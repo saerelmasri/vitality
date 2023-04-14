@@ -56,4 +56,44 @@ const register = async (req, res) => {
         });
     });
 }
-module.exports = { register, add_extra_info }
+
+const login = (req, res) => {
+    const { email, password } = req.body;
+    const checkUser = 'SELECT * FROM users WHERE email = ?';
+    sql.query(checkUser, email, (err, result) => {
+        if(err){
+            res.status(500).json({
+                status: 500,
+                message: err
+            });
+        }
+        if(result.length == 0){
+            return res.status(401).json({
+                status: 401,
+                message: 'Invalid email or password'
+            })
+        }
+        const user = result[0];
+        bcrypt.compare(password, user.password, (err, result) => {
+            if(err){
+                res.status(500).json({
+                    status: 500,
+                    message: err
+                });
+            }
+            if(!result){
+                return res.status(401).json({
+                    status: 401,
+                    message: 'Invalid email or password'
+                })
+            }
+            const token = jwt.sign({ userId: user.id }, process.env.JWT_TOKEN, { expiresIn: '1h' });
+            return res.status(200).json({
+                status: 201,
+                message: 'Log in successfully',
+                token: token
+             });
+        })
+    })
+}
+module.exports = { register, login }

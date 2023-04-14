@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const authRoute = require('./routes/auth.routes');
 app.use('/auth', authRoute);
 
+const extraInfoRoute = require('./routes/auth.routes');
+app.use('/extra_info', extraInfoRoute);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
