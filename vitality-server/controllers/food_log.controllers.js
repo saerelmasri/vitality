@@ -14,7 +14,7 @@ const addFoodLog = async(req, res) => {
     }
 
     try{
-        const decode = jwt.decode(token, process.env.JWT_TOKEN);
+        const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const userId = decode.userId;
         const insertLog = 'INSERT INTO food_intakes SET ?'
         const newLog = { userID: userId, mealID, log_date, food_name, calories, carbs, fats, protein, serving_size, number_serving }
@@ -52,7 +52,7 @@ const fetchUserMealLogs = async(req, res) => {
     }
 
     try{
-        const decode = jwt.decode(token, process.env.JWT_TOKEN);
+        const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const userID = decode.userId;
 
         const fetchQuery = 'SELECT * FROM food_intakes WHERE userID = ? AND mealID = ?';
