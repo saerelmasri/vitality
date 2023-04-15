@@ -14,6 +14,9 @@ app.use('/auth', authRoute);
 const extraInfoRoute = require('./routes/extra_info.routes');
 app.use('/extra_info', extraInfoRoute);
 
+const food_log = require('./routes/food_log.routes');
+app.use('/foodLog', food_log);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');

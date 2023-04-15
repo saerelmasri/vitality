@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const register = async (req, res) => {
-    const { nickname, username, phone_number, email, password } = req.body;
+    const { nickname, full_name, phone_number, email, password } = req.body;
     const level = 0;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -36,7 +36,7 @@ const register = async (req, res) => {
                 message: 'Email already taken'
             });
         }
-        const newUser = { username, nickname, email, password: hashPassword, phone_number, level};
+        const newUser = { nickname, full_name, phone_number, email, password: hashPassword, level};
         const insert_query = 'INSERT INTO users SET ?';
         sql.query(insert_query, newUser, (err, result) => {
             if(err){

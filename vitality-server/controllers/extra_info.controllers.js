@@ -12,7 +12,7 @@ const add_extra_info = async(req, res) => {
     const { weight, height, gender, age, diet_type_id, goal_type_id, activity_type_id } = req.body
     const decode = jwt.verify(token, process.env.JWT_TOKEN);
     const userId = decode.userId;
-    const checkUser = 'SELECT * FROM extra_fitness_info WHERE user_id = ?';
+    const checkUser = 'SELECT * FROM user_info_extra WHERE user_id = ?';
     sql.query(checkUser, userId, (err, result) => {
         if(err){
             return res.status(500).json({
@@ -28,7 +28,7 @@ const add_extra_info = async(req, res) => {
             });
         }
         const addExtraInfo = { weight, height, gender, age, user_id: userId, diet_type_id, goal_type_id, activity_type_id }
-        const insertQuery = 'INSERT INTO extra_fitness_info SET ?' ;
+        const insertQuery = 'INSERT INTO user_info_extra SET ?' ;
 
         sql.query(insertQuery, addExtraInfo, (err) => {
             if(err) {
