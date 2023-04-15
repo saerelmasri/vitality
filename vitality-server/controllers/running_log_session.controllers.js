@@ -42,4 +42,48 @@ const addNewrunningLog = async(req, res) => {
     }
 }
 
-module.exports = addNewrunningLog
+const fetchUserRunningSessions = async(req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(400).json({
+            status: 400,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const fetchRunnings = 'SELECT * FROM running_log_session WHERE user_id = ?'
+        await sql.query(fetchRunnings, user_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            if(result.lenght === 0){
+                return res.status(404).json({
+                    status: 404,
+                    message: 'No running sessions'
+                })
+            }
+
+            res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+
+}
+
+module.exports = { addNewrunningLog, fetchUserRunningSessions}
