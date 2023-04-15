@@ -84,4 +84,43 @@ const fetchUserMealLogs = async(req, res) => {
     }
 }
 
-module.exports = { addFoodLog, fetchUserMealLogs }
+const getCaloriesIntakeByDate = async (req, res) => {
+    const { log_date } = req.body
+
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(400).json({
+            status: 400,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decode = jwt.decode(token, process.env.JWT_TOKEN);
+        const userID = decode.userId;
+        const query = 'SELECT SUM(calories) AS totalCalories FROM food_intakes WHERE userID = ? AND DATE(log_date) = ?';
+        const queryParam = [ userID, log_date ]
+
+        await sql.query(query, queryParam, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            const totalCalories = result[0].totalCalories;
+            res.status(200).json({
+                status: 200, 
+                message: totalCalories
+             });
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500, 
+            message: err
+        })
+    }
+}
+
+module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate }
