@@ -38,4 +38,20 @@ const addVideoRoutine = async(req, res) => {
     })
 }
 
-module.exports = addVideoRoutine
+const fetchAllVideos = async(req, res) => {
+    const fetchQuery = 'SELECT * FROM video_routines'
+    await sql.query(fetchQuery, (err, result) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err
+            })
+        }
+        res.status(201).json({
+            status: 201, 
+            message: result
+        });
+    })
+}
+
+module.exports = {addVideoRoutine, fetchAllVideos}
