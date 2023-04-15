@@ -17,15 +17,16 @@ app.use('/extra_info', extraInfoRoute);
 const food_log = require('./routes/food_log.routes');
 app.use('/foodLog', food_log);
 
+const video_routines_route = require('./routes/video_routines.route');
+app.use('/video_routines', video_routines_route);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
         return res.status(200).json({});
     }
-
     next();
 });
 
