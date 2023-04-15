@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const authRoute = require('./routes/auth.routes');
 app.use('/auth', authRoute);
 
-const extraInfoRoute = require('./routes/auth.routes');
+const extraInfoRoute = require('./routes/extra_info.routes');
 app.use('/extra_info', extraInfoRoute);
 
 app.use((req, res, next) => {

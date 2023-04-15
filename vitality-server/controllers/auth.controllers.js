@@ -57,7 +57,7 @@ const register = async (req, res) => {
     });
 }
 
-const login = (req, res) => {
+const login = async(req, res) => {
     const { email, password } = req.body;
     const checkUser = 'SELECT * FROM users WHERE email = ?';
     sql.query(checkUser, email, (err, result) => {
@@ -96,4 +96,5 @@ const login = (req, res) => {
         })
     })
 }
+
 module.exports = { register, login }
