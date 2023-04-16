@@ -23,6 +23,9 @@ app.use('/video_routines', video_routines_route);
 const running_session_route = require('./routes/running_log_session.route');
 app.use('/running_session', running_session_route);
 
+const challenge_route = require('./routes/challenge.routes');
+app.use('/challenge_route', challenge_route);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
