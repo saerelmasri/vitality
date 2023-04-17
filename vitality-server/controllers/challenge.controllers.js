@@ -92,4 +92,79 @@ const challenge_enrolled_user = async (req, res) => {
     }
 }
 
-module.exports = {createWeeklyChallenge, challenge_enrolled_user}
+const challenge_finished = async (req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const getChallengeQuery = 'SELECT * FROM challenge_enrolled WHERE user_id = ?'
+        await sql.query(getChallengeQuery, user_id, async(err, result)=> {
+            if(err){
+                res.status(500).json({
+                    status:500,
+                    message: err
+                })
+            }
+
+            if(result[0].completation_status === 'completed'){
+                res.status(401).json({
+                    status:401,
+                    message: 'Challenge already completed'
+                })
+            }
+
+            console.log(result[0].challenge_id);
+            const checkDeadLineQuery = 'SELECT * FROM weekly_challenge WHERE id = ?'
+            await sql.query(checkDeadLineQuery, result[0].challenge_id, async(err, result) => {
+                if(err){
+                    res.status(500).json({
+                        status:500,
+                        message: err
+                    })
+                }
+                const now = new Date()
+                if(result[0].end_date < now){
+                    res.status(401).json({
+                        status:401,
+                        message: 'Challenge expired'
+                    })
+                }
+
+                const reward = result[0].rewards
+
+                const updateChallengeUser = 'UPDATE challenge_enrolled SET completation_status = ?, earned_points = ? WHERE user_id = ?';
+                const params = ['completed', reward, user_id];
+                
+                await sql.query(updateChallengeUser, ['completed', reward, user_id], (err) => {
+                    if(err){
+                        res.status(500).json({
+                            status:500,
+                            message: err
+                        })
+                    }
+                    res.status(201).json({
+                        status: 201,
+                        message: {
+                            message: 'Challenge Completed',
+                            rewards: reward
+                        }
+                    })
+                })
+            })
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
+module.exports = {createWeeklyChallenge, challenge_enrolled_user, challenge_finished}
