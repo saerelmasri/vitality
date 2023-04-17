@@ -99,4 +99,45 @@ const sendInvition = async(req, res) => {
     }
 }
 
-module.exports = {createCompetition, sendInvition}
+const showAllInvitations = async (req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const showAllInvitationQuery = 'SELECT sender_id, status FROM invitation WHERE recipient_id = ?'
+        await sql.query(showAllInvitationQuery, user_id, (err, result) => {
+            if(err){
+                res.status(500).json({
+                    status:500,
+                    message: err
+                })
+            }
+            if(Object.keys(result).length === 0){
+                res.status(401).json({
+                    status: 401,
+                    message: 'Invitation Inbox empty'
+                })
+            }
+            res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status:500,
+            message: err
+        })
+    }
+}
+
+module.exports = {createCompetition, sendInvition, showAllInvitations }
