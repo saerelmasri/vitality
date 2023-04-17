@@ -281,7 +281,7 @@ const getWinner = async(req, res) => {
     const { challenge_id } = req.body
     try{
         const getWinnerQuery = 'SELECT user_id, duration_user FROM user_competition_participation WHERE challenge_id = ? ORDER BY duration_user ASC'
-        await sql.query(getWinnerQuery, challenge_id, (err, result) => {
+        await sql.query(getWinnerQuery, challenge_id, async(err, result) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
@@ -289,11 +289,22 @@ const getWinner = async(req, res) => {
                 })
             }
 
-            res.status(201).json({
-                status: 201,
-                message: 'Congratulations',
-                results: result[0]
-            })
+            const winner = result[0]
+
+            const updateCompetition = 'UPDATE competition SET winner_user_id = ?, status = ? WHERE id = ?'
+            await sql.query(updateCompetition, [winner.user_id, 'done', challenge_id], (err) => {
+                if(err){
+                    return res.status(500).json({
+                        status: 500,
+                        message: err
+                    })
+                }
+                res.status(201).json({
+                    status: 201,
+                    message: 'Congratulations',
+                    results: winner
+                })
+            })  
         })
     }catch(err){
         res.status(500).json({
