@@ -209,7 +209,7 @@ const changeStatusInvitation = async(req, res) => {
 }
 
 const performing_competition = async(req, res) => {
-    const { competition_id, status, duration_user } = req.body 
+    const { competition_id, duration_user } = req.body 
 
     const token = req.header('Authorization')
     if(!token){
