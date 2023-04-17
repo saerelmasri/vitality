@@ -32,6 +32,9 @@ app.use('/friends_route', friends_route);
 const competition_route = require('./routes/competition.routes');
 app.use('/competition_route', competition_route);
 
+const leaderboard_route = require('./routes/leaderboard.routes');
+app.use('/leaderboard_route', leaderboard_route);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
