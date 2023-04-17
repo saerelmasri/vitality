@@ -313,4 +313,53 @@ const getWinner = async(req, res) => {
         })
     }
 }
-module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition, getWinner }
+
+const challengeDetails = async(req, res) => {
+    const {challenge_id} = req.body
+    try{
+        const query = 'SELECT title, type, distance, workout_name, rules, created_by_user_id, end_at FROM competition WHERE id = ?'
+        await sql.query(query, challenge_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            const challenge = result[0]
+            console.log(challenge.created_by_user_id);
+            const userQuery = 'SELECT full_name, nickname FROM users WHERE id = ?'
+            sql.query(userQuery, challenge.created_by_user_id, (err, result) => {
+                if(err){
+                    return res.status(500).json({
+                        status: 500,
+                        message: err
+                    })
+                }
+                const response = {
+                    title: challenge.title,
+                    type: challenge.type,
+                    distance: challenge.distance,
+                    workout_name : challenge.workout_name,
+                    rules: challenge.rules,
+                    deadline: challenge.end_at,
+                    fullName: result[0].full_name,
+                    nickName: result[0].nickname,
+                }
+                return res.status(201).json({
+                    status: 201,
+                    message: response
+                })
+            })
+
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
+module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition, getWinner, challengeDetails }
