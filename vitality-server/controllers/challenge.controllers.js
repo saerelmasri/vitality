@@ -7,14 +7,14 @@ const createWeeklyChallenge = async (req, res) => {
 
     await sql.query(checkChallenge, name, async(err, result) => {
         if(err){
-            res.status(500).json({
+            return res.status(500).json({
                 status: 500,
                 message: err
             })
         }
 
         if(result.lenght > 0){
-            res.status(401).json({
+            return res.status(401).json({
                 status: 401,
                 message: "Challenge already exist"
             })
@@ -24,12 +24,12 @@ const createWeeklyChallenge = async (req, res) => {
         const addQuery = { name, description, distance, rewards }
         await sql.query(addChallenge, addQuery, (err) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status: 500,
                     message: err
                 })
             }
-            res.status(201).json({
+            return res.status(201).json({
                 status: 201,
                 message: "Weekly Challenge Created"
             })
@@ -42,7 +42,7 @@ const challenge_enrolled_user = async (req, res) => {
     const { challenge_id, completation_status, earned_points } = req.body
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -55,13 +55,13 @@ const challenge_enrolled_user = async (req, res) => {
         const checkUserChallengeQuery = 'SELECT * FROM challenge_enrolled WHERE user_id = ?'
         await sql.query(checkUserChallengeQuery, user_id, async(err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status: 500,
                     message: err
                 })
             }
             if(result.lenght > 0){
-                res.status(401).json({
+                return res.status(401).json({
                     status:401,
                     message: 'User already enrolled in course'
                 })
@@ -72,12 +72,12 @@ const challenge_enrolled_user = async (req, res) => {
 
             await sql.query(enrolledUserQuery, enrolledUser, (err) => {
                 if(err){
-                    res.status(500).json({
+                    return res.status(500).json({
                         status: 500,
                         message: err
                     })
                 }
-                res.status(201).json({
+                return res.status(201).json({
                     status: 201,
                     message: 'User enrolled'
                 })
@@ -95,7 +95,7 @@ const challenge_finished = async (req, res) => {
     const { challenge_id } = req.body
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -108,32 +108,29 @@ const challenge_finished = async (req, res) => {
         await sql.query(getChallengeQuery, [user_id, challenge_id], async(err, result)=> {
             console.log(result);
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
             }
 
             if(result[0].completation_status === 'completed'){
-                console.log('hola');
-                res.status(401).json({
+                return res.status(401).json({
                     status:401,
                     message: 'Challenge already completed'
                 })
             }
-
-            console.log(result[0].challenge_id);
             const checkDeadLineQuery = 'SELECT * FROM weekly_challenge WHERE id = ?'
             await sql.query(checkDeadLineQuery, result[0].challenge_id, async(err, result) => {
                 if(err){
-                    res.status(500).json({
+                    return res.status(500).json({
                         status:500,
                         message: err
                     })
                 }
                 const now = new Date()
                 if(result[0].end_date < now){
-                    res.status(401).json({
+                    return res.status(401).json({
                         status:401,
                         message: 'Challenge expired'
                     })
@@ -143,13 +140,12 @@ const challenge_finished = async (req, res) => {
                 
                 await sql.query(updateChallengeUser, ['completed', reward, user_id, challenge_id], (err, result) => {
                     if(err){
-                        res.status(500).json({
+                       return res.status(500).json({
                             status:500,
                             message: err
                         })
                     }
-                    console.log(result);
-                    res.status(201).json({
+                    return res.status(201).json({
                         status: 201,
                         message: {
                             message: 'Challenge Completed',
@@ -170,7 +166,7 @@ const challenge_finished = async (req, res) => {
 const allWeeklyChallenges = async (req, res) => {
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -183,20 +179,20 @@ const allWeeklyChallenges = async (req, res) => {
         const leftJoinQuery = 'SELECT c.id, c.name, c.description, c.distance, c.rewards, c.created_at, c.end_at FROM weekly_challenge c LEFT JOIN challenge_enrolled e ON c.id = e.challenge_id AND e.user_id = ? WHERE e.challenge_id IS NULL'
         await sql.query(leftJoinQuery, user_id, (err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
             }
 
             if(result.lenght === 0){
-                res.status(401).json({
+                return res.status(401).json({
                     status:401,
                     message: 'Not challenges for you today'
                 })
             }
 
-            res.status(201).json({
+            return res.status(201).json({
                 status: 201,
                 message: result
             })
@@ -209,4 +205,31 @@ const allWeeklyChallenges = async (req, res) => {
     }
 }
 
-module.exports = {createWeeklyChallenge, challenge_enrolled_user, challenge_finished, allWeeklyChallenges}
+const weeklyChallengeDetail = async (req, res) => {
+    const { weekly_challenge_id } = req.body
+
+    try{
+        const query = 'SELECT * FROM weekly_challenge WHERE id = ?'
+        await sql.query(query, weekly_challenge_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+        
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
+module.exports = {createWeeklyChallenge, challenge_enrolled_user, challenge_finished, allWeeklyChallenges, weeklyChallengeDetail }
