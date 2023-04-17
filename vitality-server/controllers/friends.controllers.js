@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const displayUsers = async(req, res) => {
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -17,13 +17,13 @@ const displayUsers = async(req, res) => {
         const displayUsersQuery = 'SELECT id,nickname, full_name FROM users WHERE id <> ? AND id NOT IN ( SELECT friend_user_id FROM friends WHERE user_id = ?)'
         await sql.query(displayUsersQuery, [user_id, user_id], (err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
             }
 
-            res.status(201).json({
+            return res.status(201).json({
                 status: 201,
                 message: result
             })
@@ -41,7 +41,7 @@ const addFriendList = async(req, res) => {
     const { friend_id } = req.body
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -55,20 +55,20 @@ const addFriendList = async(req, res) => {
         const addFriendParams = { user_id, friend_user_id: friend_id }
         await sql.query(addFriendQuery, addFriendParams, (err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
             }
 
             if(result.lenght > 0){
-                res.status(401).json({
+                return res.status(401).json({
                     status:401,
                     message: 'Already Friends'
                 })
             }
 
-            res.status(201).json({
+            return res.status(201).json({
                 status: 201,
                 message: 'Friend Added Successfully'
             })
@@ -83,4 +83,43 @@ const addFriendList = async(req, res) => {
     }
 }
 
-module.exports = {displayUsers, addFriendList}
+const search_by_name = async(req, res) => {
+    const { full_name, nickname } = req.query   
+
+    try{
+        let query = `SELECT * FROM users`
+
+        if(full_name || nickname){
+            query += ` WHERE `
+            if(full_name){
+                query += `full_name LIKE '%${full_name}%'`
+                if(nickname) query += ` OR `
+            }
+            if(nickname){
+                query += `nickname LIKE '%${nickname}%'`
+            }
+        }
+        await sql.query(query,(err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+        
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+
+}
+
+module.exports = {displayUsers, addFriendList, search_by_name}
