@@ -1,7 +1,8 @@
 const { Router } = require('express')
 const route = Router()
-const displayUsers = require('../controllers/friends.controllers')
+const {displayUsers, addFriendList} = require('../controllers/friends.controllers')
 
 route.get('/displayUsers', displayUsers)
+route.post('/addFriend', addFriendList)
 
 module.exports = route
