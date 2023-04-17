@@ -207,4 +207,73 @@ const changeStatusInvitation = async(req, res) => {
         })
     }
 }
-module.exports = {createCompetition, sendInvition, showAllInvitations, changeStatusInvitation }
+
+const performing_competition = async(req, res) => {
+    const { competition_id, status, duration_user } = req.body 
+
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        let challenge_duration
+        const competationDurationQuery = 'SELECT duration FROM competition WHERE id = ?'
+        await sql.query(competationDurationQuery, competition_id, async(err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            challenge_duration = result[0].duration
+            if(duration_user > challenge_duration){
+                const deleteQuery = 'DELETE FROM invitation WHERE competition_id = ? AND recipient_id = ?'
+                await sql.query(deleteQuery, [ competition_id, user_id ], (err) => {
+                    if(err){
+                        return res.status(500).json({
+                            status: 500,
+                            message: err
+                        })
+                    }
+                })
+                res.status(201).json({
+                    status: 10,
+                    message: 'You exceed the duration of the challenge. You lost'
+                })
+            }
+
+            const competitionFinished = 'INSERT INTO user_competition_participation SET ?'
+            const params = { challenge_id: competition_id, user_id, duration_user }
+            await sql.query(competitionFinished, params, (err) => {
+                if(err){
+                    return res.status(500).json({
+                        status: 500,
+                        message: err
+                    })
+                }
+
+                res.status(201).json({
+                    status: 20,
+                    message: {
+                        message: 'You finished on time!',
+                        results: params
+                    }
+                })
+            })
+            
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition }
