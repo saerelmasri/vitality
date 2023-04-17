@@ -65,7 +65,7 @@ const sendInvition = async(req, res) => {
 
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -79,7 +79,7 @@ const sendInvition = async(req, res) => {
         const sendInvitionParam = { competition_id, sender_id: user_id, recipient_id, status}
         await sql.query(sendInvitionQuery, sendInvitionParam, (err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
@@ -102,7 +102,7 @@ const sendInvition = async(req, res) => {
 const showAllInvitations = async (req, res) => {
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -112,16 +112,16 @@ const showAllInvitations = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        const showAllInvitationQuery = 'SELECT sender_id, status FROM invitation WHERE recipient_id = ?'
+        const showAllInvitationQuery = 'SELECT competition_id, sender_id, status FROM invitation WHERE recipient_id = ?'
         await sql.query(showAllInvitationQuery, user_id, (err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
             }
             if(Object.keys(result).length === 0){
-                res.status(401).json({
+                return res.status(401).json({
                     status: 401,
                     message: 'Invitation Inbox empty'
                 })
@@ -140,4 +140,71 @@ const showAllInvitations = async (req, res) => {
     }
 }
 
-module.exports = {createCompetition, sendInvition, showAllInvitations }
+const changeStatusInvitation = async(req, res) => {
+    const { competition_id, status } = req.body 
+
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        if( status === 'declined'){
+            const deleteQuery = 'DELETE FROM invitation WHERE competition_id = ? AND recipient_id = ?'
+            await sql.query(deleteQuery, [competition_id, user_id], (err) => {
+                if(err){
+                    return res.status(500).json({
+                        status: 500,
+                        message: err
+                    })
+                }
+
+                res.status(201).json({
+                    status: 201,
+                    message: 'Invitation declined'
+                })
+
+
+            })
+        }
+        else if(status === 'accepted'){
+            const startCompetitionQuery = 'UPDATE invitation SET status = ? WHERE recipient_id = ?'
+            await sql.query(startCompetitionQuery, [ status, user_id ], async(err)=> {
+                if(err){
+                    return res.status(500).json({
+                        status: 500,
+                        message: err
+                    })
+                }
+
+                const getCompetitionId = 'SELECT competition_id FROM invitation WHERE recipient_id = ?'
+                await sql.query(getCompetitionId, user_id, (err, result ) => {
+                    if(err){
+                        return res.status(500).json({
+                            status: 500,
+                            message: err
+                        })
+                    }
+                    console.log(result);
+                    res.status(201).json({
+                        status: 201,
+                        message: result
+                    })
+                })
+
+            })
+        }
+    }catch(err){
+        res.status(500).json({
+            status:500,
+            message: err
+        })
+    }
+}
+module.exports = {createCompetition, sendInvition, showAllInvitations, changeStatusInvitation }
