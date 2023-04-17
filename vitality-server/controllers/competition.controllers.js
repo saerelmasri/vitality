@@ -276,4 +276,30 @@ const performing_competition = async(req, res) => {
         })
     }
 }
-module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition }
+
+const getWinner = async(req, res) => {
+    const { challenge_id } = req.body
+    try{
+        const getWinnerQuery = 'SELECT user_id, duration_user FROM user_competition_participation WHERE challenge_id = ? ORDER BY duration_user ASC'
+        await sql.query(getWinnerQuery, challenge_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            res.status(201).json({
+                status: 201,
+                message: 'Congratulations',
+                results: result[0]
+            })
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition, getWinner }
