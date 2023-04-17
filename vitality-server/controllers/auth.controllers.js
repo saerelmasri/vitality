@@ -24,7 +24,6 @@ const register = async (req, res) => {
     const check_query = 'SELECT * FROM users WHERE email = ?';
     sql.query(check_query, email, (err, result) => {
         if(err) {
-            console.log(err);
             return res.status(500).json({
                 status: 500, 
                 message: err
@@ -63,7 +62,7 @@ const login = (req, res) => {
     const checkUser = 'SELECT * FROM users WHERE email = ?';
     sql.query(checkUser, email, (err, result) => {
         if(err){
-            res.status(500).json({
+            return res.status(500).json({
                 status: 500,
                 message: err
             });
@@ -77,7 +76,7 @@ const login = (req, res) => {
         const user = result[0];
         bcrypt.compare(password, user.password, (err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status: 500,
                     message: err
                 });
@@ -101,14 +100,14 @@ const login = (req, res) => {
 const getUserbyToken = (req, res) => {
     const token = req.header('Authorization');
     if(!token){
-        res.status(400).json({
+        return res.status(400).json({
             status:400,
             message: 'Unauthorized'
         });
     }
     try{
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
-        res.status(201).json({
+        return res.status(201).json({
             status: 201,
             message: 'Success',
             response: decode
@@ -123,5 +122,42 @@ const getUserbyToken = (req, res) => {
 
 }
 
-module.exports = { register, login, getUserbyToken }
+const user_details = async(req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decode = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decode.userId
+
+        const query = 'SELECT full_name, nickname, level FROM users WHERE id = ?'
+        await sql.query(query, user_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+
+        
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
+module.exports = { register, login, getUserbyToken, user_details }
 
