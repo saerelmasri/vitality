@@ -26,6 +26,9 @@ app.use('/running_session', running_session_route);
 const challenge_route = require('./routes/challenge.routes');
 app.use('/challenge_route', challenge_route);
 
+const friends_route = require('./routes/friends.routes');
+app.use('/friends_route', friends_route);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');

@@ -1,4 +1,3 @@
-const { json } = require('body-parser');
 const sql = require('../config/db.connection');
 const jwt = require('jsonwebtoken')
 
