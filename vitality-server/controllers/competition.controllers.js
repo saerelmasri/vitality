@@ -7,7 +7,7 @@ const createCompetition = async (req, res) => {
 
     const token = req.header('Authorization')
     if(!token){
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
@@ -23,32 +23,32 @@ const createCompetition = async (req, res) => {
         const checkCompetition ='SELECT COUNT(*) AS count FROM competition WHERE created_by_user_id = ?'
         await sql.query(checkCompetition, user_id, async(err, result) => {
             if(err){
-                res.status(500).json({
+                return res.status(500).json({
                     status:500,
                     message: err
                 })
             }
 
             if (result[0].count > 0) {
-                res.status(400).json({
+                return res.status(400).json({
                     status:400,
                     message: 'You have already created a competition'
                 })
             }
 
             const createCompetitionQuery = 'INSERT INTO competition SET ?'
-            const competationParams = { title, type, distance, workout_name, rules, created_by_user_id: user_id, duration, end_at: date }
-            await sql.query(createCompetitionQuery, competationParams, (err) => {
+            const competationParams = { title, type, distance, workout_name, rules, created_by_user_id: user_id, duration, end_at: date, status: 'on going' }
+            await sql.query(createCompetitionQuery, competationParams, (err, result) => {
                 if(err){
-                    res.status(500).json({
+                    return res.status(500).json({
                         status:500,
                         message: err
                     })
                 }
-
                 res.status(201).json({
                     status:201,
-                    message: 'Challenge created'
+                    message: 'Challenge created',
+                    competition_id: result.insertId
                 })
             })
         })
@@ -60,4 +60,43 @@ const createCompetition = async (req, res) => {
     }
 }
 
-module.exports = createCompetition
+const sendInvition = async(req, res) => {
+    const { competition_id, recipient_id, status } = req.body
+
+    const token = req.header('Authorization')
+    if(!token){
+        res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const sendInvitionQuery = 'INSERT INTO invitation SET ?'
+        const sendInvitionParam = { competition_id, sender_id: user_id, recipient_id, status}
+        await sql.query(sendInvitionQuery, sendInvitionParam, (err, result) => {
+            if(err){
+                res.status(500).json({
+                    status:500,
+                    message: err
+                })
+            }
+
+            res.status(201).json({
+                status: 201,
+                message: 'Invitation Sent'
+            })
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status:500,
+            message: err
+        })
+    }
+}
+
+module.exports = {createCompetition, sendInvition}
