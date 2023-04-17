@@ -93,6 +93,7 @@ const challenge_enrolled_user = async (req, res) => {
 }
 
 const challenge_finished = async (req, res) => {
+    const { challenge_id } = req.body
     const token = req.header('Authorization')
     if(!token){
         res.status(401).json({
@@ -104,8 +105,9 @@ const challenge_finished = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        const getChallengeQuery = 'SELECT * FROM challenge_enrolled WHERE user_id = ?'
-        await sql.query(getChallengeQuery, user_id, async(err, result)=> {
+        const getChallengeQuery = 'SELECT * FROM challenge_enrolled WHERE user_id = ? AND challenge_id = ?'
+        await sql.query(getChallengeQuery, [user_id, challenge_id], async(err, result)=> {
+            console.log(result);
             if(err){
                 res.status(500).json({
                     status:500,
@@ -114,6 +116,7 @@ const challenge_finished = async (req, res) => {
             }
 
             if(result[0].completation_status === 'completed'){
+                console.log('hola');
                 res.status(401).json({
                     status:401,
                     message: 'Challenge already completed'
@@ -136,19 +139,17 @@ const challenge_finished = async (req, res) => {
                         message: 'Challenge expired'
                     })
                 }
-
                 const reward = result[0].rewards
-
-                const updateChallengeUser = 'UPDATE challenge_enrolled SET completation_status = ?, earned_points = ? WHERE user_id = ?';
-                const params = ['completed', reward, user_id];
+                const updateChallengeUser = 'UPDATE challenge_enrolled SET completation_status = ?, earned_points = ? WHERE user_id = ? AND challenge_id = ?';
                 
-                await sql.query(updateChallengeUser, ['completed', reward, user_id], (err) => {
+                await sql.query(updateChallengeUser, ['completed', reward, user_id, challenge_id], (err, result) => {
                     if(err){
                         res.status(500).json({
                             status:500,
                             message: err
                         })
                     }
+                    console.log(result);
                     res.status(201).json({
                         status: 201,
                         message: {
@@ -167,4 +168,46 @@ const challenge_finished = async (req, res) => {
     }
 }
 
-module.exports = {createWeeklyChallenge, challenge_enrolled_user, challenge_finished}
+const allWeeklyChallenges = async (req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const leftJoinQuery = 'SELECT c.id, c.name, c.description, c.distance, c.rewards, c.created_at, c.end_at FROM weekly_challenge c LEFT JOIN challenge_enrolled e ON c.id = e.challenge_id AND e.user_id = ? WHERE e.challenge_id IS NULL'
+        await sql.query(leftJoinQuery, user_id, (err, result) => {
+            if(err){
+                res.status(500).json({
+                    status:500,
+                    message: err
+                })
+            }
+
+            if(result.lenght === 0){
+                res.status(401).json({
+                    status:401,
+                    message: 'Not challenges for you today'
+                })
+            }
+
+            res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
+module.exports = {createWeeklyChallenge, challenge_enrolled_user, challenge_finished, allWeeklyChallenges}

@@ -1,9 +1,10 @@
 const { Router } = require('express')
 const route = Router()
-const {createWeeklyChallenge, challenge_enrolled_user, challenge_finished} = require('../controllers/challenge.controllers')
+const {createWeeklyChallenge, challenge_enrolled_user, challenge_finished, allWeeklyChallenges} = require('../controllers/challenge.controllers')
 
 route.post('/createWeeklyChallenge', createWeeklyChallenge)
 route.post('/enrolled_user', challenge_enrolled_user)
-route.get('/challenge_finished', challenge_finished)
+route.post('/challenge_finished', challenge_finished)
+route.get('/allWeeklyChallenges', allWeeklyChallenges)
 
 module.exports = route
