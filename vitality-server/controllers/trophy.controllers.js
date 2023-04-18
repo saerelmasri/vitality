@@ -82,4 +82,21 @@ const updateTrophyImg = async(req, res) => {
     })
 }
 
-module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg}
+const getAllTrophies = async (req, res) => {
+    const fetch = 'SELECT * FROM trophies'
+    await sql.query(fetch, (err, result) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err
+            })
+        }
+
+        return res.status(201).json({
+            status: 201,
+            message: result
+        })
+    })
+}
+
+module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies }
