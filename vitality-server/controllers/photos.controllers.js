@@ -34,5 +34,4 @@ const addProfilePhoto = async(req, res) => {
     })
 }
 
-
 module.exports = {addProfilePhoto}
