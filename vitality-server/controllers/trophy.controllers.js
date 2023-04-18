@@ -43,27 +43,22 @@ const createTrophy = async(req, res) => {
     })    
 }
 
-const updateTrophy = async(req, res) => {
-    const params = {
-        name: req.body.name,
-        description: req.body.description,
-        image_url: req.body.image_url
-    }
+const updateTrophyInfo = async(req, res) => {
+    const { id, column_name, newValue } = req.body
 
-    const addTrophyQuery = 'INSERT INTO trophies SET ?'
-    await sql.query(addTrophyQuery, params, (err) => {
+    const updateTrophyQuery = `UPDATE trophies SET ${column_name} = ? WHERE id = ?`
+    await sql.query(updateTrophyQuery, [newValue, id], (err,result) => {
         if(err){
             return res.status(500).json({
                 status: 500,
                 message: err
             })
         }
-
         return res.status(201).json({
             status: 201,
-            message: 'Trophy created successfully'
+            message: "Updated"
         })
     })
 }
 
-module.exports = createTrophy
+module.exports = {createTrophy, updateTrophyInfo}
