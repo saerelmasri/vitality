@@ -44,6 +44,7 @@ const createTrophy = async(req, res) => {
 }
 
 const updateTrophyInfo = async(req, res) => {
+    
     const { id, column_name, newValue } = req.body
 
     const updateTrophyQuery = `UPDATE trophies SET ${column_name} = ? WHERE id = ?`
@@ -61,4 +62,24 @@ const updateTrophyInfo = async(req, res) => {
     })
 }
 
-module.exports = {createTrophy, updateTrophyInfo}
+const updateTrophyImg = async(req, res) => {
+    const params = {
+        id: req.body.id,
+        image_url: req.file.filename
+    }
+    const updateTrophyQuery = `UPDATE trophies SET image_url = '${params.image_url}' WHERE id = ${params.id}`;
+    await sql.query(updateTrophyQuery, (err) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err
+            })
+        }
+        return res.status(201).json({
+            status: 201,
+            message: "Updated"
+        })
+    })
+}
+
+module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg}
