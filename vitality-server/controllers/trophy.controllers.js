@@ -147,4 +147,41 @@ const add_Trophy_To_User = async(req, res) => {
         })
     })
 }
-module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies, getTrophyByID, add_Trophy_To_User }
+
+const get_trophies_user = async(req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN)
+    const user_id = decoded.userId
+
+    const fetch = 'SELECT u.nickname, u.full_name, t.name, t.description, t.image_url FROM user_trophies AS ut JOIN users AS u ON u.id = ut.user_id JOIN trophies AS t ON t.id = ut.trophy_id WHERE ut.user_id = ?'
+
+    await sql.query(fetch, user_id, (err, result) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err
+            })
+        }
+
+        if(result.length < 0){
+            return res.status(404).json({
+                status: 404,
+                message: "No trophies found for this user"
+            })
+        }
+
+        return res.status(201).json({
+            status: 201,
+            message: result
+        })
+    })
+}
+
+module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies, getTrophyByID, add_Trophy_To_User, get_trophies_user }

@@ -15,7 +15,7 @@ const upload = multer({
     storage: storage
 })
 
-const {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies, getTrophyByID, add_Trophy_To_User} = require('../controllers/trophy.controllers')
+const {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies, getTrophyByID, add_Trophy_To_User, get_trophies_user} = require('../controllers/trophy.controllers')
 
 route.post('/addTrophyUser', jwt_middleware, add_Trophy_To_User)
 route.post('/createTrophy', [jwt_middleware, upload.single('image_url')], createTrophy)
@@ -23,5 +23,6 @@ route.put('/updateTrophyImg', [jwt_middleware, upload.single('image_url')], upda
 route.put('/updateTrophyInfo', jwt_middleware, updateTrophyInfo)
 route.get('/getAllTrophies', jwt_middleware, getAllTrophies)
 route.get('/getTrophyByID', jwt_middleware, getTrophyByID)
+route.get('/trophies', jwt_middleware, get_trophies_user)
 
 module.exports = route
