@@ -122,42 +122,5 @@ const getUserbyToken = (req, res) => {
 
 }
 
-const user_details = async(req, res) => {
-    const token = req.header('Authorization')
-    if(!token){
-        return res.status(401).json({
-            status: 401,
-            message: 'Unauthorized'
-        })
-    }
-
-    try{
-        const decode = jwt.verify(token, process.env.JWT_TOKEN);
-        const user_id = decode.userId
-
-        const query = 'SELECT full_name, nickname, level FROM users WHERE id = ?'
-        await sql.query(query, user_id, (err, result) => {
-            if(err){
-                return res.status(500).json({
-                    status: 500,
-                    message: err
-                })
-            }
-
-            return res.status(201).json({
-                status: 201,
-                message: result
-            })
-        })
-
-        
-    }catch(err){
-        res.status(500).json({
-            status: 500,
-            message: err
-        })
-    }
-}
-
-module.exports = { register, login, getUserbyToken, user_details }
+module.exports = { register, login, getUserbyToken }
 
