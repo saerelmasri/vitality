@@ -41,6 +41,8 @@ app.use('/user_route', user_route);
 const photos_route = require('./routes/photo.routes');
 app.use('/photos_route', photos_route);
 
+const trophy_route = require('./routes/trophy.routes');
+app.use('/trophy_route', trophy_route);
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
