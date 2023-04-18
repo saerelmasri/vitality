@@ -1,5 +1,6 @@
 const sql = require('../config/db.connection');
 const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 const createWeeklyChallenge = async (req, res) => {
     const { name, description, distance, rewards, start_date, end_date } = req.body

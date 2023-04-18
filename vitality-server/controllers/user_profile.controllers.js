@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const sql = require('../config/db.connection');
+require('dotenv').config();
 
 const update_profile = async(req, res) => {
     const { column_name, valueToUpdate } = req.body

@@ -1,5 +1,6 @@
 const sql = require('../config/db.connection');
 const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 const displayUsers = async(req, res) => {
     const token = req.header('Authorization')

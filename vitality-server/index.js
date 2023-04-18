@@ -38,6 +38,10 @@ app.use('/leaderboard_route', leaderboard_route);
 const user_route = require('./routes/user_profile.routes');
 app.use('/user_route', user_route);
 
+const photos_route = require('./routes/photo.routes');
+app.use('/photos_route', photos_route);
+
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
