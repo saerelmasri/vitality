@@ -118,4 +118,33 @@ const getTrophyByID = async(req, res) => {
     })
 }
 
-module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies, getTrophyByID }
+const add_Trophy_To_User = async(req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN)
+    const user_id = decoded.userId
+
+    const { trophy_id } = req.body
+    const addQuery = 'INSERT INTO user_trophies SET ?'
+    const params = { user_id, trophy_id}
+    await sql.query(addQuery, params, (err) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err
+            })
+        }
+
+        return res.status(201).json({
+            status: 201,
+            message: 'Congratulations! Trophy earned!'
+        })
+    })
+}
+module.exports = {createTrophy, updateTrophyInfo, updateTrophyImg, getAllTrophies, getTrophyByID, add_Trophy_To_User }
