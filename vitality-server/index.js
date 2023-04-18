@@ -44,6 +44,9 @@ app.use('/photos_route', photos_route);
 const trophy_route = require('./routes/trophy.routes');
 app.use('/trophy_route', trophy_route);
 
+const steps_counter_route = require('./routes/step_counter.router');
+app.use('/steps_counter_route', steps_counter_route);
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
