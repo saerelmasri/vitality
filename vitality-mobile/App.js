@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, SafeAreaView, Platform, StatusBar } from 'react-native';
 import WelcomeScreen from './app/screens/WelcomeScreen/WelcomeScreen';
+import Login from './app/screens/LoginScreen/Login';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <WelcomeScreen/>
+      <Login/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );

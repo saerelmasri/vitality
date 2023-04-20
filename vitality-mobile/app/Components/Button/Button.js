@@ -1,11 +1,14 @@
 import { View, TouchableOpacity, Text } from 'react-native'
 import { ButtonStyles } from '../../Components/Button/ButtonStylings'
 
-const Button = () => {
+const Button = ({action, title}) => {
     return(
         <View style={ButtonStyles.btnContainer}>
-            <TouchableOpacity style={ButtonStyles.btnComponent}>
-                <Text style={ButtonStyles.btnText}>Register</Text>
+            <TouchableOpacity 
+                style={ButtonStyles.btnComponent}
+                onPress={action}
+                >
+                <Text style={ButtonStyles.btnText}>{title}</Text>
             </TouchableOpacity>
         </View>
     )
