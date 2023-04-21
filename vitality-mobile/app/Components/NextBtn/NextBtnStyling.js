@@ -5,7 +5,7 @@ const nextBtnStyling = StyleSheet.create({
     nextBtn: {
         width: '50%',
         height: '10%',
-        marginTop: 50,
+        marginBottom: 50,
         borderRadius: 50,
         backgroundColor: Color.white,
         display: 'flex',

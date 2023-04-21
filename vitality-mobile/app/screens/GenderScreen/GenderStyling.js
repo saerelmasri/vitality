@@ -30,6 +30,7 @@ const genderStylings = StyleSheet.create({
         height: '90%',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-around'
     },
     headerContainer: {
         width: '100%',
