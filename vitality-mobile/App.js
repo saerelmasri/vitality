@@ -8,11 +8,12 @@ import Gender from './app/screens/GenderScreen/Gender';
 import Age from './app/screens/AgeScreen/Age';
 import Goal from './app/screens/GoalsScreen/Goal';
 import Diet from './app/screens/DietScreen/Diet';
+import ActivityLevel from './app/screens/ActivityLevelScreen/ActivityLevel';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <Diet/>
+      <ActivityLevel/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
