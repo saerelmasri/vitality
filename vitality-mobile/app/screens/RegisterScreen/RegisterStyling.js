@@ -9,16 +9,16 @@ const registerStyle = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         alignItems: 'center',
-        height: 932,
+        height: 770,
         overflow: "hidden",
         width: "100%",
     },
     inputsContainer: {
         width: '90%',
-        height: '75%',
+        height: '70%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center'
     },
     btnContainer: {
