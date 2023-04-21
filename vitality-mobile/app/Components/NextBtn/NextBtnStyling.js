@@ -5,12 +5,14 @@ const nextBtnStyling = StyleSheet.create({
     nextBtn: {
         width: '50%',
         height: '10%',
-        marginBottom: 50,
         borderRadius: 50,
         backgroundColor: Color.white,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0,
+        marginBottom: 20
     }
 })
 
