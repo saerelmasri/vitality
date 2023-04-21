@@ -1,7 +1,7 @@
 import { loginStyles } from "./LoginStyle";
 import { View, Text, TextInput, Image } from "react-native";
 import Button from "../../Components/Button/Button";
-const Login = () => {
+const Login = ({navigation}) => {
     return(
         <View style={loginStyles.loginScreen}>
             <Image source={require('../../assets/app-img/login.jpg')} style={loginStyles.loginImg}></Image>
@@ -22,7 +22,7 @@ const Login = () => {
 
             <Button title={'Log In'} action={() => {console.log('Log in');}}/>
             
-            <Text style={loginStyles.actions}>Need an account? <Text style={loginStyles.span} onPress={() => {console.log('Register Screen');}}>Register</Text></Text>
+            <Text style={loginStyles.actions}>Need an account? <Text style={loginStyles.span} onPress={() => navigation.navigate('Register')}>Register</Text></Text>
         </View>
 
 );

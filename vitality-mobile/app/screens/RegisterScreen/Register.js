@@ -13,32 +13,36 @@ const Register = () => {
                 <Text style={registerStyle.descriptionText}>Join the community of fitness and start your journey</Text>
             </View>
 
-            <View style={registerStyle.inputs}>
-                <Text>Full Name</Text>
-                <TextInput label='Email' value="" style={registerStyle.input}/>
-            </View>
-            <View style={registerStyle.inputs}>
-                <Text>Nickname</Text>
-                <TextInput label='Email' value="" style={registerStyle.input}/>
-            </View>
-            <View style={registerStyle.inputs}>
-                <Text>Phone Number</Text>
-                <TextInput label='Email' value="" style={registerStyle.input}/>
-            </View>
-            <View style={registerStyle.inputs}>
-                <Text>Email</Text>
-                <TextInput label='Email' value="" style={registerStyle.input}/>
-            </View>
-            <View style={registerStyle.inputs}>
-                <Text>Password</Text>
-                <TextInput label='Email' value="" style={registerStyle.input}/>
-            </View>
-            <View style={registerStyle.inputs} style={{marginBottom: 10}}>
-                <Text>Confirm Password</Text>
-                <TextInput label='Email' value="" style={registerStyle.input}/>
-            </View>
+            <View style={registerStyle.inputsContainer}>
+                <View style={registerStyle.inputs}>
+                    <Text>Full Name</Text>
+                    <TextInput label='Email' value="" style={registerStyle.input}/>
+                </View>
+                <View style={registerStyle.inputs}>
+                    <Text>Nickname</Text>
+                    <TextInput label='Email' value="" style={registerStyle.input}/>
+                </View>
+                <View style={registerStyle.inputs}>
+                    <Text>Phone Number</Text>
+                    <TextInput label='Email' value="" style={registerStyle.input}/>
+                </View>
+                <View style={registerStyle.inputs}>
+                    <Text>Email</Text>
+                    <TextInput label='Email' value="" style={registerStyle.input}/>
+                </View>
+                <View style={registerStyle.inputs}>
+                    <Text>Password</Text>
+                    <TextInput label='Email' value="" style={registerStyle.input}/>
+                </View>
+                <View style={registerStyle.inputs}>
+                    <Text>Confirm Password</Text>
+                    <TextInput label='Email' value="" style={registerStyle.input}/>
+                </View>
 
-            <Button action={() => {console.log('hello');}} title={'Register'}/>
+                <View style={registerStyle.btnContainer}>
+                    <Button action={() => {console.log('hello');}} title={'Register'}/>
+                </View>
+            </View>
 
             <Text>By clicking register you agree to our <Text style={registerStyle.span}>Term and Conditions</Text></Text>
         </View>

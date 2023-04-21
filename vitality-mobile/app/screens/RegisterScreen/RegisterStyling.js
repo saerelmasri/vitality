@@ -13,6 +13,21 @@ const registerStyle = StyleSheet.create({
         overflow: "hidden",
         width: "100%",
     },
+    inputsContainer: {
+        width: '90%',
+        height: '75%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
+    btnContainer: {
+        width: '100%',
+        height: '20%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     header: {
         width: 250,
         height: 80,
@@ -39,7 +54,7 @@ const registerStyle = StyleSheet.create({
     },
     inputs:{
         width: 310,
-        height: 75, 
+        height: 80, 
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start'

@@ -7,7 +7,6 @@ const ButtonStyles = StyleSheet.create({
       display:'flex',
       justifyContent: "center",
       alignItems: "center",
-      marginBottom: 30
     },
     btnComponent: {
       width: '100%',
