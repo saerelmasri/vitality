@@ -75,16 +75,6 @@ const genderStylings = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    nextBtn: {
-        width: '50%',
-        height: '10%',
-        marginTop: 50,
-        borderRadius: 50,
-        backgroundColor: Color.white,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
     }
 })
 

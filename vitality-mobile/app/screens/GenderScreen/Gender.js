@@ -1,5 +1,6 @@
 import { View, Pressable, Image, Text, TouchableOpacity, Alert } from "react-native"
 import { genderStylings } from "./GenderStyling"
+import NextBtn from "../../Components/NextBtn/NextBtn"
 
 const Gender = () => {
     return(
@@ -28,16 +29,8 @@ const Gender = () => {
                         <Image source={require('../../assets/app-img/female.png')}></Image>
                     </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity style={genderStylings.nextBtn} onPress={() => {console.log('Next Pressed');}}>
-                    <Image source={require('../../assets/app-img/nextBtn.png')}></Image>
-
-                </TouchableOpacity>
-
+                <NextBtn/>
            </View>
-
-
-
         </View>
     )
 }
