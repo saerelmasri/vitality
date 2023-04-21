@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Image, Pressable, Alert, StyleSheet, Switch } from "react-native";
+import { View, Text, TextInput, Image, Pressable, Alert, StyleSheet, TouchableOpacity } from "react-native";
 import { useState } from 'react'
 import { Color } from '../../../globalStyling'
 import Button from "../../Components/Button/Button";
@@ -34,18 +34,29 @@ const WeightHeight = () => {
 
             <View style={weightHeightStylings.weightHeightContainer}>
                 <View style={weightHeightStylings.weightContainer}>
-                    <Text style={weightHeightStylings.weightTitle}>What is your weight?</Text>
-                    <Switch
-                        trackColor={{false: 'red', true: 'green'}}
-                        thumbColor={ isEnable ? 'red' : 'green'}
-                        onValueChange={toggleSwitch}
-                        value={isEnable}
-                    />
+                    <Text style={weightHeightStylings.Title}>What is your weight?</Text>
+                    <View style={weightHeightStylings.buttonsContainer}>
+                        <TouchableOpacity style={weightHeightStylings.leftButton} onPress={() => {console.log('LB pressed');}}>
+                            <Text style={weightHeightStylings.textBtn}>LB</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={weightHeightStylings.rightButton} onPress={() => {console.log('KG pressed');}}>
+                            <Text style={weightHeightStylings.textBtn}>KG</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <TextInput style={weightHeightStylings.input}  underlineColorAndroid="transparent" keyboardType="numeric"></TextInput>
                 </View>
                 <View style={weightHeightStylings.heightContainer}>
-
+                <Text style={weightHeightStylings.Title}>What is your height?</Text>
+                    <View style={weightHeightStylings.buttonsContainer}>
+                        <TouchableOpacity style={weightHeightStylings.leftButton} onPress={() => {console.log('FT pressed');}}>
+                            <Text style={weightHeightStylings.textBtn}>FT</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={weightHeightStylings.rightButton} onPress={() => {console.log('CM pressed');}}>
+                            <Text style={weightHeightStylings.textBtn}>CM</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <TextInput style={weightHeightStylings.input}  underlineColorAndroid="transparent" keyboardType="numeric"></TextInput>
                 </View>
-
             </View>
 
 
@@ -86,7 +97,6 @@ const weightHeightStylings = StyleSheet.create({
         alignItems: 'center',
     },
     headerContainer: {
-        borderWidth: 1,
         width: '100%',
         height: '10%',
         display: 'flex',
@@ -103,7 +113,6 @@ const weightHeightStylings = StyleSheet.create({
         fontWeight: 600
     },
     descriptionContainer: {
-        borderWidth: 1,
         width: '100%',
         height: '7%',
         display: 'flex',
@@ -143,13 +152,57 @@ const weightHeightStylings = StyleSheet.create({
         top: 250,
         left: 0,
         right: 0,
-        bottom: 0
+        bottom: 0,
+        display: 'flex',
+        justifyContent: 'center', 
+        alignItems: 'center'
     },
-    weightTitle: {
+    Title: {
         fontSize: 30,
         fontWeight: 400,
         color: Color.white,
         marginTop: 20
+    },
+    buttonsContainer: {
+        width: '60%',
+        height: '20%',
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 5
+    },
+    leftButton: {
+        width: '50%',
+        height: '100%',
+        backgroundColor: Color.white,
+        borderBottomLeftRadius: 30,
+        borderTopLeftRadius: 30,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    rightButton: {
+        width: '50%',
+        height: '100%',
+        backgroundColor: Color.white,
+        borderBottomRightRadius: 30,
+        borderTopRightRadius: 30,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textBtn: {
+        fontSize: 25,
+        fontWeight: 600
+    },
+    input: {
+        width: '30%',
+        height: '30%',
+        textAlign: 'center',
+        fontSize: 35,
+        color: Color.white,
+        borderBottomWidth: 5,
+        borderBottomColor: Color.white,
+        marginTop: 5
     }
 })
 
