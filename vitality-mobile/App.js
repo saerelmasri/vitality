@@ -4,11 +4,12 @@ import Login from './app/screens/LoginScreen/Login';
 import Register from './app/screens/RegisterScreen/Register';
 import VerifyNumber from './app/screens/VerifyNumberScreen/verifyNumber';
 import WeightHeight from './app/screens/WeightHeightScreen/WeightHeight';
+import Gender from './app/screens/GenderScreen/Gender';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <WeightHeight/>
+      <Gender/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
