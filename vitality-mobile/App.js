@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, Platform, StatusBar } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from './app/screens/WelcomeScreen/WelcomeScreen';
 import Login from './app/screens/LoginScreen/Login';
 import Register from './app/screens/RegisterScreen/Register';
@@ -10,20 +12,65 @@ import Goal from './app/screens/GoalsScreen/Goal';
 import Diet from './app/screens/DietScreen/Diet';
 import ActivityLevel from './app/screens/ActivityLevelScreen/ActivityLevel';
 
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <ActivityLevel/>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={WelcomeScreen}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="VerifyNumber"
+          component={VerifyNumber}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Weight/Height"
+          component={WeightHeight}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Gender"
+          component={Gender}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Age"
+          component={Age}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Goal"
+          component={Goal}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Diet"
+          component={Diet}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="Activity"
+          component={ActivityLevel}
+          options={{headerShown:false}}
+        />
+          
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
