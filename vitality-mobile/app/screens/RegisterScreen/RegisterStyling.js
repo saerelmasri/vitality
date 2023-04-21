@@ -57,13 +57,16 @@ const registerStyle = StyleSheet.create({
         height: 80, 
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        
     },
     input: {
         width: 300,
         height: 57,
         backgroundColor:Color.white,
         borderRadius: 10,
+        fontSize: 20,
+        paddingLeft: 20
     },
     span: {
         fontWeight:600
