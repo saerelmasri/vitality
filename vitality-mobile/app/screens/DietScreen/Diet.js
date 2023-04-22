@@ -1,14 +1,27 @@
 import { View, Alert, Pressable, Image, Text } from "react-native"
 import { useRoute } from "@react-navigation/native"
-import { useState } from 'react'
+import { useState } from "react"
 import { dietStyling } from "./DietStyling"
 import NextBtn from "../../Components/NextBtn/NextBtn"
 import TypeOfDiet from "../../Components/DietComponent/TypeOfDiet"
 
-const Diet = () => {
+const Diet = ({navigation}) => {
+    const [ diet, setDiet ] = useState('')
     const route = useRoute()
     const toPass = route.params.data
-    console.log(toPass);
+
+    const data = {
+        diet: diet,
+        toPass
+    }
+
+    const checkDiet = () => {
+        if(diet === ''){
+            Alert.alert('Select a diet to follow')
+        }else{
+            navigation.navigate('Activity', {data})
+        }
+    }
     return(
         <View style={dietStyling.mainContainer}>
             <View  style={dietStyling.backBtnContainer}>
@@ -24,16 +37,12 @@ const Diet = () => {
                 </View>
 
                 <View style={dietStyling.dietContainer}>
-                    <TypeOfDiet title={'Ketogenic Diet'} description={'High-fat, low-carb diet that aims to get the body into a state of ketosis.'} imageName={'keto'}/>
-                    <TypeOfDiet title={'Vegan Diet'} description={'Plant-based diet that excludes all animal products including meat, dairy, eggs, and honey.'} imageName={'vegan'}/>
-                    <TypeOfDiet title={'Vegetarian Diet'} description={'Plant-based foods and excludes meat, fish, and poultry. It may dairy and eggs.'} imageName={'vegetarian'}/>
-                    <TypeOfDiet title={'Normal Diet'} description={'Balanced and healthy diet that meets the nutritional needs of an individual.'} imageName={'normal'}/>
-                    
-
+                    <TypeOfDiet title={'Ketogenic Diet'} description={'High-fat, low-carb diet that aims to get the body into a state of ketosis.'} imageName={'keto'} action={() => setDiet('1')}/>
+                    <TypeOfDiet title={'Vegan Diet'} description={'Plant-based diet that excludes all animal products including meat, dairy, eggs, and honey.'} imageName={'vegan'} action={() => setDiet('2')}/>
+                    <TypeOfDiet title={'Vegetarian Diet'} description={'Plant-based foods and excludes meat, fish, and poultry. It may dairy and eggs.'} imageName={'vegetarian'} action={() => setDiet('3')}/>
+                    <TypeOfDiet title={'Normal Diet'} description={'Balanced and healthy diet that meets the nutritional needs of an individual.'} imageName={'normal'} action={() => setDiet('4')}/>
                 </View>
-                
-                
-                <NextBtn/>
+                <NextBtn action={checkDiet}/>
             </View>
         </View>
     )
