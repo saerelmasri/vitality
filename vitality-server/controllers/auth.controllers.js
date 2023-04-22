@@ -118,9 +118,50 @@ const getUserbyToken = (req, res) => {
             message: 'Server Error'
         });
     }
-
-
 }
 
-module.exports = { register, login, getUserbyToken }
+const getUserInfo = async(req, res) => {
+    const token = req.header('Authorization');
+    if(!token){
+        return res.status(400).json({
+            status:400,
+            message: 'Unauthorized'
+        });
+    }
+    try{
+        const decode = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decode.userId
+        const fetch = 'SELECT * FROM users WHERE id = ?'
+        await sql.query(fetch,user_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                });
+            }
+            if(!result){
+                return res.status(401).json({
+                    status: 401,
+                    message: 'Invalid id'
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                message: 'Success',
+                response: result
+            })
+
+        } )
+        
+        
+
+    }catch(err){
+        res.status(500).json({
+            message: 'Server Error'
+        });
+    }
+}
+
+module.exports = { register, login, getUserbyToken, getUserInfo }
 
