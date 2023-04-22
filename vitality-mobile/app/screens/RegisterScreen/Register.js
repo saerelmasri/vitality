@@ -38,9 +38,14 @@ const Register = ({navigation}) => {
                     'Content-Type': 'application/json',
                 }
             }).then((res) => {
-                const token = res.data.token
-                AsyncStorage.setItem('token', token)
-                navigation.navigate('VerifyNumber')
+                if(res.data.status === 200){
+                    const token = res.data.token
+                    AsyncStorage.setItem('token', token)
+                    navigation.navigate('VerifyNumber')
+                }else{
+                    Alert.alert(res.data.message)
+                }
+                
             }).catch(err => {
                 console.log(err);
             })
