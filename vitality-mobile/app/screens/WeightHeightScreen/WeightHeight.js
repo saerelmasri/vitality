@@ -1,6 +1,5 @@
 import { View, Text, TextInput, Image, Pressable, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { useState } from 'react'
-import axios from 'axios'
 import { weightHeightStylings } from "./WeightHeightStylings";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NextBtn from "../../Components/NextBtn/NextBtn";
@@ -14,21 +13,27 @@ const WeightHeight = ({navigation}) => {
     const [ metricHeight, setMetricHeight ] = useState('LB')
 
     AsyncStorage.getItem('token')
-        .then(token => {
-           JWT = token
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
-   
+    const data = {
+        userWeight: weight,
+        userHeight: height
+    }
+
     const checkInputs = () => {
         if(weight === '' || height === ''){
             Alert.alert('All fields are required')
         }else{
-            navigation.navigate('Gender', {userWeight: weight, userHeight: height})
+            navigation.navigate('Gender', {data})
         }
     }
+
+    
 
     return(
         <ScrollView>

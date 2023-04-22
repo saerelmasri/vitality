@@ -7,13 +7,15 @@ const genderStylings = StyleSheet.create({
         display: "flex",
         alignItems: 'center',
         flex: 1,
-        height: 932,
+        height: 770,
         overflow: "hidden",
         width: "100%",
     },
     backBtnContainer: {
         width: '100%',
         height: '10%',
+        display: 'flex',
+        justifyContent: 'center'
     },
     backBtn: {
         height: 50,
@@ -30,7 +32,6 @@ const genderStylings = StyleSheet.create({
         height: '90%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around'
     },
     headerContainer: {
         width: '100%',

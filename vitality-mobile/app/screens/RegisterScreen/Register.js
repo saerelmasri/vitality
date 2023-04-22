@@ -40,12 +40,10 @@ const Register = ({navigation}) => {
                     const token = res.data.token
                     AsyncStorage.setItem('token', token)
                     navigation.navigate('Weight/Height')
-                }else{
-                    Alert.alert(res.data.message)
                 }
                 
             }).catch(err => {
-                console.log(err);
+                Alert.alert(err.response.data.message);
             })
         }
     }
