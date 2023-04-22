@@ -7,7 +7,7 @@ const loginStyles = StyleSheet.create({
       display: "flex",
       flex: 1,
       alignItems: 'center',
-      height: 932,
+      height: 770,
       overflow: "hidden",
       width: "100%",
     },
@@ -40,6 +40,8 @@ const loginStyles = StyleSheet.create({
         height: 57,
         backgroundColor:Color.white,
         borderRadius: 10,
+        fontSize: 20,
+        paddingLeft: 10
     },
     forgotPassword:{
         fontSize: 15,
