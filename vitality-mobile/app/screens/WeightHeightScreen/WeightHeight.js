@@ -1,25 +1,14 @@
 import { View, Text, TextInput, Image, Pressable, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { useState } from 'react'
 import { weightHeightStylings } from "./WeightHeightStylings";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import NextBtn from "../../Components/NextBtn/NextBtn";
-
-var JWT = ''
 
 const WeightHeight = ({navigation}) => {
     const [ weight, setWeight ] = useState('')
     const [ height, setHeight ] = useState('')
     const [ metricWeight, setMetricWeight ] = useState('LB')
     const [ metricHeight, setMetricHeight ] = useState('LB')
-
-    AsyncStorage.getItem('token')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
+ 
     const data = {
         userWeight: weight,
         userHeight: height
@@ -32,8 +21,6 @@ const WeightHeight = ({navigation}) => {
             navigation.navigate('Gender', {data})
         }
     }
-
-    
 
     return(
         <ScrollView>

@@ -14,6 +14,8 @@ const activityLevelStyle = StyleSheet.create({
     backBtnContainer: {
         width: '100%',
         height: '10%',
+        display: 'flex',
+        justifyContent: 'center'
     },
     backBtn: {
         height: 50,

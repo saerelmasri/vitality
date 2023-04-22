@@ -1,9 +1,9 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native"
 import { Color } from "../../../globalStyling"
 
-const ActivityLevelTypes = ({title, description}) => {
+const ActivityLevelTypes = ({title, description, action}) => {
     return(
-        <TouchableOpacity style={activityLevelStyle.activity}>
+        <TouchableOpacity style={activityLevelStyle.activity} onPress={action}>
             <Text style={activityLevelStyle.activityTitle}>{title}</Text>
             <Text style={activityLevelStyle.activityDescription}>{description}</Text>
         </TouchableOpacity>
@@ -12,8 +12,8 @@ const ActivityLevelTypes = ({title, description}) => {
 
 const activityLevelStyle = StyleSheet.create({
     activity:{
-        width: '90%',
-        height: '20%',
+        width: 300,
+        height: 100,
         borderRadius: 10,
         backgroundColor: Color.white,
         paddingLeft: 20,

@@ -10,6 +10,7 @@ import Age from './app/screens/AgeScreen/Age';
 import Goal from './app/screens/GoalsScreen/Goal';
 import Diet from './app/screens/DietScreen/Diet';
 import ActivityLevel from './app/screens/ActivityLevelScreen/ActivityLevel';
+import Success from './app/Components/SuccessScreen/success';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,12 @@ export default function App() {
           component={ActivityLevel}
           options={{headerShown:false}}
         />
+        <Stack.Screen
+          name="Success"
+          component={Success}
+          options={{headerShown:false}}
+        />
+        
           
 
       </Stack.Navigator>
