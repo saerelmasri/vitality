@@ -10,7 +10,6 @@ const Register = ({navigation}) => {
 
     const [ fullName, setFullName ] = useState('')
     const [ nickName, setNickName ] = useState('')
-    const [ phoneNumber, setPhoneNumber ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ confirmPassword, setConfirmPassword ] = useState('')
@@ -19,8 +18,7 @@ const Register = ({navigation}) => {
         "nickname": nickName,
         "full_name": fullName,
         "email": email,
-        "password": password,
-        "phone_number": phoneNumber
+        "password": password
     })
     
     const handleSubmition = async () => {
@@ -41,7 +39,7 @@ const Register = ({navigation}) => {
                 if(res.data.status === 200){
                     const token = res.data.token
                     AsyncStorage.setItem('token', token)
-                    navigation.navigate('VerifyNumber')
+                    navigation.navigate('Weight/Height')
                 }else{
                     Alert.alert(res.data.message)
                 }
@@ -87,17 +85,6 @@ const Register = ({navigation}) => {
                         />
                     </View>
                     <View style={registerStyle.inputs}>
-                        <Text>Phone Number</Text>
-                        <TextInput 
-                            label='Phone Number' 
-                            value={phoneNumber} 
-                            style={registerStyle.input}
-                            onChangeText={text => setPhoneNumber(text)}
-                            placeholder="Enter your phone number"
-                            underlineColorAndroid="transparent"
-                        />
-                    </View>
-                    <View style={registerStyle.inputs}>
                         <Text>Email</Text>
                         <TextInput 
                             label='Email' 
@@ -106,6 +93,7 @@ const Register = ({navigation}) => {
                             onChangeText={text => setEmail(text)}
                             placeholder="Enter your email"
                             underlineColorAndroid="transparent"
+                            autoCapitalize='none'
                         />
                     </View>
                     <View style={registerStyle.inputs}>
@@ -117,6 +105,8 @@ const Register = ({navigation}) => {
                             onChangeText={text => setPassword(text)}
                             placeholder="Enter your password"
                             underlineColorAndroid="transparent"
+                            autoCapitalize='none'
+                            secureTextEntry={true}
                         />
                     </View>
                     <View style={registerStyle.inputs}>
@@ -128,6 +118,8 @@ const Register = ({navigation}) => {
                             onChangeText={text => setConfirmPassword(text)}
                             placeholder="Enter your password again"
                             underlineColorAndroid="transparent"
+                            autoCapitalize='none'
+                            secureTextEntry={true}
                         />
                     </View>
 

@@ -4,7 +4,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from './app/screens/WelcomeScreen/WelcomeScreen';
 import Login from './app/screens/LoginScreen/Login';
 import Register from './app/screens/RegisterScreen/Register';
-import VerifyNumber from './app/screens/VerifyNumberScreen/verifyNumber';
 import WeightHeight from './app/screens/WeightHeightScreen/WeightHeight';
 import Gender from './app/screens/GenderScreen/Gender';
 import Age from './app/screens/AgeScreen/Age';
@@ -31,11 +30,6 @@ export default function App() {
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{headerShown:false}}
-        />
-        <Stack.Screen
-          name="VerifyNumber"
-          component={VerifyNumber}
           options={{headerShown:false}}
         />
         <Stack.Screen

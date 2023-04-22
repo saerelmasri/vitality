@@ -9,9 +9,16 @@ const weightHeightStylings = StyleSheet.create({
         backgroundColor: Color.grey,
         display: "flex",
         flex: 1,
-        height: 932,
+        height: 770,
         overflow: "hidden",
         width: "100%",
+        alignItems: 'center'
+    },
+    backContainer:{
+        height: '10%',
+        width: '100%',
+        display: 'flex',
+        justifyContent:'center'
     },
     backBtn: {
         height: 50,
@@ -55,7 +62,7 @@ const weightHeightStylings = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20
+        marginBottom: 10
     },
     descriptionText: {
         textAlign: 'center',
@@ -69,36 +76,34 @@ const weightHeightStylings = StyleSheet.create({
         flexDirection: 'column'
     },
     weightContainer: {
-        borderWidth: 1,
         width: '100%',
-        height: '50%',
+        height: '55%',
         backgroundColor: Color.darkGreen,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     heightContainer: {
         borderWidth: 1,
         width: '100%',
-        height: '50%',
+        height: '60%',
         backgroundColor: Color.darkGreen,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         position: 'absolute',
-        top: 250,
+        top: 230,
         left: 0,
         right: 0,
         bottom: 0,
         display: 'flex',
-        justifyContent: 'center', 
         alignItems: 'center'
     },
     Title: {
+        marginTop: 20,
         fontSize: 30,
         fontWeight: 400,
         color: Color.white,
-        marginTop: 20
     },
     buttonsContainer: {
         width: '60%',
@@ -133,7 +138,7 @@ const weightHeightStylings = StyleSheet.create({
     },
     input: {
         width: '30%',
-        height: '30%',
+        height: '20%',
         textAlign: 'center',
         fontSize: 35,
         color: Color.white,
