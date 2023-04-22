@@ -1,10 +1,10 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native"
 import { Color } from "../../../globalStyling"
 
-const GoalBtn = ({goalName}) => {
+const GoalBtn = ({goalName, action}) => {
     return(
         <TouchableOpacity style={goalStyling.goal}>
-            <Text style={goalStyling.goalText} onPress={() => {console.log(goalName);}}>{goalName}</Text>
+            <Text style={goalStyling.goalText} onPress={action}>{goalName}</Text>
         </TouchableOpacity>
     )
 }

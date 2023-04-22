@@ -1,9 +1,28 @@
 import { View, Alert, Pressable, Image, Text } from "react-native"
+import { useRoute } from "@react-navigation/native"
+import { useState } from 'react'
 import { goalStyling } from "./GoalStyling"
 import NextBtn from "../../Components/NextBtn/NextBtn"
 import GoalBtn from "../../Components/GoalBtn/GoalBtn"
 
-const Goal = () => {
+const Goal = ({navigation}) => {
+    const route = useRoute()
+    const toPass = route.params.data
+
+    const [ goal , setGoal ] = useState('')
+
+    const data = {
+        toPass,
+        goal: goal
+    }
+    const checkGoal = () => {
+        if(goal === ''){
+            Alert.alert('Select a goal to continue')
+        }else{
+            navigation.navigate('Diet', {data})
+        }
+    }
+
     return(
         <View style={goalStyling.mainContainer}>
             <View  style={goalStyling.backBtnContainer}>
@@ -21,13 +40,13 @@ const Goal = () => {
                     <Text style={goalStyling.descriptionText}>To give you a better experience we need to know your fitness goal</Text>
                 </View>
                 <View style={goalStyling.goalContainer}>
-                    <GoalBtn goalName={'To lose weight.'}/>
-                    <GoalBtn goalName={'To gain weight.'}/>
-                    <GoalBtn goalName={'To lose fat.'}/>
-                    <GoalBtn goalName={'To build muscles..'}/>
+                    <GoalBtn goalName={'Lose Weight'} action={() => {setGoal('1')}}/>
+                    <GoalBtn goalName={'Maintain Weight'} action={() => {setGoal('2')}}/>
+                    <GoalBtn goalName={'Gain Weight'} action={() => {setGoal('3')}}/>
+                    <GoalBtn goalName={'Gain Muscle'} action={() => {setGoal('4')}}/>
                 </View>
                 
-                <NextBtn/>
+                <NextBtn action={checkGoal}/>
             </View>
         </View>
     )
