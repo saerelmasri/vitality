@@ -16,28 +16,31 @@ const Register = () => {
     const [ password, setPassword ] = useState('')
     const [ confirmPassword, setConfirmPassword ] = useState('')
 
-    const data = {
-        "nickname": nickName,
-        "full_name": fullName,
-        "email": email,
-        "password": password,
-        "phone_number": phoneNumber
-    }
+    
     const handleSubmition = async () => {
-        console.log(nickName);
         if(fullName === "" && nickName === "" && phoneNumber === "" && email === "" && password === ""){
             Alert.alert('All fields are required to continue!')
         }else if(password !== confirmPassword){
             Alert.alert('Passwords should match!')
         }else{
             await axios({
-                method: 'post',
-                url: 'http://localhost:5000/auth/register',
-                data: data
+                method: 'POST',
+                url: 'http://192.168.1.104:5000/auth/register',
+                data: JSON.stringify({
+                    "nickname": nickName,
+                    "full_name": fullName,
+                    "email": email,
+                    "password": password,
+                    "phone_number": phoneNumber
+                }),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                }
             }).then((res) => {
-                console.log(res.data);
-            }).catch((err) => {
-                console.log(err.response.data);
+                console.log(res.data.token);
+            }).catch(err => {
+                console.log(err);
             })
         }
     }
