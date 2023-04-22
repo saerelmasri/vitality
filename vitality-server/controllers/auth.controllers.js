@@ -44,10 +44,7 @@ const register = async (req, res) => {
                     message: err
                 });
             }
-            const token = jwt.sign({ 
-                userId: result.insertId
-            }, 
-                process.env.JWT_TOKEN);
+            const token = jwt.sign({ userId: result.insertId }, process.env.JWT_TOKEN );
             return res.status(200).json({
                 status: 200,
                 message: 'User Successfully Created',
