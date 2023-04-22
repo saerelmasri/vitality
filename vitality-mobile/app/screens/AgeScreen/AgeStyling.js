@@ -14,6 +14,8 @@ const ageStyling = StyleSheet.create({
     backBtnContainer: {
         width: '100%',
         height: '10%',
+        display: 'flex',
+        justifyContent: 'center'
     },
     backBtn: {
         height: 50,
@@ -30,7 +32,6 @@ const ageStyling = StyleSheet.create({
         height: '90%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around'
     },
     headerContainer: {
         width: '100%',

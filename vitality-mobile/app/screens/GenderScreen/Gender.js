@@ -9,22 +9,18 @@ const Gender = ({navigation}) => {
     const route = useRoute()
     const data = route.params?.data
 
-    console.log(data);
-
-    const dataToPass = {
-        userWeight: data.userWeight,
-        userHeight : data.userHeight,
-        userGender: gender
+    const toPass = {
+        weightHeight: data,
+        gender: gender
     }
 
     const checkGender = () => {
         if(gender === ''){
             Alert.alert('Please select your gender')
         }else{
-            navigation.navigate('Age', {dataToPass})
+            navigation.navigate('Age', { toPass })
         }
     }
-
     return(
         <ScrollView>
             <View style={genderStylings.mainContainer}>
@@ -52,7 +48,7 @@ const Gender = ({navigation}) => {
                             <Image source={require('../../assets/app-img/female.png')}></Image>
                         </TouchableOpacity>
                     </View>
-                    <NextBtn action={navigation.navigate('Age', {checkGender})}/>
+                    <NextBtn action={checkGender}/>
             </View>
             </View>
         </ScrollView>

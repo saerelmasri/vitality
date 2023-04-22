@@ -1,8 +1,27 @@
 import { View, Alert, Pressable, Image, Text, TextInput } from "react-native"
+import { useRoute } from "@react-navigation/native"
+import { useState } from 'react'
 import { ageStyling } from "./AgeStyling"
 import NextBtn from "../../Components/NextBtn/NextBtn"
 
-const Age = () => {
+const Age = ({navigation}) => {
+    const route = useRoute()
+    const toPass = route.params.toPass
+
+    const [ age, setAge ] = useState('')
+
+    const data = {
+        toPass,
+        age: age
+    }
+
+    const checkAge = () => {
+        if(age === ''){
+            Alert.alert('Please enter your age to continue')
+        }else{
+            navigation.navigate('Goal', {data})
+        }
+    }
     return(
         <View style={ageStyling.mainContainer}>
             <View  style={ageStyling.backBtnContainer}>
@@ -20,9 +39,16 @@ const Age = () => {
                     <Text style={ageStyling.descriptionText}>To give you a better experience we need to know your age</Text>
                 </View>
                 <View style={ageStyling.pickerContainer}>
-                    <TextInput style={ageStyling.ageSelector} underlineColorAndroid="transparent" keyboardType="numeric"/>
+                    <TextInput 
+                        style={ageStyling.ageSelector} 
+                        underlineColorAndroid="transparent" 
+                        keyboardType="numeric"  
+                        value={age}
+                        onChangeText={(text) => setAge(text)}
+                        placeholder="Age"
+                    />
                 </View>
-                <NextBtn/>
+                <NextBtn action={checkAge}/>
             </View>
         </View>
     )
