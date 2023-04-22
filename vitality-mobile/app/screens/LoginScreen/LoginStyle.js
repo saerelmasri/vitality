@@ -52,7 +52,7 @@ const loginStyles = StyleSheet.create({
     actions: {
         fontSize: 15,
         marginRight: 150,
-        marginBottom: 10
+        marginTop: 20
     },
     span: {
         fontSize: 15,

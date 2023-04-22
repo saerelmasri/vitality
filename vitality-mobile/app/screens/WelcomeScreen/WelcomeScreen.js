@@ -12,7 +12,9 @@ const WelcomeScreen = ({navigation}) => {
       <Text style={[welcomeStyles.letsCreateYour, welcomeStyles.youreAllSetTypo]}>
         Let’s create your account!
       </Text>
-      <Button title={'Register'} action={() => navigation.navigate('Login')}/>
+      <View style={welcomeStyles.btnContainer}>
+        <Button title={'Register'} action={() => navigation.navigate('Login')}/>  
+      </View>
       <Image
         style={welcomeStyles.dumbbels}
         resizeMode="cover"

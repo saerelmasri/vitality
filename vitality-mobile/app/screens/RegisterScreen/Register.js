@@ -32,7 +32,7 @@ const Register = () => {
         }else{
             await axios({
                 method: 'post',
-                url: 'http://localhost:3000/auth/register',
+                url: 'http://localhost:5000/auth/register',
                 data: data
             }).then((res) => {
                 console.log(res.data);

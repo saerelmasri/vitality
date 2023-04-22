@@ -22,12 +22,11 @@ const welcomeStyles = StyleSheet.create({
       fontSize: 40,
     },
     btnContainer: {
-      width: 300,
-      height: 70,
+      width: '100%',
+      height: '15%',
       display:'flex',
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 42
+      justifyContent: "flex-start",
+      alignItems: "center"
     },
     btnComponent: {
       width: '100%',
@@ -46,7 +45,7 @@ const welcomeStyles = StyleSheet.create({
       color: "#000",
     },
     dumbbels: {
-      top: 202,
+      top: 226,
       left: 40,
       width: 320,
       height: 429,
