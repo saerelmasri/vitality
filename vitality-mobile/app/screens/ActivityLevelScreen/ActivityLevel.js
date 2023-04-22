@@ -53,7 +53,7 @@ const ActivityLevel = ({navigation}) => {
                     setLoading(true)
                     setTimeout(() => {
                         
-                        navigation.navigate('Success', {title: 'Account Created'})
+                        navigation.navigate('Success', {title: 'Account Created', screen: 'Login'})
                     }, 2000);
                 }
             }).catch(err => {

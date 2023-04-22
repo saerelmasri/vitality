@@ -2,9 +2,15 @@ import { View, StyleSheet, Pressable, Image, Text, ActivityIndicator } from "rea
 import { Color } from '../../../globalStyling'
 import { useRoute } from "@react-navigation/native"
 
-const Success = () => {
+const Success = ({navigation}) => {
     const route = useRoute()
     const title = route.params.title
+    const screen = route.params.screen
+
+    setTimeout(()=> {
+        navigation.navigate(`${screen}`)
+    },2000)
+
     return(
         <View style={Styles.container}>
             <Image source={require('../../assets/app-img/done.png')}></Image>
