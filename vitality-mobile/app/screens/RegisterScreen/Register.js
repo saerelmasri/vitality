@@ -1,13 +1,12 @@
 import { View, Text, TextInput, ScrollView, Alert } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { registerStyle } from "./RegisterStyling";
 import Button from "../../Components/Button/Button";
 import { useState } from "react";
-import axios, { Axios } from "axios";
-
-const baseUrl = 'http://localhost:5000';
+import axios from "axios";
 
 
-const Register = () => {
+const Register = ({navigation}) => {
 
     const [ fullName, setFullName ] = useState('')
     const [ nickName, setNickName ] = useState('')
@@ -16,6 +15,13 @@ const Register = () => {
     const [ password, setPassword ] = useState('')
     const [ confirmPassword, setConfirmPassword ] = useState('')
 
+    const data = JSON.stringify({
+        "nickname": nickName,
+        "full_name": fullName,
+        "email": email,
+        "password": password,
+        "phone_number": phoneNumber
+    })
     
     const handleSubmition = async () => {
         if(fullName === "" && nickName === "" && phoneNumber === "" && email === "" && password === ""){
@@ -26,19 +32,15 @@ const Register = () => {
             await axios({
                 method: 'POST',
                 url: 'http://192.168.1.104:5000/auth/register',
-                data: JSON.stringify({
-                    "nickname": nickName,
-                    "full_name": fullName,
-                    "email": email,
-                    "password": password,
-                    "phone_number": phoneNumber
-                }),
+                data: data,
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 }
             }).then((res) => {
-                console.log(res.data.token);
+                const token = res.data.token
+                AsyncStorage.setItem('token', token)
+                navigation.navigate('VerifyNumber')
             }).catch(err => {
                 console.log(err);
             })

@@ -13,19 +13,10 @@ const verifyNumberStyling = StyleSheet.create({
         overflow: "hidden",
         width: "100%",
     },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     container: {
         width: '100%',
         height: '95%',
+        marginTop: 60,
         backgroundColor: Color.darkGreen,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
