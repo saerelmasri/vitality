@@ -13,6 +13,8 @@ import ActivityLevel from './app/screens/ActivityLevelScreen/ActivityLevel';
 import Success from './app/Components/SuccessScreen/success';
 import Home from './app/screens/HomeScreen/Home';
 import Nutrition from './app/screens/NutritionScreen/Nutrition';
+import Macros from './app/screens/MacrosScreen/Macros';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +22,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Home"
           component={WelcomeScreen}
           options={{headerShown:false}}
@@ -69,11 +71,16 @@ export default function App() {
           name="Success"
           component={Success}
           options={{headerShown:false}}
-        /> */}
+        />
         <Stack.Screen
           name="Nutrition"
           component={Nutrition}
           options={{headerShown:true}}
+        />
+        <Stack.Screen
+          name="Macros"
+          component={Macros}
+          options={{headerShown:false}}
         />
         
           

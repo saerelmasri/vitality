@@ -3,17 +3,17 @@ import { nutritionStyle } from "./NutritionStyle";
 import MealContainer from "../../Components/MealCalories/MealCalories";
 import Macro from "../../Components/MacrosTracker/MacrosTracker";
 
-const Nutrition = () => {
+const Nutrition = ({navigation}) => {
     return(
         <View style={nutritionStyle.container}>
             <ScrollView style={{display: "flex",flex: 1,}}>
                 <View style={nutritionStyle.headerBtnContainer}>
-                    <TouchableOpacity style={nutritionStyle.btn}>
+                    <TouchableOpacity style={nutritionStyle.btn} onPress={() => navigation.navigate('Nutrition')}>
                         <Text style={nutritionStyle.btnText}>
                             Nutrition
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={nutritionStyle.btn}>
+                    <TouchableOpacity style={nutritionStyle.btn} onPress={() => navigation.navigate('Macros')}>
                         <Text style={nutritionStyle.btnText}>
                             Macros
                         </Text>
