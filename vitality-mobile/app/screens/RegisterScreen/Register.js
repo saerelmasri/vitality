@@ -22,7 +22,7 @@ const Register = ({navigation}) => {
     })
     
     const handleSubmition = async () => {
-        if(fullName === "" && nickName === "" && phoneNumber === "" && email === "" && password === ""){
+        if(fullName === "" && nickName === "" && email === "" && password === ""){
             Alert.alert('All fields are required to continue!')
         }else if(password !== confirmPassword){
             Alert.alert('Passwords should match!')

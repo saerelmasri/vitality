@@ -42,7 +42,6 @@ const Age = ({navigation}) => {
                     <TextInput 
                         style={ageStyling.ageSelector} 
                         underlineColorAndroid="transparent" 
-                        keyboardType="numeric"  
                         value={age}
                         onChangeText={(text) => setAge(text)}
                         placeholder="Age"

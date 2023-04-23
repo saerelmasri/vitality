@@ -1,5 +1,8 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Color, FontFamily } from "../../../globalStyling";
+
+const { height, width } = Dimensions.get('window')
+
 
 const registerStyle = StyleSheet.create({
     container: {
@@ -9,7 +12,7 @@ const registerStyle = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         alignItems: 'center',
-        height: 770,
+        height: height + 30,
         overflow: "hidden",
         width: "100%",
     },
@@ -29,8 +32,8 @@ const registerStyle = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        width: 250,
-        height: 80,
+        width: '70%',
+        height: '20%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'

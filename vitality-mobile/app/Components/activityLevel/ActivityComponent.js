@@ -13,7 +13,7 @@ const ActivityLevelTypes = ({title, description, action}) => {
 const activityLevelStyle = StyleSheet.create({
     activity:{
         width: 300,
-        height: 100,
+        height: 130,
         borderRadius: 10,
         backgroundColor: Color.white,
         paddingLeft: 20,

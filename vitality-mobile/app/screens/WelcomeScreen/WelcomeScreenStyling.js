@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Color, FontFamily } from "../../../globalStyling";
+
+const { height, width } = Dimensions.get('window')
 const welcomeStyles = StyleSheet.create({
     youreAllSetTypo: {
       width: 360,
@@ -26,7 +28,9 @@ const welcomeStyles = StyleSheet.create({
       height: '15%',
       display:'flex',
       justifyContent: "flex-start",
-      alignItems: "center"
+      alignItems: "center",
+      position: 'absolute',
+      marginTop: height - 90
     },
     btnComponent: {
       width: '100%',
@@ -45,18 +49,18 @@ const welcomeStyles = StyleSheet.create({
       color: "#000",
     },
     dumbbels: {
-      top: 226,
-      left: 40,
-      width: 320,
-      height: 429,
+      width: '80%',
+      height:'50%',
+      marginRight: 0,
+      right: 0,
+      top: '35%',
       position: "absolute",
     },
     food: {
-      top: 170,
-      left: 0,
-      width: 200,
-      height: 200,
-      position: "absolute",
+      width: '80%',
+      height:'20%',
+      marginRight: width - 150,
+      marginTop: '55%',
       transform: [{ rotate: '90deg' }]
     },
     welcomeScreen: {
@@ -64,10 +68,9 @@ const welcomeStyles = StyleSheet.create({
       display: "flex",
       flex: 1,
       alignItems: 'center',
-      justifyContent: 'flex-end',
-      height: 932,
       overflow: "hidden",
       width: "100%",
+      height: height
     },
 });
 

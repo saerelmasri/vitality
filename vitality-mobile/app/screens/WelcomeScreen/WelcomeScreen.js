@@ -12,20 +12,31 @@ const WelcomeScreen = ({navigation}) => {
       <Text style={[welcomeStyles.letsCreateYour, welcomeStyles.youreAllSetTypo]}>
         Let’s create your account!
       </Text>
-      <View style={welcomeStyles.btnContainer}>
-        <Button title={'Register'} action={() => navigation.navigate('Login')}/>  
-      </View>
-      <Image
-        style={welcomeStyles.dumbbels}
-        resizeMode="cover"
-        source={require("../../assets/app-img/man-with-dumbble.png")}
-      />
       <Image
         style={welcomeStyles.food}
         resizeMode="cover"
         source={require("../../assets/app-img/food.png")}
       />
+      <Image
+        style={welcomeStyles.dumbbels}
+        resizeMode="cover"
+        source={require("../../assets/app-img/man-with-dumbble.png")}
+      />
+      <View style={welcomeStyles.btnContainer}>
+        <Button title={'Register'} action={() => navigation.navigate('Login')}/>  
+      </View>
+
+      
+      {/* <View >
+        
+        
+        
+        
+        
+      </View>
+       */}
     </View>
+    
   );
 };
 

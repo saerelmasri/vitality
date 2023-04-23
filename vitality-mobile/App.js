@@ -11,9 +11,9 @@ import Goal from './app/screens/GoalsScreen/Goal';
 import Diet from './app/screens/DietScreen/Diet';
 import ActivityLevel from './app/screens/ActivityLevelScreen/ActivityLevel';
 import Success from './app/Components/SuccessScreen/success';
-import Home from './app/screens/HomeScreen/Home';
 import Nutrition from './app/screens/NutritionScreen/Nutrition';
 import Macros from './app/screens/MacrosScreen/Macros';
+import FoodListing from './app/screens/FoodListingScreen/FoodListing';
 
 
 const Stack = createNativeStackNavigator();
@@ -80,6 +80,11 @@ export default function App() {
         <Stack.Screen
           name="Macros"
           component={Macros}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name="FoodListing"
+          component={FoodListing}
           options={{headerShown:false}}
         />
         

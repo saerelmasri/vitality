@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Color, FontFamily } from "../../../globalStyling";
+
+const { height, width } = Dimensions.get('window')
 
 const loginStyles = StyleSheet.create({
     loginScreen: {
@@ -7,7 +9,7 @@ const loginStyles = StyleSheet.create({
       display: "flex",
       flex: 1,
       alignItems: 'center',
-      height: 770,
+      height: height + 50,
       overflow: "hidden",
       width: "100%",
     },
