@@ -16,6 +16,7 @@ import Macros from './app/screens/MacrosScreen/Macros';
 import FoodListing from './app/screens/FoodListingScreen/FoodListing';
 import FoodDetail from './app/screens/FoodDetailScreen/FoodDetail';
 import WelcomeKitchen from './app/screens/KitchenWelcome/KitchWelcome';
+import Recipes from './app/screens/RecipesScreen/RecipesScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -94,9 +95,14 @@ export default function App() {
           component={FoodDetail}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="WelcomeKitchen"
           component={WelcomeKitchen}
+          options={{headerShown:false}}
+        /> */}
+        <Stack.Screen
+          name="RecipeDashboard"
+          component={Recipes}
           options={{headerShown:false}}
         />
         
