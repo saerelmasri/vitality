@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, StyleSheet, Dimensions, ImageBackground, FlatList } from "react-native";
 import { Color } from "../../../globalStyling";
 import { useRoute } from "@react-navigation/native"
 import { useState, useEffect } from "react";
@@ -11,6 +11,7 @@ const RecipesDescription = () => {
     const [ protein, setProtein ] = useState('')
     const [ carbs, setCarbs ] = useState('')
     const [recipeSteps, setRecipeSteps] = useState([]);
+    const [ ingredients, setIngredients ] = useState([])
 
     useEffect(() => {
         setCalories(recipeInfo.nutrition[0].amount)
@@ -21,7 +22,19 @@ const RecipesDescription = () => {
         recipeInfo.instructions.map((step, index) => {
             setRecipeSteps(prevSteps => [...prevSteps, `Step ${index + 1}: ${step}\n`]);
         });
+
+        const ingredientsData = recipeInfo.ingredients.map((ingredient) => {
+            const { name, amount, unit } = ingredient;
+            return { name, amount, unit };
+        });
+        
+        setIngredients(ingredientsData)
     }, [])
+
+    console.log(ingredients);
+
+    
+    
 
 
     return(
@@ -70,7 +83,16 @@ const RecipesDescription = () => {
                         </View>
 
                         <View style={recipeDescription.ingredientsContainer}>
-
+                            <Text style={{fontSize: 35, fontWeight: 500, color: Color.white, textDecorationLine: 'underline', marginBottom: '2%' }}>Ingredients</Text>
+                            <FlatList
+                                data={ingredients}
+                                keyExtractor={(item, index) => index.toString()}
+                                renderItem={({ item }) => (
+                                    <View >
+                                        <Text style={{fontSize: 20, color: Color.white}}>{item.amount} {item.unit} {item.name}</Text>
+                                    </View>
+                                )}
+                            />
                         </View>
                         <ScrollView >
                             <View style={recipeDescription.preparationContainer}>
@@ -81,9 +103,6 @@ const RecipesDescription = () => {
                                 </Text>
                             </View>
                         </ScrollView>
-                        
-                        
-
                     </View>
 
                 </ScrollView>
@@ -165,10 +184,9 @@ const recipeDescription = StyleSheet.create({
         fontWeight: 400
     },
     ingredientsContainer: {
-        borderWidth: 1,
         width: width - 40,
-        height: height / 3,
         marginTop: '5%',
+        padding: 20
     },
     preparationContainer: {
         
