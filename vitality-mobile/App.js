@@ -15,6 +15,7 @@ import Nutrition from './app/screens/NutritionScreen/Nutrition';
 import Macros from './app/screens/MacrosScreen/Macros';
 import FoodListing from './app/screens/FoodListingScreen/FoodListing';
 import FoodDetail from './app/screens/FoodDetailScreen/FoodDetail';
+import WelcomeKitchen from './app/screens/KitchenWelcome/KitchWelcome';
 
 
 const Stack = createNativeStackNavigator();
@@ -88,9 +89,14 @@ export default function App() {
           component={FoodListing}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="FoodDetail"
           component={FoodDetail}
+          options={{headerShown:false}}
+        /> */}
+        <Stack.Screen
+          name="WelcomeKitchen"
+          component={WelcomeKitchen}
           options={{headerShown:false}}
         />
         
