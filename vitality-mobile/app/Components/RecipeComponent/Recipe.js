@@ -4,12 +4,7 @@ import { Color } from "../../../globalStyling";
 const RecipeComponent = ({level, name}) => {
     return(
         <TouchableOpacity style={recipesComponentStyling.recipeComponent}>
-            <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 320, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={require('../../assets/app-img/test.jpg')} imageStyle={{borderRadius: 10, opacity: 0.5}}>
-                <View style={recipesComponentStyling.level}>
-                    <Text style={recipesComponentStyling.levelTxt}>
-                        {level}
-                    </Text>
-                </View>
+            <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 320, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={{uri: `${level}`}} imageStyle={{borderRadius: 10, opacity: 0.5}}>
                 <View style={recipesComponentStyling.recipeName}>
                     <Text style={recipesComponentStyling.recipeTxt}>
                         {name}
@@ -22,12 +17,10 @@ const RecipeComponent = ({level, name}) => {
 
 const recipesComponentStyling = StyleSheet.create({
     recipeComponent: {
-        width: '90%',
-        height: '30%',  
         borderRadius: 10,
         display: 'flex',
         flexDirection: 'column',
-        marginTop: '5%'
+        marginTop: 10
     },
     level: {
         width: '100%',

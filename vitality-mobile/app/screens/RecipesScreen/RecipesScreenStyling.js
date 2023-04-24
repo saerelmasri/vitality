@@ -85,12 +85,10 @@ const recipesStyling = StyleSheet.create({
         fontWeight: 400
     },
     recipesContainer: {
-        width: width,
-        height: height / 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-
+        paddingBottom: 20
     },
     recipesScroll: {
         display: 'flex',

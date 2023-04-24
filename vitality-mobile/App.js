@@ -101,16 +101,16 @@ export default function App() {
           component={WelcomeKitchen}
           options={{headerShown:false}}
         /> */}
-        {/* <Stack.Screen
+        <Stack.Screen
           name="RecipeDashboard"
           component={Recipes}
           options={{headerShown:false}}
-        /> */}
-        <Stack.Screen
+        />
+        {/* <Stack.Screen
           name="RecipeDescription"
           component={RecipesDescription}
           options={{headerShown:false}}
-        />
+        /> */}
         
           
 
