@@ -32,12 +32,6 @@ const RecipesDescription = () => {
         setIngredients(ingredientsData)
     }, [])
 
-    console.log(ingredients);
-
-    
-    
-
-
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <ImageBackground style={recipeDescription.container} source={{uri: recipeInfo.image}} resizeMode="cover" imageStyle={{width: width, height: height / 2.5, zIndex: 0}}>

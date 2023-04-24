@@ -1,5 +1,7 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity } from "react-native";
 import { useEffect, useState } from 'react'
+import { API_KEY_RECIPES } from '@env'
+
 import axios from 'axios'
 import { Color } from "../../../globalStyling";
 import { recipesStyling } from "./RecipesScreenStyling";
@@ -17,7 +19,7 @@ const Recipes = ({navigation}) => {
                 url: 'https://api.spoonacular.com/recipes/complexSearch',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': 'ecdb01301621466d810eb52c1ef0ead1',
+                    'x-api-key': API_KEY_RECIPES,
                     'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
                 },
                 params: {
@@ -104,16 +106,10 @@ const Recipes = ({navigation}) => {
                             </View>
                         )}
                    </View>
-                                        
-
-                    
-                    
                 </ScrollView>
-
             </View>
         </SafeAreaView>
     );
 }
-
 
 export default Recipes
