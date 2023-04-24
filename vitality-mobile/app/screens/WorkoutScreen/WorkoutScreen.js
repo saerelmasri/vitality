@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
+import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
@@ -19,10 +19,114 @@ const WorkoutDashboard = () => {
                         </Pressable>
                     </View>
 
-                    <View style={workoutDashboardStyling.titleTouch}>
+                    <ScrollView  horizontal={true}>
+                        <ImageBackground style={workoutDashboardStyling.videoComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{width: width / 1.7, height: height / 6, borderRadius: 10, opacity: 0.6}}>
+                            <Text style={{fontSize: 20, color: Color.white}}>10 minutes</Text>
+                        </ImageBackground>
 
-                    </View>
+                        <ImageBackground style={workoutDashboardStyling.videoComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{width: width / 1.7, height: height / 6, borderRadius: 10, opacity: 0.6}}>
+                            <Text style={{fontSize: 20, color: Color.white}}>10 minutes</Text>
+                        </ImageBackground>
+
+                        <ImageBackground style={workoutDashboardStyling.videoComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{width: width / 1.7, height: height / 6, borderRadius: 10, opacity: 0.6}}>
+                            <Text style={{fontSize: 20, color: Color.white}}>10 minutes</Text>
+                        </ImageBackground>
+                    </ScrollView>
                     
+                    <View style={workoutDashboardStyling.headerTitle}>
+                        <Text style={workoutDashboardStyling.title}>
+                            Our Collections
+                        </Text>
+                    </View>
+
+                    <View style={workoutDashboardStyling.targetMuscleContainer}>
+                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                            <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/chest.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
+                                <View style={workoutDashboardStyling.topContainer}>
+                                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
+                                        Target muscle: Chest
+                                    </Text>
+                                </View>
+                                <View style={workoutDashboardStyling.bottomContainer}>
+                                    <View style={workoutDashboardStyling.exerciseCounter}>
+                                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
+                                            12 exercise
+                                        </Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                            <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/back.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
+                                <View style={workoutDashboardStyling.topContainer}>
+                                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
+                                        Target muscle: Chest
+                                    </Text>
+                                </View>
+                                <View style={workoutDashboardStyling.bottomContainer}>
+                                    <View style={workoutDashboardStyling.exerciseCounter}>
+                                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
+                                            12 exercise
+                                        </Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                            <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/shoulder.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
+                                <View style={workoutDashboardStyling.topContainer}>
+                                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
+                                        Target muscle: Chest
+                                    </Text>
+                                </View>
+                                <View style={workoutDashboardStyling.bottomContainer}>
+                                    <View style={workoutDashboardStyling.exerciseCounter}>
+                                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
+                                            12 exercise
+                                        </Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                            <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/legs.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
+                                <View style={workoutDashboardStyling.topContainer}>
+                                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
+                                        Target muscle: Chest
+                                    </Text>
+                                </View>
+                                <View style={workoutDashboardStyling.bottomContainer}>
+                                    <View style={workoutDashboardStyling.exerciseCounter}>
+                                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
+                                            12 exercise
+                                        </Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                            <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/arms.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
+                                <View style={workoutDashboardStyling.topContainer}>
+                                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
+                                        Target muscle: Chest
+                                    </Text>
+                                </View>
+                                <View style={workoutDashboardStyling.bottomContainer}>
+                                    <View style={workoutDashboardStyling.exerciseCounter}>
+                                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
+                                            12 exercise
+                                        </Text>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
+
+
                 </ScrollView>
 
             </View>
@@ -56,7 +160,63 @@ const workoutDashboardStyling = StyleSheet.create({
     titleTouch:{
         fontSize: 16,
         color: Color.white
+    }, 
+    videoContainers: {
+        borderWidth: 1,
+        width: width,
+        height: height / 5,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: '5%'
+    },
+    videoComponent: {
+        width: width / 1.7,
+        height: height / 6,
+        borderRadius: 10,
+        display: 'flex',
+        justifyContent: 'flex-end',
+        paddingLeft: '5%',
+        paddingBottom: '5%', 
+        marginRight: 10
+    },
+    targetMuscleContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        paddingBottom: 10
+    },
+    targetMuscleComponent: {
+        width: width - 40,
+        height: height / 5,
+        borderRadius: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    },
+    topContainer: {
+        height: '40%',
+        display: 'flex',
+        justifyContent: 'center',
+        paddingLeft: '5%'
+    },
+    bottomContainer: {
+        height: '40%',
+        display: 'flex',
+        flexDirection: 'row',
+        paddingLeft: '5%'
+    },
+    emojiContainer: {
+        width: '10%',
+        height: '70%'
+    },
+    exerciseCounter: {
+        width: '90%',
+        display: 'flex',
+        justifyContent: 'center'
     }
+
+
 })
 
 
