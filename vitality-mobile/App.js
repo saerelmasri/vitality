@@ -106,11 +106,11 @@ export default function App() {
           component={Recipes}
           options={{headerShown:false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="RecipeDescription"
           component={RecipesDescription}
           options={{headerShown:false}}
-        /> */}
+        />
         
           
 

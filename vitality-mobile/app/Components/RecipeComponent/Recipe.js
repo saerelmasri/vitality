@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 
-const RecipeComponent = ({level, name}) => {
+const RecipeComponent = ({level, name, action}) => {
     return(
-        <TouchableOpacity style={recipesComponentStyling.recipeComponent}>
+        <TouchableOpacity style={recipesComponentStyling.recipeComponent} onPress={action}>
             <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 320, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={{uri: `${level}`}} imageStyle={{borderRadius: 10, opacity: 0.5}}>
                 <View style={recipesComponentStyling.recipeName}>
                     <Text style={recipesComponentStyling.recipeTxt}>

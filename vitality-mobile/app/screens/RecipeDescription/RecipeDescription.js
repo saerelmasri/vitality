@@ -1,11 +1,32 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
+import { useRoute } from "@react-navigation/native"
+import { useState, useEffect } from "react";
 const { height, width } = Dimensions.get('window')
 
 const RecipesDescription = () => {
+    const route = useRoute()
+    const recipeInfo = route.params.recipeInfo
+    const [ calories, setCalories ] = useState('')
+    const [ protein, setProtein ] = useState('')
+    const [ carbs, setCarbs ] = useState('')
+    const [recipeSteps, setRecipeSteps] = useState([]);
+
+    useEffect(() => {
+        setCalories(recipeInfo.nutrition[0].amount)
+        setCarbs(recipeInfo.nutrition[3].amount)
+        setProtein(recipeInfo.nutrition[8].amount)
+
+        
+        recipeInfo.instructions.map((step, index) => {
+            setRecipeSteps(prevSteps => [...prevSteps, `Step ${index + 1}: ${step}\n`]);
+        });
+    }, [])
+
+
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
-            <ImageBackground style={recipeDescription.container} source={require('../../assets/app-img/test.jpg')} resizeMode="cover" imageStyle={{width: width, height: height / 2.5, zIndex: 0}}>
+            <ImageBackground style={recipeDescription.container} source={{uri: recipeInfo.image}} resizeMode="cover" imageStyle={{width: width, height: height / 2.5, zIndex: 0}}>
                 <ScrollView>
                     <View style={recipeDescription.backBtnContainer}  >
                         <View style={recipeDescription.backBtn}>
@@ -18,13 +39,13 @@ const RecipesDescription = () => {
                     <View style={recipeDescription.descriptionContainer}>
                         <View style={recipeDescription.titleHeader}>
                             <Text style={recipeDescription.title}>
-                                Healthy Banana Oatmeal Pancakes
+                                {recipeInfo.title}
                             </Text>
                         </View>
                         <View style={recipeDescription.nutritionFacts}>
                             <View style={recipeDescription.factsContent}>
                                 <Text style={recipeDescription.factsNumber}>
-                                    345
+                                    {calories}
                                 </Text>
                                 <Text style={recipeDescription.factsTxt}>
                                     Calories
@@ -32,7 +53,7 @@ const RecipesDescription = () => {
                             </View>
                             <View style={recipeDescription.factsContent}>
                                 <Text style={recipeDescription.factsNumber}>
-                                    250
+                                    {protein}
                                 </Text>
                                 <Text style={recipeDescription.factsTxt}>
                                     Protein
@@ -40,7 +61,7 @@ const RecipesDescription = () => {
                             </View>
                             <View style={recipeDescription.factsContent}>
                                 <Text style={recipeDescription.factsNumber}>
-                                    250
+                                    {carbs}
                                 </Text>
                                 <Text style={recipeDescription.factsTxt}>
                                     Carbs
@@ -51,9 +72,16 @@ const RecipesDescription = () => {
                         <View style={recipeDescription.ingredientsContainer}>
 
                         </View>
-                        <View style={recipeDescription.preparationContainer}>
+                        <ScrollView >
+                            <View style={recipeDescription.preparationContainer}>
+                                <Text style={{fontSize: 35, fontWeight: 500, color: Color.white, textDecorationLine: 'underline', marginBottom: '2%' }}>Instructions</Text>  
 
-                        </View>
+                                <Text style={{fontSize: 20, color: Color.white}}>
+                                            {recipeSteps}
+                                </Text>
+                            </View>
+                        </ScrollView>
+                        
                         
 
                     </View>
@@ -91,7 +119,6 @@ const recipeDescription = StyleSheet.create({
     },
     descriptionContainer: {
         width: width,
-        height: height,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         zIndex: 1,
@@ -144,12 +171,20 @@ const recipeDescription = StyleSheet.create({
         marginTop: '5%',
     },
     preparationContainer: {
-        borderWidth: 1,
+        
+        flex: 1,
         width: width - 40,
-        height: height / 3,
         marginTop: '5%',
-    }
-
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 20,
+      },
+      steps: {
+        width: '100%',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 20,
+      },
 })
 
 export default RecipesDescription

@@ -5,7 +5,7 @@ import { Color } from "../../../globalStyling";
 import { recipesStyling } from "./RecipesScreenStyling";
 import RecipeComponent from "../../Components/RecipeComponent/Recipe";
 
-const Recipes = () => {
+const Recipes = ({navigation}) => {
 
     const [ filter, setFilter ] = useState('')
     const [recipes, setRecipes] = useState([]);
@@ -21,10 +21,10 @@ const Recipes = () => {
                     'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
                 },
                 params: {
-                    'diet': 'vegan',
                     'includeIngredients': true,
                     'instructionsRequired': true,
                     'addRecipeInformation': true,
+                    'addRecipeNutrition': true,
                     'type': filter,
                     'number': 15
                 }
@@ -32,8 +32,9 @@ const Recipes = () => {
                 const recipeList = res.data.results.map((result) => ({
                     image: result.image,
                     title: result.title,
-                    summary: result.summary,
-                    instructions: result.analyzedInstructions[0].steps.map((step) => step.step)
+                    nutrition: result.nutrition.nutrients,
+                    instructions: result.analyzedInstructions[0].steps.map((step) => step.step),
+                    ingredients: result.nutrition.ingredients.map((name) => name),
                 }));
                 setRecipes(recipeList);
             }).catch(err => {
@@ -44,7 +45,6 @@ const Recipes = () => {
 
     }, [filter])
 
-    console.log(filter);
 
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
@@ -86,7 +86,7 @@ const Recipes = () => {
                    <View style={recipesStyling.recipesContainer}>
                         <ScrollView>
                             {recipes.map((recipe) => (
-                                <RecipeComponent level={recipe.image} name={recipe.title} />
+                                <RecipeComponent level={recipe.image} name={recipe.title} action={() => {navigation.navigate('RecipeDescription', {recipeInfo: recipe})}}/>
                             ))}
                         </ScrollView>
                    </View>
