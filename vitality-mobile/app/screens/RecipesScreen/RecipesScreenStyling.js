@@ -95,6 +95,11 @@ const recipesStyling = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: width,
+    },
+    noRecipesText: {
+        fontSize: 30,
+        color: Color.white,
+        marginTop: '10%'
     }
 })
 

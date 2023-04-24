@@ -26,6 +26,7 @@ const Recipes = ({navigation}) => {
                     'addRecipeInformation': true,
                     'addRecipeNutrition': true,
                     'type': filter,
+                    'query': filter,
                     'number': 15
                 }
             }).then((res) => {
@@ -44,6 +45,8 @@ const Recipes = ({navigation}) => {
         fetchRecipes(filter)
 
     }, [filter])
+
+
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={recipesStyling.container}>
@@ -55,7 +58,14 @@ const Recipes = ({navigation}) => {
                     <View style={recipesStyling.searchContainer}>
                         <View style={recipesStyling.searchIconContainer}>
                         </View>
-                        <TextInput style={recipesStyling.searchInput} placeholder="Search food"></TextInput>
+                        <TextInput 
+                            style={recipesStyling.searchInput} 
+                            placeholder="Search food"
+                            value={filter}
+                            onChangeText={text => setFilter(text)}
+                            underlineColorAndroid="transparent"
+                            autoCapitalize='none'
+                        ></TextInput>
                     </View>
 
                     <View style={recipesStyling.aiBtn}>
@@ -81,12 +91,18 @@ const Recipes = ({navigation}) => {
                         </TouchableOpacity>
                     </View>
 
-                   <View style={recipesStyling.recipesContainer}>
-                        <ScrollView>
-                            {recipes.map((recipe) => (
-                                <RecipeComponent level={recipe.image} name={recipe.title} action={() => {navigation.navigate('RecipeDescription', {recipeInfo: recipe})}}/>
-                            ))}
-                        </ScrollView>
+                    <View style={recipesStyling.recipesContainer}>
+                        {recipes.length ? (
+                            <ScrollView>
+                                {recipes.map((recipe) => (
+                                    <RecipeComponent level={recipe.image} name={recipe.title} action={() => {navigation.navigate('RecipeDescription', {recipeInfo: recipe})}}/>
+                                ))}
+                            </ScrollView>
+                        ) : (
+                            <View style={recipesStyling.noRecipesContainer}>
+                                <Text style={recipesStyling.noRecipesText}>Sorry, we couldn't find any recipes for your search...</Text>
+                            </View>
+                        )}
                    </View>
                                         
 
