@@ -7,12 +7,11 @@ import RecipeComponent from "../../Components/RecipeComponent/Recipe";
 
 const Recipes = () => {
 
-    // const [ imageURL, setImageURL ] = useState('')
-    // const [ recipe, setRecipe ] = useState('')
+    const [ filter, setFilter ] = useState('')
     const [recipes, setRecipes] = useState([]);
 
     useEffect( () => {
-        const fetchRecipes = async() => {
+        const fetchRecipes = async(filter) => {
             await axios({
                 method: 'GET',
                 url: 'https://api.spoonacular.com/recipes/complexSearch',
@@ -26,6 +25,7 @@ const Recipes = () => {
                     'includeIngredients': true,
                     'instructionsRequired': true,
                     'addRecipeInformation': true,
+                    'type': filter,
                     'number': 15
                 }
             }).then((res) => {
@@ -40,10 +40,11 @@ const Recipes = () => {
                 console.log(err);
             })
         }
-        fetchRecipes()
+        fetchRecipes(filter)
 
-    }, [])
+    }, [filter])
 
+    console.log(filter);
 
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
@@ -71,13 +72,13 @@ const Recipes = () => {
                     </View>
 
                     <View style={recipesStyling.btnContainer}>
-                        <TouchableOpacity style={recipesStyling.btn}>
+                        <TouchableOpacity style={recipesStyling.btn} onPress={()=> {setFilter('breakfast')}}>
                             <Text style={recipesStyling.btnTxt}>Breakfast</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={recipesStyling.btn}>
+                        <TouchableOpacity style={recipesStyling.btn} onPress={()=> {setFilter('main course')}}>
                             <Text style={recipesStyling.btnTxt}>Lunch</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={recipesStyling.btn}>
+                        <TouchableOpacity style={recipesStyling.btn} onPress={()=> {setFilter('snack')}}>
                             <Text style={recipesStyling.btnTxt}>Snack</Text>
                         </TouchableOpacity>
                     </View>
