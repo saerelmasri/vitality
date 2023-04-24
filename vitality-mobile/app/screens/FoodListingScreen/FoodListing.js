@@ -40,11 +40,8 @@ const FoodListing = () => {
                                 <Pressable onPress={() => {Alert.alert('Press')}}>
                                     <Image source={require('../../assets/app-img/addBtn.png')}/>
                                 </Pressable>
-
                             </View>
-
                         </View>
-
                     </View>
                 </ScrollView>
 
