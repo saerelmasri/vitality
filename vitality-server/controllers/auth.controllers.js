@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const register = async (req, res) => {
-    const { nickname, full_name, phone_number, email, password } = req.body;
+    const { nickname, full_name, email, password } = req.body;
     const level = 0;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -35,7 +35,7 @@ const register = async (req, res) => {
                 message: 'Email already taken'
             });
         }
-        const newUser = { nickname, full_name, phone_number, email, password: hashPassword, level};
+        const newUser = { nickname, full_name, email, password: hashPassword, level};
         const insert_query = 'INSERT INTO users SET ?';
         sql.query(insert_query, newUser, (err, result) => {
             if(err){
@@ -57,7 +57,7 @@ const register = async (req, res) => {
 const login = (req, res) => {
     const { email, password } = req.body;
     const checkUser = 'SELECT * FROM users WHERE email = ?';
-    sql.query(checkUser, email, (err, result) => {
+    sql.query(checkUser, [email], (err, result) => {
         if(err){
             return res.status(500).json({
                 status: 500,
@@ -86,7 +86,7 @@ const login = (req, res) => {
             }
             const token = jwt.sign({ userId: user.id }, process.env.JWT_TOKEN, { expiresIn: '1h' });
             return res.status(200).json({
-                status: 201,
+                status: 200,
                 message: 'Log in successfully',
                 token: token
              });
