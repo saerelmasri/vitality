@@ -60,8 +60,7 @@ const registerStyle = StyleSheet.create({
         height: 80, 
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start',
-        
+        alignItems: 'flex-start', 
     },
     input: {
         width: 300,
