@@ -136,16 +136,16 @@ export default function App() {
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         /> */}
-        {/* <Stack.Screen
+        <Stack.Screen
           name="SelectActivity"
           component={SelectActivity}
           options={{headerShown:false}}
-        /> */}
-        <Stack.Screen
+        />
+        {/* <Stack.Screen
           name="ActivityInfo"
           component={ActivityInfo}
           options={{headerShown:false}}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

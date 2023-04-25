@@ -22,11 +22,6 @@ const SelectActivity = () => {
                             </Text>
                             <TouchableOpacity style={selectActivity.circle}>
                                 <Text style={selectActivity.text}>
-                                    Running Challenge
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={selectActivity.circle}>
-                                <Text style={selectActivity.text}>
                                     Workout Challenge
                                 </Text>
                             </TouchableOpacity>
