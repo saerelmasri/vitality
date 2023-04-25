@@ -1,56 +1,19 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
-import Button from "../../Components/Button/Button";
-import { useEffect, useState } from 'react'
-import Challenge from "../../Components/ChallengeComponent/Challenge";
-import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 const { height, width } = Dimensions.get('window')
 
-
-
-const PlaygroundDashboard = () => {
+const Challenge = () => {
     
     return(
-        <SafeAreaView style={{flex:1, }}>
-            <View style={runningStyling.container}>
-                <ScrollView>
-                    <Header/>
-
-                    <View style={runningStyling.imageContainer}>
-                        <ImageBackground style={runningStyling.imageContent} source={require('../../assets/app-img/friends.jpg')} imageStyle={{width: width - 73,height: height / 3.3, borderRadius: 10, opacity: 0.7,}}>
-                            <View style={runningStyling.imageTextContent} >
-                                <Text style={runningStyling.text}>
-                                    Create your challenges and compete with your friends!
-                                </Text>
-                            </View>
-                        </ImageBackground>
-                    </View>
-
-                    <View style={runningStyling.btnContainer}>
-                        <Button title={'Create a party'}/>
-                    </View>
-
-                    <View
-                        style={{
-                            marginTop: '5%',
-                            marginBottom: '5%',
-                            borderBottomWidth: 1,
-                            borderBottomColor: Color.white,
-                            width: width - 40,
-                            marginLeft: '5%'
-                        }}
-                    ></View>
-
-                    <View style={runningStyling.challengesContainer}>
-                        <ScrollView>
-                            <Challenge/>
-                            <Challenge/>
-                            <Challenge/>
-                        </ScrollView>
-                    </View>
-                </ScrollView>
+        <TouchableOpacity style={runningStyling.challengeHeader}>
+            <View style={runningStyling.txtContainer}>
+                <Text style={{fontSize: 22}}>Run 5 kilometers this week</Text>
+                <Text style={{fontSize: 15}}>Reward: 100pts</Text>
             </View>
-        </SafeAreaView>
+            <View style={runningStyling.iconContainer}>
+
+            </View>
+        </TouchableOpacity>
     );
 }
 
@@ -141,4 +104,4 @@ const runningStyling = StyleSheet.create({
 })
 
 
-export default PlaygroundDashboard
+export default Challenge
