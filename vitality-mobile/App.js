@@ -24,6 +24,7 @@ import ExerciseListing from './app/screens/ExerciseListing/ExerciseListing';
 import PlaygroundDashboard from './app/screens/PlaygroundDashboard/PlaygroundScreen';
 import SelectActivity from './app/screens/CreatePartyScreens/SelectActivityScreen/SelectScreen';
 import ActivityInfo from './app/screens/CreatePartyScreens/ActivityInfo/ActivityInfo';
+import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteScreenStyling';
 
 
 const Stack = createNativeStackNavigator();
@@ -136,16 +137,21 @@ export default function App() {
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="SelectActivity"
           component={SelectActivity}
           options={{headerShown:false}}
-        />
+        /> */}
         {/* <Stack.Screen
           name="ActivityInfo"
           component={ActivityInfo}
           options={{headerShown:false}}
         /> */}
+        <Stack.Screen
+          name="InviteFriends"
+          component={InviteFriends}
+          options={{headerShown:false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
