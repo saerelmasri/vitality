@@ -6,6 +6,7 @@ import axios from 'axios'
 import CardComponent from "../../Components/Card/CardComponent";
 const { height, width } = Dimensions.get('window')
 import Indicator from '../../Components/ActivityIndicator/indicator'
+import { API_KEY_EXERCISES } from '@env'
 
 
 const ExerciseListing = ({navigation}) => {
@@ -21,7 +22,7 @@ const ExerciseListing = ({navigation}) => {
                 url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${listingTarget}`,
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-RapidAPI-Key': '0be9f1d9fbmsh909221869cd9123p1b8f03jsnc224a276d142',
+                    'X-RapidAPI-Key': API_KEY_EXERCISES,
                     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'  
                 },
             }).then(res => {
