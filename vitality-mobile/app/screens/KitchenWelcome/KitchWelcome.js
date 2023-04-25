@@ -1,7 +1,7 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TouchableOpacity } from "react-native";
 import { kitchenStyle } from "./KitchenWelcomeStyling";
 
-const WelcomeKitchen = () => {
+const WelcomeKitchen = ({navigation}) => {
 
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
@@ -23,7 +23,7 @@ const WelcomeKitchen = () => {
                     </View>
 
                     <View style={kitchenStyle.btnContainer}>
-                        <TouchableOpacity style={kitchenStyle.btn}>
+                        <TouchableOpacity style={kitchenStyle.btn} onPress={() => {navigation.navigate('RecipeDashboard')}}>
                             <Text style={{fontSize: 20, fontWeight: 400}}>
                                 Add Food
                             </Text>

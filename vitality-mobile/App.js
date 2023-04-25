@@ -21,10 +21,10 @@ import RecipesDescription from './app/screens/RecipeDescription/RecipeDescriptio
 import WorkoutDashboard from './app/screens/WorkoutScreen/WorkoutScreen';
 import VideoListing from './app/screens/VideoListing/VideoListing';
 import ExerciseListing from './app/screens/ExerciseListing/ExerciseListing';
+import PlaygroundDashboard from './app/screens/PlaygroundDashboard/PlaygroundScreen';
 
 
 const Stack = createNativeStackNavigator();
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -103,8 +103,8 @@ export default function App() {
           name="WelcomeKitchen"
           component={WelcomeKitchen}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="RecipeDashboard"
           component={Recipes}
           options={{headerShown:false}}
@@ -114,10 +114,10 @@ export default function App() {
           component={RecipesDescription}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="WorkoutDashboard"
           component={WorkoutDashboard}
-          options={{headerShown:true, headerTitle: 'Discover'}}
+          options={{headerShown:true, headerTitle: 'Discover', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
         <Stack.Screen
           name="VideoListing"
@@ -128,10 +128,12 @@ export default function App() {
           name="ExerciseListing"
           component={ExerciseListing}
           options={{headerShown: false}}
+        /> */}
+        <Stack.Screen
+          name="RunningDashboard"
+          component={PlaygroundDashboard}
+          options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
-        
-          
-
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -19,7 +19,6 @@ const ButtonStyles = StyleSheet.create({
     },
     btnText: {
       fontSize: 25,
-      textTransform: "capitalize",
       fontWeight: "500",
       fontFamily: FontFamily.interMedium,
       color: "#000",
