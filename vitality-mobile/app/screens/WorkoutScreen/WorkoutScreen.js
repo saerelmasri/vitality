@@ -3,7 +3,7 @@ import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
 
-const WorkoutDashboard = () => {
+const WorkoutDashboard = ({navigation}) => {
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={workoutDashboardStyling.container}>
@@ -12,7 +12,7 @@ const WorkoutDashboard = () => {
                         <Text style={workoutDashboardStyling.title}>
                             Our Popular Routines
                         </Text>
-                        <Pressable onPress={() => {Alert.alert('More')}}>
+                        <Pressable onPress={() => {navigation.navigate('VideoListing')}}>
                             <Text style={workoutDashboardStyling.titleTouch}>
                                 View all
                             </Text>
@@ -40,7 +40,7 @@ const WorkoutDashboard = () => {
                     </View>
 
                     <View style={workoutDashboardStyling.targetMuscleContainer}>
-                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                        <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: 'chest'})}}>
                             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/chest.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
                                 <View style={workoutDashboardStyling.topContainer}>
                                     <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
@@ -50,75 +50,75 @@ const WorkoutDashboard = () => {
                                 <View style={workoutDashboardStyling.bottomContainer}>
                                     <View style={workoutDashboardStyling.exerciseCounter}>
                                         <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
-                                            12 exercise
+                                            50 exercise
                                         </Text>
                                     </View>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                        <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: 'back'})}}>
                             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/back.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
                                 <View style={workoutDashboardStyling.topContainer}>
                                     <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
-                                        Target muscle: Chest
+                                        Target muscle: Back
                                     </Text>
                                 </View>
                                 <View style={workoutDashboardStyling.bottomContainer}>
                                     <View style={workoutDashboardStyling.exerciseCounter}>
                                         <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
-                                            12 exercise
+                                            50 exercise
                                         </Text>
                                     </View>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                        <TouchableOpacity  onPress={()=> {navigation.navigate('ExerciseListing', {target: 'shoulders'})}}>
                             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/shoulder.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
                                 <View style={workoutDashboardStyling.topContainer}>
                                     <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
-                                        Target muscle: Chest
+                                        Target muscle: Shoulders
                                     </Text>
                                 </View>
                                 <View style={workoutDashboardStyling.bottomContainer}>
                                     <View style={workoutDashboardStyling.exerciseCounter}>
                                         <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
-                                            12 exercise
+                                            50 exercise
                                         </Text>
                                     </View>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                        <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: 'upper legs'})}}>
                             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/legs.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
                                 <View style={workoutDashboardStyling.topContainer}>
                                     <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
-                                        Target muscle: Chest
+                                        Target muscle: Legs
                                     </Text>
                                 </View>
                                 <View style={workoutDashboardStyling.bottomContainer}>
                                     <View style={workoutDashboardStyling.exerciseCounter}>
                                         <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
-                                            12 exercise
+                                            50 exercise
                                         </Text>
                                     </View>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> {Alert.alert}}>
+                        <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: 'upper arms'})}}>
                             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={require('../../assets/app-img/arms.jpg')} imageStyle={{borderRadius: 10, opacity: 0.6}}>
                                 <View style={workoutDashboardStyling.topContainer}>
                                     <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
-                                        Target muscle: Chest
+                                        Target muscle: Bicep/Tricep
                                     </Text>
                                 </View>
                                 <View style={workoutDashboardStyling.bottomContainer}>
                                     <View style={workoutDashboardStyling.exerciseCounter}>
                                         <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
-                                            12 exercise
+                                            50 exercise
                                         </Text>
                                     </View>
                                 </View>

@@ -1,5 +1,7 @@
-import { View, ActivityIndicator, StyleSheet } from "react-native"
+import { View, ActivityIndicator, StyleSheet, Dimensions } from "react-native"
 import { Color } from '../../../globalStyling'
+const { height, width } = Dimensions.get('window')
+
 
 const Indicator = () => {
     return(
@@ -11,12 +13,12 @@ const Indicator = () => {
 
 const Styles = StyleSheet.create({
     container: {
-        backgroundColor: Color.grey,
+        backgroundColor: Color.ligtGreen,
         display: "flex",
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: '30%',
         flex: 1,
-        height: 932,
         overflow: "hidden",
         width: "100%",
     }

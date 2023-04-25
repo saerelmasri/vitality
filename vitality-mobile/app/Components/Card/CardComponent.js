@@ -3,10 +3,15 @@ import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
 
-const CardComponent = ({text}) => {
+const CardComponent = ({text, target, image}) => {
     return(
         <TouchableOpacity>
-            <ImageBackground style={workoutDashboardStyling.cardComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{borderRadius: 10, opacity: 0.7}}>
+            <ImageBackground style={workoutDashboardStyling.cardComponent} source={{uri: image}} imageStyle={{borderRadius: 20, opacity: 0.5}}>
+                <View style={workoutDashboardStyling.textCard}>
+                    <Text style={{fontSize: 20, fontWeight: 500, color: Color.white}}>
+                        {target}
+                    </Text>
+                </View>
                 <View style={workoutDashboardStyling.textCard}>
                     <Text style={{fontSize: 20, fontWeight: 500, color: Color.white}}>
                         {text}
@@ -24,7 +29,7 @@ const workoutDashboardStyling = StyleSheet.create({
         height: height / 5,
         borderRadius: 10,
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         alignItems: 'flex-end',
         marginBottom: '5%'
     },
