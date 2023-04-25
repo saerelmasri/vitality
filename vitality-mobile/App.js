@@ -22,6 +22,7 @@ import WorkoutDashboard from './app/screens/WorkoutScreen/WorkoutScreen';
 import VideoListing from './app/screens/VideoListing/VideoListing';
 import ExerciseListing from './app/screens/ExerciseListing/ExerciseListing';
 import PlaygroundDashboard from './app/screens/PlaygroundDashboard/PlaygroundScreen';
+import SelectActivity from './app/screens/CreatePartyScreens/SelectActivityScreen/SelectScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -129,10 +130,15 @@ export default function App() {
           component={ExerciseListing}
           options={{headerShown: false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="RunningDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+        /> */}
+        <Stack.Screen
+          name="SelectActivity"
+          component={SelectActivity}
+          options={{headerShown:false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
