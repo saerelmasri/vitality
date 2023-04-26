@@ -31,6 +31,7 @@ import Leaderboard from './app/screens/LeaderboardScreen/LeaderboardScreen';
 import Invitation from './app/screens/InvitationScreen/Invitation';
 import InvitationDetail from './app/screens/InvitationDetail/InvitationDetail';
 import FriendList from './app/screens/FriendList/FriendList';
+import AddFriend from './app/screens/AddFriendScreen/AddFriend';
 
 
 
@@ -188,6 +189,11 @@ export default function App() {
           name="FriendList"
           component={FriendList}
           options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+        />
+        <Stack.Screen
+          name="AddFriend"
+          component={AddFriend}
+          options={{headerShown:false, }}
         />
         
         

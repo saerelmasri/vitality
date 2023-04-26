@@ -1,8 +1,8 @@
-import { View, Pressable, Image, Alert, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const Friend = ({name}) => {
+const FriendComponent = ({name}) => {
     return(
         <View style={activityInfoStyle.friends}>
             <View style={activityInfoStyle.photoContainer}>
@@ -10,11 +10,6 @@ const Friend = ({name}) => {
             </View>
             <View style={activityInfoStyle.nameContainer}>
                 <Text style={{fontSize: 17}}>{name}</Text>
-            </View>
-            <View style={activityInfoStyle.addContainer}>
-                <Pressable onPress={() => {Alert.alert('Omg Ambar hi')}}>
-                    <Image source={require('../../assets/app-img/addBtn.png')}/>
-                </Pressable>
             </View>
         </View>
     );
@@ -67,15 +62,8 @@ const activityInfoStyle = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         paddingLeft: 10
-    },
-    addContainer: {
-        height: '100%',
-        width: '25%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
     }
 })
 
 
-export default Friend
+export default FriendComponent

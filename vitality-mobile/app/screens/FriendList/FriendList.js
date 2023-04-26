@@ -1,9 +1,9 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
-import Friend from "../../Components/FriendComponent/Friend";
+import FriendComponent from "../../Components/ListFriend/ListFriend";
 const { height, width } = Dimensions.get('window')
 
-const FriendList = () => {
+const FriendList = ({navigation}) => {
     return(
         <SafeAreaView style={{flex:1,}}>
             <View style={friendStyle.container}>
@@ -23,7 +23,7 @@ const FriendList = () => {
                         <Text style={{fontSize: 25, color: Color.white}}>
                             Workout Friends
                         </Text>
-                        <Pressable onPress={() => Alert.alert('Hola')}>
+                        <Pressable onPress={() => navigation.navigate('AddFriend')}>
                             <Text style={{fontSize: 16, color: Color.white, fontWeight: 500}}>
                                 Add Friend
                             </Text>
@@ -31,17 +31,14 @@ const FriendList = () => {
                     </View>
                     <View style={friendStyle.friendListConteiner}>
                         <ScrollView>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
+                            <FriendComponent name={'Saer El Masri'}/>
                         </ScrollView>
                     </View>
 
