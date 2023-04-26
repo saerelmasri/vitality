@@ -29,6 +29,7 @@ import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
 import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
 import Leaderboard from './app/screens/LeaderboardScreen/LeaderboardScreen';
 import Invitation from './app/screens/InvitationScreen/Invitation';
+import InvitationDetail from './app/screens/InvitationDetail/InvitationDetail';
 
 
 
@@ -137,11 +138,21 @@ export default function App() {
           component={ExerciseListing}
           options={{headerShown: false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
+        <Stack.Screen
+          name="Leaderboard"
+          component={Leaderboard}
+          options={{headerShown:true, headerTitle: 'LeaderBoard', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+        />
+        <Stack.Screen
+          name="Invitations"
+          component={Invitation}
+          options={{headerShown:true, headerTitle: 'Invitations', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+        /> */}
         {/* <Stack.Screen
           name="SelectActivity"
           component={SelectActivity}
@@ -168,15 +179,11 @@ export default function App() {
           options={{headerShown:false}}
         /> */}
         <Stack.Screen
-          name="Leaderboard"
-          component={Leaderboard}
-          options={{headerShown:true, headerTitle: 'LeaderBoard', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+          name="InvitationDetail"
+          component={InvitationDetail}
+          options={{headerShown:false,}}
         />
-        <Stack.Screen
-          name="Invitations"
-          component={Invitation}
-          options={{headerShown:true, headerTitle: 'Invitations', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
-        />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
