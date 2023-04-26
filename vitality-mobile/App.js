@@ -153,6 +153,11 @@ export default function App() {
           component={InviteFriends}
           options={{headerShown:false}}
         /> */}
+        {/* <Stack.Screen
+          name="Trophy"
+          component={Trophy}
+          options={{headerShown:false}}
+        /> */}
         <Stack.Screen
           name="Trophy"
           component={Trophy}
