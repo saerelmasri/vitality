@@ -28,6 +28,7 @@ import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteS
 import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
 import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
 import Leaderboard from './app/screens/LeaderboardScreen/LeaderboardScreen';
+import Invitation from './app/screens/InvitationScreen/Invitation';
 
 
 
@@ -170,6 +171,11 @@ export default function App() {
           name="Leaderboard"
           component={Leaderboard}
           options={{headerShown:true, headerTitle: 'LeaderBoard', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+        />
+        <Stack.Screen
+          name="Invitations"
+          component={Invitation}
+          options={{headerShown:true, headerTitle: 'Invitations', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
       </Stack.Navigator>
     </NavigationContainer>

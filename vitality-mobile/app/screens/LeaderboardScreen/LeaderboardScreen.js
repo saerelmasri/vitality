@@ -1,13 +1,8 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { View, ScrollView, SafeAreaView, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
-import Button from "../../Components/Button/Button";
-import { useEffect, useState } from 'react'
-import Challenge from "../../Components/ChallengeComponent/Challenge";
 import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 import LeaderboardItem from "../../Components/LeaderboardItem/LeaderboardItem";
 const { height, width } = Dimensions.get('window')
-
-
 
 const Leaderboard = ({navigation}) => {
     
@@ -15,7 +10,7 @@ const Leaderboard = ({navigation}) => {
         <SafeAreaView style={{flex:1, }}>
             <View style={leaderboardStyle.container}>
                 <ScrollView>
-                    <Header action1={()=> navigation.navigate('PlaygroundDashboard')}/>
+                    <Header action1={()=> navigation.navigate('PlaygroundDashboard')} action3={() => navigation.navigate('Invitations')}/>
                     <View style={leaderboardStyle.headerContainer}>
                         <View style={leaderboardStyle.boardContainer}>
                             <View style={leaderboardStyle.boardPlace}>
