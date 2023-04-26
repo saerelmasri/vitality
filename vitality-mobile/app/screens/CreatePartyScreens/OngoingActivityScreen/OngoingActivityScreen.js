@@ -1,13 +1,13 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Text, StyleSheet, Dimensions } from "react-native";
+import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Text, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../../globalStyling";
 import Button from "../../../Components/Button/Button";
 const { height, width } = Dimensions.get('window')
 
-
 const onGoingActivity = () => {
+    
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
-            <View style={onGoingActivityStyling.container}>
+            <ImageBackground style={onGoingActivityStyling.container} source={require('../../../assets/app-img/ads.jpg')}>
                 <ScrollView>
                     <View style={onGoingActivityStyling.backBtnContainer}>
                         <View style={onGoingActivityStyling.backBtn}>
@@ -18,6 +18,7 @@ const onGoingActivity = () => {
                     </View>
 
                     <View style={onGoingActivityStyling.content}>
+                        
                         <View style={onGoingActivityStyling.timingConteiner}>
                             <View style={onGoingActivityStyling.timing}>
                                 <Text style={{fontSize: 60, fontWeight: 500, color: Color.white}}>
@@ -54,7 +55,7 @@ const onGoingActivity = () => {
                     </View>
 
                 </ScrollView>
-            </View>
+            </ImageBackground>
         </SafeAreaView>
     );
 }
@@ -67,6 +68,7 @@ const onGoingActivityStyling = StyleSheet.create({
         alignItems: 'center',
         overflow: "hidden",
         width: "100%",
+        height: height
     },
     backBtnContainer: {
         width: width,
@@ -86,6 +88,7 @@ const onGoingActivityStyling = StyleSheet.create({
     content: {
         height: height /1.1,
         display: 'flex',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
     },

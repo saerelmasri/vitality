@@ -26,7 +26,8 @@ import SelectActivity from './app/screens/CreatePartyScreens/SelectActivityScree
 import ActivityInfo from './app/screens/CreatePartyScreens/ActivityInfo/ActivityInfo';
 import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteScreenStyling';
 import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
-import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivity/onGoingActivity';
+import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
+
 
 
 const Stack = createNativeStackNavigator();
