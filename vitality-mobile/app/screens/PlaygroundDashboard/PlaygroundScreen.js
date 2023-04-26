@@ -8,13 +8,13 @@ const { height, width } = Dimensions.get('window')
 
 
 
-const PlaygroundDashboard = () => {
+const PlaygroundDashboard = ({navigation}) => {
     
     return(
         <SafeAreaView style={{flex:1, }}>
             <View style={runningStyling.container}>
                 <ScrollView>
-                    <Header/>
+                    <Header action2={()=> {navigation.navigate('Leaderboard')}}/>
 
                     <View style={runningStyling.imageContainer}>
                         <ImageBackground style={runningStyling.imageContent} source={require('../../assets/app-img/friends.jpg')} imageStyle={{width: width - 73,height: height / 3.3, borderRadius: 10, opacity: 0.7,}}>

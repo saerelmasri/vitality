@@ -136,11 +136,11 @@ export default function App() {
           component={ExerciseListing}
           options={{headerShown: false}}
         /> */}
-        {/* <Stack.Screen
-          name="RunningDashboard"
+        <Stack.Screen
+          name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
-        /> */}
+        />
         {/* <Stack.Screen
           name="SelectActivity"
           component={SelectActivity}

@@ -9,13 +9,13 @@ const { height, width } = Dimensions.get('window')
 
 
 
-const Leaderboard = () => {
+const Leaderboard = ({navigation}) => {
     
     return(
         <SafeAreaView style={{flex:1, }}>
             <View style={leaderboardStyle.container}>
                 <ScrollView>
-                    <Header/>
+                    <Header action1={()=> navigation.navigate('PlaygroundDashboard')}/>
                     <View style={leaderboardStyle.headerContainer}>
                         <View style={leaderboardStyle.boardContainer}>
                             <View style={leaderboardStyle.boardPlace}>
