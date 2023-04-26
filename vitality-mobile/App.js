@@ -27,6 +27,7 @@ import ActivityInfo from './app/screens/CreatePartyScreens/ActivityInfo/Activity
 import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteScreenStyling';
 import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
 import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
+import Leaderboard from './app/screens/LeaderboardScreen/LeaderboardScreen';
 
 
 
@@ -160,10 +161,15 @@ export default function App() {
           component={Trophy}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="onGoingActivity"
           component={onGoingActivity}
           options={{headerShown:false}}
+        /> */}
+        <Stack.Screen
+          name="Leaderboard"
+          component={Leaderboard}
+          options={{headerShown:true, headerTitle: 'LeaderBoard', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
       </Stack.Navigator>
     </NavigationContainer>
