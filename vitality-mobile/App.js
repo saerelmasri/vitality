@@ -26,6 +26,7 @@ import SelectActivity from './app/screens/CreatePartyScreens/SelectActivityScree
 import ActivityInfo from './app/screens/CreatePartyScreens/ActivityInfo/ActivityInfo';
 import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteScreenStyling';
 import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
+import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivity/onGoingActivity';
 
 
 const Stack = createNativeStackNavigator();
@@ -159,8 +160,8 @@ export default function App() {
           options={{headerShown:false}}
         /> */}
         <Stack.Screen
-          name="Trophy"
-          component={Trophy}
+          name="onGoingActivity"
+          component={onGoingActivity}
           options={{headerShown:false}}
         />
       </Stack.Navigator>
