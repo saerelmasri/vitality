@@ -32,6 +32,7 @@ import Invitation from './app/screens/InvitationScreen/Invitation';
 import InvitationDetail from './app/screens/InvitationDetail/InvitationDetail';
 import FriendList from './app/screens/FriendList/FriendList';
 import AddFriend from './app/screens/AddFriendScreen/AddFriend';
+import Profile from './app/screens/ProfileScreen/Profile';
 
 
 
@@ -185,7 +186,7 @@ export default function App() {
           component={InvitationDetail}
           options={{headerShown:false,}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="FriendList"
           component={FriendList}
           options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -194,6 +195,11 @@ export default function App() {
           name="AddFriend"
           component={AddFriend}
           options={{headerShown:false, }}
+        /> */}
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
         
         
