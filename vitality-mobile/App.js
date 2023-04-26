@@ -30,6 +30,7 @@ import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScr
 import Leaderboard from './app/screens/LeaderboardScreen/LeaderboardScreen';
 import Invitation from './app/screens/InvitationScreen/Invitation';
 import InvitationDetail from './app/screens/InvitationDetail/InvitationDetail';
+import FriendList from './app/screens/FriendList/FriendList';
 
 
 
@@ -178,11 +179,17 @@ export default function App() {
           component={onGoingActivity}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="InvitationDetail"
           component={InvitationDetail}
           options={{headerShown:false,}}
+        /> */}
+        <Stack.Screen
+          name="FriendList"
+          component={FriendList}
+          options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
+        
         
       </Stack.Navigator>
     </NavigationContainer>
