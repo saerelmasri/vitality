@@ -12,7 +12,7 @@ const GoalBtn = ({goalName, action}) => {
 const goalStyling = StyleSheet.create({
     goal: {
         width: '100%',
-        height: '18%',
+        height: '12%',
         borderRadius: 10,
         backgroundColor: Color.white,
         display: 'flex',

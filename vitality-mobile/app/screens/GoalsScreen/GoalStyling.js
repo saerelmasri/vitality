@@ -15,7 +15,8 @@ const goalStyling = StyleSheet.create({
         width: '100%',
         height: '10%',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingTop: 10
     },
     backBtn: {
         height: 50,

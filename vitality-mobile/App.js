@@ -57,11 +57,11 @@ export default function App() {
           component={Register}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Weight/Height"
           component={WeightHeight}
           options={{headerShown:false}}
-        />
+        /> */}
         {/* <Stack.Screen
           name="Gender"
           component={Gender}
@@ -71,13 +71,13 @@ export default function App() {
           name="Age"
           component={Age}
           options={{headerShown:false}}
-        />
+        /> */}
         <Stack.Screen
           name="Goal"
           component={Goal}
           options={{headerShown:false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Diet"
           component={Diet}
           options={{headerShown:false}}
