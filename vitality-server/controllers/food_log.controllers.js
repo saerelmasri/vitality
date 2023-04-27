@@ -40,7 +40,6 @@ const addFoodLog = async(req, res) => {
     }
 }
 
-
 const fetchUserMealLogs = async(req, res) => {
     const { mealID } = req.body
     const token = req.header('Authorization')
@@ -123,4 +122,80 @@ const getCaloriesIntakeByDate = async (req, res) => {
     }
 }
 
-module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate }
+const addDailyCalories = async (req, res) => {
+    const { daily_calories } = req.body
+
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(400).json({
+            status: 400,
+            message: 'Unauthorized'
+        })
+    }
+    try{
+        const decode = jwt.decode(token, process.env.JWT_TOKEN);
+        const userID = decode.userId;
+        const query = 'INSERT INTO daily_calories SET ?';
+        const queryParam = { user_id: userID, daily_calories }
+
+        await sql.query(query, queryParam, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            res.status(200).json({
+                status: 200, 
+                message: 'Daily Calories Added'
+             });
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500, 
+            message: err
+        })
+    }
+
+}
+
+const getDailyCalories = async (req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(400).json({
+            status: 400,
+            message: 'Unauthorized'
+        })
+    }
+    try{
+        const decode = jwt.decode(token, process.env.JWT_TOKEN);
+        const userID = decode.userId;
+        const query = 'SELECT daily_calories FROM daily_calories WHERE user_id = ?';
+        const queryParam = { user_id: userID }
+
+        await sql.query(query, queryParam, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            res.status(200).json({
+                status: 200, 
+                message: 'Successful',
+                data: result
+             });
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500, 
+            message: err
+        })
+    }
+
+}
+
+
+module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate, addDailyCalories, getDailyCalories }
