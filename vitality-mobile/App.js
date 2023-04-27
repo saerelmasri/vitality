@@ -72,21 +72,21 @@ export default function App() {
           component={Age}
           options={{headerShown:false}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Goal"
           component={Goal}
           options={{headerShown:false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Diet"
           component={Diet}
           options={{headerShown:false}}
-        />
+        /> */}
         <Stack.Screen
           name="Activity"
           component={ActivityLevel}
           options={{headerShown:false}}
-        /> */}
+        />
 
         {/* <Stack.Screen
           name="Success"

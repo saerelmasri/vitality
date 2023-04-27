@@ -12,8 +12,8 @@ var JWT = ''
 const ActivityLevel = ({navigation}) => {
     const [ activity, setActivity ] = useState('')
     const [loading, setLoading] = useState(false);
-    const route = useRoute()
-    const toPass = route.params.data
+    // const route = useRoute()
+    // const toPass = route.params.data
 
     
     AsyncStorage.getItem('token')
@@ -25,15 +25,15 @@ const ActivityLevel = ({navigation}) => {
     });
 
 
-    const data = JSON.stringify({
-        'weight': toPass['toPass']['toPass']['toPass']['weightHeight']['userWeight'],
-        'height': toPass['toPass']['toPass']['toPass']['weightHeight']['userHeight'],
-        'gender': toPass['toPass']['toPass']['toPass']['gender'],
-        'age': toPass['toPass']['toPass']['age'],
-        'goal_type_id': toPass['toPass']['goal'],
-        'diet_type_id': toPass['diet'],
-        'activity_type_id': activity
-    })
+    // const data = JSON.stringify({
+    //     'weight': toPass['toPass']['toPass']['toPass']['weightHeight']['userWeight'],
+    //     'height': toPass['toPass']['toPass']['toPass']['weightHeight']['userHeight'],
+    //     'gender': toPass['toPass']['toPass']['toPass']['gender'],
+    //     'age': toPass['toPass']['toPass']['age'],
+    //     'goal_type_id': toPass['toPass']['goal'],
+    //     'diet_type_id': toPass['diet'],
+    //     'activity_type_id': activity
+    // })
 
     const checkActivity = async() => {
         if(activity === ''){
@@ -84,24 +84,28 @@ const ActivityLevel = ({navigation}) => {
                             </View>
                             <View style={activityLevelStyle.activityContainer}>
                                 <ActivityLevelTypes 
-                                    title={'Sedentary'} 
-                                    description={'Little to no exercise or physical activity in daily routine.'} 
-                                    action={() => setActivity('1')}
+                                    title={'Sedentary: little or no exercise'} 
+                                    action={() => setActivity('2')}
                                 />
                                 <ActivityLevelTypes 
-                                    title={'Light Active'} 
-                                    description={'You work a job with light physical demands, or you work a desk job and perform light exercise for 30 minutes per day, 3-5 times per week.'}
-                                    action={() => {setActivity('2')}}
+                                    title={'Exercise 1-3 times/week'} 
+                                    action={() => {setActivity('3')}}
                                 />
                                 <ActivityLevelTypes 
-                                    title={'Active'} 
-                                    description={' You average more than 60 minutes of physical activity a day'}
-                                    action={() => setActivity('3')}
-                                />
-                                <ActivityLevelTypes 
-                                    title={'Very Active'} 
-                                    description={'You do intentional exercise every day that is equivalent to briskly walking for at least four hours and 15 minutes - briskly walking is walking at 4mph'}
+                                    title={'Exercise 4-5 times/week'} 
                                     action={() => setActivity('4')}
+                                />
+                                <ActivityLevelTypes 
+                                    title={'Daily exercise or intense exercise 3-4 times/week'} 
+                                    action={() => setActivity('5')}
+                                />
+                                <ActivityLevelTypes 
+                                    title={'Intense exercise 6-7 times/week'} 
+                                    action={() => setActivity('6')}
+                                />
+                                <ActivityLevelTypes 
+                                    title={'Very intense exercise daily, or physical job'} 
+                                    action={() => setActivity('7')}
                                 />
                                 
                             </View>

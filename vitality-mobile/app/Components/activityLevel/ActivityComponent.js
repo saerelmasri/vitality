@@ -5,7 +5,6 @@ const ActivityLevelTypes = ({title, description, action}) => {
     return(
         <TouchableOpacity style={activityLevelStyle.activity} onPress={action}>
             <Text style={activityLevelStyle.activityTitle}>{title}</Text>
-            <Text style={activityLevelStyle.activityDescription}>{description}</Text>
         </TouchableOpacity>
     )
 }
@@ -13,7 +12,7 @@ const ActivityLevelTypes = ({title, description, action}) => {
 const activityLevelStyle = StyleSheet.create({
     activity:{
         width: 300,
-        height: 130,
+        height: '15%',
         borderRadius: 10,
         backgroundColor: Color.white,
         paddingLeft: 20,
