@@ -33,6 +33,7 @@ import InvitationDetail from './app/screens/InvitationDetail/InvitationDetail';
 import FriendList from './app/screens/FriendList/FriendList';
 import AddFriend from './app/screens/AddFriendScreen/AddFriend';
 import Profile from './app/screens/ProfileScreen/Profile';
+import Settings from './app/screens/SettingScreen/Setting';
 
 
 
@@ -196,10 +197,15 @@ export default function App() {
           component={AddFriend}
           options={{headerShown:false, }}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Profile"
           component={Profile}
           options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+        /> */}
+        <Stack.Screen
+          name="Settins"
+          component={Settings}
+          options={{headerShown:false,}}
         />
         
         
