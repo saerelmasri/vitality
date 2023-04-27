@@ -113,11 +113,10 @@ const weightHeightStylings = StyleSheet.create({
         marginTop: 5
     },
     leftButton: {
-        width: '50%',
+        width: '100%',
         height: '100%',
         backgroundColor: Color.white,
-        borderBottomLeftRadius: 30,
-        borderTopLeftRadius: 30,
+        borderRadius: 30,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'

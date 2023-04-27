@@ -6,8 +6,6 @@ import NextBtn from "../../Components/NextBtn/NextBtn";
 const WeightHeight = ({navigation}) => {
     const [ weight, setWeight ] = useState('')
     const [ height, setHeight ] = useState('')
-    const [ metricWeight, setMetricWeight ] = useState('LB')
-    const [ metricHeight, setMetricHeight ] = useState('LB')
  
     const data = {
         userWeight: weight,
@@ -44,12 +42,9 @@ const WeightHeight = ({navigation}) => {
                     <View style={weightHeightStylings.weightContainer}>
                         <Text style={weightHeightStylings.Title}>What is your weight?</Text>
                         <View style={weightHeightStylings.buttonsContainer}>
-                            <TouchableOpacity style={weightHeightStylings.leftButton} onPress={() => {setMetricWeight('LB')}}>
-                                <Text style={weightHeightStylings.textBtn}>LB</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={weightHeightStylings.rightButton} onPress={() => {setMetricWeight('KG')}}>
+                            <View style={weightHeightStylings.leftButton}>
                                 <Text style={weightHeightStylings.textBtn}>KG</Text>
-                            </TouchableOpacity>
+                            </View>
                         </View>
                         <TextInput 
                             style={weightHeightStylings.input}  
@@ -63,12 +58,9 @@ const WeightHeight = ({navigation}) => {
                     <View style={weightHeightStylings.heightContainer}>
                     <Text style={weightHeightStylings.Title}>What is your height?</Text>
                         <View style={weightHeightStylings.buttonsContainer}>
-                            <TouchableOpacity style={weightHeightStylings.leftButton} onPress={() => {setMetricHeight('FT')}}>
-                                <Text style={weightHeightStylings.textBtn}>FT</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={weightHeightStylings.rightButton} onPress={() => {setMetricHeight('CM')}}>
+                            <View style={weightHeightStylings.leftButton}>
                                 <Text style={weightHeightStylings.textBtn}>CM</Text>
-                            </TouchableOpacity>
+                            </View>
                         </View>
                         <TextInput 
                             style={weightHeightStylings.input}  

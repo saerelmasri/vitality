@@ -56,13 +56,13 @@ export default function App() {
           name="Register"
           component={Register}
           options={{headerShown:false}}
-        />
+        /> */}
         <Stack.Screen
           name="Weight/Height"
           component={WeightHeight}
           options={{headerShown:false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Gender"
           component={Gender}
           options={{headerShown:false}}
@@ -94,7 +94,7 @@ export default function App() {
           options={{headerShown:false}}
         /> */}
 
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Nutrition"
           component={Nutrition}
           options={{headerShown:true, headerTitle: 'Nutrition', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -113,7 +113,7 @@ export default function App() {
           name="FoodDetail"
           component={FoodDetail}
           options={{headerShown:false}}
-        />
+        /> */}
 
         {/* <Stack.Screen
           name="WelcomeKitchen"
