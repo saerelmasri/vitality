@@ -42,7 +42,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Home"
           component={WelcomeScreen}
           options={{headerShown:false}}
@@ -92,9 +92,9 @@ export default function App() {
           name="Success"
           component={Success}
           options={{headerShown:false}}
-        />
+        /> */}
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Nutrition"
           component={Nutrition}
           options={{headerShown:true, headerTitle: 'Nutrition', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -113,7 +113,7 @@ export default function App() {
           name="FoodDetail"
           component={FoodDetail}
           options={{headerShown:false}}
-        /> */}
+        />
 
         {/* <Stack.Screen
           name="WelcomeKitchen"
