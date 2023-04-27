@@ -20,9 +20,6 @@ app.use('/foodLog', food_log);
 const video_routines_route = require('./routes/video_routines.route');
 app.use('/video_routines', video_routines_route);
 
-const running_session_route = require('./routes/running_log_session.route');
-app.use('/running_session', running_session_route);
-
 const challenge_route = require('./routes/challenge.routes');
 app.use('/challenge_route', challenge_route);
 
@@ -40,9 +37,6 @@ app.use('/user_route', user_route);
 
 const photos_route = require('./routes/photo.routes');
 app.use('/photos_route', photos_route);
-
-const trophy_route = require('./routes/trophy.routes');
-app.use('/trophy_route', trophy_route);
 
 const steps_counter_route = require('./routes/step_counter.router');
 app.use('/steps_counter_route', steps_counter_route);
