@@ -170,9 +170,9 @@ const getDailyCalories = async (req, res) => {
     }
     try{
         const decode = jwt.decode(token, process.env.JWT_TOKEN);
-        const userID = decode.userId;
-        const query = 'SELECT daity_calories FROM daily_calories WHERE user_id = ?';
-        const queryParam = { user_id: userID }
+        const user_id = decode.userId;
+        const query = 'SELECT * FROM daily_calories WHERE user_id = ?';
+        const queryParam = [user_id]
 
         await sql.query(query, queryParam, (err, result) => {
             if(err){
@@ -181,11 +181,10 @@ const getDailyCalories = async (req, res) => {
                     message: err
                 })
             }
-
+            const calories = result[0].daity_calories
             res.status(200).json({
                 status: 200, 
-                message: 'Successful',
-                data: result
+                message: calories
              });
         })
     }catch(err){
