@@ -1,15 +1,18 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, Dimensions, TextInput } from "react-native";
 import { foodStyling } from "./FoodListingStyling";
+import { useRoute } from "@react-navigation/native"
 
 
-const FoodListing = () => {
+const FoodListing = ({navigation}) => {
+    const route = useRoute()
+    const mealType = route.params.mealType
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={foodStyling.container}>
                 <ScrollView>
                     <View style={foodStyling.backBtnContainer}>
                         <View style={foodStyling.backBtn}>
-                            <Pressable onPress={() => Alert.alert('image clicked')}>
+                            <Pressable onPress={() => navigation.goBack()}>
                                 <Image source={require('../../assets/app-img/back-btn.png')}></Image>
                             </Pressable>
                         </View>
@@ -17,7 +20,7 @@ const FoodListing = () => {
 
                     <View style={foodStyling.headerMeal}>
                         <Text style={foodStyling.headerTitle}>
-                            Breakfast
+                            {mealType}
                         </Text>
                     </View>
 

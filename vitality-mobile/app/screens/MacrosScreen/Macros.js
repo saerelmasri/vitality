@@ -63,7 +63,7 @@ const Macros = ({navigation}) => {
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
-                        <Pressable onPress={() => {Alert.alert('Add breakfast')}}>
+                        <Pressable onPress={() => navigation.navigate('FoodListing', {mealType: 'Breakfast'})}>
                             <Text style={macrosStyling.addFood}>Add Food</Text>
                         </Pressable>
                     </View>
@@ -86,7 +86,7 @@ const Macros = ({navigation}) => {
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
-                        <Pressable onPress={() => {Alert.alert('Add Lunch')}}>
+                        <Pressable onPress={() => navigation.navigate('FoodListing', {mealType: 'Lunch'})}>
                             <Text style={macrosStyling.addFood}>Add Food</Text>
                         </Pressable>
                     </View>
@@ -109,7 +109,7 @@ const Macros = ({navigation}) => {
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
-                        <Pressable onPress={() => {Alert.alert('Add Lunch')}}>
+                        <Pressable onPress={() => navigation.navigate('FoodListing', {mealType: 'Dinner'})}>
                             <Text style={macrosStyling.addFood}>Add Dinner</Text>
                         </Pressable>
                     </View>

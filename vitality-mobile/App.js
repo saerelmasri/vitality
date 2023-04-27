@@ -86,32 +86,35 @@ export default function App() {
           name="Activity"
           component={ActivityLevel}
           options={{headerShown:false}}
-        />
-        <Stack.Screen
+        /> */}
+
+        {/* <Stack.Screen
           name="Success"
           component={Success}
           options={{headerShown:false}}
-        />
+        /> */}
+
         <Stack.Screen
           name="Nutrition"
           component={Nutrition}
-          options={{headerShown:true}}
+          options={{headerShown:true, headerTitle: 'Nutrition', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
         <Stack.Screen
           name="Macros"
           component={Macros}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="FoodListing"
           component={FoodListing}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="FoodDetail"
           component={FoodDetail}
           options={{headerShown:false}}
-        /> */}
+        />
+
         {/* <Stack.Screen
           name="WelcomeKitchen"
           component={WelcomeKitchen}
@@ -127,6 +130,7 @@ export default function App() {
           component={RecipesDescription}
           options={{headerShown:false}}
         /> */}
+
         {/* <Stack.Screen
           name="WorkoutDashboard"
           component={WorkoutDashboard}
@@ -142,6 +146,7 @@ export default function App() {
           component={ExerciseListing}
           options={{headerShown: false}}
         /> */}
+
         {/* <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
@@ -202,11 +207,11 @@ export default function App() {
           component={Profile}
           options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Settins"
           component={Settings}
           options={{headerShown:false,}}
-        />
+        /> */}
         
         
       </Stack.Navigator>
