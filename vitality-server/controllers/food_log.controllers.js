@@ -136,7 +136,7 @@ const addDailyCalories = async (req, res) => {
         const decode = jwt.decode(token, process.env.JWT_TOKEN);
         const userID = decode.userId;
         const query = 'INSERT INTO daily_calories SET ?';
-        const queryParam = { user_id: userID, daily_calories }
+        const queryParam = { user_id: userID, daity_calories: daily_calories }
 
         await sql.query(query, queryParam, (err, result) => {
             if(err){
@@ -171,7 +171,7 @@ const getDailyCalories = async (req, res) => {
     try{
         const decode = jwt.decode(token, process.env.JWT_TOKEN);
         const userID = decode.userId;
-        const query = 'SELECT daily_calories FROM daily_calories WHERE user_id = ?';
+        const query = 'SELECT daity_calories FROM daily_calories WHERE user_id = ?';
         const queryParam = { user_id: userID }
 
         await sql.query(query, queryParam, (err, result) => {

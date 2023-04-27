@@ -171,7 +171,7 @@ const removeUser = async(req, res) => {
     try{
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decode.userId
-        const fetch = 'DELETE * FROM users WHERE id = ?'
+        const fetch = 'DELETE FROM users WHERE id = ?'
         await sql.query(fetch,user_id, (err, result) => {
             if(err){
                 return res.status(500).json({
