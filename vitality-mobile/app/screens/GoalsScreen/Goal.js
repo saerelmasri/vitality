@@ -6,15 +6,16 @@ import NextBtn from "../../Components/NextBtn/NextBtn"
 import GoalBtn from "../../Components/GoalBtn/GoalBtn"
 
 const Goal = ({navigation}) => {
-    // const route = useRoute()
-    // const toPass = route.params.data
+    const route = useRoute()
+    const toPass = route.params.data
 
-    // const [ goal , setGoal ] = useState('')
+    const [ goal , setGoal ] = useState('')
+    const [ goalID, setGoalID ] = useState('')
 
-    // const data = {
-    //     toPass,
-    //     goal: goal
-    // }
+    const data = {
+        toPass,
+        goal: {goal, goalID}
+    }
     const checkGoal = () => {
         if(goal === ''){
             Alert.alert('Select a goal to continue')
@@ -40,13 +41,13 @@ const Goal = ({navigation}) => {
                     <Text style={goalStyling.descriptionText}>To give you a better experience we need to know your fitness goal</Text>
                 </View>
                 <View style={goalStyling.goalContainer}>
-                    <GoalBtn goalName={'Maintain weight'} action={() => {setGoal('1')}}/>
-                    <GoalBtn goalName={'Mild weight loss'} action={() => {setGoal('2')}}/>
-                    <GoalBtn goalName={'Weight loss'} action={() => {setGoal('3')}}/>
-                    <GoalBtn goalName={'Extreme weight loss'} action={() => {setGoal('4')}}/>
-                    <GoalBtn goalName={'Mild weight gain'} action={() => {setGoal('5')}}/>
-                    <GoalBtn goalName={'Weight gain'} action={() => {setGoal('6')}}/>
-                    <GoalBtn goalName={'Extreme weight gain'} action={() => {setGoal('7')}}/>
+                    <GoalBtn goalName={'Maintain weight'} action={() => {setGoal('maintain'), setGoalID('1')}}/>
+                    <GoalBtn goalName={'Mild weight loss'} action={() => {setGoal('mildlose'), setGoalID('2')}}/>
+                    <GoalBtn goalName={'Weight loss'} action={() => {setGoal('weightlose'), setGoalID('3')}}/>
+                    <GoalBtn goalName={'Extreme weight loss'} action={() => {setGoal('extremelose'), setGoalID('4')}}/>
+                    <GoalBtn goalName={'Mild weight gain'} action={() => {setGoal('mildgain'), setGoalID('5')}}/>
+                    <GoalBtn goalName={'Weight gain'} action={() => {setGoal('weightgain'), setGoalID('6')}}/>
+                    <GoalBtn goalName={'Extreme weight gain'} action={() => {setGoal('extremegain'), setGoalID('7')}}/>
                 </View>
                 
                 <NextBtn action={checkGoal}/>

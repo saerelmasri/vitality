@@ -42,7 +42,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Home"
           component={WelcomeScreen}
           options={{headerShown:false}}
@@ -56,13 +56,13 @@ export default function App() {
           name="Register"
           component={Register}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="Weight/Height"
           component={WeightHeight}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="Gender"
           component={Gender}
           options={{headerShown:false}}
@@ -71,8 +71,8 @@ export default function App() {
           name="Age"
           component={Age}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="Goal"
           component={Goal}
           options={{headerShown:false}}
@@ -81,18 +81,18 @@ export default function App() {
           name="Diet"
           component={Diet}
           options={{headerShown:false}}
-        /> */}
+        />
         <Stack.Screen
           name="Activity"
           component={ActivityLevel}
           options={{headerShown:false}}
         />
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Success"
           component={Success}
           options={{headerShown:false}}
-        /> */}
+        />
 
         {/* <Stack.Screen
           name="Nutrition"
