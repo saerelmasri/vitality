@@ -2,7 +2,7 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { foodStyling } from "./FoodListingStyling";
 import { useRoute } from "@react-navigation/native"
 import Food from "../../Components/FoodComponent/Food";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Indicator from '../../Components/ActivityIndicator/indicator'
 import { Color } from "../../../globalStyling";
@@ -15,6 +15,15 @@ const FoodListing = ({navigation}) => {
     const [ foodData, setFoodData ] = useState('')
     const [ foodName, setFoodName ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
+
+    let mealID = ''
+    if(mealType === 'Breakfast'){
+        mealID = 1
+    }else if(mealType === 'Lunch'){
+        mealID = 2
+    }else if(mealType === 'Dinner'){
+        mealID = 3
+    }
 
     const searchFood = async () => {
         await axios({
@@ -41,11 +50,10 @@ const FoodListing = ({navigation}) => {
     }
 
     const dataToSend = {
-        meal: mealType,
+        meal: mealID,
         food: foodData
     }
 
-    console.log(foodData);
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={foodStyling.container}>
@@ -84,7 +92,7 @@ const FoodListing = ({navigation}) => {
                         <Indicator />
                         ) : foodData ? (
                         <View style={foodStyling.foodItemList}>
-                            <Food name={foodData['nameProduct']} serving={foodData['serving']} />
+                            <Food name={foodData['nameProduct']} serving={foodData['serving']} action={()=>{navigation.navigate('FoodDetail', {foodInfo: dataToSend})}} />
                         </View>
                         ) : null
                     }

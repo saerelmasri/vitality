@@ -22,7 +22,7 @@ const Macros = ({navigation}) => {
                 method: 'GET',
                 url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
                 headers: {
-                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI2MDI4MzMsImV4cCI6MTY4MjYwNjQzM30.F7mkLUTPvL3u2EMBe1EuQFAYTHSCiELEko1FPvcPWBM",
+                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI2MzYyMjgsImV4cCI6MTY4MjYzOTgyOH0.RP6_s5O_3ANEg0nHYe760fHYhtgqB-sO5k3hqnMhoe0",
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 }

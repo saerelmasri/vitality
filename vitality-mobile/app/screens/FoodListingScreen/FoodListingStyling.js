@@ -89,8 +89,9 @@ const foodStyling = StyleSheet.create({
         paddingLeft: 20
     },
     foodTxt: {
-        fontSize: 18,
-        fontWeight: 500
+        fontSize: 22,
+        fontWeight: 500,
+        textTransform: 'capitalize'
     },
     addContainer: {
         width: '30%',
