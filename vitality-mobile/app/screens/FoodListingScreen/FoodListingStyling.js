@@ -46,17 +46,21 @@ const foodStyling = StyleSheet.create({
         backgroundColor: Color.white,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
         marginLeft: 10,
         borderRadius: 10
     },
-    searchIconContainer: {
-        width: width /7,
-        height: '100%',
+    searchBtn: {
+        width: '30%',
+        backgroundColor: Color.grey,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     searchInput: {
         fontSize: 20,
-        width: '80%',
+        width: '70%',
         paddingLeft: 10
     },
     foodItem: {
@@ -70,7 +74,6 @@ const foodStyling = StyleSheet.create({
 
     },
     foodItemList: {
-        borderWidth: 1,
         width: width,
         height: height / 1.3,
         marginTop: 20,
@@ -94,6 +97,16 @@ const foodStyling = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    instruction: {
+        width: width,
+        height: height / 8,
+        marginTop: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingLeft: '5%',
+        paddingRight: '5%',
     }
 
 })
