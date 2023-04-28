@@ -35,7 +35,7 @@ const foodStyling = StyleSheet.create({
         height: height / 13,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     headerTitle: {
         fontSize: 30,
@@ -45,10 +45,10 @@ const foodStyling = StyleSheet.create({
     detailContainer: {
         width: width - 40,
         marginLeft: 20,
-        height: height /3,
+        height: height / 4,
         display: 'flex',
         justifyContent: 'space-around', 
-        marginTop: 50
+        marginTop: 20
     },
     detailStats: {
         width: '100%',
@@ -73,7 +73,6 @@ const foodStyling = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50
     },
     btn: {
         width: '50%',
@@ -83,6 +82,59 @@ const foodStyling = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    text: {
+        fontSize: 18, 
+        color: Color.white
+    },
+    foodStats: {
+        width: width,
+        height: height / 2.2,
+        display: 'flex',
+    },
+    top: {
+        height: '60%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    calorieCounter:{
+        borderWidth: 10,
+        borderColor: Color.white,
+        width:'50%',
+        height: '90%',
+        borderRadius: 100,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    bottom: {
+        height: '40%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    stats: {
+        width: '90%',
+        height: '80%',
+        borderRadius: 10,
+        backgroundColor: Color.grey,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    statInfo: {
+        width: '30%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    numberStyle: {
+        fontSize: 24
+    },
+    textStyle: {
+        fontSize: 18
     }
 })
 

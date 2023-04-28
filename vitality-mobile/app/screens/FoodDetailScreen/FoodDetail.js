@@ -27,33 +27,62 @@ const FoodDetail = () => {
 
                     <View style={foodStyling.detailContainer}>
                         <View style={foodStyling.detailStats}>
-                            <Text style={{fontSize: 18, color: Color.white}}>
+                            <Text style={foodStyling.text}>
                                 Meal
                             </Text>
-                            <Picker
-                                selectedValue={selectedValue}
-                                style={{ height: 50, width: 150, backgroundColor: Color.grey}}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                            >
-                                <Picker.Item label="Breakfast" value="breakfast" />
-                                <Picker.Item label="Lunch" value="lunch" />
-                                <Picker.Item label="Dinner" value="dinner" />
-                                <Picker.Item label="Snack" value="snack" />
-                            </Picker>
-                        </View>
-                        <View style={foodStyling.detailStats}>
-                            <Text style={{fontSize: 18, color: Color.white}}>
-                                Number of servings
+                            <Text style={foodStyling.text}>
+                                Breakfast
                             </Text>
-                            <TextInput style={foodStyling.txtInput} placeholder="Number of Serving"></TextInput>
                         </View>
-
                         <View style={foodStyling.detailStats}>
                             <Text style={{fontSize: 18, color: Color.white}}>
                                 Serving Size
                             </Text>
                             <TextInput style={foodStyling.txtInput} placeholder="Serving Size"></TextInput>
                         </View>
+                    </View>
+
+                    <View style={foodStyling.foodStats}>
+                        <View style={foodStyling.top}>
+                            <View style={foodStyling.calorieCounter}>
+                                <Text style={{fontSize: 45, fontWeight: 500, color: Color.white}}>
+                                    2,000
+                                </Text>
+                                <Text style={{fontSize: 25, fontWeight: 500, color: Color.white}}>
+                                    Calories
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={foodStyling.bottom}>
+                            <View style={foodStyling.stats}>
+                                <View style={foodStyling.statInfo}>
+                                    <Text style={foodStyling.numberStyle}>
+                                        200g
+                                    </Text>
+                                    <Text style={foodStyling.textStyle}>
+                                        Protein
+                                    </Text>
+                                </View>
+                                <View style={foodStyling.statInfo}>
+                                    <Text style={foodStyling.numberStyle}>
+                                        200g
+                                    </Text>
+                                    <Text style={foodStyling.textStyle}>
+                                        Protein
+                                    </Text>
+                                </View>
+                                <View style={foodStyling.statInfo}>
+                                    <Text style={foodStyling.numberStyle}>
+                                        200g
+                                    </Text>
+                                    <Text style={foodStyling.textStyle}>
+                                        Protein
+                                    </Text>
+                                </View>
+                            </View>
+
+                        </View>
+
                     </View>
 
                     <View style={foodStyling.btnContainer}>
