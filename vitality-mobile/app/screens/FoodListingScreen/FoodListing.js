@@ -41,8 +41,8 @@ const FoodListing = ({navigation}) => {
             setIsLoading(true)
             setTimeout(() => {
                 setIsLoading(false)
-                const { protein_g, calories, carbohydrates_total_g, fat_total_g, serving_size_g, name } = res.data[0];
-                setFoodData({protein: protein_g, calories: calories, carbs: carbohydrates_total_g, fat: fat_total_g, serving: serving_size_g, nameProduct: name});    
+                const { calories, name } = res.data[0];
+                setFoodData({calories: calories,nameProduct: name});    
             }, 2000)
         }).catch(err => {
             setIsLoading(false)
@@ -51,7 +51,7 @@ const FoodListing = ({navigation}) => {
 
     const dataToSend = {
         meal: mealID,
-        food: foodData
+        food: foodData.nameProduct
     }
 
     return(
@@ -92,7 +92,7 @@ const FoodListing = ({navigation}) => {
                         <Indicator />
                         ) : foodData ? (
                         <View style={foodStyling.foodItemList}>
-                            <Food name={foodData['nameProduct']} serving={foodData['serving']} action={()=>{navigation.navigate('FoodDetail', {foodInfo: dataToSend})}} />
+                            <Food name={foodData['nameProduct']} serving={foodData['calories']} action={()=>{navigation.navigate('FoodDetail', {foodInfo: dataToSend})}} />
                         </View>
                         ) : null
                     }

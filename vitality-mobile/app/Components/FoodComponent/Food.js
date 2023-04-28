@@ -7,7 +7,7 @@ const Food = ({name, serving, action}) => {
         <TouchableOpacity style={foodStyling.foodItem} onPress={action}>
             <View style={foodStyling.foodInfo}>
                 <Text style={foodStyling.foodTxt}>{name}</Text>
-                <Text style={foodStyling.foodTxt}>{serving} gr</Text>
+                <Text style={foodStyling.foodTxt}>{serving} cal</Text>
             </View>
         </TouchableOpacity>
     );

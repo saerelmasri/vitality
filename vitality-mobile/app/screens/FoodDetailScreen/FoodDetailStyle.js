@@ -65,7 +65,8 @@ const foodStyling = StyleSheet.create({
     txtInput: {
         width: '30%',
         height: '70%',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        textAlign: 'center'
     },
     btnContainer: {
         width: width,
