@@ -1,35 +1,91 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
+import axios from "axios";
+import { PieChart } from "react-native-chart-kit";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NzIwMTMsImV4cCI6MTY4Mjc3NTYxM30.n86_v6YF94bYUf60ep-r2VIPNGQvUmZGP05wA5ApyH0"
+const { height, width } = Dimensions.get('window')
+
+const chartConfig = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#08130D",
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    barPercentage: 1,
+    useShadowColorFromDataset: false
+};
 
 const Macro = () => {
+    const [ carbs, setCarbs ] = useState(0)
+    const [ fats, setFats ] = useState(0)
+    const [ protein, setProtein ] = useState(0)
+
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    const data = [
+        {
+            name: "Carbs",
+            population: carbs,
+            color: "green",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "Fats",
+            population: fats,
+            color: "blue",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "Protein",
+            population: protein,
+            color: "red",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+    ]
+
+    useEffect(()=> {
+        const interval = setInterval(() => {
+            const getTotalCalories = async() => {
+                await axios({
+                    method: 'GET',
+                    url: 'http://192.168.1.104:5000/foodLog/sumOfNutrients',
+                    headers: {
+                        'Authorization': token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res=> {
+                    setCarbs(res.data.message.carbs);
+                    setFats(res.data.message.fats);
+                    setProtein(res.data.message.protein);
+                }).catch(err => console.error(err.response.data))
+            };
+    
+            getTotalCalories()
+        }, 5000)
+        return () => clearInterval(interval)
+    })
+
     return(
         <View style={nutritionStyle.card}>
-            <View style={nutritionStyle.top}>
-                <View style={nutritionStyle.test}></View>
-            </View>
-            <View style={nutritionStyle.bottom}>
-                <View style={nutritionStyle.stats}>
-                    <View style={nutritionStyle.statsInfo}>
-                        <View style={nutritionStyle.square}></View>
-                        <Text style={nutritionStyle.nutritionTitle}>Carbohydrates</Text>
-                    </View>
-                    <Text style={nutritionStyle.nutritionTitle}>27%</Text>
-                </View>
-                <View style={nutritionStyle.stats}>
-                    <View style={nutritionStyle.statsInfo}>
-                        <View style={nutritionStyle.square}></View>
-                        <Text style={nutritionStyle.nutritionTitle}>Fat</Text>
-                    </View>
-                        <Text style={nutritionStyle.nutritionTitle}>38%</Text>
-                </View>
-                <View style={nutritionStyle.stats}>
-                <View style={nutritionStyle.statsInfo}>
-                    <View style={nutritionStyle.square}></View>
-                        <Text style={nutritionStyle.nutritionTitle}>Protein</Text>
-                    </View>
-                    <Text style={nutritionStyle.nutritionTitle}>27%</Text>
-                </View>
-            </View>
+            <PieChart
+                data={data}
+                chartConfig={chartConfig}
+                accessor={"population"}
+                width={width}
+                height={250}
+                paddingLeft="20"
+            />
         </View>
             
     )
@@ -37,8 +93,8 @@ const Macro = () => {
 
 const nutritionStyle = StyleSheet.create({
     card: {
-        width: '90%',
-        height: '80%',
+        width: width - 10,
+        height: height / 3,
         marginTop: 10,
         borderRadius: 10,
         backgroundColor: Color.darkGreen,
@@ -47,10 +103,9 @@ const nutritionStyle = StyleSheet.create({
     },
     top:{
         width: '100%',
-        height: '50%',
+        height: '100%',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        paddingLeft: '25%'
     }, 
     bottom:{
         width: '100%',
@@ -60,7 +115,6 @@ const nutritionStyle = StyleSheet.create({
         justifyContent: 'space-around'
     },
     test: {
-        borderWidth: 1,
         borderColor: Color.white,
         width: 150,
         height: 150,
