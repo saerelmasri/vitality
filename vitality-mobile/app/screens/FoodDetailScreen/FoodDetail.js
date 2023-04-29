@@ -3,13 +3,25 @@ import { useEffect, useState } from 'react'
 import { useRoute } from "@react-navigation/native"
 import { Color } from "../../../globalStyling";
 import { foodStyling } from "./FoodDetailStyle";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
+
+// let JWT =''
 
 const FoodDetail = ({navigation}) => {
     const [serving, setServing] = useState('');
     const [ foodStats, setFoodStats ] = useState('')
     const route = useRoute()
     const data = route.params.foodInfo
+
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
 
     let mealType = ''
     if(data['meal'] === 1){
@@ -39,7 +51,7 @@ const FoodDetail = ({navigation}) => {
                 const { calories, name, fat_total_g, protein_g, carbohydrates_total_g } = res.data[0];
                 setFoodStats({ calories, nameProduct: name, fats: fat_total_g, protein: protein_g, carbs: carbohydrates_total_g });
             } catch (error) {
-                console.error(error);
+                console.error(error.response.data);
             }
         };
         if (serving !== '') {
@@ -57,7 +69,7 @@ const FoodDetail = ({navigation}) => {
         "serving_size": serving
     }
 
-    let JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI2Nzk0MDMsImV4cCI6MTY4MjY4MzAwM30.lpQlQtfGtMQDTsvYQ_9hCbER4l-qFUy7K99ocT--IGU'
+    let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjIwNzQsImV4cCI6MTY4Mjc2NTY3NH0.CjZhoZynO1LxFKAihOw5clU-2chUmxiP2usr8tlgp0Q"
 
     const logFood = async() => {
         if(serving === ''){
@@ -77,7 +89,7 @@ const FoodDetail = ({navigation}) => {
                     navigation.goBack()
                 }
             }).catch(err => {
-                Alert.alert(err.response)
+                Alert.alert(err.response.data)
             })
         }
     }
@@ -124,6 +136,9 @@ const FoodDetail = ({navigation}) => {
                                 returnKeyType="next"
                                 variant="outline"
                             />
+                            <Text style={{fontSize: 15, color: Color.white}}>
+                                gr
+                            </Text>
                         </View>
                     </View>
 

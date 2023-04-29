@@ -3,11 +3,14 @@ import { useState, useEffect } from 'react'
 import { macrosStyling } from "./MacrosStyling"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios"
-let JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI2MDI4MzMsImV4cCI6MTY4MjYwNjQzM30.F7mkLUTPvL3u2EMBe1EuQFAYTHSCiELEko1FPvcPWBM'
 
 const Macros = ({navigation}) => {
     const [ calories, setCalories ] = useState('')
-
+    const [ food, setFood ] = useState(0)
+    const [ breakfastCal, setBreakfastCal ] = useState('')
+    const [ lunchCal, setLunchCal ] = useState('')
+    const [ dinnerCal, setDinnerCal ] = useState('')
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjIwNzQsImV4cCI6MTY4Mjc2NTY3NH0.CjZhoZynO1LxFKAihOw5clU-2chUmxiP2usr8tlgp0Q"
     // AsyncStorage.getItem('token')
     // .then(token => {
     //     JWT = token
@@ -16,25 +19,51 @@ const Macros = ({navigation}) => {
     //     console.log(error);
     // });
 
-    useEffect(()=>{
-        const getCalories = async() => {
-            await axios({
-                method: 'GET',
-                url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
-                headers: {
-                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI2MzYyMjgsImV4cCI6MTY4MjYzOTgyOH0.RP6_s5O_3ANEg0nHYe760fHYhtgqB-sO5k3hqnMhoe0",
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setCalories(res.data.message);
-            }).catch(err => {
-                console.log(err.response);
-            })
-        }
 
-        getCalories()
+    useEffect(()=>{
+        const interval = setInterval(() => {
+            const getCalories = async() => {
+                await axios({
+                    method: 'GET',
+                    url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
+                    headers: {
+                        'Authorization': token,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setCalories(res.data.message);
+                }).catch(err => {
+                    console.log(err.response);
+                })
+            }
+            getCalories()
+
+            const getTotalCalories = async() => {
+                await axios({
+                    method: 'POST',
+                    url: 'http://192.168.1.104:5000/foodLog/sumOfCalories',
+                    headers: {
+                        'Authorization': token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res=> {
+                    setBreakfastCal(res.data.message.breakfast);
+                    setDinnerCal(res.data.message.dinner);
+                    setLunchCal(res.data.message.lunch);
+                }).catch(err => console.error(err))
+            };
+    
+            getTotalCalories()
+        }, 2000)
+        return () => clearInterval(interval);
     }, [])
+
+    useEffect(() => {
+        setFood(Number(breakfastCal) + Number(lunchCal) + Number(dinnerCal));
+      }, [breakfastCal, lunchCal, dinnerCal]);
+
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={macrosStyling.container}>
@@ -66,25 +95,25 @@ const Macros = ({navigation}) => {
                                 <Text style={macrosStyling.textTop}>-</Text>
                             </View>
                             <View style={macrosStyling.foodContainer}>
-                                <Text style={macrosStyling.textTop}>0</Text>
+                                <Text style={macrosStyling.textTop}>{food}</Text>
                                 <Text style={macrosStyling.textBottom}>Food</Text>
                             </View>
                             <View style={macrosStyling.signContainer}>
                                 <Text style={macrosStyling.textTop}>=</Text>
                             </View>
                             <View style={macrosStyling.remainsContainer}>
-                                <Text style={macrosStyling.textTop}>{calories}</Text>
+                                <Text style={macrosStyling.textTop}>{calories - food}</Text>
                                 <Text style={macrosStyling.textBottom}>Remaining</Text>
                             </View>
                         </View>
                     </View>
                     <View style={macrosStyling.mealHeader}>
                         <Text style={macrosStyling.mealType}>Breakfast</Text>
-                        <Text style={macrosStyling.addFood}>406</Text>
+                        <Text style={macrosStyling.addFood}>{breakfastCal}</Text>
                     </View>
 
                     <View style={macrosStyling.foodContainerList}>
-                        <View style={macrosStyling.listItem}>
+                        {/* <View style={macrosStyling.listItem}>
                             <View style={macrosStyling.itemHeader}>
                                 <Text style={macrosStyling.food}>Banana</Text>
                                 <Text style={macrosStyling.foodDefault}>1 medium</Text>
@@ -92,7 +121,7 @@ const Macros = ({navigation}) => {
                             <View style={macrosStyling.itemHeader}>
                                 <Text style={macrosStyling.foodCal}>105</Text>
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
@@ -103,11 +132,11 @@ const Macros = ({navigation}) => {
 
                     <View style={macrosStyling.mealHeader}>
                         <Text style={macrosStyling.mealType}>Lunch</Text>
-                        <Text style={macrosStyling.addFood}>325</Text>
+                        <Text style={macrosStyling.addFood}>{lunchCal}</Text>
                     </View>
 
                     <View style={macrosStyling.foodContainerList}>
-                        <View style={macrosStyling.listItem}>
+                        {/* <View style={macrosStyling.listItem}>
                             <View style={macrosStyling.itemHeader}>
                                 <Text style={macrosStyling.food}>Banana</Text>
                                 <Text style={macrosStyling.foodDefault}>1 medium</Text>
@@ -115,7 +144,7 @@ const Macros = ({navigation}) => {
                             <View style={macrosStyling.itemHeader}>
                                 <Text style={macrosStyling.foodCal}>105</Text>
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
@@ -126,11 +155,11 @@ const Macros = ({navigation}) => {
 
                     <View style={macrosStyling.mealHeader}>
                         <Text style={macrosStyling.mealType}>Dinner</Text>
-                        <Text style={macrosStyling.addFood}>725</Text>
+                        <Text style={macrosStyling.addFood}>{dinnerCal}</Text>
                     </View>
 
                     <View style={macrosStyling.foodContainerList}>
-                        <View style={macrosStyling.listItem}>
+                        {/* <View style={macrosStyling.listItem}>
                             <View style={macrosStyling.itemHeader}>
                                 <Text style={macrosStyling.food}>Banana</Text>
                                 <Text style={macrosStyling.foodDefault}>1 medium</Text>
@@ -138,7 +167,7 @@ const Macros = ({navigation}) => {
                             <View style={macrosStyling.itemHeader}>
                                 <Text style={macrosStyling.foodCal}>105</Text>
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>

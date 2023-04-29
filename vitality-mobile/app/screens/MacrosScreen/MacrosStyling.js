@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet, Dimensions } from "react-native"
 import { Color } from "../../../globalStyling"
+const { height, width } = Dimensions.get('window')
 
 const macrosStyling = StyleSheet.create({
     container: {
@@ -7,11 +8,11 @@ const macrosStyling = StyleSheet.create({
         flex:1,
         alignItems: 'center',
         overflow: "hidden",
-        width: 360,
+        width: width,
     },
     headerContainer: {
-        width: 360,
-        height: 60,
+        width: width ,
+        height: height / 12 ,
         backgroundColor: Color.ligtGreen,
         display: 'flex',
         justifyContent: 'center',
@@ -23,13 +24,13 @@ const macrosStyling = StyleSheet.create({
         color: Color.white
     },
     statsContainer: {
-        width: 360,
-        height: 100,
+        width: width,
+        height: height /5,
         backgroundColor: Color.ligtGreen
     },
     containerTitle: {
-        width: '100%',
-        height: '30%',
+        width: width,
+        height: height / 19,
         display: 'flex',
         justifyContent: 'center',
         paddingLeft: 10
@@ -84,8 +85,8 @@ const macrosStyling = StyleSheet.create({
         alignItems: 'center'
     },
     mealHeader: {
-        width: 360,
-        height: 50,
+        width: width,
+        height: height / 12,
         backgroundColor: Color.ligtGreen,
         borderTopWidth: 1,
         borderBottomWidth: 1,
@@ -108,11 +109,13 @@ const macrosStyling = StyleSheet.create({
         color: Color.white
     },
     foodContainerList: {
-        width: 360,
-        height: 250,
+        borderWidth: 1,
+        width: width,
+        height: height / 3,
         backgroundColor: Color.ligtGreen
     },
     listItem: {
+        borderWidth: 1,
         width: '100%',
         height: '30%',
         display: 'flex',
@@ -120,6 +123,7 @@ const macrosStyling = StyleSheet.create({
         justifyContent: 'space-between'
     },
     itemHeader: {
+        borderWidth: 1,
         width: '30%',
         height: '100%',
         display: 'flex',
@@ -143,8 +147,8 @@ const macrosStyling = StyleSheet.create({
         color: Color.white
     },
     backBtnContainer: {
-        width: '100%',
-        height: '5%',
+        width: width,
+        height: height / 10,
         display: 'flex',
         justifyContent: 'center',
         backgroundColor: Color.ligtGreen

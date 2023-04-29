@@ -63,10 +63,11 @@ const foodStyling = StyleSheet.create({
         borderColor: Color.white
     },
     txtInput: {
-        width: '30%',
+        width: '20%',
         height: '70%',
         borderBottomWidth: 1,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginLeft: 100
     },
     btnContainer: {
         width: width,
