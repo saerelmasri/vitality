@@ -1,34 +1,135 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
+import axios from "axios";
+import { PieChart } from "react-native-chart-kit";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NzIwMTMsImV4cCI6MTY4Mjc3NTYxM30.n86_v6YF94bYUf60ep-r2VIPNGQvUmZGP05wA5ApyH0"
+const { height, width } = Dimensions.get('window')
+
+const chartConfig = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#08130D",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, 
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false
+};
 
 const MealContainer = () => {
+    const [ breakfastCal, setBreakfastCal ] = useState(0)
+    const [ lunchCal, setLunchCal ] = useState(0)
+    const [ dinnerCal, setDinnerCal ] = useState(0)
+    const [ food, setFood ] = useState(0)
+    const [ calories, setCalories ] = useState('')
+
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    useEffect(()=> {
+        const interval = setInterval(() => {
+
+            const getTotalCalories = async() => {
+                await axios({
+                    method: 'POST',
+                    url: 'http://192.168.1.104:5000/foodLog/sumOfCalories',
+                    headers: {
+                        'Authorization': token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res=> {
+                    setBreakfastCal(res.data.message.breakfast);
+                    setDinnerCal(res.data.message.dinner);
+                    setLunchCal(res.data.message.lunch);
+                }).catch(err => console.error(err))
+            };
+
+            getTotalCalories()
+        }, 5000)
+        return () => clearInterval(interval)
+
+
+    })
+
+    useEffect(()=> {
+        setFood(Number(breakfastCal) + Number(lunchCal) + Number(dinnerCal));
+        const getCalories = async() => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
+                headers: {
+                    'Authorization': token,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setCalories(res.data.message);
+            }).catch(err => {
+                console.log(err.response);
+            })
+        }
+        getCalories()
+    }, [breakfastCal, lunchCal, dinnerCal])
+
+
+    const data = [
+        {
+            name: "Breakfast",
+            population: breakfastCal,
+            color: "green",
+        },
+        {
+            name: "Lunch",
+            population: lunchCal,
+            color: "blue",
+        },
+        {
+            name: "Dinner",
+            population: dinnerCal,
+            color: "red",
+        },
+    ]
+
     return(
         <View style={nutritionStyle.card}>
             <View style={nutritionStyle.cardTopContent}>
                 <View style={nutritionStyle.containerVisualizer}>
-                    <View style={nutritionStyle.test}></View>
+                <PieChart
+                    data={data}
+                    chartConfig={chartConfig}
+                    accessor={"population"}
+                    backgroundColor={"transparent"}
+                    hasLegend={false}
+                    style={nutritionStyle.test}
+                    width={190}
+                    height={120}
+                    center={[50,0]}
+                />
                 </View>
                 <View style={nutritionStyle.statsContent}>
                     <View style={nutritionStyle.leftContainer}>
                         <View style={nutritionStyle.leftTopContainer}>
-                            <View style={nutritionStyle.square}></View>
+                            <View style={[nutritionStyle.square, {backgroundColor: 'green'}]}></View>
                             <Text style={nutritionStyle.nutritionTitle}>Breakfast</Text>
                         </View>
                         <View style={nutritionStyle.leftBottomContainer}>
-                            <View style={nutritionStyle.square}></View>
+                            <View style={[nutritionStyle.square, {backgroundColor: 'red'}]}></View>
                             <Text style={nutritionStyle.nutritionTitle}>Dinner</Text>
                         </View>
                     </View>
                     <View style={nutritionStyle.rightContainer}>
                         <View style={nutritionStyle.leftTopContainer}>
-                            <View style={nutritionStyle.square}></View>
+                            <View style={[nutritionStyle.square, {backgroundColor: 'blue'}]}></View>
                             <Text style={nutritionStyle.nutritionTitle}>Lunch</Text>
                         </View>
-                        <View style={nutritionStyle.leftBottomContainer}>
-                            <View style={nutritionStyle.square}></View>
-                            <Text style={nutritionStyle.nutritionTitle}>Snacks</Text>
-                        </View>
-
                     </View>
                 </View>
 
@@ -39,15 +140,7 @@ const MealContainer = () => {
                         Total Calories
                     </Text>
                     <Text style={nutritionStyle.statsText}>
-                        0
-                    </Text>
-                </View>
-                <View style={nutritionStyle.statsContainer}>
-                <Text style={nutritionStyle.statsText}>
-                        Net Calories
-                    </Text>
-                    <Text style={nutritionStyle.statsText}>
-                        0
+                        {food}
                     </Text>
                 </View>
                 <View style={nutritionStyle.statsContainer}>
@@ -55,7 +148,7 @@ const MealContainer = () => {
                         Goal
                     </Text>
                     <Text style={nutritionStyle.statsText}>
-                        2,000
+                        {calories}
                     </Text>
                 </View>
             </View>
@@ -65,7 +158,7 @@ const MealContainer = () => {
 
 const nutritionStyle = StyleSheet.create({
     card: {
-        width: '90%',
+        width: width,
         height: '80%',
         marginTop: 10,
         borderRadius: 10,
@@ -85,16 +178,18 @@ const nutritionStyle = StyleSheet.create({
         justifyContent:'space-around'
     },
     statsContainer: {
-        width: '100%',
-        height: '30%',
+        width: width,
+        height: height / 15,
         borderTopColor: Color.white,
         borderBottomColor: Color.white,
         borderTopWidth: 1,
         borderBottomColorWidth: 1,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingLeft: '7%',
+        paddingRight: '7%'
     }, 
     statsText: {
         fontSize: 20,
@@ -109,11 +204,12 @@ const nutritionStyle = StyleSheet.create({
         alignItems: 'center'
     },
     test: {
-        borderWidth: 1,
         borderColor: Color.white,
         width: 110,
         height: 110,
-        borderRadius: 500
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     statsContent: {
         width: '100%',
