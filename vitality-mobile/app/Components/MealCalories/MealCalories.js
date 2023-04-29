@@ -158,7 +158,7 @@ const MealContainer = () => {
 
 const nutritionStyle = StyleSheet.create({
     card: {
-        width: width,
+        width: width - 10,
         height: '80%',
         marginTop: 10,
         borderRadius: 10,
@@ -178,7 +178,7 @@ const nutritionStyle = StyleSheet.create({
         justifyContent:'space-around'
     },
     statsContainer: {
-        width: width,
+        width: width - 10,
         height: height / 15,
         borderTopColor: Color.white,
         borderBottomColor: Color.white,
