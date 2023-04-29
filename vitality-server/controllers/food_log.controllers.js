@@ -41,7 +41,7 @@ const addFoodLog = async(req, res) => {
 }
 
 const fetchUserMealLogs = async(req, res) => {
-    const { id } = req.body;
+    const mealID = req.params.mealID;
     const token = req.header('Authorization')
     if(!token){
         return res.status(400).json({
@@ -54,9 +54,9 @@ const fetchUserMealLogs = async(req, res) => {
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const userID = decode.userId;
 
-        const fetchQuery = 'SELECT * FROM food_intakes WHERE mealID = ?';
+        const fetchQuery = 'SELECT food_name, calories, userID FROM food_intakes WHERE userID = ? AND mealID = ?';
         
-        await sql.query(fetchQuery, [id], (err, result) => {
+        await sql.query(fetchQuery, [userID, mealID], (err, result) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
