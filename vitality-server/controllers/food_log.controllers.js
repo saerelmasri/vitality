@@ -254,7 +254,63 @@ const sumOfCalories = async (req, res) => {
         message: err
       });
     }
-  };
-  
+};
 
-module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate, addDailyCalories, getDailyCalories, sumOfCalories }
+const sumOfNutrients = async (req, res) => {
+    const token = req.header('Authorization');
+
+    if (!token) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Unauthorized'
+      });
+    }
+  
+    try {
+      const decode = jwt.decode(token, process.env.JWT_TOKEN);
+      const user_id = decode.userId;
+  
+      const query = `
+        SELECT SUM(carbs) as total_carbs,
+        SUM(fats) as total_fats,
+        SUM(protein) as total_protein
+        FROM food_intakes 
+        WHERE userID = ?;
+      `;
+      const queryParam = [user_id];
+  
+      await sql.query(query, queryParam, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            status: 500,
+            message: err
+          });
+        }
+  
+        if (!result || result.length === 0) {
+          return res.status(404).json({
+            status: 404,
+            message: 'No results found'
+          });
+        }
+
+        const data = {
+            "carbs": result[0].total_carbs,
+            "protein": result[0].total_protein,
+            "fats": result[0].total_fats
+        }
+  
+        res.status(200).json({
+          status: 200,
+          message: data
+        });
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: 500,
+        message: err
+      });
+    }
+};
+  
+module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate, addDailyCalories, getDailyCalories, sumOfCalories, sumOfNutrients }
