@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const addFoodLog = async(req, res) => {
-    const { mealID, log_date, food_name, calories, carbs, fats, protein, serving_size, number_serving } = req.body;
+    const { mealID, food_name, calories, carbs, fats, protein, serving_size } = req.body;
 
     const token = req.header('Authorization');
     if(!token){
@@ -17,13 +17,13 @@ const addFoodLog = async(req, res) => {
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const userId = decode.userId;
         const insertLog = 'INSERT INTO food_intakes SET ?'
-        const newLog = { userID: userId, mealID, log_date, food_name, calories, carbs, fats, protein, serving_size, number_serving }
+        const newLog = { userID: userId, mealID, food_name, calories, carbs, fats, protein, serving_size }
     
         await sql.query(insertLog, newLog, (err) =>{
             if(err){
                 return res.status(500).json({
                     status: 500,
-                    message: err
+                    message: err    
                 })
             }
 
@@ -41,7 +41,7 @@ const addFoodLog = async(req, res) => {
 }
 
 const fetchUserMealLogs = async(req, res) => {
-    const { mealID } = req.body
+    const { id } = req.body;
     const token = req.header('Authorization')
     if(!token){
         return res.status(400).json({
@@ -54,10 +54,9 @@ const fetchUserMealLogs = async(req, res) => {
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const userID = decode.userId;
 
-        const fetchQuery = 'SELECT * FROM food_intakes WHERE userID = ? AND mealID = ?';
-        const fetchParam = [ userID, mealID ]
-
-        await sql.query(fetchQuery, fetchParam, (err, result) => {
+        const fetchQuery = 'SELECT * FROM food_intakes WHERE mealID = ?';
+        
+        await sql.query(fetchQuery, [id], (err, result) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
@@ -196,5 +195,66 @@ const getDailyCalories = async (req, res) => {
 
 }
 
+const sumOfCalories = async (req, res) => {
+    const token = req.header('Authorization');
+  
+    if (!token) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Unauthorized'
+      });
+    }
+  
+    try {
+      const decode = jwt.decode(token, process.env.JWT_TOKEN);
+      const user_id = decode.userId;
+  
+      const query = 'SELECT mealID, SUM(calories) as total_calories FROM food_intakes WHERE userID = ? GROUP BY mealID;';
+      const queryParam = [user_id];
+  
+      await sql.query(query, queryParam, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            status: 500,
+            message: err
+          });
+        }
+  
+        if (!result || result.length === 0) {
+          return res.status(404).json({
+            status: 404,
+            message: 'No results found'
+          });
+        }
+  
+        let calories = {
+          breakfast: 0,
+          lunch: 0,
+          dinner: 0
+        };
+  
+        result.forEach(item => {
+          if (item.mealID === 1) {
+            calories.breakfast = item.total_calories;
+          } else if (item.mealID === 2) {
+            calories.lunch = item.total_calories;
+          } else if (item.mealID === 3) {
+            calories.dinner = item.total_calories;
+          }
+        });
+  
+        res.status(200).json({
+          status: 200,
+          message: calories
+        });
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: 500,
+        message: err
+      });
+    }
+  };
+  
 
-module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate, addDailyCalories, getDailyCalories }
+module.exports = { addFoodLog, fetchUserMealLogs, getCaloriesIntakeByDate, addDailyCalories, getDailyCalories, sumOfCalories }
