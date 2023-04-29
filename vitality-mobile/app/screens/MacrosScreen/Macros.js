@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { macrosStyling } from "./MacrosStyling"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios"
+import FoodIntake from "../../Components/FoodIntakeComponent/FoodIntake";
 
 const Macros = ({navigation}) => {
     const [ calories, setCalories ] = useState('')
@@ -10,7 +11,10 @@ const Macros = ({navigation}) => {
     const [ breakfastCal, setBreakfastCal ] = useState('')
     const [ lunchCal, setLunchCal ] = useState('')
     const [ dinnerCal, setDinnerCal ] = useState('')
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjIwNzQsImV4cCI6MTY4Mjc2NTY3NH0.CjZhoZynO1LxFKAihOw5clU-2chUmxiP2usr8tlgp0Q"
+    const [ foodMeal1, setFoodMeal1 ] = useState([])
+    const [ foodMeal2, setFoodMeal2 ] = useState([])
+    const [ foodMeal3, setFoodMeal3 ] = useState([])
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjYzNzgsImV4cCI6MTY4Mjc2OTk3OH0.N31fPJTwUZRhtF7UlkmTk_WEBc9GLU5PfmzAOcW_Ra8"
     // AsyncStorage.getItem('token')
     // .then(token => {
     //     JWT = token
@@ -56,13 +60,43 @@ const Macros = ({navigation}) => {
             };
     
             getTotalCalories()
+
+            
+            
         }, 2000)
         return () => clearInterval(interval);
     }, [])
 
     useEffect(() => {
         setFood(Number(breakfastCal) + Number(lunchCal) + Number(dinnerCal));
+
+        const getFoods = async(meal) => {
+            await axios({
+                method: 'GET',
+                url: `http://192.168.1.104:5000/foodLog/fetchUserMealLogs/${meal}`,
+                headers: {
+                    'Authorization': token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if(meal === 1){
+                    setFoodMeal1(res.data.message)
+                }else if(meal === 2){
+                    setFoodMeal2(res.data.message)
+                }else if(meal === 3){
+                    setFoodMeal3(res.data.message)
+                }
+                
+            }).catch(err => console.error(err.response.data.message))
+        }
+        
+        getFoods(1)
+        getFoods(2)
+        getFoods(3)
+    
       }, [breakfastCal, lunchCal, dinnerCal]);
+
 
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
@@ -113,15 +147,13 @@ const Macros = ({navigation}) => {
                     </View>
 
                     <View style={macrosStyling.foodContainerList}>
-                        {/* <View style={macrosStyling.listItem}>
-                            <View style={macrosStyling.itemHeader}>
-                                <Text style={macrosStyling.food}>Banana</Text>
-                                <Text style={macrosStyling.foodDefault}>1 medium</Text>
-                            </View>
-                            <View style={macrosStyling.itemHeader}>
-                                <Text style={macrosStyling.foodCal}>105</Text>
-                            </View>
-                        </View> */}
+                        <ScrollView>
+                            {
+                                foodMeal1.map((food, index) => {
+                                    return <FoodIntake name={food['food_name']} calories={food['calories']}/>
+                                })
+                            }
+                        </ScrollView>
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
@@ -136,15 +168,13 @@ const Macros = ({navigation}) => {
                     </View>
 
                     <View style={macrosStyling.foodContainerList}>
-                        {/* <View style={macrosStyling.listItem}>
-                            <View style={macrosStyling.itemHeader}>
-                                <Text style={macrosStyling.food}>Banana</Text>
-                                <Text style={macrosStyling.foodDefault}>1 medium</Text>
-                            </View>
-                            <View style={macrosStyling.itemHeader}>
-                                <Text style={macrosStyling.foodCal}>105</Text>
-                            </View>
-                        </View> */}
+                        <ScrollView>
+                            {
+                                foodMeal2.map((food, index) => {
+                                    return <FoodIntake name={food['food_name']} calories={food['calories']}/>
+                                })
+                            }
+                        </ScrollView>
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>
@@ -159,15 +189,13 @@ const Macros = ({navigation}) => {
                     </View>
 
                     <View style={macrosStyling.foodContainerList}>
-                        {/* <View style={macrosStyling.listItem}>
-                            <View style={macrosStyling.itemHeader}>
-                                <Text style={macrosStyling.food}>Banana</Text>
-                                <Text style={macrosStyling.foodDefault}>1 medium</Text>
-                            </View>
-                            <View style={macrosStyling.itemHeader}>
-                                <Text style={macrosStyling.foodCal}>105</Text>
-                            </View>
-                        </View> */}
+                        <ScrollView>
+                            {
+                                foodMeal3.map((food, index) => {
+                                    return <FoodIntake name={food['food_name']} calories={food['calories']}/>
+                                })
+                            }
+                        </ScrollView>
                     </View>
                     
                     <View style={macrosStyling.mealHeader}>

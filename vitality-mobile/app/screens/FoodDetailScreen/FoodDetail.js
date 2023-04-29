@@ -69,7 +69,7 @@ const FoodDetail = ({navigation}) => {
         "serving_size": serving
     }
 
-    let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjIwNzQsImV4cCI6MTY4Mjc2NTY3NH0.CjZhoZynO1LxFKAihOw5clU-2chUmxiP2usr8tlgp0Q"
+    let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjYzNzgsImV4cCI6MTY4Mjc2OTk3OH0.N31fPJTwUZRhtF7UlkmTk_WEBc9GLU5PfmzAOcW_Ra8"
 
     const logFood = async() => {
         if(serving === ''){

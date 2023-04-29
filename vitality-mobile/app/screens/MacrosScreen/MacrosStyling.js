@@ -9,23 +9,24 @@ const macrosStyling = StyleSheet.create({
         alignItems: 'center',
         overflow: "hidden",
         width: width,
+        backgroundColor: Color.ligtGreen,
     },
     headerContainer: {
         width: width ,
-        height: height / 12 ,
+        height: height / 22 ,
         backgroundColor: Color.ligtGreen,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
     headerTitle: {
-        fontSize: 35,
+        fontSize: 32,
         fontWeight: 500,
         color: Color.white
     },
     statsContainer: {
         width: width,
-        height: height /5,
+        height: height /7,
         backgroundColor: Color.ligtGreen
     },
     containerTitle: {
@@ -86,8 +87,8 @@ const macrosStyling = StyleSheet.create({
     },
     mealHeader: {
         width: width,
-        height: height / 12,
-        backgroundColor: Color.ligtGreen,
+        height: height / 15,
+        backgroundColor: Color.darkGreen,
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: Color.white,
@@ -100,30 +101,28 @@ const macrosStyling = StyleSheet.create({
     },
     mealType: {
         fontSize: 25,
-        fontWeight: 300,
+        fontWeight: 500,
         color: Color.white
     },
     addFood:{
         fontSize: 20,
-        fontWeight: 300,
+        fontWeight: 500,
         color: Color.white
     },
     foodContainerList: {
-        borderWidth: 1,
         width: width,
-        height: height / 3,
+        height: height / 9.7,
         backgroundColor: Color.ligtGreen
     },
     listItem: {
-        borderWidth: 1,
-        width: '100%',
-        height: '30%',
+        borderColor: Color.white,
+        width: width,
+        height: height / 20,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     itemHeader: {
-        borderWidth: 1,
         width: '30%',
         height: '100%',
         display: 'flex',
