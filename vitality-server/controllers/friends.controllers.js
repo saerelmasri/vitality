@@ -136,7 +136,7 @@ const displayMyFriends = async(req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        const displayUsersQuery = 'SELECT nickname FROM users WHERE id IN ( SELECT friend_user_id FROM friends WHERE user_id = ?)'
+        const displayUsersQuery = 'SELECT id, nickname FROM users WHERE id IN ( SELECT friend_user_id FROM friends WHERE user_id = ?)'
         await sql.query(displayUsersQuery, [user_id], (err, result) => {
             if(err){
                 return res.status(500).json({

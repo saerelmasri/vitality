@@ -92,24 +92,35 @@ const deleteCompetiton = async (req, res) => {
     }
 }
 
-const sendInvition = async(req, res) => {
-    const { competition_id, recipient_id, status } = req.body
-
-    const token = req.header('Authorization')
-    if(!token){
-        return res.status(401).json({
-            status: 401,
-            message: 'Unauthorized'
-        })
+const sendInvition = async (req, res) => {
+    const { competition_id, recipient_id } = req.body;
+  
+    const token = req.header('Authorization');
+    if (!token) {
+      return res.status(401).json({
+        status: 401,
+        message: 'Unauthorized'
+      });
     }
-
-    try{
+  
+    try {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
-        const user_id = decoded.userId
+        const user_id = decoded.userId;
+  
+        // const checkInvitationQuery = 'SELECT * FROM invitation WHERE competition_id = ? AND sender_id = ? AND recipient_id = ? AND status = "pending"';
+        // const checkInvitationParams = [competition_id, user_id, recipient_id];
+        // const [rows] = await sql.query(checkInvitationQuery, checkInvitationParams);
 
-        const sendInvitionQuery = 'INSERT INTO invitation SET ?'
-        const sendInvitionParam = { competition_id, sender_id: user_id, recipient_id, status}
-        await sql.query(sendInvitionQuery, sendInvitionParam, (err, result) => {
+        // if (rows.length > 0) {
+        // return res.status(400).json({
+        //     status: 400,
+        //     message: 'Invitation already sent to the recipient'
+        // });
+        // }
+        
+        const checkQuery = 'SELECT * FROM invitation WHERE competition_id = ? AND recipient_id = ?'
+        const checkParams = [competition_id, recipient_id]
+        await sql.query(checkQuery, checkParams,async (err, result) => {
             if(err){
                 return res.status(500).json({
                     status:500,
@@ -117,19 +128,30 @@ const sendInvition = async(req, res) => {
                 })
             }
 
+            if(result.length > 0){
+                return res.status(400).json({
+                    status:400,
+                    message: "This user has been invitated"
+                })
+            }
+            const sendInvitationQuery = 'INSERT INTO invitation SET ?';
+            const sendInvitationParams = { competition_id, sender_id: user_id, recipient_id, status: 'pending' };
+            await sql.query(sendInvitationQuery, sendInvitationParams);
+    
             res.status(201).json({
-                status: 201,
-                message: 'Invitation Sent'
-            })
+            status: 201,
+            message: 'Invitation Sent'
+            });
         })
-
-    }catch(err){
-        res.status(500).json({
-            status:500,
-            message: err
-        })
+    } catch (err) {
+      res.status(500).json({
+        status: 500,
+        message: err.message
+      });
     }
-}
+  };
+
+
 
 const showAllInvitations = async (req, res) => {
     const token = req.header('Authorization')
