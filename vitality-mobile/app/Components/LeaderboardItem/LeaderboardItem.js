@@ -2,20 +2,20 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const LeaderboardItem = () => {
+const LeaderboardItem = ({position, name, level}) => {
     return(
         <View style={leaderboardStyle.leaderboardItem}>
             <View style={leaderboardStyle.itemPosition}>
-                <Text style={leaderboardStyle.itemText}>01.</Text>
+                <Text style={leaderboardStyle.itemText}>{position}.</Text>
             </View>
             <View style={leaderboardStyle.itemName}>
                 <Text style={leaderboardStyle.itemText}>
-                    Imad Charafedine
+                    {name}
                 </Text>
             </View>
             <View style={leaderboardStyle.itemLevel}>
                 <Text style={leaderboardStyle.itemText}>
-                    100
+                    {level}
                 </Text>
             </View>
         </View>

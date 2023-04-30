@@ -3,9 +3,46 @@ import { Color } from "../../../globalStyling";
 import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 import LeaderboardItem from "../../Components/LeaderboardItem/LeaderboardItem";
 const { height, width } = Dimensions.get('window')
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NjMwNTUsImV4cCI6MTY4Mjg2NjY1NX0.UdRGhMWTJgbCLdToptoFJ7tvINNOARuT8B_rWvxTupU"
+
 
 const Leaderboard = ({navigation}) => {
-    
+ // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    const [ list, setList ] = useState([])
+    const [ topThree, setTopThree ] = useState([])
+
+    useEffect(()=> {
+        const fetchLeaderboard = async() => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/leaderboard_route/level_leaderboard',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setTopThree(res.data.message.slice(0, 3))
+                setList(res.data.message)
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+
+        fetchLeaderboard()
+
+    }, [])
+
     return(
         <SafeAreaView style={{flex:1, }}>
             <View style={leaderboardStyle.container}>
@@ -41,14 +78,13 @@ const Leaderboard = ({navigation}) => {
                     </View>
                     <View style={leaderboardStyle.leaderboard}>
                         <ScrollView>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
-                            <LeaderboardItem/>
+                            {
+                                list.map((item, index) => (
+<                                   LeaderboardItem position={index + 1} name={item.full_name} level={item.level}/>
+                                    //<Friend key={friend.id} name={friend.nickname} action={() => sendInvitation(friend.id)}/>
+                                ))
+                            }
+                            
                         </ScrollView>
                     </View>
                 </ScrollView>
