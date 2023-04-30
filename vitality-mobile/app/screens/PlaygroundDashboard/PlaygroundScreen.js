@@ -27,7 +27,7 @@ const PlaygroundDashboard = ({navigation}) => {
                     </View>
 
                     <View style={runningStyling.btnContainer}>
-                        <Button title={'Create a party'}/>
+                        <Button title={'Create a party'} action={() => navigation.navigate('SelectActivity')}/>
                     </View>
 
                     <View

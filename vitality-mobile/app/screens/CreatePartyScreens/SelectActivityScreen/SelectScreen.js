@@ -1,15 +1,16 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../../globalStyling";
+import { useState } from "react";
 const { height, width } = Dimensions.get('window')
 
-const SelectActivity = () => {
+const SelectActivity = ({navigation}) => {
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={selectActivity.container}>
                 <ScrollView>
                     <View style={selectActivity.backBtnContainer}>
                         <View style={selectActivity.backBtn}>
-                            <Pressable onPress={() => console.log('hello')}>
+                            <Pressable onPress={() => navigation.goBack()}>
                                 <Image source={require('../../../assets/app-img/back-btn.png')}></Image>
                             </Pressable>
                         </View>
@@ -20,18 +21,16 @@ const SelectActivity = () => {
                             <Text style={[selectActivity.text, { color: Color.white }]}>
                                 Select the type of challenge
                             </Text>
-                            <TouchableOpacity style={selectActivity.circle}>
+                            <TouchableOpacity style={selectActivity.circle} onPress={() =>{ 
+                                navigation.navigate('ActivityInfo')
+                            }}>
                                 <Text style={selectActivity.text}>
                                     Workout Challenge
                                 </Text>
                             </TouchableOpacity>
                         </View>
-
                     </View>
-
-                    
                 </ScrollView>
-
             </View>
         </SafeAreaView>
     );

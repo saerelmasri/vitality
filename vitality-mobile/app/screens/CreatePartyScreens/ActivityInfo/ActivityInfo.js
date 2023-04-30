@@ -2,15 +2,64 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { Color } from "../../../../globalStyling";
 import Button from "../../../Components/Button/Button";
 const { height, width } = Dimensions.get('window')
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NTMwMzgsImV4cCI6MTY4Mjg1NjYzOH0.diBikWQmmDHj7LNCdTrS9JcJ26v445Ypx7uiLcOxWdU"
 
-const ActivityInfo = () => {
+const ActivityInfo = ({navigation}) => {
+    const [ challengeName, setChallengeName ] = useState('')
+    const [ workoutName, setWorkoutName ] = useState('')
+    const [ rules, setRules ] = useState('')
+    const [ competitionID, setCompetitionID ] = useState('')
+
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    console.log(challengeName + " " + workoutName + " " + rules);
+
+    const info = {
+        "title": challengeName,
+        "type": 'workout', 
+        "workout_name": workoutName,
+        "rules": rules,
+        "reward": 150
+    }
+
+    const createCompetition = async() => {
+        if(challengeName === "" || workoutName === "" || rules === ""){
+            Alert.alert('Please fill fields')
+        }else{
+            await axios({
+                method: 'POST',
+                url: 'http://192.168.1.104:5000/competition_route/createCompetition',
+                data: info,
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if(res.data.status === 201){
+                    setCompetitionID(res.data.competition_id)
+                    Alert.alert(res.data.message)
+                    //navigation.navigate("InviteFriends", {competition__id: competitionID})
+                }
+            }).catch(err => Alert.alert(err.response.data.message))
+        }
+    }
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={activityInfoStyle.container}>
                 <ScrollView>
                     <View style={activityInfoStyle.backBtnContainer}>
                         <View style={activityInfoStyle.backBtn}>
-                            <Pressable onPress={() => console.log('hello')}>
+                            <Pressable onPress={() => navigation.goBack()}>
                                 <Image source={require('../../../assets/app-img/back-btn.png')}></Image>
                             </Pressable>
                         </View>
@@ -21,7 +70,7 @@ const ActivityInfo = () => {
                     </View>
                     <View style={activityInfoStyle.inputContainer}>
                         <View style={activityInfoStyle.input}>
-                            <Text>Challenge Type</Text>
+                            <Text>Workout</Text>
                         </View>
                         <View style={activityInfoStyle.inputs}>
                             <Text style={{color: Color.white}}>Challenge Name</Text>
@@ -30,6 +79,8 @@ const ActivityInfo = () => {
                                 placeholder="Enter challenge Name"
                                 underlineColorAndroid="transparent"
                                 autoCapitalize='none'
+                                value={challengeName}
+                                onChangeText={text => setChallengeName(text)}
                             />
                         </View>
 
@@ -40,6 +91,8 @@ const ActivityInfo = () => {
                                 placeholder="Enter your workout name"
                                 underlineColorAndroid="transparent"
                                 autoCapitalize='none'
+                                value={workoutName}
+                                onChangeText={text => setWorkoutName(text)}
                             />
                         </View>
                         <View style={activityInfoStyle.inputs}>
@@ -49,12 +102,14 @@ const ActivityInfo = () => {
                                 placeholder="Enter your rule"
                                 underlineColorAndroid="transparent"
                                 autoCapitalize='none'
+                                value={rules}
+                                onChangeText={text => setRules(text)}
                             />
                         </View>
                     </View>
 
                     <View style={activityInfoStyle.btnContainer}>
-                        <Button title={'Register'}/>
+                        <Button title={'Register'} action={createCompetition}/>
                     </View>
                     
                     
@@ -71,7 +126,6 @@ const activityInfoStyle = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         overflow: "hidden",
-        width: "100%",
     },
     backBtnContainer: {
         width: width,
@@ -108,8 +162,8 @@ const activityInfoStyle = StyleSheet.create({
         paddingBottom: '10%',
     },
     inputs:{
-        width: 310,
-        height: 80, 
+        width: width / 1.2,
+        height: height / 7, 
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start', 

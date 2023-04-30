@@ -94,7 +94,7 @@ export default function App() {
           options={{headerShown:false}}
         /> */}
 
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Nutrition"
           component={Nutrition}
           options={{headerShown:true, headerTitle: 'Nutrition', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -113,7 +113,7 @@ export default function App() {
           name="FoodDetail"
           component={FoodDetail}
           options={{headerShown:false}}
-        />
+        /> */}
 
         {/* <Stack.Screen
           name="WelcomeKitchen"
@@ -147,7 +147,7 @@ export default function App() {
           options={{headerShown: false}}
         /> */}
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -161,27 +161,22 @@ export default function App() {
           name="Invitations"
           component={Invitation}
           options={{headerShown:true, headerTitle: 'Invitations', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="SelectActivity"
           component={SelectActivity}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        /> 
+        <Stack.Screen
           name="ActivityInfo"
           component={ActivityInfo}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+         <Stack.Screen
           name="InviteFriends"
           component={InviteFriends}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
-          name="Trophy"
-          component={Trophy}
-          options={{headerShown:false}}
-        /> */}
+        />
         {/* <Stack.Screen
           name="onGoingActivity"
           component={onGoingActivity}
