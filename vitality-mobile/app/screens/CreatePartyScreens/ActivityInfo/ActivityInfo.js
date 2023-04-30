@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NjMwNTUsImV4cCI6MTY4Mjg2NjY1NX0.UdRGhMWTJgbCLdToptoFJ7tvINNOARuT8B_rWvxTupU"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4Njk2MjAsImV4cCI6MTY4Mjg3MzIyMH0.McmG9a8ZHwvJ3SyJ7ubk06Kv_3BKu9KDOUXzwW5wun4"
 
 const ActivityInfo = ({navigation}) => {
     const [ challengeName, setChallengeName ] = useState('')

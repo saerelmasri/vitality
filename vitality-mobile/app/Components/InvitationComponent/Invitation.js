@@ -2,32 +2,22 @@ import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity }
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const InvitationCard = () => {
+const InvitationCard = ({from, action1}) => {
     
     return(
         <View style={invitationStyle.invitationCard}>
             <View style={invitationStyle.top}>
-                <View style={invitationStyle.profileContainer}>
-                    <ImageBackground style={invitationStyle.profile}></ImageBackground>
-                </View>
                 <View style={invitationStyle.nameContainer}>
-                    <Text style={{fontSize: 19, fontWeight: 500,}}>
-                        Saer El Masri challenged you!
+                    <Text style={{fontSize: 27, fontWeight: 500,}}>
+                        {from} challenged you!
                     </Text>
                 </View>
             </View>
             <View style={invitationStyle.bottom}>
                 <View style={invitationStyle.btnContainer}>
-                    <TouchableOpacity style={invitationStyle.btn}>
+                    <TouchableOpacity style={invitationStyle.btn} onPress={action1}>
                         <Text style={invitationStyle.btnText}>
                             Accept
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={invitationStyle.btnContainer}>
-                <TouchableOpacity style={invitationStyle.btn}>
-                        <Text style={invitationStyle.btnText}>
-                            Declined
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -49,7 +39,7 @@ const invitationStyle = StyleSheet.create({
         height: '60%',
         width: '100%',
         display: 'flex',
-        flexDirection: 'row',
+        justifyContent: 'center'
     },
     bottom: {
         height: '40%',
@@ -74,11 +64,10 @@ const invitationStyle = StyleSheet.create({
         width: '65%',
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: '5%',
-        paddingRight: '5%',
+        paddingLeft: '7%',
     },
     btnContainer: {
-        width: '50%',
+        width: '100%',
         height: '100%',
         display: 'flex',
         justifyContent: 'center',

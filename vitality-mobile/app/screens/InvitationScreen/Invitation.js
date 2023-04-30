@@ -3,11 +3,63 @@ import { Color } from "../../../globalStyling";
 import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 import InvitationCard from "../../Components/InvitationComponent/Invitation";
 const { height, width } = Dimensions.get('window')
-
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjg2OTY2NSwiZXhwIjoxNjgyODczMjY1fQ.e-liGJRdmb1w2HSQPxr-Ee3ndRTeM5sTG0NFkviBqd0"
 
 
 const Invitation = ({navigation}) => {
-    
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    const [ invitations, setInvitations ] = useState([])
+
+    useEffect(() => {
+        const fetchInvitations = async () => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/competition_route/allInvitation',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setInvitations(res.data.message);
+            }).catch(err => {
+                console.log(err.response.data.message);
+            })
+        }
+
+        fetchInvitations()
+    }, [])
+
+    const changeStatus = async(id, statusInfo) => {
+        await axios({
+            method: 'PUT',
+            url: 'http://192.168.1.104:5000/competition_route/changeStatus',
+            data: {
+                "competition_id": id,
+                "status": statusInfo
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err.response.message);
+        }) 
+    }
+
     return(
         <SafeAreaView style={{flex:1, }}>
             <View style={invitationStyle.container}>
@@ -24,14 +76,13 @@ const Invitation = ({navigation}) => {
                         </Text>
                     </View>
                     <View style={invitationStyle.invitationContainer}>
-                        <ScrollView>
-                            <InvitationCard/>
-                            <InvitationCard/>
-                            <InvitationCard/>
-                            <InvitationCard/>
-                            <InvitationCard/>
-                            <InvitationCard/>
-                        </ScrollView>
+                    <ScrollView>
+                    { 
+                        invitations.map(item => (
+                            <InvitationCard from={item.creator_username} key={item.id} action1={() => {changeStatus(item.competition_id, "accepted")}} action2={() => {changeStatus(item.competition_id, "declined")}}/>
+                        ))
+                    }
+                    </ScrollView>
                         
                     </View>
                 </ScrollView>
