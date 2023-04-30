@@ -5,11 +5,42 @@ import { useEffect, useState } from 'react'
 import Challenge from "../../Components/ChallengeComponent/Challenge";
 import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 const { height, width } = Dimensions.get('window')
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjg5MTE1NywiZXhwIjoxNjgyODk0NzU3fQ.JpOqACfgSyNm6fsgrHvZt3CnfVbHAbaQ5nLK7mzKnN4"
 
 
 
 const PlaygroundDashboard = ({navigation}) => {
-    
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
+
+    const [ partyInfo, setPartyInfo ] = useState([])
+
+    useEffect(()=> {
+        const onwerParty = async() => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/competition_route/onwCompetition',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if(res.data.status === 201){
+                    setPartyInfo(res.data.message[0]);
+                }
+            }).catch(err => console.log(err.response))
+        }
+        onwerParty()
+    }, [])
+
     return(
         <SafeAreaView style={{flex:1, }}>
             <View style={runningStyling.container}>
@@ -42,8 +73,12 @@ const PlaygroundDashboard = ({navigation}) => {
                     ></View>
 
                     <View style={runningStyling.challengesContainer}>
+                        { partyInfo && partyInfo.title ? (
+                            <Challenge name={partyInfo.title} reward={`Reward:${partyInfo.reward}pts`} />
+                        ) : (
+                            <Challenge name={"Create a party"} reward={"challenge your friends"} />
+                        )}
                         <ScrollView>
-                            <Challenge/>
                             <Challenge/>
                             <Challenge/>
                         </ScrollView>

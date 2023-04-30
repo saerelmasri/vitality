@@ -76,14 +76,19 @@ const Invitation = ({navigation}) => {
                         </Text>
                     </View>
                     <View style={invitationStyle.invitationContainer}>
-                    <ScrollView>
-                    { 
-                        invitations.map(item => (
-                            <InvitationCard from={item.creator_username} key={item.id} action1={() => {changeStatus(item.competition_id, "accepted")}} action2={() => {changeStatus(item.competition_id, "declined")}}/>
-                        ))
-                    }
-                    </ScrollView>
-                        
+                        <ScrollView>
+                        { 
+                            invitations.map(item => (
+                                <InvitationCard 
+                                    from={item.creator_username} 
+                                    key={item.id} 
+                                    action1={() => {changeStatus(item.competition_id, "accepted")}} 
+                                    action2={() => {changeStatus(item.competition_id, "declined")}} 
+                                    action3={() => navigation.navigate('InvitationDetail',{ competitionInfo: { id: item.competition_id }} )}
+                                />
+                            ))
+                        }
+                        </ScrollView>
                     </View>
                 </ScrollView>
             </View>

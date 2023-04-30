@@ -2,15 +2,78 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { Color } from "../../../globalStyling";
 import Button from "../../Components/Button/Button";
 const { height, width } = Dimensions.get('window')
+import { useRoute } from "@react-navigation/native"
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjg3Mzc1MSwiZXhwIjoxNjgyODc3MzUxfQ.a1p9UjAShY0IkNSKyuHv5k4ur-2zkshhC73eQJtWA40"
 
-const InvitationDetail = () => {
+
+const InvitationDetail = ({navigation}) => {
+    const route = useRoute()
+    const competitionID = route.params.competitionInfo
+
+    const [ challengeDetails, setChallengeDetails ] = useState([])
+
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    useEffect(()=> {
+        const fetchDetail = async() => {
+            await axios({
+                method: 'POST',
+                url: 'http://192.168.1.104:5000/competition_route/challengeDetails',
+                data: {
+                    "challenge_id": competitionID['id']
+                },
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setChallengeDetails(res.data.message);
+            }).catch(err => {
+                console.log(err.response.data);
+            })
+        }
+        fetchDetail()
+    }, [])
+
+    const changeStatus = async(id, statusInfo) => {
+        await axios({
+            method: 'PUT',
+            url: 'http://192.168.1.104:5000/competition_route/changeStatus',
+            data: {
+                "competition_id": id,
+                "status": statusInfo
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.data.status === 201){
+                navigation.navigate('PlaygroundDashboard')
+            }
+        }).catch(err => {
+            Alert.alert(err.response.message)
+            navigation.navigate('PlaygroundDashboard')
+        }) 
+    }
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={invitationStyle.container}>
                 <ScrollView>
                     <View style={invitationStyle.backBtnContainer}>
                         <View style={invitationStyle.backBtn}>
-                            <Pressable onPress={() => console.log('hello')}>
+                            <Pressable onPress={() => navigation.goBack()}>
                                 <Image source={require('../../assets/app-img/back-btn.png')}></Image>
                             </Pressable>
                         </View>
@@ -21,7 +84,7 @@ const InvitationDetail = () => {
                     </View>
                     <View style={invitationStyle.invitationName}>
                         <Text style={{fontSize: 28, color: Color.white}}> 
-                            Saer El Masri challenge!
+                            {challengeDetails.title} challenge!
                         </Text>
                     </View>
                     <View style={invitationStyle.detailContainer}>
@@ -38,7 +101,7 @@ const InvitationDetail = () => {
                                 Workout Name 
                             </Text>
                             <Text style={invitationStyle.rightTxt}>
-                                Planks
+                                {challengeDetails.workout_name}
                             </Text>
                         </View>
                         <View style={invitationStyle.detailInfo}>
@@ -46,7 +109,7 @@ const InvitationDetail = () => {
                                 Rules 
                             </Text>
                             <Text style={invitationStyle.rightTxt}>
-                                5 minutes
+                                {challengeDetails.rules}
                             </Text>
                         </View>
                         <View style={invitationStyle.detailInfo}>
@@ -54,7 +117,7 @@ const InvitationDetail = () => {
                                 Reward 
                             </Text>
                             <Text style={invitationStyle.rightTxt}>
-                                100pts
+                                {challengeDetails.reward} pts
                             </Text>
                         </View>
                     </View>
@@ -65,12 +128,11 @@ const InvitationDetail = () => {
 
                     </View>
                     <View style={invitationStyle.topBtn}>
-                        <Button title={'Accept'}/>
+                        <Button title={'Accept'} action={() => changeStatus(competitionID['id'], "accepted")}/>
                     </View>
                     <View style={invitationStyle.topBtn}>
-                        <Button title={'Decline'}/>
+                        <Button title={'Decline'} action={() => changeStatus(competitionID['id'], "declined")}/>
                     </View>
-
                 </ScrollView>
             </View>
         </SafeAreaView>

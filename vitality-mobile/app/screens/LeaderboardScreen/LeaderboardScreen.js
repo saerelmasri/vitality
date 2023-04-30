@@ -80,11 +80,9 @@ const Leaderboard = ({navigation}) => {
                         <ScrollView>
                             {
                                 list.map((item, index) => (
-<                                   LeaderboardItem position={index + 1} name={item.full_name} level={item.level}/>
-                                    //<Friend key={friend.id} name={friend.nickname} action={() => sendInvitation(friend.id)}/>
+                                    <LeaderboardItem position={index + 1} name={item.full_name} level={item.level}/>
                                 ))
-                            }
-                            
+                            }   
                         </ScrollView>
                     </View>
                 </ScrollView>

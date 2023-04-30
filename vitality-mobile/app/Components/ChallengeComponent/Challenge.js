@@ -2,13 +2,13 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const Challenge = () => {
+const Challenge = ({name, reward, action}) => {
     
     return(
-        <TouchableOpacity style={runningStyling.challengeHeader}>
+        <TouchableOpacity style={runningStyling.challengeHeader} onPress={action}>
             <View style={runningStyling.txtContainer}>
-                <Text style={{fontSize: 22}}>Run 5 kilometers this week</Text>
-                <Text style={{fontSize: 15}}>Reward: 100pts</Text>
+                <Text style={{fontSize: 22}}>{name}</Text>
+                <Text style={{fontSize: 15}}>{reward}</Text>
             </View>
             <View style={runningStyling.iconContainer}>
 

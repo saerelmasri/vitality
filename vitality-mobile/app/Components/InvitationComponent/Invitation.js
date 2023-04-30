@@ -2,10 +2,10 @@ import { View, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity }
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const InvitationCard = ({from, action1}) => {
+const InvitationCard = ({from, action1, action2, action3}) => {
     
     return(
-        <View style={invitationStyle.invitationCard}>
+        <TouchableOpacity style={invitationStyle.invitationCard} onPress={action3}>
             <View style={invitationStyle.top}>
                 <View style={invitationStyle.nameContainer}>
                     <Text style={{fontSize: 27, fontWeight: 500,}}>
@@ -21,8 +21,15 @@ const InvitationCard = ({from, action1}) => {
                         </Text>
                     </TouchableOpacity>
                 </View>
+                <View style={invitationStyle.btnContainer}>
+                    <TouchableOpacity style={invitationStyle.btn} onPress={action2}>
+                        <Text style={invitationStyle.btnText}>
+                            Declined
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
@@ -67,7 +74,7 @@ const invitationStyle = StyleSheet.create({
         paddingLeft: '7%',
     },
     btnContainer: {
-        width: '100%',
+        width: '50%',
         height: '100%',
         display: 'flex',
         justifyContent: 'center',

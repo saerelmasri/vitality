@@ -149,17 +149,17 @@ export default function App() {
         <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
-          options={{headerShown:true, headerTitle: 'Playground', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+          options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
         <Stack.Screen
           name="Leaderboard"
           component={Leaderboard}
-          options={{headerShown:true, headerTitle: 'LeaderBoard', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+          options={{headerShown:true, headerTitle: 'LeaderBoard', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
         <Stack.Screen
           name="Invitations"
           component={Invitation}
-          options={{headerShown:true, headerTitle: 'Invitations', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
+          options={{headerShown:true, headerTitle: 'Invitations', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
         <Stack.Screen
           name="ActivityInfo"
@@ -170,17 +170,17 @@ export default function App() {
           name="InviteFriends"
           component={InviteFriends}
           options={{headerShown:false}}
-        />
-        {/* <Stack.Screen
+        /> 
+        <Stack.Screen
           name="onGoingActivity"
           component={onGoingActivity}
           options={{headerShown:false}}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="InvitationDetail"
           component={InvitationDetail}
           options={{headerShown:false,}}
-        /> */}
+        />
         {/* <Stack.Screen
           name="FriendList"
           component={FriendList}
