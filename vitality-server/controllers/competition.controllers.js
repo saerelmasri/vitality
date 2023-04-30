@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const createCompetition = async (req, res) => {
     
-    const { title, type, distance, workout_name, rules, duration } = req.body
+    const { title, type, distance, workout_name, rules } = req.body
 
     const token = req.header('Authorization')
     if(!token){
@@ -18,8 +18,6 @@ const createCompetition = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
          
-        const date = new Date();
-        date.setDate(date.getDate() + 1);
 
         const checkCompetition ='SELECT COUNT(*) AS count FROM competition WHERE created_by_user_id = ?'
         await sql.query(checkCompetition, user_id, async(err, result) => {
@@ -38,7 +36,7 @@ const createCompetition = async (req, res) => {
             }
 
             const createCompetitionQuery = 'INSERT INTO competition SET ?'
-            const competationParams = { title, type, distance, workout_name, rules, created_by_user_id: user_id, duration, end_at: date, status: 'on going' }
+            const competationParams = { title, type, distance, workout_name, rules, created_by_user_id: user_id, status: 'on going' }
             await sql.query(createCompetitionQuery, competationParams, (err, result) => {
                 if(err){
                     return res.status(500).json({
