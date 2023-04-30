@@ -123,4 +123,40 @@ const search_by_name = async(req, res) => {
 
 }
 
-module.exports = {displayUsers, addFriendList, search_by_name}
+const displayMyFriends = async(req, res) => {
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const displayUsersQuery = 'SELECT nickname FROM users WHERE id IN ( SELECT friend_user_id FROM friends WHERE user_id = ?)'
+        await sql.query(displayUsersQuery, [user_id], (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status:500,
+                    message: err
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status:500,
+            message: err
+        })
+    }
+}
+
+module.exports = {displayUsers, addFriendList, search_by_name, displayMyFriends}

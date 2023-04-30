@@ -206,7 +206,7 @@ const sumOfCalories = async (req, res) => {
     }
   
     try {
-      const decode = jwt.decode(token, process.env.JWT_TOKEN);
+      const decode = jwt.verify(token, process.env.JWT_TOKEN);
       const user_id = decode.userId;
   
       const query = 'SELECT mealID, SUM(calories) as total_calories FROM food_intakes WHERE userID = ? GROUP BY mealID;';
@@ -267,7 +267,7 @@ const sumOfNutrients = async (req, res) => {
     }
   
     try {
-      const decode = jwt.decode(token, process.env.JWT_TOKEN);
+      const decode = jwt.verify(token, process.env.JWT_TOKEN);
       const user_id = decode.userId;
   
       const query = `

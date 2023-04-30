@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const createCompetition = async (req, res) => {
     
-    const { title, type, distance, workout_name, rules } = req.body
+    const { title, type, workout_name, rules, reward } = req.body
 
     const token = req.header('Authorization')
     if(!token){
@@ -31,12 +31,12 @@ const createCompetition = async (req, res) => {
             if (result[0].count > 0) {
                 return res.status(400).json({
                     status:400,
-                    message: 'You have already created a competition'
+                    message: 'Only one competition at time'
                 })
             }
 
             const createCompetitionQuery = 'INSERT INTO competition SET ?'
-            const competationParams = { title, type, distance, workout_name, rules, created_by_user_id: user_id, status: 'on going' }
+            const competationParams = { title, type, workout_name, rules, created_by_user_id: user_id, status: 'on going', reward }
             await sql.query(createCompetitionQuery, competationParams, (err, result) => {
                 if(err){
                     return res.status(500).json({
@@ -49,6 +49,39 @@ const createCompetition = async (req, res) => {
                     message: 'Challenge created',
                     competition_id: result.insertId
                 })
+            })
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
+const deleteCompetiton = async (req, res) => {
+    const { id } = req.body
+
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try{
+        const deleteQuery ='DELETE FROM competition WHERE id = ?'
+        await sql.query(deleteQuery, [id], async(err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status:500,
+                    message: err
+                })
+            }
+            res.status(201).json({
+                status:201,
+                message: 'Challenge deleted',
             })
         })
     }catch(err){
@@ -361,4 +394,4 @@ const challengeDetails = async(req, res) => {
     }
 }
 
-module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition, getWinner, challengeDetails }
+module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition, getWinner, challengeDetails, deleteCompetiton }
