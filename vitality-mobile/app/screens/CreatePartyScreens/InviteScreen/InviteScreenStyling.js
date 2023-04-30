@@ -3,15 +3,75 @@ import { Color } from "../../../../globalStyling";
 import Button from "../../../Components/Button/Button";
 import Friend from "../../../Components/FriendComponent/Friend";
 const { height, width } = Dimensions.get('window')
+import { useRoute } from "@react-navigation/native"
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NTg5MDUsImV4cCI6MTY4Mjg2MjUwNX0.mUSFTsfRJPZaMx5DD4t04CHFU0I3Pm74zakSXH6e6qQ"
 
-const InviteFriends = () => {
+
+const InviteFriends = ({navigation}) => {
+    const route = useRoute()
+    const competitionID = route.params.competitionInfo
+
+    const [ friends, setFriends ] = useState([])
+
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
+    const deleteCompetition = async() => {
+        await axios({
+            method: 'DELETE',
+            url: 'http://192.168.1.104:5000/competition_route/deleteCompetiton',
+            data: competitionID,
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.data.status === 201){
+                navigation.goBack()
+            }
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
+
+    useEffect(() => {
+        const fetchFriends = async() => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/friends_route/myfriends',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setFriends(res.data.message)
+            }).catch(err => {
+                console.error(err.response);
+            })
+        }
+    
+        fetchFriends()
+    }, [])
+    
+    console.log(friends);
+
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={activityInfoStyle.container}>
                 <ScrollView>
                     <View style={activityInfoStyle.backBtnContainer}>
                         <View style={activityInfoStyle.backBtn}>
-                            <Pressable onPress={() => console.log('hello')}>
+                            <Pressable onPress={() => deleteCompetition()}>
                                 <Image source={require('../../../assets/app-img/back-btn.png')}></Image>
                             </Pressable>
                         </View>
@@ -27,11 +87,11 @@ const InviteFriends = () => {
                         </View>
                         <View style={activityInfoStyle.friendsSection}>
                             <ScrollView>
-                                <Friend name={'Saer El Masri'}/>
-                                <Friend name={'Saer El Masri'}/>
-                                <Friend name={'Saer El Masri'}/>
-                                <Friend name={'Saer El Masri'}/>
-                                <Friend name={'Saer El Masri'}/>
+                            {
+                                friends.map(friend => (
+                                    <Friend key={friend.id} name={friend.nickname} />
+                                ))
+                            }
                             </ScrollView>
                         </View>
                     </View>

@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NTMwMzgsImV4cCI6MTY4Mjg1NjYzOH0.diBikWQmmDHj7LNCdTrS9JcJ26v445Ypx7uiLcOxWdU"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NTg5MDUsImV4cCI6MTY4Mjg2MjUwNX0.mUSFTsfRJPZaMx5DD4t04CHFU0I3Pm74zakSXH6e6qQ"
 
 const ActivityInfo = ({navigation}) => {
     const [ challengeName, setChallengeName ] = useState('')
@@ -31,26 +31,33 @@ const ActivityInfo = ({navigation}) => {
         "reward": 150
     }
 
+    const competitionInfo = {
+        "id": competitionID
+    }
+
     const createCompetition = async() => {
         if(challengeName === "" || workoutName === "" || rules === ""){
             Alert.alert('Please fill fields')
         }else{
-            await axios({
-                method: 'POST',
-                url: 'http://192.168.1.104:5000/competition_route/createCompetition',
-                data: info,
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
+            try {
+                const res = await axios({
+                    method: 'POST',
+                    url: 'http://192.168.1.104:5000/competition_route/createCompetition',
+                    data: info,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
                 if(res.data.status === 201){
                     setCompetitionID(res.data.competition_id)
                     Alert.alert(res.data.message)
-                    //navigation.navigate("InviteFriends", {competition__id: competitionID})
+                    navigation.navigate("InviteFriends", { competitionInfo: { id: res.data.competition_id } })
                 }
-            }).catch(err => Alert.alert(err.response.data.message))
+            } catch (err) {
+                console.error(err.response.data.message)
+            }
         }
     }
     return(
