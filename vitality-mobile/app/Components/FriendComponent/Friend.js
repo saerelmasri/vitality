@@ -2,7 +2,7 @@ import { View, Pressable, Image, Alert, Text, StyleSheet, Dimensions } from "rea
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const Friend = ({name}) => {
+const Friend = ({name, action}) => {
     return(
         <View style={activityInfoStyle.friends}>
             <View style={activityInfoStyle.photoContainer}>
@@ -12,7 +12,7 @@ const Friend = ({name}) => {
                 <Text style={{fontSize: 17}}>{name}</Text>
             </View>
             <View style={activityInfoStyle.addContainer}>
-                <Pressable onPress={() => {Alert.alert('Omg Ambar hi')}}>
+                <Pressable onPress={action}>
                     <Image source={require('../../assets/app-img/addBtn.png')}/>
                 </Pressable>
             </View>

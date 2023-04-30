@@ -22,7 +22,6 @@ import WorkoutDashboard from './app/screens/WorkoutScreen/WorkoutScreen';
 import VideoListing from './app/screens/VideoListing/VideoListing';
 import ExerciseListing from './app/screens/ExerciseListing/ExerciseListing';
 import PlaygroundDashboard from './app/screens/PlaygroundDashboard/PlaygroundScreen';
-import SelectActivity from './app/screens/CreatePartyScreens/SelectActivityScreen/SelectScreen';
 import ActivityInfo from './app/screens/CreatePartyScreens/ActivityInfo/ActivityInfo';
 import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteScreenStyling';
 import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
@@ -162,11 +161,6 @@ export default function App() {
           component={Invitation}
           options={{headerShown:true, headerTitle: 'Invitations', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
         />
-        <Stack.Screen
-          name="SelectActivity"
-          component={SelectActivity}
-          options={{headerShown:false}}
-        /> 
         <Stack.Screen
           name="ActivityInfo"
           component={ActivityInfo}

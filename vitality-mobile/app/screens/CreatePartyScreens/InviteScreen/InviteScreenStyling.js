@@ -7,7 +7,7 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NTg5MDUsImV4cCI6MTY4Mjg2MjUwNX0.mUSFTsfRJPZaMx5DD4t04CHFU0I3Pm74zakSXH6e6qQ"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NjMwNTUsImV4cCI6MTY4Mjg2NjY1NX0.UdRGhMWTJgbCLdToptoFJ7tvINNOARuT8B_rWvxTupU"
 
 
 const InviteFriends = ({navigation}) => {
@@ -63,7 +63,28 @@ const InviteFriends = ({navigation}) => {
         fetchFriends()
     }, [])
     
-    console.log(friends);
+    
+    const sendInvitation = async(recipient_id) => {
+        await axios({
+            method: 'POST',
+            url: 'http://192.168.1.104:5000/competition_route/sendInvitation',
+            data: {
+                "competition_id": competitionID['id'],
+                "recipient_id": recipient_id,
+                "status": "Pending"
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            Alert.alert(res.data.message);
+        }).catch(err => {
+            Alert.alert(err.response.data.message)
+        })
+    }
+
 
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
@@ -89,14 +110,14 @@ const InviteFriends = ({navigation}) => {
                             <ScrollView>
                             {
                                 friends.map(friend => (
-                                    <Friend key={friend.id} name={friend.nickname} />
+                                    <Friend key={friend.id} name={friend.nickname} action={() => sendInvitation(friend.id)}/>
                                 ))
                             }
                             </ScrollView>
                         </View>
                     </View>
                     <View style={activityInfoStyle.btnContainer}>
-                        <Button title={'Register'}/>
+                        <Button title={'Continue'} action={()=> navigation.navigate('PlaygroundDashboard')}/>
                     </View>
                 </ScrollView>
             </View>

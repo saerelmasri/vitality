@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NTg5MDUsImV4cCI6MTY4Mjg2MjUwNX0.mUSFTsfRJPZaMx5DD4t04CHFU0I3Pm74zakSXH6e6qQ"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NjMwNTUsImV4cCI6MTY4Mjg2NjY1NX0.UdRGhMWTJgbCLdToptoFJ7tvINNOARuT8B_rWvxTupU"
 
 const ActivityInfo = ({navigation}) => {
     const [ challengeName, setChallengeName ] = useState('')
@@ -21,7 +21,6 @@ const ActivityInfo = ({navigation}) => {
     //     console.log(error);
     // });
 
-    console.log(challengeName + " " + workoutName + " " + rules);
 
     const info = {
         "title": challengeName,
