@@ -36,7 +36,7 @@ const createCompetition = async (req, res) => {
             }
 
             const createCompetitionQuery = 'INSERT INTO competition SET ?'
-            const competationParams = { title, type, workout_name, rules, created_by_user_id: user_id, status: 'on going', reward }
+            const competationParams = { title, type, workout_name, rules, created_by_user_id: user_id, status: 'to be started', reward }
             await sql.query(createCompetitionQuery, competationParams, (err, result) => {
                 if(err){
                     return res.status(500).json({
@@ -107,6 +107,19 @@ const sendInvition = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId;
   
+  
+        // const checkInvitationQuery = 'SELECT * FROM invitation WHERE competition_id = ? AND sender_id = ? AND recipient_id = ? AND status = "pending"';
+        // const checkInvitationParams = [competition_id, user_id, recipient_id];
+        // const [rows] = await sql.query(checkInvitationQuery, checkInvitationParams);
+
+        // if (rows.length > 0) {
+        // return res.status(400).json({
+        //     status: 400,
+        //     message: 'Invitation already sent to the recipient'
+        // });
+        // }
+        
+    
         // const checkInvitationQuery = 'SELECT * FROM invitation WHERE competition_id = ? AND sender_id = ? AND recipient_id = ? AND status = "pending"';
         // const checkInvitationParams = [competition_id, user_id, recipient_id];
         // const [rows] = await sql.query(checkInvitationQuery, checkInvitationParams);
@@ -149,9 +162,7 @@ const sendInvition = async (req, res) => {
         message: err.message
       });
     }
-  };
-
-
+};
 
 const showAllInvitations = async (req, res) => {
     const token = req.header('Authorization')
@@ -166,7 +177,7 @@ const showAllInvitations = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        const showAllInvitationQuery = 'SELECT competition_id, sender_id, status FROM invitation WHERE recipient_id = ?'
+        const showAllInvitationQuery = 'SELECT c.id AS competition_id, c.title, c.type, c.workout_name, c.rules, c.reward, u.nickname AS creator_username, i.status FROM competition c JOIN users u ON c.created_by_user_id = u.id JOIN invitation i ON c.id = i.competition_id WHERE i.recipient_id = ?'
         await sql.query(showAllInvitationQuery, user_id, (err, result) => {
             if(err){
                 return res.status(500).json({
@@ -194,9 +205,90 @@ const showAllInvitations = async (req, res) => {
     }
 }
 
-const changeStatusInvitation = async(req, res) => {
-    const { competition_id, status } = req.body 
-
+const changeStatusInvitation = async (req, res) => {
+    const { competition_id, status } = req.body;
+  
+    const token = req.header("Authorization");
+    if (!token) {
+      return res.status(401).json({
+        status: 401,
+        message: "Unauthorized",
+      });
+    }
+  
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+      const user_id = decoded.userId;
+  
+      if (status === "declined") {
+        const deleteQuery = "DELETE FROM invitation WHERE competition_id = ? AND recipient_id = ?";
+        await sql.query(deleteQuery, [competition_id, user_id], (err) => {
+          if (err) {
+            return res.status(500).json({
+              status: 500,
+              message: err,
+            });
+          }
+  
+          res.status(201).json({
+            status: 201,
+            message: "Invitation declined",
+          });
+        });
+      } else if (status === "accepted") {
+        const checkInvitationsQuery = "SELECT COUNT(*) AS count FROM invitation WHERE competition_id = ? AND status = 'accepted'";
+        await sql.query(checkInvitationsQuery, [competition_id], async (err, result) => {
+          if (err) {
+            return res.status(500).json({
+              status: 500,
+              message: err,
+            });
+          }
+  
+          const count = result[0].count;
+  
+          const updateInvitationQuery = "UPDATE invitation SET status = ? WHERE competition_id = ? AND recipient_id = ?";
+          await sql.query(updateInvitationQuery, [status, competition_id, user_id], async (err) => {
+            if (err) {
+              return res.status(500).json({
+                status: 500,
+                message: err,
+              });
+            }
+  
+            if (count === 1) { // If all users accepted, start the competition
+              const startCompetitionQuery = "UPDATE competition SET status = 'started' WHERE id = ?";
+              await sql.query(startCompetitionQuery, [competition_id], async (err) => {
+                if (err) {
+                  return res.status(500).json({
+                    status: 500,
+                    message: err,
+                  });
+                }
+  
+                res.status(201).json({
+                  status: 201,
+                  message: competition_id,
+                });
+              });
+            } else {
+              res.status(201).json({
+                status: 201,
+                message: "Invitation accepted",
+              });
+            }
+          });
+        });
+      }
+    } catch (err) {
+      res.status(500).json({
+        status: 500,
+        message: err,
+      });
+    }
+  };
+  
+const ownerCompetition = async(req, res) => {
     const token = req.header('Authorization')
     if(!token){
         return res.status(401).json({
@@ -209,51 +301,20 @@ const changeStatusInvitation = async(req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        if( status === 'declined'){
-            const deleteQuery = 'DELETE FROM invitation WHERE competition_id = ? AND recipient_id = ?'
-            await sql.query(deleteQuery, [competition_id, user_id], (err) => {
-                if(err){
-                    return res.status(500).json({
-                        status: 500,
-                        message: err
-                    })
-                }
-
-                res.status(201).json({
-                    status: 201,
-                    message: 'Invitation declined'
+        const showcompetitionOwn = 'SELECT * FROM competition WHERE created_by_user_id = ?'
+        await sql.query(showcompetitionOwn, user_id, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status:500,
+                    message: err
                 })
-
-
+            }
+            res.status(201).json({
+                status: 201,
+                message: result
             })
-        }
-        else if(status === 'accepted'){
-            const startCompetitionQuery = 'UPDATE invitation SET status = ? WHERE recipient_id = ?'
-            await sql.query(startCompetitionQuery, [ status, user_id ], async(err)=> {
-                if(err){
-                    return res.status(500).json({
-                        status: 500,
-                        message: err
-                    })
-                }
+        })
 
-                const getCompetitionId = 'SELECT competition_id FROM invitation WHERE recipient_id = ?'
-                await sql.query(getCompetitionId, user_id, (err, result ) => {
-                    if(err){
-                        return res.status(500).json({
-                            status: 500,
-                            message: err
-                        })
-                    }
-                    console.log(result);
-                    res.status(201).json({
-                        status: 201,
-                        message: result
-                    })
-                })
-
-            })
-        }
     }catch(err){
         res.status(500).json({
             status:500,
@@ -371,7 +432,7 @@ const getWinner = async(req, res) => {
 const challengeDetails = async(req, res) => {
     const {challenge_id} = req.body
     try{
-        const query = 'SELECT title, type, distance, workout_name, rules, created_by_user_id, end_at FROM competition WHERE id = ?'
+        const query = 'SELECT title, type, workout_name, reward, rules, created_by_user_id FROM competition WHERE id = ?'
         await sql.query(query, challenge_id, (err, result) => {
             if(err){
                 return res.status(500).json({
@@ -381,7 +442,6 @@ const challengeDetails = async(req, res) => {
             }
 
             const challenge = result[0]
-            console.log(challenge.created_by_user_id);
             const userQuery = 'SELECT full_name, nickname FROM users WHERE id = ?'
             sql.query(userQuery, challenge.created_by_user_id, (err, result) => {
                 if(err){
@@ -393,12 +453,11 @@ const challengeDetails = async(req, res) => {
                 const response = {
                     title: challenge.title,
                     type: challenge.type,
-                    distance: challenge.distance,
                     workout_name : challenge.workout_name,
                     rules: challenge.rules,
-                    deadline: challenge.end_at,
                     fullName: result[0].full_name,
                     nickName: result[0].nickname,
+                    reward: challenge.reward
                 }
                 return res.status(201).json({
                     status: 201,
@@ -416,4 +475,14 @@ const challengeDetails = async(req, res) => {
     }
 }
 
-module.exports = { createCompetition, sendInvition, showAllInvitations, changeStatusInvitation, performing_competition, getWinner, challengeDetails, deleteCompetiton }
+module.exports = { 
+    createCompetition, 
+    sendInvition, 
+    showAllInvitations, 
+    changeStatusInvitation, 
+    performing_competition, 
+    getWinner, 
+    challengeDetails, 
+    deleteCompetiton,
+    ownerCompetition
+}
