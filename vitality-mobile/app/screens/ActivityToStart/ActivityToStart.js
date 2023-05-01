@@ -38,7 +38,6 @@ const ActivityToStart = ({navigation}) => {
         fetchInvitation()
     }, [])
 
-    console.log(users);
 
     // AsyncStorage.getItem('token')
     // .then(token => {
@@ -47,6 +46,49 @@ const ActivityToStart = ({navigation}) => {
     // .catch(error => {
     //     console.log(error);
     // });
+
+    const startCompetition = async() => {
+        await axios({
+            method: 'PUT',
+            url: 'http://192.168.1.104:5000/competition_route/startCompetition',
+            data: {
+                "id": competitionID['id'],
+                "status": "Started"
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.data.status === 201){
+                navigation.navigate('onGoingActivity', { competitionID: competitionID['id'] })
+            }
+        }).catch(err => {
+            console.error(err.response.data.message);
+        })
+    }
+
+    const cancelCompetition = async() => {
+        await axios({
+            method: 'DELETE',
+            url: 'http://192.168.1.104:5000/competition_route/deleteCompetiton',
+            data: {
+                "id": competitionID['id']
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.data.status === 201){
+                navigation.navigate('PlaygroundDashboard')
+            }
+        }).catch(err => {
+            console.error(err.response.data.message);
+        })
+    }
 
     
     return(
@@ -95,10 +137,10 @@ const ActivityToStart = ({navigation}) => {
 
                     </View>
                     <View style={activityToStartStyling.topBtn}>
-                        <Button title={'Start Competition'} action={() => changeStatus(competitionID['id'], "accepted")}/>
+                        <Button title={'Start Competition'} action={() => startCompetition()}/>
                     </View>
                     <View style={activityToStartStyling.topBtn}>
-                        <Button title={'Cancel competition'} action={() => changeStatus(competitionID['id'], "declined")}/>
+                        <Button title={'Cancel competition'} action={() => cancelCompetition()}/>
                     </View>
                 </ScrollView>
             </View>
