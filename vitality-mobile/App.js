@@ -147,7 +147,7 @@ export default function App() {
           options={{headerShown: false}}
         /> */}
 
-        <Stack.Screen
+        {/* <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -171,13 +171,13 @@ export default function App() {
           name="InviteFriends"
           component={InviteFriends}
           options={{headerShown:false}}
-        /> 
+        />  */}
         <Stack.Screen
           name="onGoingActivity"
           component={onGoingActivity}
           options={{headerShown:false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="InvitationDetail"
           component={InvitationDetail}
           options={{headerShown:false,}}
@@ -186,7 +186,7 @@ export default function App() {
           name="ActivityToStart"
           component={ActivityToStart}
           options={{headerShown:false,}}
-        />
+        /> */}
         {/* <Stack.Screen
           name="FriendList"
           component={FriendList}

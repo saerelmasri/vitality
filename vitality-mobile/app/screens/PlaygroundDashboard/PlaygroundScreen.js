@@ -7,8 +7,7 @@ import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI5MzQyNDUsImV4cCI6MTY4MjkzNzg0NX0.NjIhyMsRXBh1n67ursIuuBRWoedWFIRl4aupdjQz5Uc"
-
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk0MDEzOCwiZXhwIjoxNjgyOTQzNzM4fQ.c-g310yCByCZ41QDAWdy2rdzhA8ahzsVk5QuNOJhO6E"
 
 
 const PlaygroundDashboard = ({navigation}) => {

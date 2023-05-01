@@ -10,6 +10,13 @@ let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjkz
 
 
 const ActivityToStart = ({navigation}) => {
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
     const route = useRoute()
     const competitionID = route.params.competitionInfo
 
@@ -39,13 +46,7 @@ const ActivityToStart = ({navigation}) => {
     }, [])
 
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    
 
     const startCompetition = async() => {
         await axios({

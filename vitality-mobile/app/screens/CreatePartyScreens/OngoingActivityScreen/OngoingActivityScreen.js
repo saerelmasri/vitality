@@ -2,55 +2,109 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { Color } from "../../../../globalStyling";
 import Button from "../../../Components/Button/Button";
 const { height, width } = Dimensions.get('window')
+import { useRoute } from "@react-navigation/native"
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk0MjUwNywiZXhwIjoxNjgyOTQ2MTA3fQ.o-9MSxdvP1BoLTOB3nPN7C9yFeHaUuzfTKGTlk-45o0"
+import CountDown from "react-native-countdown-component";
 
 const onGoingActivity = () => {
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // });
+
     
+
+    // const route = useRoute()
+    // const id = route.params.competitionID
+
+    const [ challengeDetail, setChallengeDetail ] = useState([])
+    const [isCountdownFinished, setIsCountdownFinished] = useState(false);
+
+    const handleCountdownFinish = () => {
+        setIsCountdownFinished(true);
+    };
+
+    useEffect(() => {
+        const fetchInfoCompetition = async() => {
+            await axios({
+                method: 'POST',
+                url: 'http://192.168.1.104:5000/competition_route/challengeDetails',
+                data: {
+                    "challenge_id": 41
+                },
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                if(res.data.status === 201){
+                    setChallengeDetail(res.data.message);
+                }
+            }).catch(err => {
+                console.log(err.response.data);
+            })
+        }
+
+        fetchInfoCompetition()
+    }, [])
+
+    console.log(challengeDetail);
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <ImageBackground style={onGoingActivityStyling.container} source={require('../../../assets/app-img/ads.jpg')}>
                 <ScrollView>
-                    <View style={onGoingActivityStyling.backBtnContainer}>
-                        <View style={onGoingActivityStyling.backBtn}>
-                            <Pressable onPress={() => console.log('hello')}>
-                                <Image source={require('../../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     <View style={onGoingActivityStyling.content}>
                         
                         <View style={onGoingActivityStyling.timingConteiner}>
                             <View style={onGoingActivityStyling.timing}>
-                                <Text style={{fontSize: 60, fontWeight: 500, color: Color.white}}>
-                                    01: 23:49
-                                </Text>
-                            </View>
-                            <View style={onGoingActivityStyling.timingHeader}>
-                                <Text style={{fontSize: 25, fontWeight: 300, color: Color.white}}>
-                                    Duration
-                                </Text>
+                                <CountDown
+                                    size={30}
+                                    until={10}
+                                    showSeparator
+                                    timeToShow={['M', 'S']}
+                                    digitStyle={{ backgroundColor: 'transparent' }}
+                                    digitTxtStyle={{ color: 'white', fontSize: 50 }}
+                                    timeLabelStyle={{ color: 'white' }}
+                                    onFinish={handleCountdownFinish}
+                                />
+
                             </View>
                         </View>
                         <View style={onGoingActivityStyling.challengeNameContainer}>
                             <Text style={{fontSize: 50, fontWeight: 500, color: Color.white, textTransform: 'uppercase', textAlign: 'center'}}>
-                                Saer's Challenge
+                                {challengeDetail.nickName}'s Challenge
                             </Text>
                         </View>
                         <View style={onGoingActivityStyling.extraInfo}>
                             <Text style={onGoingActivityStyling.extraInfoText}>
                                 Workout Name
                             </Text>
+                            <Text style={onGoingActivityStyling.extraInfoText}>
+                                {challengeDetail.workout_name}
+                            </Text>
                         </View>
                         <View style={onGoingActivityStyling.extraInfo}>
                             <Text style={onGoingActivityStyling.extraInfoText}>
                                 Your Rules
                             </Text>
+                            <Text style={onGoingActivityStyling.extraInfoText}>
+                                {challengeDetail.rules}
+                            </Text>
                         </View>
 
-                        <View style={onGoingActivityStyling.btnContainer}>
-                            <Button title={'Done!'}/>
-
-                        </View>
+                        {isCountdownFinished &&
+                            <View style={onGoingActivityStyling.btnContainer}>
+                                <Button title={'Done!'}/>
+                            </View>
+                        }
+                        
 
                     </View>
 
@@ -86,6 +140,7 @@ const onGoingActivityStyling = StyleSheet.create({
         alignItems: 'center'
     },
     content: {
+        marginTop: '15%',
         height: height /1.1,
         display: 'flex',
         flex: 1,
