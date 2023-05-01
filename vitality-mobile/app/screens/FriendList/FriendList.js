@@ -2,8 +2,36 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { Color } from "../../../globalStyling";
 import FriendComponent from "../../Components/ListFriend/ListFriend";
 const { height, width } = Dimensions.get('window')
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk2MzEzMywiZXhwIjoxNjgyOTY2NzMzfQ.1YkOMuxZwIvqsXjt6bDhjXNx_XVAngFZBSCWsd77wt4"
+
 
 const FriendList = ({navigation}) => {
+
+    const [ friend, setFriends ] = useState([])
+
+    useEffect(() => {
+        const fetchUsers = async() => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/friends_route/myfriends',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setFriends(res.data.message);
+            }).catch(err => {
+                console.log(err.response.data);
+            })
+        }
+
+        fetchUsers()
+    }, [])
+
     return(
         <SafeAreaView style={{flex:1,}}>
             <View style={friendStyle.container}>
@@ -31,14 +59,13 @@ const FriendList = ({navigation}) => {
                     </View>
                     <View style={friendStyle.friendListConteiner}>
                         <ScrollView>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
-                            <FriendComponent name={'Saer El Masri'}/>
+                            {friend.map(item => (
+                                <FriendComponent 
+                                key={item.id} 
+                                name={item.nickname} 
+                                photo={item.photo_url} 
+                                />
+                            ))}
                         </ScrollView>
                     </View>
 

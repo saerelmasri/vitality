@@ -147,7 +147,7 @@ export default function App() {
           options={{headerShown: false}}
         /> */}
 
-        <Stack.Screen
+        {/* <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -191,8 +191,8 @@ export default function App() {
           name="ActivityToStart"
           component={ActivityToStart}
           options={{headerShown:false,}}
-        />
-        {/* <Stack.Screen
+        /> */}
+        <Stack.Screen
           name="FriendList"
           component={FriendList}
           options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -201,7 +201,7 @@ export default function App() {
           name="AddFriend"
           component={AddFriend}
           options={{headerShown:false, }}
-        /> */}
+        />
         {/* <Stack.Screen
           name="Profile"
           component={Profile}

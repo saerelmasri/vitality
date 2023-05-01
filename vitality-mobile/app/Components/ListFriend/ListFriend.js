@@ -2,14 +2,23 @@ import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
-const FriendComponent = ({name}) => {
+const FriendComponent = ({name, photo}) => {
+   
     return(
         <View style={activityInfoStyle.friends}>
             <View style={activityInfoStyle.photoContainer}>
-                <View style={activityInfoStyle.photo}></View>
+                {photo !== null ? (
+                        <View style={activityInfoStyle.photo}>
+                            <Image source={{uri: photo}} style={{width: '100%', height: '100%', borderRadius: 100}}/>
+                        </View>
+                    ) : (
+                    <View style={activityInfoStyle.photo}>
+                        <Image source={require('../../assets/app-img/default.jpg')} style={{width: '100%', height: '100%', borderRadius: 100}}/>
+                    </View>
+                )}
             </View>
             <View style={activityInfoStyle.nameContainer}>
-                <Text style={{fontSize: 17}}>{name}</Text>
+                <Text style={{fontSize: 19}}>{name}</Text>
             </View>
         </View>
     );
@@ -54,7 +63,7 @@ const activityInfoStyle = StyleSheet.create({
         width: '80%',
         height: '80%',
         borderRadius: 100,
-        backgroundColor: Color.grey
+        borderWidth: 1
     },
     nameContainer:{
         width: '45%',

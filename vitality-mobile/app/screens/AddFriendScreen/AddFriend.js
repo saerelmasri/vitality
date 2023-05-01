@@ -4,6 +4,7 @@ import Friend from "../../Components/FriendComponent/Friend";
 const { height, width } = Dimensions.get('window')
 
 const AddFriend = ({navigation}) => {
+    
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={addFriendStyling.container}>
