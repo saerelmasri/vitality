@@ -7,7 +7,7 @@ import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjg5MTE1NywiZXhwIjoxNjgyODk0NzU3fQ.JpOqACfgSyNm6fsgrHvZt3CnfVbHAbaQ5nLK7mzKnN4"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI5MzQyNDUsImV4cCI6MTY4MjkzNzg0NX0.NjIhyMsRXBh1n67ursIuuBRWoedWFIRl4aupdjQz5Uc"
 
 
 
@@ -74,9 +74,9 @@ const PlaygroundDashboard = ({navigation}) => {
 
                     <View style={runningStyling.challengesContainer}>
                         { partyInfo && partyInfo.title ? (
-                            <Challenge name={partyInfo.title} reward={`Reward:${partyInfo.reward}pts`} />
+                            <Challenge name={partyInfo.title} reward={`Reward:${partyInfo.reward}pts`} action={() => navigation.navigate('ActivityToStart', { competitionInfo: { id: partyInfo.id }})}/>
                         ) : (
-                            <Challenge name={"Create a party"} reward={"challenge your friends"} />
+                            <Challenge name={"Create a party"} reward={"Challenge your friends"} />
                         )}
                         <ScrollView>
                             <Challenge/>

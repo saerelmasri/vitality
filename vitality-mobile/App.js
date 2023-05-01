@@ -33,6 +33,7 @@ import FriendList from './app/screens/FriendList/FriendList';
 import AddFriend from './app/screens/AddFriendScreen/AddFriend';
 import Profile from './app/screens/ProfileScreen/Profile';
 import Settings from './app/screens/SettingScreen/Setting';
+import ActivityToStart from './app/screens/ActivityToStart/ActivityToStart';
 
 
 
@@ -179,6 +180,11 @@ export default function App() {
         <Stack.Screen
           name="InvitationDetail"
           component={InvitationDetail}
+          options={{headerShown:false,}}
+        />
+        <Stack.Screen
+          name="ActivityToStart"
+          component={ActivityToStart}
           options={{headerShown:false,}}
         />
         {/* <Stack.Screen

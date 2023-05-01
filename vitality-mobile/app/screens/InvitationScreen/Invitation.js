@@ -77,7 +77,7 @@ const Invitation = ({navigation}) => {
                     </View>
                     <View style={invitationStyle.invitationContainer}>
                         <ScrollView>
-                        { 
+                        {
                             invitations.map(item => (
                                 <InvitationCard 
                                     from={item.creator_username} 
