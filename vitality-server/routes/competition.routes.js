@@ -11,7 +11,8 @@ const {
     challengeDetails, 
     deleteCompetiton,
     ownerCompetition,
-    getInvitedUsers
+    getInvitedUsers,
+    startCompetition
 } = require('../controllers/competition.controllers')
 
 route.post('/createCompetition', createCompetition)
@@ -22,6 +23,7 @@ route.get('/allUserInvitated/:competition_id', getInvitedUsers)
 route.post('/challengeDetails', jwt_middleware, challengeDetails)
 route.post('/winner', jwt_middleware, getWinner)
 route.put('/changeStatus', changeStatusInvitation)
+route.put('/startCompetition', startCompetition)
 route.post('/performingCompetition', performing_competition)
 route.delete('/deleteCompetiton', deleteCompetiton)
 

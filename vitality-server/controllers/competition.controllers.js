@@ -514,6 +514,26 @@ const getInvitedUsers = async (req, res) => {
     });
 };
 
+const startCompetition = async(req, res) => {
+    const { id } = req.body;
+    const { status } = req.body;
+
+    const query = `UPDATE competition SET status = '${status}' WHERE id = ${id}`;
+    await sql.query(query, (err, result) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err,
+            });
+        }
+        return res.status(201).json({
+            status: 201,
+            message: 'Challenge started',
+        });
+
+    })
+}
+
 module.exports = { 
     createCompetition, 
     sendInvition, 
@@ -524,5 +544,6 @@ module.exports = {
     challengeDetails, 
     deleteCompetiton,
     ownerCompetition,
-    getInvitedUsers
+    getInvitedUsers,
+    startCompetition,
 }
