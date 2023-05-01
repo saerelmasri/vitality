@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4Njk2MjAsImV4cCI6MTY4Mjg3MzIyMH0.McmG9a8ZHwvJ3SyJ7ubk06Kv_3BKu9KDOUXzwW5wun4"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1NTY0OCwiZXhwIjoxNjgyOTU5MjQ4fQ.XsmQVtKSNx6vtd_PlHngwbzbNjZqhFFQniamhlz8Pb8"
 
 const ActivityInfo = ({navigation}) => {
     const [ challengeName, setChallengeName ] = useState('')
@@ -94,7 +94,7 @@ const ActivityInfo = ({navigation}) => {
                             <Text style={{color: Color.white}}>Workout Name</Text>
                             <TextInput 
                                 style={activityInfoStyle.input}
-                                placeholder="Enter your workout name"
+                                placeholder="Enter your challenge objective"
                                 underlineColorAndroid="transparent"
                                 autoCapitalize='none'
                                 value={workoutName}
@@ -105,12 +105,13 @@ const ActivityInfo = ({navigation}) => {
                             <Text style={{color: Color.white}}>Your rule</Text>
                             <TextInput 
                                 style={activityInfoStyle.input}
-                                placeholder="Enter your rule"
+                                placeholder="Enter your time"
                                 underlineColorAndroid="transparent"
                                 autoCapitalize='none'
                                 value={rules}
                                 onChangeText={text => setRules(text)}
                             />
+                            <Text style={{color: Color.white, fontSize: 15}}>Enter time only in minutes</Text>
                         </View>
                     </View>
 

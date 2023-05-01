@@ -6,7 +6,7 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4MjkzNzc0OSwiZXhwIjoxNjgyOTQxMzQ5fQ.estWPrbXSmNIaYXDv5EzxcDM4LzmUJWlzPsMO2e1Pio"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI5NDY4MDksImV4cCI6MTY4Mjk1MDQwOX0.8a9XkUujw4yxHaGyZxALpK-Gut7ISHeas8BWoD0XYrM"
 
 
 const ActivityToStart = ({navigation}) => {
@@ -54,7 +54,7 @@ const ActivityToStart = ({navigation}) => {
             url: 'http://192.168.1.104:5000/competition_route/startCompetition',
             data: {
                 "id": competitionID['id'],
-                "status": "Started"
+                "status": "started"
             },
             headers: {
                 'Authorization': JWT,

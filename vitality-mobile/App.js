@@ -25,7 +25,6 @@ import PlaygroundDashboard from './app/screens/PlaygroundDashboard/PlaygroundScr
 import ActivityInfo from './app/screens/CreatePartyScreens/ActivityInfo/ActivityInfo';
 import InviteFriends from './app/screens/CreatePartyScreens/InviteScreen/InviteScreenStyling';
 import Trophy from './app/screens/CreatePartyScreens/TrophyScreen/TrohpyScreen';
-import onGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
 import Leaderboard from './app/screens/LeaderboardScreen/LeaderboardScreen';
 import Invitation from './app/screens/InvitationScreen/Invitation';
 import InvitationDetail from './app/screens/InvitationDetail/InvitationDetail';
@@ -34,6 +33,7 @@ import AddFriend from './app/screens/AddFriendScreen/AddFriend';
 import Profile from './app/screens/ProfileScreen/Profile';
 import Settings from './app/screens/SettingScreen/Setting';
 import ActivityToStart from './app/screens/ActivityToStart/ActivityToStart';
+import OnGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
 
 
 
@@ -147,7 +147,7 @@ export default function App() {
           options={{headerShown: false}}
         /> */}
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -171,13 +171,18 @@ export default function App() {
           name="InviteFriends"
           component={InviteFriends}
           options={{headerShown:false}}
-        />  */}
+        /> 
         <Stack.Screen
           name="onGoingActivity"
-          component={onGoingActivity}
+          component={OnGoingActivity}
           options={{headerShown:false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
+          name="Winner/Loser"
+          component={Trophy}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
           name="InvitationDetail"
           component={InvitationDetail}
           options={{headerShown:false,}}
@@ -186,7 +191,7 @@ export default function App() {
           name="ActivityToStart"
           component={ActivityToStart}
           options={{headerShown:false,}}
-        /> */}
+        />
         {/* <Stack.Screen
           name="FriendList"
           component={FriendList}

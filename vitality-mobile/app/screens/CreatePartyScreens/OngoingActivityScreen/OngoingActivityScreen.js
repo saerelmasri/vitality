@@ -6,10 +6,10 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk0MjUwNywiZXhwIjoxNjgyOTQ2MTA3fQ.o-9MSxdvP1BoLTOB3nPN7C9yFeHaUuzfTKGTlk-45o0"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1NTY0OCwiZXhwIjoxNjgyOTU5MjQ4fQ.XsmQVtKSNx6vtd_PlHngwbzbNjZqhFFQniamhlz8Pb8"
 import CountDown from "react-native-countdown-component";
 
-const onGoingActivity = () => {
+const OnGoingActivity = ({navigation}) => {
     // AsyncStorage.getItem('token')
     // .then(token => {
     //     JWT = token
@@ -20,8 +20,8 @@ const onGoingActivity = () => {
 
     
 
-    // const route = useRoute()
-    // const id = route.params.competitionID
+    const route = useRoute()
+    const id = route.params.competitionID
 
     const [ challengeDetail, setChallengeDetail ] = useState([])
     const [isCountdownFinished, setIsCountdownFinished] = useState(false);
@@ -36,7 +36,7 @@ const onGoingActivity = () => {
                 method: 'POST',
                 url: 'http://192.168.1.104:5000/competition_route/challengeDetails',
                 data: {
-                    "challenge_id": 41
+                    "challenge_id": id
                 },
                 headers: {
                     'Authorization': JWT,
@@ -55,7 +55,33 @@ const onGoingActivity = () => {
         fetchInfoCompetition()
     }, [])
 
-    console.log(challengeDetail);
+    const finishCompetition = async() => {
+        await axios({
+            method: 'POST',
+            url: 'http://192.168.1.104:5000/competition_route/winner',
+            data: {
+                "challenge_id": id,
+                "rewards": challengeDetail.reward
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            console.log(res.data.message);
+            if(res.data.status === 201){
+                navigation.navigate('Winner/Loser', {title: "winner"})
+            }else{
+                navigation.navigate('Winner/Loser', {title: "loser"})
+            }
+        }).catch(err => {
+            
+            console.log(err.response.data);
+        })
+    }
+
+    const timeInMinutes = parseInt(challengeDetail.rules.match(/\d+/)[0]);
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <ImageBackground style={onGoingActivityStyling.container} source={require('../../../assets/app-img/ads.jpg')}>
@@ -66,7 +92,7 @@ const onGoingActivity = () => {
                             <View style={onGoingActivityStyling.timing}>
                                 <CountDown
                                     size={30}
-                                    until={10}
+                                    until={timeInMinutes * 60}
                                     showSeparator
                                     timeToShow={['M', 'S']}
                                     digitStyle={{ backgroundColor: 'transparent' }}
@@ -101,7 +127,7 @@ const onGoingActivity = () => {
 
                         {isCountdownFinished &&
                             <View style={onGoingActivityStyling.btnContainer}>
-                                <Button title={'Done!'}/>
+                                <Button title={'Done!'} action={() => finishCompetition()}/>
                             </View>
                         }
                         
@@ -191,4 +217,4 @@ const onGoingActivityStyling = StyleSheet.create({
     }
 })
 
-export default onGoingActivity
+export default OnGoingActivity
