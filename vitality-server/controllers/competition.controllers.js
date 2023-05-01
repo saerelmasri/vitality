@@ -3,55 +3,53 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 const createCompetition = async (req, res) => {
-    
     const { title, type, workout_name, rules, reward } = req.body
 
     const token = req.header('Authorization')
-    if(!token){
+    if (!token) {
         return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
     }
 
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN)
         const user_id = decoded.userId
-         
 
-        const checkCompetition ='SELECT COUNT(*) AS count FROM competition WHERE created_by_user_id = ?'
-        await sql.query(checkCompetition, user_id, async(err, result) => {
-            if(err){
+        const checkCompetition = 'SELECT COUNT(*) AS count FROM competition WHERE created_by_user_id = ? AND (status = "started")'
+        await sql.query(checkCompetition, user_id, async (err, result) => {
+            if (err) {
                 return res.status(500).json({
-                    status:500,
+                    status: 500,
                     message: err
                 })
             }
 
             if (result[0].count > 0) {
                 return res.status(400).json({
-                    status:400,
-                    message: 'Only one competition at time'
+                    status: 400,
+                    message: 'Only one competition at a time'
                 })
             }
 
             const createCompetitionQuery = 'INSERT INTO competition SET ?'
-            const competationParams = { title, type, workout_name, rules, created_by_user_id: user_id, status: 'to be started', reward }
-            await sql.query(createCompetitionQuery, competationParams, (err, result) => {
-                if(err){
+            const competitionParams = { title, type, workout_name, rules, created_by_user_id: user_id, status: 'to be started', reward }
+            await sql.query(createCompetitionQuery, competitionParams, (err, result) => {
+                if (err) {
                     return res.status(500).json({
-                        status:500,
+                        status: 500,
                         message: err
                     })
                 }
                 res.status(201).json({
-                    status:201,
+                    status: 201,
                     message: 'Challenge created',
                     competition_id: result.insertId
                 })
             })
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
             status: 500,
             message: err
@@ -289,37 +287,40 @@ const changeStatusInvitation = async (req, res) => {
   };
   
 const ownerCompetition = async(req, res) => {
-    const token = req.header('Authorization')
-    if(!token){
+    const token = req.header('Authorization');
+    if (!token) {
         return res.status(401).json({
-            status: 401,
-            message: 'Unauthorized'
-        })
+        status: 401,
+        message: 'Unauthorized',
+        });
     }
 
-    try{
+    try {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
-        const user_id = decoded.userId
+        const user_id = decoded.userId;
 
-        const showcompetitionOwn = 'SELECT * FROM competition WHERE created_by_user_id = ?'
-        await sql.query(showcompetitionOwn, user_id, (err, result) => {
+        const query = `
+        SELECT * FROM competition WHERE created_by_user_id = ? AND status != 'done'
+        `;
+        
+        await sql.query(query, [user_id], (err, result) => {
             if(err){
                 return res.status(500).json({
-                    status:500,
+                    status: 500, 
                     message: err
                 })
             }
+            
             res.status(201).json({
                 status: 201,
-                message: result
+                message: result,
             })
-        })
-
-    }catch(err){
-        res.status(500).json({
-            status:500,
-            message: err
-        })
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: 'Server Error',
+        });
     }
 }
 
@@ -393,10 +394,35 @@ const performing_competition = async(req, res) => {
 }
 
 const getWinner = async(req, res) => {
-    const { challenge_id } = req.body
+    const { challenge_id, rewards } = req.body
+    const updateLevel = 500;
+
+    const token = req.header('Authorization')
+    if(!token){
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
     try{
-        const getWinnerQuery = 'SELECT user_id, duration_user FROM user_competition_participation WHERE challenge_id = ? ORDER BY duration_user ASC'
-        await sql.query(getWinnerQuery, challenge_id, async(err, result) => {
+
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const user_id = decoded.userId
+
+        const checkWinnerQuery = 'SELECT winner_user_id FROM competition WHERE id = ?';
+        const result = await sql.query(checkWinnerQuery, [challenge_id]);
+        const competitionResult = result.length ? result[0] : null;
+
+        if (competitionResult && competitionResult.winner_user_id !== null) {
+            return res.status(400).json({
+                status: 400,
+                message: 'You lost'
+            });
+        }
+
+        const updateCompetition = 'UPDATE competition SET winner_user_id = ?, status = \'done\' WHERE id = ?'
+        await sql.query(updateCompetition, [user_id, challenge_id], async(err) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
@@ -404,27 +430,71 @@ const getWinner = async(req, res) => {
                 })
             }
 
-            const winner = result[0]
-
-            const updateCompetition = 'UPDATE competition SET winner_user_id = ?, status = ? WHERE id = ?'
-            await sql.query(updateCompetition, [winner.user_id, 'done', challenge_id], (err) => {
+            const getUser = 'SELECT level, progress FROM users WHERE id = ?'
+            await sql.query(getUser, [user_id], async(err, result) => {
                 if(err){
                     return res.status(500).json({
                         status: 500,
                         message: err
                     })
                 }
-                res.status(201).json({
-                    status: 201,
-                    message: 'Congratulations',
-                    results: winner
-                })
-            })  
-        })
+                
+                const currentLevel = result[0].level;
+                const currentProgress = result[0].progress;
+                const updateProgress = rewards + currentProgress;
+
+                if(updateProgress >= updateLevel){
+                    const nextLevel = currentLevel + 1;
+                    const progress = 0;
+
+                    const updateLevelQuery = 'UPDATE users SET level = ?, progress = ? WHERE id = ?'
+                    const params = [ nextLevel, progress, user_id]
+                    await sql.query(updateLevelQuery, params, (err, result) => {
+                        if(err){
+                            return res.status(500).json({
+                                status: 500,
+                                message: err
+                            })
+                        }
+
+                        return res.status(201).json({
+                            status: 201,
+                            message: {
+                                mesageLeve: 'New Level, congrats!',
+                                newLevel: nextLevel,
+                                newProgress: progress
+                            }
+
+                        })
+                    })
+                }else{
+                    const updateLevelQuery = 'UPDATE users SET progress = ? WHERE id = ?'
+                    await sql.query(updateLevelQuery, [updateProgress, user_id], (err, result) => {
+                        if(err){
+                            return res.status(500).json({
+                                status: 500,
+                                message: err
+                            })
+                        }
+
+                        return res.status(201).json({
+                            status: 201,
+                            message: {
+                                mesageLeve: 'Points earned',
+                                level: currentLevel,
+                                progress: updateProgress
+                            }
+
+                        })
+                    })
+                }
+            })
+        })  
     }catch(err){
+        console.error(err);
         res.status(500).json({
             status: 500,
-            message: err
+            message: err.message
         })
     }
 }
