@@ -475,6 +475,45 @@ const challengeDetails = async(req, res) => {
     }
 }
 
+const getInvitedUsers = async (req, res) => {
+    const { competition_id } = req.params;
+
+    const token = req.header("Authorization");
+    if (!token) {
+        return res.status(401).json({
+            status: 401,
+            message: "Unauthorized",
+        });
+    }
+
+    const query = `
+        SELECT invitation.status, users.nickname 
+        FROM invitation 
+        INNER JOIN users 
+        ON invitation.recipient_id = users.id 
+        WHERE invitation.competition_id = ?
+    `;
+    await sql.query(query, [competition_id], (err, result) => {
+        if(err){
+            return res.status(500).json({
+                status: 500,
+                message: err,
+            });
+        }
+        if(result.length === 0){
+            return res.status(400).json({
+                status: 400,
+                message: 'No one has accepted the invitation yet',
+            });
+        }
+        return res.status(201).json({
+            status: 201,
+            message: result,
+        });
+
+    });
+};
+
 module.exports = { 
     createCompetition, 
     sendInvition, 
@@ -484,5 +523,6 @@ module.exports = {
     getWinner, 
     challengeDetails, 
     deleteCompetiton,
-    ownerCompetition
+    ownerCompetition,
+    getInvitedUsers
 }

@@ -10,13 +10,15 @@ const {
     getWinner, 
     challengeDetails, 
     deleteCompetiton,
-    ownerCompetition
+    ownerCompetition,
+    getInvitedUsers
 } = require('../controllers/competition.controllers')
 
 route.post('/createCompetition', createCompetition)
 route.post('/sendInvitation', sendInvition)
 route.get('/allInvitation', showAllInvitations)
 route.get('/onwCompetition', ownerCompetition)
+route.get('/allUserInvitated/:competition_id', getInvitedUsers)
 route.post('/challengeDetails', jwt_middleware, challengeDetails)
 route.post('/winner', jwt_middleware, getWinner)
 route.put('/changeStatus', changeStatusInvitation)
