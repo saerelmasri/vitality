@@ -6,7 +6,7 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1NTY0OCwiZXhwIjoxNjgyOTU5MjQ4fQ.XsmQVtKSNx6vtd_PlHngwbzbNjZqhFFQniamhlz8Pb8"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1OTM5NSwiZXhwIjoxNjgyOTYyOTk1fQ.iFojrF9nNIt_4h7w1WRZ0KxmjCLG-3IniVXIBNP6Sf0"
 import CountDown from "react-native-countdown-component";
 
 const OnGoingActivity = ({navigation}) => {
@@ -17,14 +17,11 @@ const OnGoingActivity = ({navigation}) => {
     // .catch(error => {
     //     console.log(error);
     // });
-
-    
-
     const route = useRoute()
     const id = route.params.competitionID
-
     const [ challengeDetail, setChallengeDetail ] = useState([])
-    const [isCountdownFinished, setIsCountdownFinished] = useState(false);
+    const [isCountdownFinished, setIsCountdownFinished] = useState(false)
+    const [timeInMinutes, setTimeInMinutes] = useState(null)
 
     const handleCountdownFinish = () => {
         setIsCountdownFinished(true);
@@ -46,14 +43,18 @@ const OnGoingActivity = ({navigation}) => {
             }).then(res => {
                 if(res.data.status === 201){
                     setChallengeDetail(res.data.message);
+                    const time = res.data.message.rules;
+                    setTimeInMinutes(time * 60);
                 }
             }).catch(err => {
                 console.log(err.response.data);
             })
         }
-
+    
         fetchInfoCompetition()
-    }, [])
+    
+    }, [id])
+
 
     const finishCompetition = async() => {
         await axios({
@@ -76,12 +77,11 @@ const OnGoingActivity = ({navigation}) => {
                 navigation.navigate('Winner/Loser', {title: "loser"})
             }
         }).catch(err => {
-            
             console.log(err.response.data);
         })
     }
+    const time = challengeDetail.rules
 
-    const timeInMinutes = parseInt(challengeDetail.rules.match(/\d+/)[0]);
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <ImageBackground style={onGoingActivityStyling.container} source={require('../../../assets/app-img/ads.jpg')}>
@@ -92,7 +92,7 @@ const OnGoingActivity = ({navigation}) => {
                             <View style={onGoingActivityStyling.timing}>
                                 <CountDown
                                     size={30}
-                                    until={timeInMinutes * 60}
+                                    until={ timeInMinutes * 60}
                                     showSeparator
                                     timeToShow={['M', 'S']}
                                     digitStyle={{ backgroundColor: 'transparent' }}
@@ -121,7 +121,7 @@ const OnGoingActivity = ({navigation}) => {
                                 Your Rules
                             </Text>
                             <Text style={onGoingActivityStyling.extraInfoText}>
-                                {challengeDetail.rules}
+                                {challengeDetail.rules} minutes
                             </Text>
                         </View>
 

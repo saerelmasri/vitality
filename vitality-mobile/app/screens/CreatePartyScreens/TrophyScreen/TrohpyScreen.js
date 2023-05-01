@@ -7,7 +7,9 @@ const Trophy = ({navigation}) => {
     const route = useRoute()
     const winnerOrLoser = route.params.title
 
-    console.log(winnerOrLoser);
+    setTimeout(()=> {
+        navigation.navigate('PlaygroundDashboard')
+    },2000)
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={trophyStyle.container}>

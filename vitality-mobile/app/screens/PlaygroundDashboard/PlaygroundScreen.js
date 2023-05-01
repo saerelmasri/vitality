@@ -7,7 +7,7 @@ import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1NTY0OCwiZXhwIjoxNjgyOTU5MjQ4fQ.XsmQVtKSNx6vtd_PlHngwbzbNjZqhFFQniamhlz8Pb8"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1OTM5NSwiZXhwIjoxNjgyOTYyOTk1fQ.iFojrF9nNIt_4h7w1WRZ0KxmjCLG-3IniVXIBNP6Sf0"
 
 
 const PlaygroundDashboard = ({navigation}) => {
@@ -39,6 +39,7 @@ const PlaygroundDashboard = ({navigation}) => {
         }
         onwerParty()
     }, [])
+
 
     return(
         <SafeAreaView style={{flex:1, }}>
@@ -77,10 +78,6 @@ const PlaygroundDashboard = ({navigation}) => {
                         ) : (
                             <Challenge name={"Create a party"} reward={"Challenge your friends"} />
                         )}
-                        <ScrollView>
-                            <Challenge/>
-                            <Challenge/>
-                        </ScrollView>
                     </View>
                 </ScrollView>
             </View>

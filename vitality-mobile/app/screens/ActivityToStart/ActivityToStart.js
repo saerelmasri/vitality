@@ -6,7 +6,7 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI5NDY4MDksImV4cCI6MTY4Mjk1MDQwOX0.8a9XkUujw4yxHaGyZxALpK-Gut7ISHeas8BWoD0XYrM"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1OTM5NSwiZXhwIjoxNjgyOTYyOTk1fQ.iFojrF9nNIt_4h7w1WRZ0KxmjCLG-3IniVXIBNP6Sf0"
 
 
 const ActivityToStart = ({navigation}) => {

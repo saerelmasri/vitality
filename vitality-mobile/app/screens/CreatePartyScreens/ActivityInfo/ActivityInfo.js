@@ -105,7 +105,7 @@ const ActivityInfo = ({navigation}) => {
                             <Text style={{color: Color.white}}>Your rule</Text>
                             <TextInput 
                                 style={activityInfoStyle.input}
-                                placeholder="Enter your time"
+                                placeholder="Set the minutes"
                                 underlineColorAndroid="transparent"
                                 autoCapitalize='none'
                                 value={rules}
