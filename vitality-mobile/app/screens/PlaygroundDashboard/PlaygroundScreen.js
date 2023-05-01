@@ -22,22 +22,25 @@ const PlaygroundDashboard = ({navigation}) => {
     const [ partyInfo, setPartyInfo ] = useState([])
 
     useEffect(()=> {
-        const onwerParty = async() => {
-            await axios({
-                method: 'GET',
-                url: 'http://192.168.1.104:5000/competition_route/onwCompetition',
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                if(res.data.status === 201){
-                    setPartyInfo(res.data.message[0]);
-                }
-            }).catch(err => console.log(err.response))
-        }
-        onwerParty()
+        const interval = setInterval(() => {
+            const onwerParty = async() => {
+                await axios({
+                    method: 'GET',
+                    url: 'http://192.168.1.104:5000/competition_route/onwCompetition',
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    if(res.data.status === 201){
+                        setPartyInfo(res.data.message[0]);
+                    }
+                }).catch(err => console.log(err.response))
+            }
+            onwerParty()
+        }, 5000)
+        return () => clearInterval(interval);
     }, [])
 
 
