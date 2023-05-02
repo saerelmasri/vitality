@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNDgwMzMsImV4cCI6MTY4MzA1MTYzM30.j9A5T8GTejXSZCfuJJ10MoqJ-s399MdSOU1sZLIA78w"
 
 
-const ChangeUserHeight = ({navigation}) => {
+const ChangeUserWeight = ({navigation}) => {
     // AsyncStorage.getItem('token')
     // .then(token => {
     //     JWT = token
@@ -18,10 +18,10 @@ const ChangeUserHeight = ({navigation}) => {
     // });
 
     const [ newValue, setNewValue ] = useState('')
-    const [ height, setHeight ] = useState('')
+    const [ weight, setWeight ] = useState('')
 
     useEffect(()=> {
-        const fetchHeight = async() => {
+        const fetchWeight = async() => {
             await axios({
                 method: 'GET',
                 url: 'http://192.168.1.104:5000/user_route/user_extra_info',
@@ -31,13 +31,13 @@ const ChangeUserHeight = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                setHeight(res.data.message[0]['height']);
+                setWeight(res.data.message[0]['weight']);
             }).catch(err => {
                 console.log(err);
             })
         }
 
-        fetchHeight()
+        fetchWeight()
     },[])
 
     const handleTextIput = async(param) => {
@@ -48,7 +48,7 @@ const ChangeUserHeight = ({navigation}) => {
                 method: 'PUT',
                 url: 'http://192.168.1.104:5000/user_route/update_profile_extra_info',
                 data: {
-                    "column_name": "height",
+                    "column_name": "weight",
                     "valueToUpdate": param
                 },headers: {
                     'Authorization': JWT,
@@ -58,7 +58,7 @@ const ChangeUserHeight = ({navigation}) => {
             }).then(res => {
                 console.log(res);
                 if(res.data.status === 201){
-                    Alert.alert('Height changed')
+                    Alert.alert('Weight changed')
                     navigation.navigate('Profile')
                 }
             }).catch(err => {
@@ -79,13 +79,13 @@ const ChangeUserHeight = ({navigation}) => {
                     </View>
                 </View>
                 <View style={statsStyling.headerContent}>
-                    <Text style={{fontSize: 28, fontWeight: 500, color: Color.white}}>Change your Height</Text>
+                    <Text style={{fontSize: 28, fontWeight: 500, color: Color.white}}>Change your Weight</Text>
                 </View>
 
                 <View style={statsStyling.inputContainer}>
                     <View style={statsStyling.heightContainer}>
                         <View style={statsStyling.TitleContainer}>
-                            <Text style={{fontSize: 20, color: Color.white}}>Height:</Text>
+                            <Text style={{fontSize: 20, color: Color.white}}>Weight:</Text>
                         </View>
                         <View style={statsStyling.inputTextContainer}>
                             <TextInput 
@@ -93,11 +93,11 @@ const ChangeUserHeight = ({navigation}) => {
                                 value={newValue} 
                                 onChangeText={text => setNewValue(text)}
                                 underlineColorAndroid="transparent"
-                                placeholder={height}
+                                placeholder={weight}
                             />
                         </View>
                         <View style={statsStyling.statsContainer}>
-                            <Text style={{fontSize: 40, color: Color.white}}>CM</Text>
+                            <Text style={{fontSize: 40, color: Color.white}}>KG</Text>
                         </View>
                     </View>
                 </View>
@@ -197,4 +197,4 @@ const statsStyling = StyleSheet.create({
 })
 
 
-export default ChangeUserHeight
+export default ChangeUserWeight
