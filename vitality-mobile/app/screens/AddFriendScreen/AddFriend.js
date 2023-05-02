@@ -2,9 +2,66 @@ import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, 
 import { Color } from "../../../globalStyling";
 import Friend from "../../Components/FriendComponent/Friend";
 const { height, width } = Dimensions.get('window')
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
+let JWT ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMjQ2NDMsImV4cCI6MTY4MzAyODI0M30.u2z5BSxG8jGVIriQkEeIdV57SxqYf8ct3qeKU_LZAg8"
 
 const AddFriend = ({navigation}) => {
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
+
+    const [ userDetail, setUserDetail ] = useState([])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const fetchUser = async() => {
+                await axios({
+                    method: 'GET',
+                    url: 'http://192.168.1.104:5000/friends_route/displayUsers',
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setUserDetail(res.data.message);
+                }).catch(err => {
+                    console.log(err.response);
+                })
+            }
+
+            fetchUser()
+        }, 5000)
+        return () => clearInterval(interval);
+    }, [])
     
+    const addFriend = async(id) => {
+        await axios({
+            method: 'POST',
+            url: 'http://192.168.1.104:5000/friends_route/addFriend',
+            data: {
+                "friend_id": id
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.data.status === 201){
+                Alert.alert('Added to friend list')
+            }
+        }).catch(err => {
+            Alert.alert(res.response.data.message)
+        })
+    }
+
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={addFriendStyling.container}>
@@ -27,22 +84,12 @@ const AddFriend = ({navigation}) => {
                             </Text>
                         </View>
                     </View>
-                    <View style={addFriendStyling.searchContainer}>
-                        <TextInput 
-                            style={addFriendStyling.findFriend}
-                            placeholder="Search for a friend"
-
-                        />
-
-                    </View>
+                    
                     <View style={addFriendStyling.friendListConteiner}>
                         <ScrollView>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
-                            <Friend name={'Saer El Masri '}/>
+                            {userDetail.map((item) => (
+                                <Friend key={item.id} name={item.full_name} photo={item.photo_url} action={() => {addFriend(item.id)}}/>
+                            ))}
                         </ScrollView>
                     </View>
 
