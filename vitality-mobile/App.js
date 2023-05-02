@@ -36,6 +36,7 @@ import ActivityToStart from './app/screens/ActivityToStart/ActivityToStart';
 import OnGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
 import ChangeUserHeight from './app/screens/ChangeHeight/ChangeUserHeight';
 import ChangeUserWeight from './app/screens/ChangeWeight/ChangeUserWeight';
+import ChangeGoal from './app/screens/ChangeGoal/ChangeUserGoal';
 
 
 
@@ -222,6 +223,11 @@ export default function App() {
         <Stack.Screen
           name="ChangeWeight"
           component={ChangeUserWeight}
+          options={{headerShown:false,}}
+        />
+        <Stack.Screen
+          name="ChangeGoal"
+          component={ChangeGoal}
           options={{headerShown:false,}}
         />
         

@@ -1,7 +1,6 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 import Button from "../../Components/Button/Button";
-const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -56,7 +55,6 @@ const ChangeUserWeight = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                console.log(res);
                 if(res.data.status === 201){
                     Alert.alert('Weight changed')
                     navigation.navigate('Profile')

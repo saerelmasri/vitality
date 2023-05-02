@@ -42,7 +42,7 @@ const Settings = ({navigation}) => {
                         <Text style={settingStyle.optionTxt}>Change Weight</Text>
                         <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={settingStyle.option}>
+                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeGoal')}>
                         <Text style={settingStyle.optionTxt}>Change goal</Text>
                         <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
                     </TouchableOpacity>
