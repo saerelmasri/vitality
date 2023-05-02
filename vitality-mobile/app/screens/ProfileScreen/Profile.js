@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMjgxOTEsImV4cCI6MTY4MzAzMTc5MX0.aU9pKD8oW6zKIp8N26zwIL7Fx7VdJRo_dQN35AhbQlw"
 
 
-const Profile = () => {
+const Profile = ({navigation}) => {
     // AsyncStorage.getItem('token')
     // .then(token => {
     //     JWT = token
@@ -17,6 +17,15 @@ const Profile = () => {
     // })
     
     const [profileDetail, setProfileDetail ] = useState([])
+
+    const handleLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('token');
+            navigation.navigate('Login');
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(()=> {
         const fetchProfile = async() => {
@@ -63,19 +72,13 @@ const Profile = () => {
 
                     <View style={profileStyling.collectionSection}>
                         <View style={profileStyling.optionSection}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('Settins')}>
                                 <Text style={profileStyling.optionTxt}>Settings</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
                             <Text style={profileStyling.optionTxt}>Friend/Add Friends</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
-                            <Text style={profileStyling.optionTxt}>Edit Diet</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                            <Text style={profileStyling.optionTxt}>Setting</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={handleLogout}>
                             <Text style={profileStyling.optionTxt}>Log Out</Text>
                             </TouchableOpacity>
                         </View>

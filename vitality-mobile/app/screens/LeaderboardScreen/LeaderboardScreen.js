@@ -6,7 +6,7 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI4NjMwNTUsImV4cCI6MTY4Mjg2NjY1NX0.UdRGhMWTJgbCLdToptoFJ7tvINNOARuT8B_rWvxTupU"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMzAzMTIsImV4cCI6MTY4MzAzMzkxMn0.Nh4xQBuLclimi68Qr_xIPTJsKd_9hnsow82RV9tnR6w"
 
 
 const Leaderboard = ({navigation}) => {

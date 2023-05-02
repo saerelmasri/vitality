@@ -66,13 +66,15 @@ const Invitation = ({navigation}) => {
                 <ScrollView>
                     <Header action1={()=> navigation.navigate('PlaygroundDashboard')} action2={()=> {navigation.navigate('Leaderboard')}}/>
                     <View style={invitationStyle.headerTitle}>
-                        <Text style={{fontSize: 30, fontWeight: 400, color: Color.white}}>
-                            Check who invite you to a challenge!
-                        </Text>
+                        <ImageBackground style={invitationStyle.headerCard} source={require('../../assets/app-img/challenge.jpg')} imageStyle={{borderRadius: 10}}>
+                            <Text style={{fontSize: 32, fontWeight: 500, color: Color.black, textAlign: 'center', paddingLeft: '5%', paddingRight: '5%'}}>
+                                Check who invite you to a challenge!
+                            </Text>
+                        </ImageBackground>
                     </View>
                     <View style={invitationStyle.disclaimerContent}>
                         <Text style={{fontSize: 15, color: Color.white, textAlign: 'center'}}>
-                            Disclaimer: Once the challenge is accepted, it will start right away.   
+                            Disclaimer: Once the challenge is accepted, it will start right away.
                         </Text>
                     </View>
                     <View style={invitationStyle.invitationContainer}>
@@ -108,10 +110,18 @@ const invitationStyle = StyleSheet.create({
     },
     headerTitle: {
         width: width,
-        height: height / 10,
+        height: height / 4,
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: '5%'
+        alignItems: 'center'
+    },
+    headerCard: {
+        width: width - 40,
+        height: height / 5,
+        borderRadius: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     disclaimerContent: {
         width: width,
