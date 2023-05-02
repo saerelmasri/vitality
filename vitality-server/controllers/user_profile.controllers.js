@@ -113,8 +113,8 @@ const user_details = async(req, res) => {
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decode.userId
 
-        const query = 'SELECT users.full_name, users.nickname, users.level, user_photo.photo_url FROM users JOIN user_photo ON users.id = user_photo.user_id WHERE users.id = ?'
-        await sql.query(query, user_id, (err, result) => {
+        const query = 'SELECT users.full_name, users.nickname, users.level, users.progress, user_photo.photo_url FROM users JOIN user_photo ON users.id = user_photo.user_id WHERE users.id = ?'
+        await sql.query(query, [user_id], (err, result) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
