@@ -4,8 +4,9 @@ import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNDgwMzMsImV4cCI6MTY4MzA1MTYzM30.j9A5T8GTejXSZCfuJJ10MoqJ-s399MdSOU1sZLIA78w"
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNTkyODUsImV4cCI6MTY4MzA2Mjg4NX0.Hgfhz-YXAyn0R5RaS2PfSStr1ljmfBWwKU8u0y-1Csk"
 import { statsStyling } from "./ChangeUserWeightStyle";
+import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const ChangeUserWeight = ({navigation}) => {
     // AsyncStorage.getItem('token')
@@ -18,6 +19,7 @@ const ChangeUserWeight = ({navigation}) => {
 
     const [ newValue, setNewValue ] = useState('')
     const [ weight, setWeight ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false) 
 
     useEffect(()=> {
         const fetchWeight = async() => {
@@ -55,11 +57,12 @@ const ChangeUserWeight = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                if(res.data.status === 201){
-                    Alert.alert('Weight changed')
-                    navigation.navigate('Profile')
-                }
+                setIsLoading(true)
+                setTimeout(() => {
+                    navigation.navigate('Success', {title: 'Weight changed', screen: 'Profile'})
+                }, 2000);
             }).catch(err => {
+                setIsLoading(false)
                 Alert.alert(err.response.data.response)
             })
         }
@@ -68,43 +71,46 @@ const ChangeUserWeight = ({navigation}) => {
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={statsStyling.container}>
-                <ScrollView>
-                <View style={statsStyling.backBtnContainer}>
-                    <View style={statsStyling.backBtn}>
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                        </Pressable>
-                    </View>
-                </View>
-                <View style={statsStyling.headerContent}>
-                    <Text style={{fontSize: 28, fontWeight: 500, color: Color.white}}>Change your Weight</Text>
-                </View>
-
-                <View style={statsStyling.inputContainer}>
-                    <View style={statsStyling.heightContainer}>
-                        <View style={statsStyling.TitleContainer}>
-                            <Text style={{fontSize: 20, color: Color.white}}>Weight:</Text>
+                {isLoading ? ( <Indicator/>): (
+                    <>
+                    <ScrollView>
+                        <View style={statsStyling.backBtnContainer}>
+                            <View style={statsStyling.backBtn}>
+                                <Pressable onPress={() => navigation.goBack()}>
+                                    <Image source={require('../../assets/app-img/back-btn.png')}></Image>
+                                </Pressable>
+                            </View>
                         </View>
-                        <View style={statsStyling.inputTextContainer}>
-                            <TextInput 
-                                style={statsStyling.textInputStyle}
-                                value={newValue} 
-                                onChangeText={text => setNewValue(text)}
-                                underlineColorAndroid="transparent"
-                                placeholder={weight}
-                            />
+                        <View style={statsStyling.headerContent}>
+                            <Text style={{fontSize: 28, fontWeight: 500, color: Color.white}}>Change your Weight</Text>
                         </View>
-                        <View style={statsStyling.statsContainer}>
-                            <Text style={{fontSize: 40, color: Color.white}}>KG</Text>
+
+                        <View style={statsStyling.inputContainer}>
+                            <View style={statsStyling.heightContainer}>
+                                <View style={statsStyling.TitleContainer}>
+                                    <Text style={{fontSize: 20, color: Color.white}}>Weight:</Text>
+                                </View>
+                                <View style={statsStyling.inputTextContainer}>
+                                    <TextInput 
+                                        style={statsStyling.textInputStyle}
+                                        value={newValue} 
+                                        onChangeText={text => setNewValue(text)}
+                                        underlineColorAndroid="transparent"
+                                        placeholder={weight}
+                                    />
+                                </View>
+                                <View style={statsStyling.statsContainer}>
+                                    <Text style={{fontSize: 40, color: Color.white}}>KG</Text>
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                </View>
 
-                <View style={statsStyling.btnContainer}>
-                    <Button title={'Confirm'} action={() => handleTextIput()}/>
-
-                </View>
-                </ScrollView>
+                        <View style={statsStyling.btnContainer}>
+                            <Button title={'Confirm'} action={() => handleTextIput(newValue)}/>
+                        </View>
+                    </ScrollView>
+                    </>
+                )}
             </View>
         </SafeAreaView>
     );

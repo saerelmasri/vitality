@@ -1,7 +1,7 @@
-import {  StyleSheet } from "react-native"
+import { View, Alert, Pressable, Image, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { Color } from "../../../globalStyling"
 
-const goalStyling = StyleSheet.create({
+const activityLevelStyle = StyleSheet.create({
     mainContainer: {
         backgroundColor: Color.ligtGreen,
         display: "flex",
@@ -15,8 +15,7 @@ const goalStyling = StyleSheet.create({
         width: '100%',
         height: '10%',
         display: 'flex',
-        justifyContent: 'center',
-        paddingTop: 10
+        justifyContent: 'center'
     },
     backBtn: {
         height: 50,
@@ -32,15 +31,15 @@ const goalStyling = StyleSheet.create({
         width: '100%',
         height: '90%',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     headerContainer: {
         width: '100%',
-        height: '10%',
+        height: '9%',
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: '10%'
+        justifyContent: 'center',
+        marginBottom: '5%'
     },
     headerText: {
         fontSize: 30,
@@ -54,22 +53,19 @@ const goalStyling = StyleSheet.create({
     descriptionContainer: {
         width: '100%',
         height: '7%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20
     },
     descriptionText: {
         textAlign: 'center',
         paddingLeft: 55,
         paddingRight: 55,
     },
-    goalContainer: {
-        width: '80%',
-        height: '65%',
+    activityContainer: {
+        width: '100%',
+        height: '70%',
         display: 'flex',
+        alignItems: 'center',
         justifyContent: 'space-around'
     }
 })
 
-export { goalStyling }
+export { activityLevelStyle }

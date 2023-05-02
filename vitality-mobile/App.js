@@ -37,6 +37,7 @@ import OnGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScr
 import ChangeUserHeight from './app/screens/ChangeHeight/ChangeUserHeight';
 import ChangeUserWeight from './app/screens/ChangeWeight/ChangeUserWeight';
 import ChangeGoal from './app/screens/ChangeGoal/ChangeUserGoal';
+import ChangeActivityLevel from './app/screens/ChangeActivityLevel/ChangeActivityLevel';
 
 
 
@@ -90,12 +91,12 @@ export default function App() {
           component={ActivityLevel}
           options={{headerShown:false}}
         />
-
         <Stack.Screen
-          name="Success"
-          component={Success}
-          options={{headerShown:false}}
-        /> */}
+        name="Success"
+        component={Success}
+        options={{headerShown:false}}
+        />*/}
+        
 
         {/* <Stack.Screen
           name="Nutrition"
@@ -229,6 +230,16 @@ export default function App() {
           name="ChangeGoal"
           component={ChangeGoal}
           options={{headerShown:false,}}
+        />
+        <Stack.Screen
+          name="ChangeActivity"
+          component={ChangeActivityLevel}
+          options={{headerShown:false,}}
+        />
+        <Stack.Screen
+        name="Success"
+        component={Success}
+        options={{headerShown:false}}
         />
         
         
