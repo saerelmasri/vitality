@@ -1,8 +1,43 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMjgxOTEsImV4cCI6MTY4MzAzMTc5MX0.aU9pKD8oW6zKIp8N26zwIL7Fx7VdJRo_dQN35AhbQlw"
+
 
 const Profile = () => {
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
+    
+    const [profileDetail, setProfileDetail ] = useState([])
+
+    useEffect(()=> {
+        const fetchProfile = async() => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/user_route/user_details',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setProfileDetail(res.data.message[0]);
+            }).catch(err => {
+                console.log(err.response);
+            })
+        }
+
+        fetchProfile()
+
+    }, [])
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={profileStyling.container}>
@@ -12,15 +47,15 @@ const Profile = () => {
                             <View style={profileStyling.profileAvatar}>
                                 <Text style={profileStyling.avatarTxt}>Your Profile</Text>
                                 <View style={profileStyling.avatar}></View>
-                                <Text style={profileStyling.avatarTxt}>Saer El Masri</Text>
-                                <Text style={profileStyling.avatarTxt}>@SaerLMasri</Text>
+                                <Text style={profileStyling.avatarTxt}>{profileDetail['full_name']}</Text>
+                                <Text style={profileStyling.avatarTxt}>@{profileDetail['nickname']}</Text>
                             </View>
                             <View style={profileStyling.levelContainer}>
                                 <Text style={profileStyling.avatarTxt}>
-                                    Level 10
+                                    Level {profileDetail['level']}
                                 </Text>
                                 <Text style={profileStyling.avatarTxt}>
-                                    150 / 300
+                                {profileDetail['progress']} / 500
                                 </Text>
                             </View>  
                         </View>

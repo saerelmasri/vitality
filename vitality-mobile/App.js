@@ -192,7 +192,7 @@ export default function App() {
           component={ActivityToStart}
           options={{headerShown:false,}}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="FriendList"
           component={FriendList}
           options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -201,12 +201,12 @@ export default function App() {
           name="AddFriend"
           component={AddFriend}
           options={{headerShown:false, }}
-        />
-        {/* <Stack.Screen
+        /> */}
+        <Stack.Screen
           name="Profile"
           component={Profile}
           options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
-        /> */}
+        />
         {/* <Stack.Screen
           name="Settins"
           component={Settings}
