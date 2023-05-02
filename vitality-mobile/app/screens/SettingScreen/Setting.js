@@ -34,8 +34,12 @@ const Settings = ({navigation}) => {
                 </View>
 
                 <View style={settingStyle.optionsContainer}>
-                    <TouchableOpacity style={settingStyle.option}>
-                        <Text style={settingStyle.optionTxt}>Change Weight/Height</Text>
+                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeHeight')}>
+                        <Text style={settingStyle.optionTxt}>Change Height</Text>
+                        <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeHeight')}>
+                        <Text style={settingStyle.optionTxt}>Change Weight</Text>
                         <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={settingStyle.option}>
@@ -124,7 +128,7 @@ const settingStyle = StyleSheet.create({
     },
     optionsContainer: {
         width: width,
-        height: height / 4,
+        height: height / 3,
         backgroundColor: Color.grey,
         marginTop: ' 20%'
     },

@@ -34,6 +34,7 @@ import Profile from './app/screens/ProfileScreen/Profile';
 import Settings from './app/screens/SettingScreen/Setting';
 import ActivityToStart from './app/screens/ActivityToStart/ActivityToStart';
 import OnGoingActivity from './app/screens/CreatePartyScreens/OngoingActivityScreen/OngoingActivityScreen';
+import ChangeUserHeight from './app/screens/ChangeHeight/ChangeUserHeight';
 
 
 
@@ -147,7 +148,7 @@ export default function App() {
           options={{headerShown: false}}
         /> */}
 
-         <Stack.Screen
+        {/* <Stack.Screen
           name="PlaygroundDashboard"
           component={PlaygroundDashboard}
           options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -191,7 +192,7 @@ export default function App() {
           name="ActivityToStart"
           component={ActivityToStart}
           options={{headerShown:false,}}
-        /> 
+        />  */}
         {/* <Stack.Screen
           name="FriendList"
           component={FriendList}
@@ -202,7 +203,7 @@ export default function App() {
           component={AddFriend}
           options={{headerShown:false, }}
         /> */}
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Profile"
           component={Profile}
           options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}
@@ -211,7 +212,12 @@ export default function App() {
           name="Settins"
           component={Settings}
           options={{headerShown:false,}}
-        /> */}
+        />
+        <Stack.Screen
+          name="ChangeHeight"
+          component={ChangeUserHeight}
+          options={{headerShown:false,}}
+        />
         
         
       </Stack.Navigator>
