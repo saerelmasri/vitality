@@ -1,8 +1,41 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
+import { useEffect, useState } from "react"
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNjA0NjksImV4cCI6MTY4MzA2NDA2OX0.Az21H7eiC6xrF7rsRdortwxIgoteAPk_QlyOZHzCFLI"
+
 
 const Settings = ({navigation}) => {
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
+
+    const [ user, setUser ] = useState('')
+
+    useEffect(() => {
+        const fetchFullName = async () => {
+            await axios({
+                method: 'GET',
+                url: 'http://192.168.1.104:5000/user_route/user_details',
+                headers: {
+                    'Authorization': JWT,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+                setUser(res.data.message[0]['full_name']);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        fetchFullName()
+    }, [])
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={settingStyle.container}>
@@ -23,13 +56,8 @@ const Settings = ({navigation}) => {
                     </View>
                     <View style={settingStyle.name}>
                         <Text style={{fontSize: 22, fontWeight: 500}}>
-                            Saer El Masri
+                            {user}
                         </Text>
-                    </View>
-                    <View style={settingStyle.actionBtn}>
-                        <Pressable onPress={() => Alert.alert('Hola')}>
-                            <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
-                        </Pressable>
                     </View>
                 </View>
 
@@ -99,7 +127,8 @@ const settingStyle = StyleSheet.create({
         height: height / 7,
         backgroundColor: Color.grey,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingLeft: '5%'
     },
     avatarContent: {
         width: width / 4,

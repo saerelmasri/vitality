@@ -40,11 +40,10 @@ const ChangeActivityLevel = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                console.log(res.data.message);
-                // setLoading(true)
-                // setTimeout(() => {
-                //     navigation.navigate('Success', {title: 'Activity Changed', screen: 'Profile'})
-                // }, 2000);
+                setLoading(true)
+                setTimeout(() => {
+                    navigation.navigate('Success', {title: 'Activity Changed', screen: 'Profile'})
+                }, 2000);
             }).catch(err => {
                 setLoading(false)
                 console.log(err.response);

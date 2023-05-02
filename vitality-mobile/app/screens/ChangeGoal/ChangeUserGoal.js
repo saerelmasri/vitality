@@ -11,6 +11,13 @@ let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMw
 
 
 const ChangeGoal = ({navigation}) => {
+    // AsyncStorage.getItem('token')
+    // .then(token => {
+    //     JWT = token
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
 
     const [ goal , setGoal ] = useState('')
     const [ goalID, setGoalID ] = useState('')
