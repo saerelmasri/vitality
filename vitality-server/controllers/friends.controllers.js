@@ -4,39 +4,56 @@ require('dotenv').config();
 
 const displayUsers = async(req, res) => {
     const token = req.header('Authorization')
-    if(!token){
+    if (!token) {
         return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         })
     }
 
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN)
         const user_id = decoded.userId
 
-        const displayUsersQuery = 'SELECT id,nickname, full_name FROM users WHERE id <> ? AND id NOT IN ( SELECT friend_user_id FROM friends WHERE user_id = ?)'
+        const baseUrl = 'http://192.168.1.104:5000/vitality/vitality-server/vitality-server/image/'
+        const displayUsersQuery = `
+            SELECT u.id, u.nickname, u.full_name, up.photo_url 
+            FROM users u 
+            LEFT JOIN user_photo up ON u.id = up.user_id 
+            WHERE u.id <> ? 
+            AND u.id NOT IN (
+                SELECT friend_user_id 
+                FROM friends 
+                WHERE user_id = ?
+            )
+        `
+
         await sql.query(displayUsersQuery, [user_id, user_id], (err, result) => {
-            if(err){
+            if (err) {
                 return res.status(500).json({
-                    status:500,
+                    status: 500,
                     message: err
                 })
             }
 
-            return res.status(201).json({
-                status: 201,
-                message: result
+            const usersWithPhotoUrls = result.map(user => {
+                const photoUrl = user.photo_url ? baseUrl + user.photo_url : null
+                return { ...user, photo_url: photoUrl }
+            })
+
+            return res.status(200).json({
+                status: 200,
+                message: usersWithPhotoUrls
             })
         })
-
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            status:500,
+            status: 500,
             message: err
         })
     }
 }
+
 
 const addFriendList = async(req, res) => {
     const { friend_id } = req.body
@@ -85,10 +102,10 @@ const addFriendList = async(req, res) => {
 }
 
 const search_by_name = async(req, res) => {
-    const { full_name, nickname } = req.query   
+    const { full_name, nickname } = req.body   
 
     try{
-        let query = `SELECT * FROM users`
+        let query = `SELECT nickname FROM users`
 
         if(full_name || nickname){
             query += ` WHERE `
@@ -136,7 +153,18 @@ const displayMyFriends = async(req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        const displayUsersQuery = 'SELECT id, nickname FROM users WHERE id IN ( SELECT friend_user_id FROM friends WHERE user_id = ?)'
+        const displayUsersQuery = `
+        SELECT 
+            users.id, 
+            users.nickname, 
+            user_photo.photo_url 
+        FROM 
+            users 
+            INNER JOIN friends ON users.id = friends.friend_user_id 
+            LEFT JOIN user_photo ON users.id = user_photo.user_id 
+        WHERE 
+            friends.user_id = ?`
+
         await sql.query(displayUsersQuery, [user_id], (err, result) => {
             if(err){
                 return res.status(500).json({
