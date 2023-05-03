@@ -1,11 +1,14 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
+import * as FileSystem from 'expo-file-system';
+import base64js from 'base64-js';
 const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNjA0NjksImV4cCI6MTY4MzA2NDA2OX0.Az21H7eiC6xrF7rsRdortwxIgoteAPk_QlyOZHzCFLI"
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as ImagePicker from 'expo-image-picker'
+import Indicator from "../../Components/ActivityIndicator/indicator";
+let JWT ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMxMTc3ODUsImV4cCI6MTY4MzEyMTM4NX0.FlZKgEOhIAkBDDShuDzB-7ooF4j8uRh3EAFwI2Zueb8"
 
 const Settings = ({navigation}) => {
     // AsyncStorage.getItem('token')
@@ -17,7 +20,9 @@ const Settings = ({navigation}) => {
     // })
 
     const [ user, setUser ] = useState('')
-
+    const [ image, setImage ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false)
+ 
     useEffect(() => {
         const fetchFullName = async () => {
             await axios({
@@ -30,59 +35,114 @@ const Settings = ({navigation}) => {
                 }
             }).then(res => {
                 setUser(res.data.message[0]['full_name']);
+                setImage(res.data.message[0]['photo_url']);
             }).catch(err => {
-                console.log(err);
+                console.log(err.response);
             })
         }
-        fetchFullName()
+        fetchFullName()        
     }, [])
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+    
+        if (!result.canceled) {
+            setImage(result.assets[0].uri)
+            await axios({
+                method: 'POST',
+                url: 'http://192.168.1.104:5000/photos_route/addProfilePhoto',
+                data: {
+                    "photoData": result.assets[0].uri
+                },
+                headers: {
+                    'Authorization': JWT,
+                }
+              }).then(response => {
+                console.log(response.data);
+              })
+              .catch(error => {
+                console.log(error.response);
+              });
+
+            // const base64 = await FileSystem.readAsStringAsync(, {
+            //     encoding: FileSystem.EncodingType.Base64,
+            //   });
+            //   const binary = base64js.toByteArray(base64);
+
+              
+        }
+
+    }
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={settingStyle.container}>
                 <ScrollView>
-                <View style={settingStyle.backBtnContainer}>
-                    <View style={settingStyle.backBtn}>
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                        </Pressable>
-                    </View>
-                </View>
-                <View style={settingStyle.headerContent}>
-                    <Text style={{fontSize: 25}}>Settings</Text>
-                </View>
-                <View style={settingStyle.profileContainer}>
-                    <View style={settingStyle.avatarContent}>
-                        <View style={settingStyle.picture}></View>
-                    </View>
-                    <View style={settingStyle.name}>
-                        <Text style={{fontSize: 22, fontWeight: 500}}>
-                            {user}
-                        </Text>
-                    </View>
-                </View>
+                { isLoading ? (
+                    <Indicator/>
+                ): (
+                    <>
+                        <View style={settingStyle.backBtnContainer}>
+                            <View style={settingStyle.backBtn}>
+                                <Pressable onPress={() => navigation.goBack()}>
+                                    <Image source={require('../../assets/app-img/back-btn.png')}></Image>
+                                </Pressable>
+                            </View>
+                        </View>
+                        <View style={settingStyle.headerContent}>
+                            <Text style={{fontSize: 25}}>Settings</Text>
+                        </View>
+                        <View style={settingStyle.profileContainer}>
+                            <View style={settingStyle.avatarContent} >
+                                <View style={settingStyle.picture}>
+                                    { image ? (
+                                    <Image source={{ uri: image }} style={{ width: 120, height: 120, borderRadius: 150 }}/>
+                                    ): (
+                                        <Image source={require('../../assets/app-img/default.jpg')} style={{ width: 120, height: 120, borderRadius: 100 }}/>
+                                        
+                                    )}
+                                </View>
+                            </View>
+                            <View style={settingStyle.name}>
+                                <TouchableOpacity onPress={pickImage}>
+                                    <Text style={{fontSize: 22, fontWeight: 500, color: 'white'}}>
+                                        Change image
+                                    </Text>
+                                </TouchableOpacity>
+                                
+                            </View>
 
-                <View style={settingStyle.optionsContainer}>
-                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeHeight')}>
-                        <Text style={settingStyle.optionTxt}>Change Height</Text>
-                        <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeWeight')}>
-                        <Text style={settingStyle.optionTxt}>Change Weight</Text>
-                        <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeGoal')}>
-                        <Text style={settingStyle.optionTxt}>Change goal</Text>
-                        <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeActivity')}>
-                        <Text style={settingStyle.optionTxt}>Change activity level</Text>
-                        <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
-                    </TouchableOpacity>
+                            <View style={settingStyle.name}>
+                                <Text style={{fontSize: 22, fontWeight: 500}}>
+                                    {user}
+                                </Text>
+                            </View>
+                        </View>
 
-                </View>
-
-                   
-
+                        <View style={settingStyle.optionsContainer}>
+                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeHeight')}>
+                                <Text style={settingStyle.optionTxt}>Change Height</Text>
+                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeWeight')}>
+                                <Text style={settingStyle.optionTxt}>Change Weight</Text>
+                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeGoal')}>
+                                <Text style={settingStyle.optionTxt}>Change goal</Text>
+                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeActivity')}>
+                                <Text style={settingStyle.optionTxt}>Change activity level</Text>
+                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                            </TouchableOpacity>
+                        </View>
+                    </>
+                )}
                 </ScrollView>
             </View>
         </SafeAreaView>
@@ -124,11 +184,12 @@ const settingStyle = StyleSheet.create({
     },
     profileContainer: {
         width: width,
-        height: height / 7,
+        height: height / 3,
         backgroundColor: Color.grey,
         display: 'flex',
-        flexDirection: 'row',
-        paddingLeft: '5%'
+        flexDirection: 'column',
+        justifyContent:'space-around',
+        alignItems: 'center'
     },
     avatarContent: {
         width: width / 4,
@@ -138,16 +199,23 @@ const settingStyle = StyleSheet.create({
         alignItems: 'center'
     },
     picture:{
-        width: '80%',
-        height: '65%',
+        width: 120,
+        height: 120,
         borderRadius: 100,
-        backgroundColor: Color.white
-    },
-    name: {
-        width: width / 1.8,
+        borderWidth: 1,
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: '5%'
+        alignItems: 'center',
+        marginBottom: 20
+    },
+    name: {
+        borderWidth: 1,
+        width: width / 1,
+        height: height/ 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 10
     },
     actionBtn: {
         width: width / 5,

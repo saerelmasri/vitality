@@ -10,31 +10,6 @@ const WorkoutDashboard = ({navigation}) => {
                 <ScrollView>
                     <View style={workoutDashboardStyling.headerTitle}>
                         <Text style={workoutDashboardStyling.title}>
-                            Our Popular Routines
-                        </Text>
-                        <Pressable onPress={() => {navigation.navigate('VideoListing')}}>
-                            <Text style={workoutDashboardStyling.titleTouch}>
-                                View all
-                            </Text>
-                        </Pressable>
-                    </View>
-
-                    <ScrollView  horizontal={true}>
-                        <ImageBackground style={workoutDashboardStyling.videoComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{width: width / 1.7, height: height / 6, borderRadius: 10, opacity: 0.6}}>
-                            <Text style={{fontSize: 20, color: Color.white}}>10 minutes</Text>
-                        </ImageBackground>
-
-                        <ImageBackground style={workoutDashboardStyling.videoComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{width: width / 1.7, height: height / 6, borderRadius: 10, opacity: 0.6}}>
-                            <Text style={{fontSize: 20, color: Color.white}}>10 minutes</Text>
-                        </ImageBackground>
-
-                        <ImageBackground style={workoutDashboardStyling.videoComponent} source={require('../../assets/app-img/video.jpg')} imageStyle={{width: width / 1.7, height: height / 6, borderRadius: 10, opacity: 0.6}}>
-                            <Text style={{fontSize: 20, color: Color.white}}>10 minutes</Text>
-                        </ImageBackground>
-                    </ScrollView>
-                    
-                    <View style={workoutDashboardStyling.headerTitle}>
-                        <Text style={workoutDashboardStyling.title}>
                             Our Collections
                         </Text>
                     </View>
