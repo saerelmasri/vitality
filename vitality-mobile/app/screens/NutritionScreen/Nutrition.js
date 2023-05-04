@@ -18,7 +18,7 @@ const Nutrition = ({navigation}) => {
                             Macros
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={nutritionStyle.btn}>
+                    <TouchableOpacity style={nutritionStyle.btn} onPress={() => navigation.navigate('WelcomeKitchen')}>
                         <Text style={nutritionStyle.btnText}>
                             Kitchen
                         </Text>
@@ -29,7 +29,7 @@ const Nutrition = ({navigation}) => {
                     </View>
                     <View style={nutritionStyle.center}>
                         <Text style={nutritionStyle.centerTxt}>
-                            Today
+                            Your logs
                         </Text>
                     </View>
                     <View style={nutritionStyle.right}></View>

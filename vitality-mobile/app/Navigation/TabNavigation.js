@@ -38,6 +38,7 @@ import ChangeUserHeight from '../screens/ChangeHeight/ChangeUserHeight';
 import ChangeUserWeight from '../screens/ChangeWeight/ChangeUserWeight';
 import ChangeGoal from '../screens/ChangeGoal/ChangeUserGoal';
 import ChangeActivityLevel from '../screens/ChangeActivityLevel/ChangeActivityLevel';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
 
 const NutritionDashboard = () => {
   return (
@@ -46,16 +47,17 @@ const NutritionDashboard = () => {
         <Stack.Screen name="Macros" component={Macros} options={{headerShown:false}}/>
         <Stack.Screen name="FoodListing" component={FoodListing} options={{headerShown:false}} />
         <Stack.Screen name="FoodDetail" component={FoodDetail} options={{headerShown:false}}/>
+        <Stack.Screen name="WelcomeKitchen" component={WelcomeKitchen} options={{headerShown:false}}/>
+        <Stack.Screen name="RecipeDashboard" component={Recipes} options={{headerShown:false}}/> 
+        <Stack.Screen name="RecipeDescription" component={RecipesDescription} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 }
 
-const KitchenDashboard = () => {
+const Home = () => {
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="WelcomeKitchen" component={WelcomeKitchen} options={{headerShown:false}}/>
-        <Stack.Screen name="RecipeDashboard" component={Recipes} options={{headerShown:false}}/> 
-        <Stack.Screen name="RecipeDescription" component={RecipesDescription} options={{headerShown:false}}/>
+        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/> 
       </Stack.Navigator>
     );
 }
@@ -109,22 +111,22 @@ const HomeTabs = () => {
           headerShown: false, // Hide the header
         }}>
             <Tab.Screen
+                name="Home"
+                component={Home}
+                options={{
+                    tabBarLabel: 'Homex',
+                    tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="home" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tab.Screen
                 name="Nutrition"
                 component={NutritionDashboard}
                 options={{
                     tabBarLabel: 'Nutrition',
                     tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="nutrition" color={color} size={size} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Kitchen"
-                component={KitchenDashboard}
-                options={{
-                    tabBarLabel: 'Kitchen',
-                    tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="food" color={color} size={size} />
                     ),
                 }}
             />

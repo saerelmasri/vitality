@@ -71,14 +71,14 @@ const Recipes = ({navigation}) => {
                     </View>
 
                     <View style={recipesStyling.aiBtn}>
-                        <Pressable onPress={() => {Alert.alert('Pressed')}}>
+                        <View>
                             <View style={recipesStyling.chefTxt} >
                                 <Text style= {{fontSize: 20, fontWeight: 500, color: Color.white,}}>
-                                    Don’t know what to cook?Check our new AI chef!
+                                    We have for you a large database of recipes!
                                 </Text>
                             </View>
                             <Image source={require('../../assets/app-img/chef.jpg')} style={{resizeMode: 'cover', height: 123, width: 340, borderRadius: 10, opacity: 0.5}}/>
-                        </Pressable>
+                        </View>
                     </View>
 
                     <View style={recipesStyling.btnContainer}>

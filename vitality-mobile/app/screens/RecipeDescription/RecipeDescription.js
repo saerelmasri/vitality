@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const { height, width } = Dimensions.get('window')
 import { recipeDescription } from "./RecipeDescriptionStyling";
 
-const RecipesDescription = () => {
+const RecipesDescription = ({navigation}) => {
     const route = useRoute()
     const recipeInfo = route.params.recipeInfo
     const [ calories, setCalories ] = useState('')
@@ -38,7 +38,7 @@ const RecipesDescription = () => {
                 <ScrollView>
                     <View style={recipeDescription.backBtnContainer}  >
                         <View style={recipeDescription.backBtn}>
-                            <Pressable onPress={() => Alert.alert('image clicked')}>
+                            <Pressable onPress={() => navigation.goBack()}>
                                 <Image source={require('../../assets/app-img/back-btn.png')}></Image>
                             </Pressable>
                         </View>
