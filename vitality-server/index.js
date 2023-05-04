@@ -17,9 +17,6 @@ app.use('/extra_info', extraInfoRoute);
 const food_log = require('./routes/food_log.routes');
 app.use('/foodLog', food_log);
 
-const video_routines_route = require('./routes/video_routines.route');
-app.use('/video_routines', video_routines_route);
-
 const challenge_route = require('./routes/challenge.routes');
 app.use('/challenge_route', challenge_route);
 

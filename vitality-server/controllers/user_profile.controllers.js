@@ -18,7 +18,7 @@ const update_profile_extra_info = async(req, res) => {
         const user_id = decoded.userId
         
         const query = `UPDATE user_info_extra SET ${column_name} = ? WHERE user_id = ?`
-        console.log(valueToUpdate);
+        
         await sql.query(query, [ valueToUpdate, user_id ], async(err, result) => {
             if(err){
                 return res.status(500).json({
@@ -112,8 +112,10 @@ const user_details = async(req, res) => {
     try{
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decode.userId
-
-        const query = 'SELECT users.full_name, users.nickname, users.level, users.progress, user_photo.photo_url FROM users JOIN user_photo ON users.id = user_photo.user_id WHERE users.id = ?'
+        const query = `SELECT users.full_name, users.nickname, users.level, users.progress, COALESCE(user_photo.photo_url, '') AS photo_url
+            FROM users
+            LEFT JOIN user_photo ON users.id = user_photo.user_id
+            WHERE users.id = ?`
         await sql.query(query, [user_id], (err, result) => {
             if(err){
                 return res.status(500).json({
