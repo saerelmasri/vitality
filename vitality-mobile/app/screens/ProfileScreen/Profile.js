@@ -5,42 +5,39 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
-var JWT = ""
-
+var JWT =""
 
 const Profile = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    })
-    
     const [profileDetail, setProfileDetail ] = useState([])
     const { handleLogout } = useLogin()
-
-
-    useEffect(()=> {
-        const fetchProfile = async() => {
-            await axios({
-                method: 'GET',
-                url: 'http://192.168.1.104:5000/user_route/user_details',
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
+    
+    useEffect(() => {
+        let isMounted = true;
+        AsyncStorage.getItem('jwt')
+            .then(token => {
+                if (isMounted) {
+                    const JWT = token;
+                    axios({
+                        method: 'GET',
+                        url: 'http://192.168.1.104:5000/user_route/user_details',
+                        headers: {
+                            'Authorization': JWT,
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => {
+                        setProfileDetail(res.data.message[0]);
+                    }).catch(err => {
+                        console.log(err.response.data);
+                    });
                 }
-            }).then(res => {
-                setProfileDetail(res.data.message[0]);
-            }).catch(err => {
-                console.log(err.response);
             })
-        }
+            .catch(error => {
+                console.log(error);
+            });
 
-        fetchProfile()
-
-    }, [])
+        return () => { isMounted = false }; // cleanup function to prevent memory leaks
+    }, []);
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={profileStyling.container}>

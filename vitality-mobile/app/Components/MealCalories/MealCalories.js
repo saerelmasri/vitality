@@ -4,7 +4,7 @@ import axios from "axios";
 import { PieChart } from "react-native-chart-kit";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-
+var JWT = ''
 const { height, width } = Dimensions.get('window')
 
 const chartConfig = {
@@ -19,22 +19,27 @@ const chartConfig = {
 };
 
 const MealContainer = () => {
-    const JWT = ''
     const [ breakfastCal, setBreakfastCal ] = useState(0)
     const [ lunchCal, setLunchCal ] = useState(0)
     const [ dinnerCal, setDinnerCal ] = useState(0)
     const [ food, setFood ] = useState(0)
     const [ calories, setCalories ] = useState('')
 
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    useEffect(() => {
+        const getJWT = async () => {
+            try {
+                const token = await AsyncStorage.getItem('jwt')
+                JWT = token
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        getJWT()
+    }, [])
 
     useEffect(()=> {
+        
         const interval = setInterval(() => {
 
             const getTotalCalories = async() => {
@@ -54,6 +59,23 @@ const MealContainer = () => {
             };
 
             getTotalCalories()
+
+            const getCalories = async() => {
+                await axios({
+                    method: 'GET',
+                    url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setCalories(res.data.message);
+                }).catch(err => {
+                    console.log(err.response.data);
+                })
+            }
+            getCalories()
         }, 5000)
         return () => clearInterval(interval)
 
@@ -62,22 +84,7 @@ const MealContainer = () => {
 
     useEffect(()=> {
         setFood(Number(breakfastCal) + Number(lunchCal) + Number(dinnerCal));
-        const getCalories = async() => {
-            await axios({
-                method: 'GET',
-                url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setCalories(res.data.message.status);
-            }).catch(err => {
-                console.log(err.response.data);
-            })
-        }
-        getCalories()
+        
     }, [breakfastCal, lunchCal, dinnerCal])
 
 

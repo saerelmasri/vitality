@@ -1,7 +1,5 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
-import * as FileSystem from 'expo-file-system';
-import base64js from 'base64-js';
 const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
@@ -50,7 +48,6 @@ const Settings = ({navigation}) => {
             aspect: [4, 3],
             quality: 1,
         });
-    
         if (!result.canceled) {
             setImage(result.assets[0].uri)
             await axios({
@@ -68,16 +65,10 @@ const Settings = ({navigation}) => {
               .catch(error => {
                 console.log(error.response);
               });
-
-            // const base64 = await FileSystem.readAsStringAsync(, {
-            //     encoding: FileSystem.EncodingType.Base64,
-            //   });
-            //   const binary = base64js.toByteArray(base64);
-
-              
         }
-
     }
+
+    console.log(JWT);
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={settingStyle.container}>
@@ -209,7 +200,6 @@ const settingStyle = StyleSheet.create({
         marginBottom: 20
     },
     name: {
-        borderWidth: 1,
         width: width / 1,
         height: height/ 20,
         display: 'flex',
