@@ -4,28 +4,22 @@ const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMjgxOTEsImV4cCI6MTY4MzAzMTc5MX0.aU9pKD8oW6zKIp8N26zwIL7Fx7VdJRo_dQN35AhbQlw"
+import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
+var JWT = ""
 
 
 const Profile = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // })
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    })
     
     const [profileDetail, setProfileDetail ] = useState([])
+    const { handleLogout } = useLogin()
 
-    const handleLogout = async () => {
-        try {
-            await AsyncStorage.removeItem('token');
-            navigation.navigate('Login');
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     useEffect(()=> {
         const fetchProfile = async() => {
@@ -78,7 +72,7 @@ const Profile = ({navigation}) => {
                             <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
                             <Text style={profileStyling.optionTxt}>Friend/Add Friends</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={handleLogout}>
+                            <TouchableOpacity onPress={() => handleLogout()}>
                             <Text style={profileStyling.optionTxt}>Log Out</Text>
                             </TouchableOpacity>
                         </View>

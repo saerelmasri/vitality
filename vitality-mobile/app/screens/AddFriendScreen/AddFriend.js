@@ -5,16 +5,16 @@ const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-let JWT ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMjQ2NDMsImV4cCI6MTY4MzAyODI0M30.u2z5BSxG8jGVIriQkEeIdV57SxqYf8ct3qeKU_LZAg8"
+var JWT =""
 
 const AddFriend = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // })
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    })
 
     const [ userDetail, setUserDetail ] = useState([])
 

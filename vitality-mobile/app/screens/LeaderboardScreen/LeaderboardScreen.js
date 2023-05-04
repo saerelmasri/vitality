@@ -6,17 +6,17 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMzAzMTIsImV4cCI6MTY4MzAzMzkxMn0.Nh4xQBuLclimi68Qr_xIPTJsKd_9hnsow82RV9tnR6w"
+var JWT = ''
 
 
 const Leaderboard = ({navigation}) => {
- // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
     const [ list, setList ] = useState([])
     const [ topThree, setTopThree ] = useState([])

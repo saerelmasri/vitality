@@ -4,18 +4,20 @@ import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNTkyODUsImV4cCI6MTY4MzA2Mjg4NX0.Hgfhz-YXAyn0R5RaS2PfSStr1ljmfBWwKU8u0y-1Csk"
+var JWT = ""
 import { statsStyling } from "./ChangeUserHeightStyle";
 import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const ChangeUserHeight = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+    console.log(JWT);
 
     const [ newValue, setNewValue ] = useState('')
     const [ height, setHeight ] = useState('')
@@ -34,7 +36,7 @@ const ChangeUserHeight = ({navigation}) => {
             }).then(res => {
                 setHeight(res.data.message[0]['height']);
             }).catch(err => {
-                console.log(err);
+                console.log(err.response.data);
             })
         }
 

@@ -8,19 +8,19 @@ import NextBtn from "../../Components/NextBtn/NextBtn"
 import ActivityLevelTypes from "../../Components/activityLevel/ActivityComponent"
 import Indicator from '../../Components/ActivityIndicator/indicator'
 import Button from "../../Components/Button/Button";
-var JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNTg2MTAsImV4cCI6MTY4MzA2MjIxMH0.0YCj3SGS8fyBGRgHjJdIu8sYrktYIC8limQ3m2iIae0"
+var JWT = ""
 
 const ChangeActivityLevel = ({navigation}) => {
     const [ activity, setActivity ] = useState('')
     const [loading, setLoading] = useState(false);
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
 
     const checkActivity = async(param) => {

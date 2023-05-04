@@ -6,17 +6,17 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1OTM5NSwiZXhwIjoxNjgyOTYyOTk1fQ.iFojrF9nNIt_4h7w1WRZ0KxmjCLG-3IniVXIBNP6Sf0"
+var JWT = ""
 
 
 const ActivityToStart = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
     const route = useRoute()
     const competitionID = route.params.competitionInfo
 

@@ -4,7 +4,7 @@ import { macrosStyling } from "./MacrosStyling"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios"
 import FoodIntake from "../../Components/FoodIntakeComponent/FoodIntake";
-
+var JWT = ''
 const Macros = ({navigation}) => {
     const [ calories, setCalories ] = useState('')
     const [ food, setFood ] = useState(0)
@@ -14,14 +14,14 @@ const Macros = ({navigation}) => {
     const [ foodMeal1, setFoodMeal1 ] = useState([])
     const [ foodMeal2, setFoodMeal2 ] = useState([])
     const [ foodMeal3, setFoodMeal3 ] = useState([])
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjYzNzgsImV4cCI6MTY4Mjc2OTk3OH0.N31fPJTwUZRhtF7UlkmTk_WEBc9GLU5PfmzAOcW_Ra8"
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
 
     useEffect(()=>{
@@ -31,7 +31,7 @@ const Macros = ({navigation}) => {
                     method: 'GET',
                     url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
                     headers: {
-                        'Authorization': token,
+                        'Authorization': JWT,
                         Accept: 'application/json',
                         'Content-Type': 'application/json'
                     }
@@ -48,7 +48,7 @@ const Macros = ({navigation}) => {
                     method: 'POST',
                     url: 'http://192.168.1.104:5000/foodLog/sumOfCalories',
                     headers: {
-                        'Authorization': token,
+                        'Authorization': JWT,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     }
@@ -75,7 +75,7 @@ const Macros = ({navigation}) => {
                 method: 'GET',
                 url: `http://192.168.1.104:5000/foodLog/fetchUserMealLogs/${meal}`,
                 headers: {
-                    'Authorization': token,
+                    'Authorization': JWT,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }

@@ -6,7 +6,7 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjg3Mzc1MSwiZXhwIjoxNjgyODc3MzUxfQ.a1p9UjAShY0IkNSKyuHv5k4ur-2zkshhC73eQJtWA40"
+var JWT = ""
 
 
 const InvitationDetail = ({navigation}) => {
@@ -15,13 +15,13 @@ const InvitationDetail = ({navigation}) => {
 
     const [ challengeDetails, setChallengeDetails ] = useState([])
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
     useEffect(()=> {
         const fetchDetail = async() => {

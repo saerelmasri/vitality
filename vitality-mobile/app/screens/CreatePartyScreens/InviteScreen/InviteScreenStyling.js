@@ -7,7 +7,7 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjk1NTY0OCwiZXhwIjoxNjgyOTU5MjQ4fQ.XsmQVtKSNx6vtd_PlHngwbzbNjZqhFFQniamhlz8Pb8"
+var JWT = ""
 
 const InviteFriends = ({navigation}) => {
     const route = useRoute()
@@ -15,13 +15,13 @@ const InviteFriends = ({navigation}) => {
 
     const [ friends, setFriends ] = useState([])
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
     const deleteCompetition = async() => {
         await axios({

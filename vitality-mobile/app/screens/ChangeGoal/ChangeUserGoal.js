@@ -7,17 +7,17 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from "../../Components/Button/Button"
 import Indicator from "../../Components/ActivityIndicator/indicator"
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwNjA0NjksImV4cCI6MTY4MzA2NDA2OX0.Az21H7eiC6xrF7rsRdortwxIgoteAPk_QlyOZHzCFLI"
+var JWT = ""
 
 
 const ChangeGoal = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // })
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    })
 
     const [ goal , setGoal ] = useState('')
     const [ goalID, setGoalID ] = useState('')

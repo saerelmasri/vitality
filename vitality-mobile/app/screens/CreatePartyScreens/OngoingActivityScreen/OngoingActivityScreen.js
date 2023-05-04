@@ -6,17 +6,17 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMwMzAzMTIsImV4cCI6MTY4MzAzMzkxMn0.Nh4xQBuLclimi68Qr_xIPTJsKd_9hnsow82RV9tnR6w"
+var JWT = ""
 import CountDown from "react-native-countdown-component";
 
 const OnGoingActivity = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('token')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
     const route = useRoute()
     const id = route.params.competitionID
     const [ challengeDetail, setChallengeDetail ] = useState([])

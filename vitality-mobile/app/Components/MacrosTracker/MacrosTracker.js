@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
 import axios from "axios";
 import { PieChart } from "react-native-chart-kit";
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NzIwMTMsImV4cCI6MTY4Mjc3NTYxM30.n86_v6YF94bYUf60ep-r2VIPNGQvUmZGP05wA5ApyH0"
+var JWT = ''
 const { height, width } = Dimensions.get('window')
 
 const chartConfig = {
@@ -21,13 +21,13 @@ const Macro = () => {
     const [ fats, setFats ] = useState(0)
     const [ protein, setProtein ] = useState(0)
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
     const data = [
         {
@@ -60,7 +60,7 @@ const Macro = () => {
                     method: 'GET',
                     url: 'http://192.168.1.104:5000/foodLog/sumOfNutrients',
                     headers: {
-                        'Authorization': token,
+                        'Authorization': JWT,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     }

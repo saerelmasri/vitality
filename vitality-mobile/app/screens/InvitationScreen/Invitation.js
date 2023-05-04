@@ -6,17 +6,17 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY4Mjg2OTY2NSwiZXhwIjoxNjgyODczMjY1fQ.e-liGJRdmb1w2HSQPxr-Ee3ndRTeM5sTG0NFkviBqd0"
+var JWT = ''
 
 
 const Invitation = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
     const [ invitations, setInvitations ] = useState([])
 

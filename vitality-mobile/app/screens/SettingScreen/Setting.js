@@ -8,16 +8,16 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as ImagePicker from 'expo-image-picker'
 import Indicator from "../../Components/ActivityIndicator/indicator";
-let JWT ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODMxMTc3ODUsImV4cCI6MTY4MzEyMTM4NX0.FlZKgEOhIAkBDDShuDzB-7ooF4j8uRh3EAFwI2Zueb8"
+var JWT =""
 
 const Settings = ({navigation}) => {
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // })
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    })
 
     const [ user, setUser ] = useState('')
     const [ image, setImage ] = useState('')

@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
 import axios from "axios";
 import { PieChart } from "react-native-chart-kit";
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NzIwMTMsImV4cCI6MTY4Mjc3NTYxM30.n86_v6YF94bYUf60ep-r2VIPNGQvUmZGP05wA5ApyH0"
+
 const { height, width } = Dimensions.get('window')
 
 const chartConfig = {
@@ -19,19 +19,20 @@ const chartConfig = {
 };
 
 const MealContainer = () => {
+    const JWT = ''
     const [ breakfastCal, setBreakfastCal ] = useState(0)
     const [ lunchCal, setLunchCal ] = useState(0)
     const [ dinnerCal, setDinnerCal ] = useState(0)
     const [ food, setFood ] = useState(0)
     const [ calories, setCalories ] = useState('')
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
     useEffect(()=> {
         const interval = setInterval(() => {
@@ -41,7 +42,7 @@ const MealContainer = () => {
                     method: 'POST',
                     url: 'http://192.168.1.104:5000/foodLog/sumOfCalories',
                     headers: {
-                        'Authorization': token,
+                        'Authorization': JWT,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     }
@@ -66,14 +67,14 @@ const MealContainer = () => {
                 method: 'GET',
                 url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
                 headers: {
-                    'Authorization': token,
+                    'Authorization': JWT,
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                setCalories(res.data.message);
+                setCalories(res.data.message.status);
             }).catch(err => {
-                console.log(err.response);
+                console.log(err.response.data);
             })
         }
         getCalories()
