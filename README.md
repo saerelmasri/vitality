@@ -26,14 +26,6 @@
 
 <br><br>
 
-### Fitness Trainer Stories
-
-- As a fitness trainer, I want to be able to easily create an account where I can share my name, coach type and years of experience to others.
-- As a fitness trainer, I want to share my contact info such as email and phone number so users can contact me to provide them my service.
--
-
-<br><br>
-
 <!-- Prototyping -->
 <img src="./README/title3.svg"/>
 
