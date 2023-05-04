@@ -57,7 +57,6 @@ const MealContainer = () => {
                     setLunchCal(res.data.message.lunch);
                 }).catch(err => console.error(err))
             };
-
             getTotalCalories()
 
             const getCalories = async() => {
