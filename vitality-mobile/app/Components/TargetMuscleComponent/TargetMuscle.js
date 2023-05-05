@@ -1,23 +1,32 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
+import { useNavigation } from '@react-navigation/native';
 
 
-const TargetMuscle = ({navigation, target, img, navLink}) => {
+const TargetMuscle = ({target}) => {
+    const navigation = useNavigation();
+
     let path = ''
+    let link = ''
     if(target === 'Chest'){
         path = require('../../assets/app-img/chest.jpg')
+        link = 'chest'
     }else if(target === 'Back'){
         path = require('../../assets/app-img/back.jpg')
+        link = 'back'
     }else if(target === 'Shoulders'){
         path = require('../../assets/app-img/shoulder.jpg')
+        link = 'shoulders'
     }else if(target === 'Legs'){
         path = require('../../assets/app-img/legs.jpg')
+        link = 'upper legs'
     }else if(target === 'Arms'){
         path = require('../../assets/app-img/arms.jpg')
+        link = 'upper arms'
     }
     return(
-        <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: {navLink}})}}>
+        <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: link})}}>
             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={path} imageStyle={{borderRadius: 10}}>
                 <View style={workoutDashboardStyling.topContainer}>
                     <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>

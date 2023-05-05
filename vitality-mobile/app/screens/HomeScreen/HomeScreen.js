@@ -25,7 +25,7 @@ const HomeScreen = () => {
                     </View>
                     <View style={activityInfoStyle.caloriesContainer}>
                         <ImageBackground style={activityInfoStyle.kitchen} source={require('../../assets/app-img/friendsImg.jpg')} imageStyle={{borderRadius: 10}}>
-                            <TouchableOpacity style={activityInfoStyle.containerBtn} onPress={() => navigation.navigate('Playground', { screen: 'PlaygroundDashboard' })}>
+                            <TouchableOpacity style={activityInfoStyle.containerBtn} onPress={() => navigation.navigate('Playground', { screen: 'PlaygroundDashboard'})}>
                                 <Text style={{fontSize: 17, color: Color.black, fontWeight: 300, textAlign: 'center'}}>Check out our playground</Text>
                             </TouchableOpacity>
                         </ImageBackground>

@@ -4,7 +4,7 @@ import TargetMuscle from "../../Components/TargetMuscleComponent/TargetMuscle";
 const { height, width } = Dimensions.get('window')
 
 
-const WorkoutDashboard = ({navigation}) => {
+const WorkoutDashboard = () => {
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={workoutDashboardStyling.container}>
@@ -16,11 +16,11 @@ const WorkoutDashboard = ({navigation}) => {
                     </View>
 
                     <View style={workoutDashboardStyling.targetMuscleContainer}>
-                        <TargetMuscle navLink={'chest'} target={'Chest'}/>
-                        <TargetMuscle navLink={'back'} target={'Back'}/>
-                        <TargetMuscle navLink={'shoulders'} target={'Shoulders'}/>
-                        <TargetMuscle navLink={'upper legs'} target={'Legs'}/>
-                        <TargetMuscle navLink={'upper arms'} target={'Arms'}/>
+                        <TargetMuscle target={'Chest'}/>
+                        <TargetMuscle target={'Back'}/>
+                        <TargetMuscle target={'Shoulders'}/>
+                        <TargetMuscle target={'Legs'}/>
+                        <TargetMuscle target={'Arms'}/>
                     </View>
                 </ScrollView>
             </View>

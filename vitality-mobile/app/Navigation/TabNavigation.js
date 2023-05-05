@@ -1,7 +1,8 @@
-
+import { Pressable } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import "react-native-gesture-handler";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -55,6 +56,7 @@ const NutritionDashboard = () => {
 }
 
 const Home = () => {
+  
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/> 
@@ -88,6 +90,7 @@ const Playground = () => {
 }
 
 const ProfileDashboard = () => {
+  const navigation = useNavigation();
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Profile" component={Profile} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
@@ -96,7 +99,11 @@ const ProfileDashboard = () => {
         <Stack.Screen name="ChangeWeight" component={ChangeUserWeight} options={{headerShown:false,}} />
         <Stack.Screen name="ChangeGoal" component={ChangeGoal} options={{headerShown:false,}} />
         <Stack.Screen name="ChangeActivity" component={ChangeActivityLevel} options={{headerShown:false,}} />
-        <Stack.Screen name="FriendList" component={FriendList} options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}} />
+        <Stack.Screen name="FriendList" component={FriendList} options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}, headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <MaterialCommunityIcons name="arrow-left" size={30} />
+            </Pressable>
+          ),}} />
         <Stack.Screen name="AddFriend" component={AddFriend} options={{headerShown:false, }} />
         <Stack.Screen name="Success" component={Success} options={{headerShown:false}} />
       </Stack.Navigator>

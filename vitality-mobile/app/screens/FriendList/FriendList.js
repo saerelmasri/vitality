@@ -47,13 +47,6 @@ const FriendList = ({navigation}) => {
         <SafeAreaView style={{flex:1,}}>
             <View style={friendStyle.container}>
                 <ScrollView>
-                    <View  style={friendStyle.backBtnContainer}>
-                        <View style={friendStyle.backBtn}>
-                            <Pressable onPress={() => navigation.navigate('Nutrition')}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
                     <View style={friendStyle.headerContainer}>
                         <View style={friendStyle.header}>
                             <Text style={{fontSize: 18, fontWeight: 500, marginBottom: 5}}>
@@ -101,21 +94,6 @@ const friendStyle = StyleSheet.create({
         alignItems: 'center',
         overflow: "hidden",
         width: "100%",
-    },
-    backBtnContainer: {
-        width: width,
-        height: height / 3,
-        display: 'flex',
-    },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     headerContainer: {
         width: width,
