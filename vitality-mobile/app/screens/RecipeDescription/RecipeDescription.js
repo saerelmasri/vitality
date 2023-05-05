@@ -33,15 +33,9 @@ const RecipesDescription = ({navigation}) => {
     }, [])
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <ImageBackground style={recipeDescription.container} source={{uri: recipeInfo.image}} resizeMode="cover" imageStyle={{width: width, height: height / 2.5, zIndex: 0}}>
                 <ScrollView>
                     <View style={recipeDescription.backBtnContainer}  >
-                        <View style={recipeDescription.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
                     </View>
 
                     <View style={recipeDescription.descriptionContainer}>
@@ -102,7 +96,6 @@ const RecipesDescription = ({navigation}) => {
 
                 </ScrollView>
             </ImageBackground>
-        </SafeAreaView>
     );
 }
 

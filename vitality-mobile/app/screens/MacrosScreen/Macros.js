@@ -101,21 +101,8 @@ const Macros = ({navigation}) => {
 
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={macrosStyling.container}>
                 <ScrollView style={{display: "flex",flex: 1,}}>
-                    <View  style={macrosStyling.backBtnContainer}>
-                        <View style={macrosStyling.backBtn}>
-                            <Pressable onPress={() => navigation.navigate('Nutrition')}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-                    <View style={macrosStyling.headerContainer}>
-                        <Text style={macrosStyling.headerTitle}>
-                            Diary
-                        </Text>
-                    </View>
                     <View style={macrosStyling.statsContainer}>
                         <View style={macrosStyling.containerTitle}>
                             <Text style={macrosStyling.TitleTxt}>
@@ -206,9 +193,7 @@ const Macros = ({navigation}) => {
                         </Pressable>
                     </View>
                 </ScrollView>
-            </View>
-            
-        </SafeAreaView>
+            </View>            
     )
 }
 

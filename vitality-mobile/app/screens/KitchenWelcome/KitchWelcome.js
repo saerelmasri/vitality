@@ -4,17 +4,8 @@ import { kitchenStyle } from "./KitchenWelcomeStyling";
 const WelcomeKitchen = ({navigation}) => {
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={kitchenStyle.container}>
                 <ScrollView>
-                    <View style={kitchenStyle.backBtnContainer}>
-                        <View style={kitchenStyle.backBtn}>
-                            <Pressable onPress={() => Alert.alert('image clicked')}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     <View style={kitchenStyle.imgCover}>
                         <Image source={require('../../assets/app-img/kitchen.png')}/>
                     </View>
@@ -33,7 +24,6 @@ const WelcomeKitchen = ({navigation}) => {
                 </ScrollView>
 
             </View>
-        </SafeAreaView>
     );
 }
 

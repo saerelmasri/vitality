@@ -55,17 +55,8 @@ const FoodListing = ({navigation}) => {
     }
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={foodStyling.container}>
                 <ScrollView>
-                    <View style={foodStyling.backBtnContainer}>
-                        <View style={foodStyling.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     <View style={foodStyling.headerMeal}>
                         <Text style={foodStyling.headerTitle}>
                             {mealType}
@@ -100,8 +91,6 @@ const FoodListing = ({navigation}) => {
                 </ScrollView>
 
             </View>
-
-        </SafeAreaView>
     );
 }
 export default FoodListing
