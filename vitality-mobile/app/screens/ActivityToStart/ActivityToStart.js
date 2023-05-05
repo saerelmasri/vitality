@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
 import Button from "../../Components/Button/Button";
 const { height, width } = Dimensions.get('window')
@@ -93,21 +93,8 @@ const ActivityToStart = ({navigation}) => {
 
     
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={activityToStartStyling.container}>
                 <ScrollView>
-                    <View style={activityToStartStyling.backBtnContainer}>
-                        <View style={activityToStartStyling.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
-                    <View style={activityToStartStyling.header}>
-                        <Text style={activityToStartStyling.txt}>Challenge Dashboard</Text>
-                    </View>
-                    
                     <View style={activityToStartStyling.detailContainer}>
                         <View style={activityToStartStyling.detailInfo}>
                             <Text style={activityToStartStyling.leftTxt}>
@@ -126,7 +113,8 @@ const ActivityToStart = ({navigation}) => {
                             </ScrollView>
                         ): (
                             <View style={activityToStartStyling.item}>
-                                <Text style={activityToStartStyling.rightTxt}>No one has accepted yet</Text>
+                                <Image source={require('../../assets/app-img/waiting.png')} style={{width: 260, height: 260}}/>
+                                <Text style={{fontSize: 30, fontWeight: 500, color: Color.white}}>No one has accepted yet</Text>
                             </View>
                         )}
                         </View>
@@ -145,7 +133,6 @@ const ActivityToStart = ({navigation}) => {
                     </View>
                 </ScrollView>
             </View>
-        </SafeAreaView>
     );
 }
 
@@ -256,10 +243,10 @@ const activityToStartStyling = StyleSheet.create({
         paddingRight: '5%',
     },
     item: {
-        height: height / 19,
+        height: height / 2.5,
         width: width,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         paddingLeft: '5%',

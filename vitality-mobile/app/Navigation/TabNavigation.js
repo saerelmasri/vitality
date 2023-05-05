@@ -74,15 +74,15 @@ const Workout = () => {
 const Playground = () => {
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="PlaygroundDashboard" component={PlaygroundDashboard} options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
-        <Stack.Screen name="Leaderboard" component={Leaderboard} options={{headerShown:true, headerTitle: 'LeaderBoard', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
-        <Stack.Screen name="Invitations" component={Invitation} options={{headerShown:true, headerTitle: 'Invitations', headerLeft: null, headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="PlaygroundDashboard" component={PlaygroundDashboard} options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369',  elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="Leaderboard" component={Leaderboard} options={{headerShown:true, headerTitle: 'LeaderBoard', headerLeft: null, headerStyle: {backgroundColor: '#127369',  elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="Invitations" component={Invitation} options={{headerShown:true, headerTitle: 'Invitations', headerLeft: null, headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="ActivityInfo" component={ActivityInfo} options={{headerShown:false}}/>
         <Stack.Screen name="InviteFriends" component={InviteFriends}options={{headerShown:false}}/> 
         <Stack.Screen name="onGoingActivity" component={OnGoingActivity} options={{headerShown:false}}/>
         <Stack.Screen name="Winner/Loser" component={Trophy} options={{headerShown:false}}/>
         <Stack.Screen name="InvitationDetail" component={InvitationDetail} options={{headerShown:false,}}/>
-        <Stack.Screen name="ActivityToStart" component={ActivityToStart} options={{headerShown:false,}}/> 
+        <Stack.Screen name="ActivityToStart" component={ActivityToStart} options={{headerShown:true, headerTitle: 'Challenge Dashboard', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
       </Stack.Navigator>
     );
 }

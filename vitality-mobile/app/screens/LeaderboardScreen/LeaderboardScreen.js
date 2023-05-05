@@ -8,6 +8,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ''
 import { BASE_URL } from '@env'
+import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const Leaderboard = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -20,6 +21,7 @@ const Leaderboard = ({navigation}) => {
 
     const [ list, setList ] = useState([])
     const [ topThree, setTopThree ] = useState([])
+    const [ isLoading, setLoading ] = useState(false)
 
     useEffect(()=> {
         const fetchLeaderboard = async() => {
@@ -32,8 +34,12 @@ const Leaderboard = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                setTopThree(res.data.message.slice(0, 3))
-                setList(res.data.message)
+                setLoading(true)
+                setInterval(() => {
+                    setLoading(false)
+                    setTopThree(res.data.message.slice(0, 3))
+                    setList(res.data.message)
+                }, 2000)
             }).catch(err => {
                 console.log(err);
             })
@@ -48,43 +54,51 @@ const Leaderboard = ({navigation}) => {
             <View style={leaderboardStyle.container}>
                 <ScrollView>
                     <Header action1={()=> navigation.navigate('PlaygroundDashboard')} action3={() => navigation.navigate('Invitations')}/>
-                    <View style={leaderboardStyle.headerContainer}>
-                        <View style={leaderboardStyle.boardContainer}>
-                            <View style={leaderboardStyle.boardPlace}>
-                                <View style={leaderboardStyle.profile}></View>
-                                <View style={leaderboardStyle.position}>
-                                    <Text style={{fontSize: 15, fontWeight: 500}}>
-                                        3
-                                    </Text>
+                    { isLoading ? (
+                            <Indicator/>
+                        ) : (
+                            <>
+                            <View style={leaderboardStyle.headerContainer}>
+                                <View style={leaderboardStyle.boardContainer}>
+                                    <View style={leaderboardStyle.boardPlace}>
+                                        <View style={leaderboardStyle.profile}></View>
+                                        <View style={leaderboardStyle.position}>
+                                            <Text style={{fontSize: 15, fontWeight: 500}}>
+                                                3
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View style={leaderboardStyle.boardPlace}>
+                                        <View style={leaderboardStyle.profileFirst}></View>
+                                        <View style={leaderboardStyle.positionFirst}>
+                                            <Text style={{fontSize: 15, fontWeight: 500}}>
+                                                1
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View style={leaderboardStyle.boardPlace}>
+                                        <View style={leaderboardStyle.profile}></View>
+                                        <View style={leaderboardStyle.position}>
+                                            <Text style={{fontSize: 15, fontWeight: 500}}>
+                                                2
+                                            </Text>
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
-                            <View style={leaderboardStyle.boardPlace}>
-                                <View style={leaderboardStyle.profileFirst}></View>
-                                <View style={leaderboardStyle.positionFirst}>
-                                    <Text style={{fontSize: 15, fontWeight: 500}}>
-                                        1
-                                    </Text>
-                                </View>
+                            <View style={leaderboardStyle.leaderboard}>
+                                <ScrollView>
+                                    {
+                                        list.map((item, index) => (
+                                            <LeaderboardItem position={index + 1} name={item.full_name} level={item.level}/>
+                                        ))
+                                    }   
+                                </ScrollView>
                             </View>
-                            <View style={leaderboardStyle.boardPlace}>
-                                <View style={leaderboardStyle.profile}></View>
-                                <View style={leaderboardStyle.position}>
-                                    <Text style={{fontSize: 15, fontWeight: 500}}>
-                                        2
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={leaderboardStyle.leaderboard}>
-                        <ScrollView>
-                            {
-                                list.map((item, index) => (
-                                    <LeaderboardItem position={index + 1} name={item.full_name} level={item.level}/>
-                                ))
-                            }   
-                        </ScrollView>
-                    </View>
+                                
+                            </>
+                        )}
+                    
                 </ScrollView>
             </View>
         </SafeAreaView>

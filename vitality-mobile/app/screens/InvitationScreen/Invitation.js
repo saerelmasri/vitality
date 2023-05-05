@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Text, StyleSheet, Dimensions, ImageBackground, TouchableOpacity } from "react-native";
+import { View, ScrollView, SafeAreaView, Text, StyleSheet, Dimensions, ImageBackground, Image } from "react-native";
 import { Color } from "../../../globalStyling";
 import Header from "../../Components/PlaygroundHeader/PlaygroundHeader";
 import InvitationCard from "../../Components/InvitationComponent/Invitation";
@@ -8,6 +8,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ''
 import { BASE_URL } from '@env'
+import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const Invitation = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -78,19 +79,27 @@ const Invitation = ({navigation}) => {
                         </Text>
                     </View>
                     <View style={invitationStyle.invitationContainer}>
-                        <ScrollView>
-                        {
-                            invitations.map(item => (
-                                <InvitationCard 
-                                    from={item.creator_username} 
-                                    key={item.id} 
-                                    action1={() => {changeStatus(item.competition_id, "accepted")}} 
-                                    action2={() => {changeStatus(item.competition_id, "declined")}} 
-                                    action3={() => navigation.navigate('InvitationDetail',{ competitionInfo: { id: item.competition_id }} )}
-                                />
-                            ))
-                        }
-                        </ScrollView>
+                        { invitations.length === 0 ? (
+                            <View style={{width: width, height: height / 2, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                    <Image source={require('../../assets/app-img/no-invitation1.png')} style={{width: 320, height: 320}}   resizeMode="contain"/>
+                                    <Text style={{fontSize: 30, fontWeight: 500, color: Color.white}}>No invitations</Text>
+                            </View>
+                        ) : (
+                            <ScrollView>
+                            {
+                                invitations.map(item => (
+                                    <InvitationCard 
+                                        from={item.creator_username} 
+                                        key={item.id} 
+                                        action1={() => {changeStatus(item.competition_id, "accepted")}} 
+                                        action2={() => {changeStatus(item.competition_id, "declined")}} 
+                                        action3={() => navigation.navigate('InvitationDetail',{ competitionInfo: { id: item.competition_id }} )}
+                                    />
+                                ))
+                            }
+                            </ScrollView>
+                        )}
+                        
                     </View>
                 </ScrollView>
             </View>

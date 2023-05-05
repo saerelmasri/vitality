@@ -6,24 +6,29 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-var JWT = ""
+//var JWT = ""
 import CountDown from "react-native-countdown-component";
 import { BASE_URL } from '@env'
 
 
 const OnGoingActivity = ({navigation}) => {
-    AsyncStorage.getItem('token')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    const [JWT, setJWT] = useState(null)
+
+    useEffect(() => {
+        AsyncStorage.getItem('jwt')
+        .then(token => {
+            setJWT(token || '');
+        })
+        .catch(error => {
+            console.log(error);
+            setJWT('');
+        });
+    }, [])
     const route = useRoute()
     const id = route.params.competitionID
     const [ challengeDetail, setChallengeDetail ] = useState([])
     const [isCountdownFinished, setIsCountdownFinished] = useState(false)
-    const [timeInMinutes, setTimeInMinutes] = useState(null)
+    const [timeInMinutes, setTimeInMinutes] = useState(0)
 
     const handleCountdownFinish = () => {
         setIsCountdownFinished(true);
@@ -43,10 +48,11 @@ const OnGoingActivity = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
+                console.log(res.data.message);
                 if(res.data.status === 201){
                     setChallengeDetail(res.data.message);
                     const time = res.data.message.rules;
-                    setTimeInMinutes(time * 60);
+                    setTimeInMinutes(Number(time));
                 }
             }).catch(err => {
                 console.log(err.response.data);
@@ -55,8 +61,7 @@ const OnGoingActivity = ({navigation}) => {
     
         fetchInfoCompetition()
     
-    }, [id])
-
+    }, [id, JWT])
 
     const finishCompetition = async() => {
         await axios({
@@ -82,7 +87,7 @@ const OnGoingActivity = ({navigation}) => {
             console.log(err.response.data);
         })
     }
-    const time = challengeDetail.rules
+
 
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
@@ -94,7 +99,7 @@ const OnGoingActivity = ({navigation}) => {
                             <View style={onGoingActivityStyling.timing}>
                                 <CountDown
                                     size={30}
-                                    until={ timeInMinutes * 60}
+                                    until={timeInMinutes * 60}
                                     showSeparator
                                     timeToShow={['M', 'S']}
                                     digitStyle={{ backgroundColor: 'transparent' }}
