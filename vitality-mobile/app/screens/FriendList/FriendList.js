@@ -5,24 +5,31 @@ const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-var JWT = ""
 import { BASE_URL } from '@env'
+import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const FriendList = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    })
-
 
     const [ friend, setFriends ] = useState([])
-
+    const [ isLoading, setIsLoading ] = useState(false)
+    const [ JWT, setJWT ] = useState('')
+    
     useEffect(() => {
         const interval = setInterval(() => {
-            const fetchUsers = async() => {
+            AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, 5000)
+        return () => clearInterval(interval);
+    }, [])
+
+    useEffect(() => {
+        const fetchUsers = async() => {
+            if (JWT) {
                 await axios({
                     method: 'GET',
                     url: `${BASE_URL}/friends_route/myfriends`,
@@ -32,16 +39,21 @@ const FriendList = ({navigation}) => {
                         'Content-Type': 'application/json'
                     }
                 }).then(res => {
-                    setFriends(res.data.message);
+                    setIsLoading(true)
+                    setInterval(() => {
+                        setFriends(res.data.message);
+                        setIsLoading(false)
+                    }, 2000)
                 }).catch(err => {
+                    setIsLoading(false)
                     console.log(err.response.data);
                 })
             }
+        }
 
-            fetchUsers()
-        }, 5000)
-        return () => clearInterval(interval);
-    }, [])
+        fetchUsers()
+    }, [JWT])
+
 
     return(
         <SafeAreaView style={{flex:1,}}>
@@ -69,15 +81,20 @@ const FriendList = ({navigation}) => {
                         </Pressable>
                     </View>
                     <View style={friendStyle.friendListConteiner}>
-                        <ScrollView>
-                            {friend.map(item => (
-                                <FriendComponent 
-                                key={item.id} 
-                                name={item.nickname} 
-                                photo={item.photo_url} 
-                                />
-                            ))}
-                        </ScrollView>
+                        { isLoading ? (
+                            <Indicator/>
+                        ) : (
+                            <ScrollView>
+                                {friend.map(item => (
+                                    <FriendComponent 
+                                    key={item.id} 
+                                    name={item.nickname} 
+                                    photo={item.photo_url} 
+                                    />
+                                ))}
+                            </ScrollView>
+                        )}
+                        
                     </View>
 
                 </ScrollView>

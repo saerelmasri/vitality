@@ -4,45 +4,52 @@ import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-var JWT = ""
 import { statsStyling } from "./ChangeUserHeightStyle";
 import { BASE_URL } from '@env'
 import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const ChangeUserHeight = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
-    console.log(JWT);
-
     const [ newValue, setNewValue ] = useState('')
     const [ height, setHeight ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
+    const [ JWT, setJWT ] = useState('')
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, 5000)
+        return () => clearInterval(interval);
+    }, [])
+
+    
 
     useEffect(()=> {
         const fetchHeight = async() => {
-            await axios({
-                method: 'GET',
-                url: `${BASE_URL}/user_route/user_extra_info`,
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setHeight(res.data.message[0]['height']);
-            }).catch(err => {
-                console.log(err.response.data);
-            })
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/user_route/user_extra_info`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setHeight(res.data.message[0]['height']);
+                }).catch(err => {
+                    console.log(err.response.data);
+                })
+            }
         }
 
         fetchHeight()
-    },[])
+    },[JWT])
 
     const handleTextIput = async(param) => {
         if(newValue === " "){

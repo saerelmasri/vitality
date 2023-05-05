@@ -104,7 +104,7 @@ const ProfileDashboard = () => {
               <MaterialCommunityIcons name="arrow-left" size={30} />
             </Pressable>
           ),}} />
-        <Stack.Screen name="AddFriend" component={AddFriend} options={{headerShown:false, }} />
+        <Stack.Screen name="AddFriend" component={AddFriend} options={{headerShown:true, headerTitle: '', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
         <Stack.Screen name="Success" component={Success} options={{headerShown:false}} />
       </Stack.Navigator>
     );

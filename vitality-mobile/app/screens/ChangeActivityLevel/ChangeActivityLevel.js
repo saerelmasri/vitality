@@ -7,7 +7,6 @@ import { activityLevelStyle } from "./ChangeActivityLevelStyling";
 import ActivityLevelTypes from "../../Components/activityLevel/ActivityComponent"
 import Indicator from '../../Components/ActivityIndicator/indicator'
 import Button from "../../Components/Button/Button";
-var JWT = ""
 import { BASE_URL } from '@env'
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -15,41 +14,48 @@ import { ScrollView } from "react-native-gesture-handler";
 const ChangeActivityLevel = ({navigation}) => {
     const [ activity, setActivity ] = useState('')
     const [loading, setLoading] = useState(false);
+    const [ JWT, setJWT ] = useState('')
 
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
+    useEffect(() => {
+        const interval = setInterval(() => {
+            AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, 5000)
+        return () => clearInterval(interval);
+    }, [])
 
     const checkActivity = async(param) => {
         if(activity === ''){
             Alert.alert('Select an activity please')
         }else{
-            await axios({
-                method: 'PUT',
-                url: `${BASE_URL}/user_route/update_profile_extra_info`,
-                data: {
-                    "column_name": "activity_type_id",
-                    "valueToUpdate": param
-                },
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setLoading(true)
-                setTimeout(() => {
-                    navigation.navigate('Success', {title: 'Activity Changed', screen: 'Profile'})
-                }, 2000);
-            }).catch(err => {
-                setLoading(false)
-                console.log(err.response);
-            })
+            if(JWT){
+                await axios({
+                    method: 'PUT',
+                    url: `${BASE_URL}/user_route/update_profile_extra_info`,
+                    data: {
+                        "column_name": "activity_type_id",
+                        "valueToUpdate": param
+                    },
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setLoading(true)
+                    setTimeout(() => {
+                        navigation.navigate('Success', {title: 'Activity Changed', screen: 'Profile'})
+                    }, 2000);
+                }).catch(err => {
+                    setLoading(false)
+                    console.log(err.response);
+                })
+            }
         }
     }
     return(

@@ -5,24 +5,30 @@ const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
-var JWT =""
 import { BASE_URL } from '@env'
-
+import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const AddFriend = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    })
-
+    const [ JWT, setJWT ] = useState('')
     const [ userDetail, setUserDetail ] = useState([])
+    const [ isLoading, setIsLoading ] = useState(false)
 
     useEffect(() => {
         const interval = setInterval(() => {
-            const fetchUser = async() => {
+            AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, 5000)
+        return () => clearInterval(interval);
+    }, [])
+
+    useEffect(() => {
+        const fetchUser = async() => {
+            if(JWT){
                 await axios({
                     method: 'GET',
                     url: `${BASE_URL}/friends_route/displayUsers`,
@@ -32,16 +38,19 @@ const AddFriend = ({navigation}) => {
                         'Content-Type': 'application/json'
                     }
                 }).then(res => {
-                    setUserDetail(res.data.message);
+                    setIsLoading(true)
+                    setInterval(() => {
+                        setUserDetail(res.data.message);
+                        setIsLoading(false)
+                    }, 2000)
                 }).catch(err => {
+                    setIsLoading(false)
                     console.log(err.response);
                 })
             }
-
-            fetchUser()
-        }, 5000)
-        return () => clearInterval(interval);
-    }, [])
+        }
+        fetchUser()
+    }, [JWT])
     
     const addFriend = async(id) => {
         await axios({
@@ -65,16 +74,8 @@ const AddFriend = ({navigation}) => {
     }
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={addFriendStyling.container}>
                 <ScrollView>
-                <View style={addFriendStyling.backBtnContainer}>
-                        <View style={addFriendStyling.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
                     <View style={addFriendStyling.headerContainer}>
                         <View style={addFriendStyling.header}>
                             <Text style={{fontSize: 18, fontWeight: 500, marginBottom: 5}}>
@@ -88,16 +89,20 @@ const AddFriend = ({navigation}) => {
                     </View>
                     
                     <View style={addFriendStyling.friendListConteiner}>
-                        <ScrollView>
-                            {userDetail.map((item) => (
-                                <Friend key={item.id} name={item.full_name} photo={item.photo_url} action={() => {addFriend(item.id)}}/>
-                            ))}
-                        </ScrollView>
+                        { isLoading ? (
+                            <Indicator/>
+                        ):(
+                            <ScrollView>
+                                {userDetail.map((item) => (
+                                    <Friend key={item.id} name={item.full_name} photo={item.photo_url} action={() => {addFriend(item.id)}}/>
+                                ))}
+                            </ScrollView>
+                        )}
+                        
                     </View>
 
                 </ScrollView>
             </View>
-        </SafeAreaView>
     );
 }
 
@@ -110,27 +115,12 @@ const addFriendStyling = StyleSheet.create({
         overflow: "hidden",
         width: "100%",
     },
-    backBtnContainer: {
-        width: width,
-        height: height / 10,
-        display: 'flex',
-    },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }, 
     headerContainer: {
         width: width,
         height: height / 5,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     header: {
         height: height / 6,
@@ -161,7 +151,7 @@ const addFriendStyling = StyleSheet.create({
     },
     friendListConteiner: {
         width: width,
-        height: height / 1.9,
+        height: height / 1.5,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

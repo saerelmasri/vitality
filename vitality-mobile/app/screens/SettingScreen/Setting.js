@@ -11,6 +11,10 @@ import { BASE_URL } from '@env'
 
 const Settings = ({navigation}) => {
     const [ JWT, setJWT ] = useState('')
+    const [ user, setUser ] = useState('')
+    const [ image, setImage ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(false)
+
     useEffect(() => {
         AsyncStorage.getItem('jwt')
             .then(token => {
@@ -21,29 +25,29 @@ const Settings = ({navigation}) => {
             });
     }, []);
 
-    const [ user, setUser ] = useState('')
-    const [ image, setImage ] = useState('')
-    const [ isLoading, setIsLoading ] = useState(false)
+    
  
     useEffect(() => {
         const fetchFullName = async () => {
-            await axios({
-                method: 'GET',
-                url: `${BASE_URL}/user_route/user_details`,
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setUser(res.data.message[0]['full_name']);
-                setImage(res.data.message[0]['photo_url']);
-            }).catch(err => {
-                console.log(err.response);
-            })
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/user_route/user_details`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setUser(res.data.message[0]['full_name']);
+                    setImage(res.data.message[0]['photo_url']);
+                }).catch(err => {
+                    console.log(err.response);
+                })
+            }
         }
         fetchFullName()        
-    }, [])
+    }, [JWT])
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({

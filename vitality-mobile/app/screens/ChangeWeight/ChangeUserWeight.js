@@ -4,27 +4,32 @@ import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-var JWT = ""
 import { statsStyling } from "./ChangeUserWeightStyle";
 import Indicator from "../../Components/ActivityIndicator/indicator";
 import { BASE_URL } from '@env'
 
 const ChangeUserWeight = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
     const [ newValue, setNewValue ] = useState('')
     const [ weight, setWeight ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false) 
+    const [ JWT, setJWT ] = useState('')
 
-    console.log(JWT);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, 5000)
+        return () => clearInterval(interval);
+    }, [])
+
     useEffect(()=> {
         const fetchWeight = async() => {
+           if(JWT){
             await axios({
                 method: 'GET',
                 url: `${BASE_URL}/user_route/user_extra_info`,
@@ -38,10 +43,11 @@ const ChangeUserWeight = ({navigation}) => {
             }).catch(err => {
                 console.log(err);
             })
+           }
         }
 
         fetchWeight()
-    },[])
+    },[JWT])
 
     const handleTextIput = async(param) => {
         if(newValue === " "){
