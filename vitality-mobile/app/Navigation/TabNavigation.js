@@ -71,13 +71,18 @@ const Workout = () => {
 }
 
 const Playground = () => {
+  const navigation = useNavigation();
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="PlaygroundDashboard" component={PlaygroundDashboard} options={{headerShown:true, headerTitle: 'Playground', headerLeft: null, headerStyle: {backgroundColor: '#127369',  elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="Leaderboard" component={Leaderboard} options={{headerShown:true, headerTitle: 'LeaderBoard', headerLeft: null, headerStyle: {backgroundColor: '#127369',  elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="Invitations" component={Invitation} options={{headerShown:true, headerTitle: 'Invitations', headerLeft: null, headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
-        <Stack.Screen name="ActivityInfo" component={ActivityInfo} options={{headerShown:false}}/>
-        <Stack.Screen name="InviteFriends" component={InviteFriends}options={{headerShown:false}}/> 
+        <Stack.Screen name="ActivityInfo" component={ActivityInfo} options={{headerShown:true, headerTitle: 'Create Challenge', headerLeft: () => (
+      <Pressable onPress={() => navigation.goBack()}>
+        <MaterialCommunityIcons name="arrow-left" size={30} />
+      </Pressable>
+      ) , headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="InviteFriends" component={InviteFriends} options={{headerShown:true, headerTitle: '', headerLeft: null, headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30,}}}/>
         <Stack.Screen name="onGoingActivity" component={OnGoingActivity} options={{tabBarVisible: false }}/>
         <Stack.Screen name="WinnerLoser" component={Trophy} options={{headerShown:false}}/>
         <Stack.Screen name="InvitationDetail" component={InvitationDetail} options={{headerShown:false,}}/>

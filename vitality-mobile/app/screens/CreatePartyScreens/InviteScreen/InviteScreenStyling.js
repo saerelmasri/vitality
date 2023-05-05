@@ -50,6 +50,7 @@ const InviteFriends = ({navigation}) => {
         })
     }
 
+    
     useEffect(() => {
         const fetchFriends = async () => {
           try {
@@ -75,6 +76,7 @@ const InviteFriends = ({navigation}) => {
         fetchFriends();
 
     }, [JWT]);
+
     
     const sendInvitation = async(recipient_id) => {
         await axios({
@@ -99,17 +101,8 @@ const InviteFriends = ({navigation}) => {
 
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={activityInfoStyle.container}>
                 <ScrollView>
-                    <View style={activityInfoStyle.backBtnContainer}>
-                        <View style={activityInfoStyle.backBtn}>
-                            <Pressable onPress={() => deleteCompetition()}>
-                                <Image source={require('../../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     <View style={activityInfoStyle.header}>
                         <Text style={activityInfoStyle.txt}>Invite Friends</Text>
                     </View>
@@ -125,7 +118,7 @@ const InviteFriends = ({navigation}) => {
                                 <ScrollView>
                                 {
                                     friends.map(friend => (
-                                        <Friend key={friend.id} name={friend.nickname} action={() => sendInvitation(friend.id)}/>
+                                        <Friend key={friend.id} name={friend.nickname} photo={friend.photo_url}  action={() => sendInvitation(friend.id)}/>
                                     ))
                                 }
                                 </ScrollView>
@@ -135,10 +128,11 @@ const InviteFriends = ({navigation}) => {
                     </View>
                     <View style={activityInfoStyle.btnContainer}>
                         <Button title={'Continue'} action={()=> navigation.navigate('PlaygroundDashboard')}/>
+                        <Button title={'Delete Competition'} action={()=> deleteCompetition()}/>
                     </View>
                 </ScrollView>
             </View>
-        </SafeAreaView>
+            
     );
 }
 
@@ -185,10 +179,11 @@ const activityInfoStyle = StyleSheet.create({
         paddingBottom: '10%',
     },
     btnContainer: {
+        borderWidth: 1,
         width: width,
-        height: width / 2,
+        height: width / 1.5,
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     friends: {

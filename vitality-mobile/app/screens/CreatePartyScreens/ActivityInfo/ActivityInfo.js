@@ -61,17 +61,8 @@ const ActivityInfo = ({navigation}) => {
         }
     }
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={activityInfoStyle.container}>
                 <ScrollView>
-                    <View style={activityInfoStyle.backBtnContainer}>
-                        <View style={activityInfoStyle.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     <View style={activityInfoStyle.header}>
                         <Text style={activityInfoStyle.txt}>Create Challenge</Text>
                     </View>
@@ -117,13 +108,12 @@ const ActivityInfo = ({navigation}) => {
                     </View>
 
                     <View style={activityInfoStyle.btnContainer}>
-                        <Button title={'Register'} action={createCompetition}/>
+                        <Button title={'Create'} action={createCompetition}/>
                     </View>
                     
                     
                 </ScrollView>
             </View>
-        </SafeAreaView>
     );
 }
 
@@ -135,21 +125,6 @@ const activityInfoStyle = StyleSheet.create({
         alignItems: 'center',
         overflow: "hidden",
     },
-    backBtnContainer: {
-        width: width,
-        height: height / 10,
-        display: 'flex',
-    },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }, 
     header: {
         height: height / 12,
         display: 'flex',

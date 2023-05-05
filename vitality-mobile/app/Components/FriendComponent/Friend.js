@@ -8,7 +8,7 @@ const Friend = ({name, action, photo}) => {
             <View style={activityInfoStyle.photoContainer}>
                 {photo !== null  ? (
                         <View style={activityInfoStyle.photo}>
-                            <Image source={{uri: photo}} />
+                            <Image source={{uri: `${photo}`}} style={{width: '100%', height: '100%', borderRadius: 100}}/>
                         </View>
                     ) : (
                     <View style={activityInfoStyle.photo}>
