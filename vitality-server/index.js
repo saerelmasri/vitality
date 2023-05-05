@@ -7,6 +7,7 @@ app.use(cors());
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/public', express.static('public'));
 
 const authRoute = require('./routes/auth.routes');
 app.use('/auth', authRoute);
