@@ -175,7 +175,7 @@ const showAllInvitations = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decoded.userId
 
-        const showAllInvitationQuery = 'SELECT c.id AS competition_id, c.title, c.type, c.workout_name, c.rules, c.reward, u.nickname AS creator_username, i.status FROM competition c JOIN users u ON c.created_by_user_id = u.id JOIN invitation i ON c.id = i.competition_id WHERE i.recipient_id = ?'
+        const showAllInvitationQuery = 'SELECT c.id AS competition_id, c.title, c.type, c.workout_name, c.rules, c.reward, u.nickname AS creator_username, i.status FROM competition c JOIN users u ON c.created_by_user_id = u.id JOIN invitation i ON c.id = i.competition_id WHERE i.recipient_id = ? AND c.status != "done"';
         await sql.query(showAllInvitationQuery, user_id, (err, result) => {
             if(err){
                 return res.status(500).json({
