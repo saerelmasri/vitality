@@ -17,10 +17,18 @@ const displayUsers = async(req, res) => {
 
         const baseUrl = 'http://192.168.1.104:5000/vitality/vitality-server/vitality-server/image/'
         const displayUsersQuery = `
-            SELECT u.id, u.nickname, u.full_name, up.photo_url 
-            FROM users u 
-            LEFT JOIN user_photo up ON u.id = up.user_id 
-            WHERE u.id <> ? 
+            SELECT u.id, u.nickname, u.full_name, up.photo_url
+            FROM users u
+            LEFT JOIN (
+                SELECT user_id, photo_url
+                FROM user_photo up1
+                WHERE up1.created_at = (
+                    SELECT MAX(created_at)
+                    FROM user_photo up2
+                    WHERE up1.user_id = up2.user_id
+                )
+            ) AS up ON u.id = up.user_id
+            WHERE u.id <> ?
             AND u.id NOT IN (
                 SELECT friend_user_id 
                 FROM friends 
@@ -157,13 +165,21 @@ const displayMyFriends = async(req, res) => {
         SELECT 
             users.id, 
             users.nickname, 
-            user_photo.photo_url 
+            latest_photo.photo_url 
         FROM 
             users 
+            LEFT JOIN (
+                SELECT user_id, photo_url
+                FROM user_photo
+                WHERE (user_id, created_at) IN (
+                    SELECT user_id, MAX(created_at) 
+                    FROM user_photo 
+                    GROUP BY user_id
+                )
+            ) AS latest_photo ON users.id = latest_photo.user_id
             INNER JOIN friends ON users.id = friends.friend_user_id 
-            LEFT JOIN user_photo ON users.id = user_photo.user_id 
         WHERE 
-            friends.user_id = ?`
+            friends.user_id = ?;`
 
         await sql.query(displayUsersQuery, [user_id], (err, result) => {
             if(err){
