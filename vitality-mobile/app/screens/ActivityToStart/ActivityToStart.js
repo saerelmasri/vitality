@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ""
-
+import { BASE_URL } from '@env'
 
 const ActivityToStart = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -26,7 +26,7 @@ const ActivityToStart = ({navigation}) => {
         const fetchInvitation = async() => {
             await axios({
                 method: 'GET',
-                url: `http://192.168.1.104:5000/competition_route/allUserInvitated/${competitionID['id']}`,
+                url: `${BASE_URL}/competition_route/allUserInvitated/${competitionID['id']}`,
                 data: { competition_id: competitionID['id'] },
                 headers: {
                     'Authorization': JWT,
@@ -51,7 +51,7 @@ const ActivityToStart = ({navigation}) => {
     const startCompetition = async() => {
         await axios({
             method: 'PUT',
-            url: 'http://192.168.1.104:5000/competition_route/startCompetition',
+            url: `${BASE_URL}/competition_route/startCompetition`,
             data: {
                 "id": competitionID['id'],
                 "status": "started"
@@ -73,7 +73,7 @@ const ActivityToStart = ({navigation}) => {
     const cancelCompetition = async() => {
         await axios({
             method: 'DELETE',
-            url: 'http://192.168.1.104:5000/competition_route/deleteCompetiton',
+            url: `${BASE_URL}/competition_route/deleteCompetiton`,
             data: {
                 "id": competitionID['id']
             },

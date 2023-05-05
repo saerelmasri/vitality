@@ -5,8 +5,8 @@ import { Color } from "../../../globalStyling";
 import { foodStyling } from "./FoodDetailStyle";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
-
-// let JWT =''
+import { BASE_URL } from '@env'
+var JWT =''
 
 const FoodDetail = ({navigation}) => {
     const [serving, setServing] = useState('');
@@ -14,13 +14,13 @@ const FoodDetail = ({navigation}) => {
     const route = useRoute()
     const data = route.params.foodInfo
 
-    // AsyncStorage.getItem('token')
-    // .then(token => {
-    //     JWT = token
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+    AsyncStorage.getItem('jwt')
+    .then(token => {
+        JWT = token
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
 
     let mealType = ''
@@ -69,7 +69,6 @@ const FoodDetail = ({navigation}) => {
         "serving_size": serving
     }
 
-    let JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU0LCJpYXQiOjE2ODI3NjYzNzgsImV4cCI6MTY4Mjc2OTk3OH0.N31fPJTwUZRhtF7UlkmTk_WEBc9GLU5PfmzAOcW_Ra8"
 
     const logFood = async() => {
         if(serving === ''){
@@ -77,7 +76,7 @@ const FoodDetail = ({navigation}) => {
         }else{
             await axios({
                 method: 'POST',
-                url: 'http://192.168.1.104:5000/foodLog/addLog',
+                url: `${BASE_URL}/foodLog/addLog`,
                 data: log,
                 headers: {
                     Accept: 'application/json',

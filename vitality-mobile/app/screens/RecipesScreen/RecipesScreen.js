@@ -1,7 +1,6 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity } from "react-native";
 import { useEffect, useState } from 'react'
-import { API_KEY_RECIPES } from '@env'
-
+import { API_KEY_RECIPES, BASE_URL } from '@env'
 import axios from 'axios'
 import { Color } from "../../../globalStyling";
 import { recipesStyling } from "./RecipesScreenStyling";

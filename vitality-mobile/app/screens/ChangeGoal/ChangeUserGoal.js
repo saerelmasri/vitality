@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from "../../Components/Button/Button"
 import Indicator from "../../Components/ActivityIndicator/indicator"
 var JWT = ""
-
+import { BASE_URL } from '@env'
 
 const ChangeGoal = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -30,7 +30,7 @@ const ChangeGoal = ({navigation}) => {
         }else{
             await axios({
                 method: 'PUT',
-                url: 'http://192.168.1.104:5000/user_route/update_profile_extra_info',
+                url: `${BASE_URL}/user_route/update_profile_extra_info`,
                 data: {
                     "column_name": "goal_type_id",
                     "valueToUpdate": param

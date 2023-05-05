@@ -4,7 +4,7 @@ import { registerStyle } from "./RegisterStyling";
 import Button from "../../Components/Button/Button";
 import { useState } from "react";
 import axios from "axios";
-
+import { BASE_URL } from '@env'
 
 const Register = ({navigation}) => {
 
@@ -29,7 +29,7 @@ const Register = ({navigation}) => {
         }else{
             await axios({
                 method: 'POST',
-                url: 'http://192.168.1.104:5000/auth/register',
+                url: `${BASE_URL}/auth/register`,
                 data: data,
                 headers: {
                     Accept: 'application/json',

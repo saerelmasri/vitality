@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ""
+import { BASE_URL } from '@env'
 
 const InviteFriends = ({navigation}) => {
     const route = useRoute()
@@ -26,7 +27,7 @@ const InviteFriends = ({navigation}) => {
     const deleteCompetition = async() => {
         await axios({
             method: 'DELETE',
-            url: 'http://192.168.1.104:5000/competition_route/deleteCompetiton',
+            url: `${BASE_URL}/competition_route/deleteCompetiton`,
             data: competitionID,
             headers: {
                 'Authorization': JWT,
@@ -46,7 +47,7 @@ const InviteFriends = ({navigation}) => {
         const fetchFriends = async() => {
             await axios({
                 method: 'GET',
-                url: 'http://192.168.1.104:5000/friends_route/myfriends',
+                url: `${BASE_URL}/friends_route/myfriends`,
                 headers: {
                     'Authorization': JWT,
                     Accept: 'application/json',
@@ -66,7 +67,7 @@ const InviteFriends = ({navigation}) => {
     const sendInvitation = async(recipient_id) => {
         await axios({
             method: 'POST',
-            url: 'http://192.168.1.104:5000/competition_route/sendInvitation',
+            url: `${BASE_URL}/competition_route/sendInvitation`,
             data: {
                 "competition_id": competitionID['id'],
                 "recipient_id": recipient_id,

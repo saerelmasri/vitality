@@ -4,11 +4,12 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { activityLevelStyle } from "./ChangeActivityLevelStyling";
-import NextBtn from "../../Components/NextBtn/NextBtn"
 import ActivityLevelTypes from "../../Components/activityLevel/ActivityComponent"
 import Indicator from '../../Components/ActivityIndicator/indicator'
 import Button from "../../Components/Button/Button";
 var JWT = ""
+import { BASE_URL } from '@env'
+
 
 const ChangeActivityLevel = ({navigation}) => {
     const [ activity, setActivity ] = useState('')
@@ -29,7 +30,7 @@ const ChangeActivityLevel = ({navigation}) => {
         }else{
             await axios({
                 method: 'PUT',
-                url: 'http://192.168.1.104:5000/user_route/update_profile_extra_info',
+                url: `${BASE_URL}/user_route/update_profile_extra_info`,
                 data: {
                     "column_name": "activity_type_id",
                     "valueToUpdate": param

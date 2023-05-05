@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
 var JWT =""
+import { BASE_URL } from '@env'
 
 const Profile = ({navigation}) => {
     const [profileDetail, setProfileDetail ] = useState([])
@@ -19,7 +20,7 @@ const Profile = ({navigation}) => {
                     const JWT = token;
                     axios({
                         method: 'GET',
-                        url: 'http://192.168.1.104:5000/user_route/user_details',
+                        url: `${BASE_URL}/user_route/user_details`,
                         headers: {
                             'Authorization': JWT,
                             Accept: 'application/json',

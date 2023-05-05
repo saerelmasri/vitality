@@ -5,8 +5,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginStyles } from "./LoginStyle";
 import Button from "../../Components/Button/Button";
 import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
+import { useNavigation } from '@react-navigation/native';
 
-const Login = ({navigation}) => {
+const Login = () => {
+    const navigation = useNavigation();
+
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -22,7 +25,7 @@ const Login = ({navigation}) => {
     }
     useEffect(() => {
         if(jwt) {
-          navigation.navigate('Home')
+            navigation.navigate('Home');
         }
       }, [jwt, navigation])
 

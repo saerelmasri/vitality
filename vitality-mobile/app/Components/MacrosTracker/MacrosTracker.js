@@ -4,6 +4,7 @@ import axios from "axios";
 import { PieChart } from "react-native-chart-kit";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
+import { BASE_URL } from '@env'
 var JWT = ''
 const { height, width } = Dimensions.get('window')
 
@@ -21,13 +22,17 @@ const Macro = () => {
     const [ fats, setFats ] = useState(0)
     const [ protein, setProtein ] = useState(0)
 
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    useEffect(() => {
+        const getJWT = async () => {
+            try {
+                const token = await AsyncStorage.getItem('jwt')
+                JWT = token
+            } catch (error) {
+                console.log(error.response.data)
+            }
+        }
+        getJWT()
+    }, [])
 
     const data = [
         {
@@ -53,18 +58,20 @@ const Macro = () => {
         },
     ]
 
+
     useEffect(()=> {
         const interval = setInterval(() => {
             const getTotalCalories = async() => {
                 await axios({
                     method: 'GET',
-                    url: 'http://192.168.1.104:5000/foodLog/sumOfNutrients',
+                    url: `${BASE_URL}/foodLog/sumOfNutrients`,
                     headers: {
                         'Authorization': JWT,
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     }
                 }).then(res=> {
+                    console.log(res);
                     setCarbs(res.data.message.carbs);
                     setFats(res.data.message.fats);
                     setProtein(res.data.message.protein);
@@ -72,6 +79,8 @@ const Macro = () => {
             };
     
             getTotalCalories()
+            console.log(BASE_URL);
+
         }, 5000)
         return () => clearInterval(interval)
     })

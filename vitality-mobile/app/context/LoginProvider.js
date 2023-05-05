@@ -3,6 +3,7 @@ import { View, ActivityIndicator } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 const LoginContext = createContext()
+import { BASE_URL } from '@env'
 
 const LoginProvider = ({children}) => {
     const [ isLoggedIn, setIsLoggedIn ] = useState(false)
@@ -10,31 +11,31 @@ const LoginProvider = ({children}) => {
     const [ loading, setLoading ] = useState(false)
 
     const handleLogin = (email, password) => {
-        setLoading(true)
-        axios({
-          method: 'POST',
-          url: 'http://192.168.1.104:5000/auth/login',
-          data: {
-            "email": email,
-            "password": password    
-          },
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }).then((res) => {
-          if (res.data.status == 200) {
-            AsyncStorage.setItem('jwt', res.data.token)
-            console.log(res.data.token);
-            setJwt(res.data.token);
-            setIsLoggedIn(true);
-            setLoading(false)
-          }
-        }).catch((err) => {
-          console.log(err.response.data);
+      setLoading(true)
+      axios({
+        method: 'POST',
+        url: 'http://192.168.1.104:5000/auth/login',
+        data: {
+          "email": email,
+          "password": password    
+        },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        if (res.data.status == 200) {
+          AsyncStorage.setItem('jwt', res.data.token)
+          console.log(res.data.token);
+          setJwt(res.data.token);
+          setIsLoggedIn(true);
           setLoading(false)
-        })
-      }
+        }
+      }).catch((err) => {
+        console.log(err.response.data);
+        setLoading(false)
+      })
+    }
 
     const handleLogout = async () => {
         try {

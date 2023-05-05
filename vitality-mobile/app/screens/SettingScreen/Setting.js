@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as ImagePicker from 'expo-image-picker'
 import Indicator from "../../Components/ActivityIndicator/indicator";
 var JWT =""
+import { BASE_URL } from '@env'
 
 const Settings = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -25,7 +26,7 @@ const Settings = ({navigation}) => {
         const fetchFullName = async () => {
             await axios({
                 method: 'GET',
-                url: 'http://192.168.1.104:5000/user_route/user_details',
+                url: `${BASE_URL}/user_route/user_details`,
                 headers: {
                     'Authorization': JWT,
                     Accept: 'application/json',
@@ -52,7 +53,7 @@ const Settings = ({navigation}) => {
             setImage(result.assets[0].uri)
             await axios({
                 method: 'POST',
-                url: 'http://192.168.1.104:5000/photos_route/addProfilePhoto',
+                url: `${BASE_URL}/photos_route/addProfilePhoto`,
                 data: {
                     "photoData": result.assets[0].uri
                 },
@@ -67,8 +68,6 @@ const Settings = ({navigation}) => {
               });
         }
     }
-
-    console.log(JWT);
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={settingStyle.container}>

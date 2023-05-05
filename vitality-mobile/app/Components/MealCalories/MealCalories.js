@@ -5,6 +5,7 @@ import { PieChart } from "react-native-chart-kit";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 var JWT = ''
+import { BASE_URL } from '@env'
 const { height, width } = Dimensions.get('window')
 
 const chartConfig = {
@@ -31,12 +32,12 @@ const MealContainer = () => {
                 const token = await AsyncStorage.getItem('jwt')
                 JWT = token
             } catch (error) {
-                console.log(error)
+                console.log(error.response.data)
             }
         }
-
         getJWT()
     }, [])
+
 
     useEffect(()=> {
         
@@ -45,7 +46,7 @@ const MealContainer = () => {
             const getTotalCalories = async() => {
                 await axios({
                     method: 'POST',
-                    url: 'http://192.168.1.104:5000/foodLog/sumOfCalories',
+                    url: `${BASE_URL}/foodLog/sumOfCalories`,
                     headers: {
                         'Authorization': JWT,
                         'Accept': 'application/json',
@@ -55,14 +56,14 @@ const MealContainer = () => {
                     setBreakfastCal(res.data.message.breakfast);
                     setDinnerCal(res.data.message.dinner);
                     setLunchCal(res.data.message.lunch);
-                }).catch(err => console.error(err))
+                }).catch(err => console.error(err.response.data))
             };
             getTotalCalories()
 
             const getCalories = async() => {
                 await axios({
                     method: 'GET',
-                    url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
+                    url: `${BASE_URL}/foodLog/getDailyCalories`,
                     headers: {
                         'Authorization': JWT,
                         Accept: 'application/json',

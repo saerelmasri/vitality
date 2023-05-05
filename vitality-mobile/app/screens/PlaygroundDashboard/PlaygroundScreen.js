@@ -8,7 +8,7 @@ const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ''
-
+import { BASE_URL } from '@env'
 
 const PlaygroundDashboard = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -26,7 +26,7 @@ const PlaygroundDashboard = ({navigation}) => {
             const onwerParty = async() => {
                 await axios({
                     method: 'GET',
-                    url: 'http://192.168.1.104:5000/competition_route/onwCompetition',
+                    url: `${BASE_URL}/competition_route/onwCompetition`,
                     headers: {
                         'Authorization': JWT,
                         Accept: 'application/json',

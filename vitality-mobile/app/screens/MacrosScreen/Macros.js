@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios"
 import FoodIntake from "../../Components/FoodIntakeComponent/FoodIntake";
 var JWT = ''
+import { BASE_URL } from '@env'
+
 const Macros = ({navigation}) => {
     const [ calories, setCalories ] = useState('')
     const [ food, setFood ] = useState(0)
@@ -29,7 +31,7 @@ const Macros = ({navigation}) => {
             const getCalories = async() => {
                 await axios({
                     method: 'GET',
-                    url: 'http://192.168.1.104:5000/foodLog/getDailyCalories',
+                    url: `${BASE_URL}/foodLog/getDailyCalories`,
                     headers: {
                         'Authorization': JWT,
                         Accept: 'application/json',
@@ -46,7 +48,7 @@ const Macros = ({navigation}) => {
             const getTotalCalories = async() => {
                 await axios({
                     method: 'POST',
-                    url: 'http://192.168.1.104:5000/foodLog/sumOfCalories',
+                    url: `${BASE_URL}/foodLog/sumOfCalories`,
                     headers: {
                         'Authorization': JWT,
                         'Accept': 'application/json',
@@ -56,7 +58,7 @@ const Macros = ({navigation}) => {
                     setBreakfastCal(res.data.message.breakfast);
                     setDinnerCal(res.data.message.dinner);
                     setLunchCal(res.data.message.lunch);
-                }).catch(err => console.error(err))
+                }).catch(err => console.error(err.response))
             };
     
             getTotalCalories()
@@ -73,7 +75,7 @@ const Macros = ({navigation}) => {
         const getFoods = async(meal) => {
             await axios({
                 method: 'GET',
-                url: `http://192.168.1.104:5000/foodLog/fetchUserMealLogs/${meal}`,
+                url: `${BASE_URL}/foodLog/fetchUserMealLogs/${meal}`,
                 headers: {
                     'Authorization': JWT,
                     'Accept': 'application/json',

@@ -8,6 +8,7 @@ import NextBtn from "../../Components/NextBtn/NextBtn"
 import ActivityLevelTypes from "../../Components/activityLevel/ActivityComponent"
 import Indicator from '../../Components/ActivityIndicator/indicator'
 var JWT = ''
+import { BASE_URL } from '@env'
 
 const ActivityLevel = ({navigation}) => {
     const [ activity, setActivity ] = useState('')
@@ -69,7 +70,7 @@ const ActivityLevel = ({navigation}) => {
             console.log(calories);
             await axios({
                 method: 'POST',
-                url: 'http://192.168.1.104:5000/extra_info/extraInfoUser',
+                url: `${BASE_URL}/extra_info/extraInfoUser`,
                 data: data,
                 headers: {
                     'Authorization': JWT,
@@ -80,7 +81,7 @@ const ActivityLevel = ({navigation}) => {
                 if(res.data.status === 200){
                     axios({
                         method: 'POST',
-                        url: 'http://192.168.1.104:5000/foodLog/addDailyCalories',
+                        url: `${BASE_URL}/foodLog/addDailyCalories`,
                         data: {
                             'daily_calories': calories
                         },
@@ -98,7 +99,7 @@ const ActivityLevel = ({navigation}) => {
                         setLoading(false)
                         axios({
                             method: 'delete',
-                            url: 'http://192.168.1.104:5000/auth/removeUser',
+                            url: BASE_URL + 'auth/removeUser',
                             headers: {
                                 'Authorization': JWT,
                                 Accept: 'application/json',

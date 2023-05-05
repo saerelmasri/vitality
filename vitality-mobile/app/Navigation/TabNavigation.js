@@ -114,7 +114,7 @@ const HomeTabs = () => {
                 name="Home"
                 component={Home}
                 options={{
-                    tabBarLabel: 'Homex',
+                    tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={size} />
                     ),

@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ""
 import { statsStyling } from "./ChangeUserWeightStyle";
 import Indicator from "../../Components/ActivityIndicator/indicator";
+import { BASE_URL } from '@env'
 
 const ChangeUserWeight = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -26,7 +27,7 @@ const ChangeUserWeight = ({navigation}) => {
         const fetchWeight = async() => {
             await axios({
                 method: 'GET',
-                url: 'http://192.168.1.104:5000/user_route/user_extra_info',
+                url: `${BASE_URL}/user_route/user_extra_info`,
                 headers: {
                     'Authorization': JWT,
                     Accept: 'application/json',
@@ -48,7 +49,7 @@ const ChangeUserWeight = ({navigation}) => {
         }else{
             await axios({
                 method: 'PUT',
-                url: 'http://192.168.1.104:5000/user_route/update_profile_extra_info',
+                url: `${BASE_URL}/user_route/update_profile_extra_info`,
                 data: {
                     "column_name": "weight",
                     "valueToUpdate": param

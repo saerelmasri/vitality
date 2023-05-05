@@ -8,6 +8,8 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ""
 import CountDown from "react-native-countdown-component";
+import { BASE_URL } from '@env'
+
 
 const OnGoingActivity = ({navigation}) => {
     AsyncStorage.getItem('token')
@@ -31,7 +33,7 @@ const OnGoingActivity = ({navigation}) => {
         const fetchInfoCompetition = async() => {
             await axios({
                 method: 'POST',
-                url: 'http://192.168.1.104:5000/competition_route/challengeDetails',
+                url: `${BASE_URL}/competition_route/challengeDetails`,
                 data: {
                     "challenge_id": id
                 },
@@ -59,7 +61,7 @@ const OnGoingActivity = ({navigation}) => {
     const finishCompetition = async() => {
         await axios({
             method: 'POST',
-            url: 'http://192.168.1.104:5000/competition_route/winner',
+            url: `${BASE_URL}/competition_route/winner`,
             data: {
                 "challenge_id": id,
                 "rewards": challengeDetail.reward

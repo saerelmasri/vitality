@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ''
-
+import { BASE_URL } from '@env'
 
 const Invitation = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -24,7 +24,7 @@ const Invitation = ({navigation}) => {
         const fetchInvitations = async () => {
             await axios({
                 method: 'GET',
-                url: 'http://192.168.1.104:5000/competition_route/allInvitation',
+                url: `${BASE_URL}/competition_route/allInvitation`,
                 headers: {
                     'Authorization': JWT,
                     Accept: 'application/json',
@@ -43,7 +43,7 @@ const Invitation = ({navigation}) => {
     const changeStatus = async(id, statusInfo) => {
         await axios({
             method: 'PUT',
-            url: 'http://192.168.1.104:5000/competition_route/changeStatus',
+            url: `${BASE_URL}/competition_route/changeStatus`,
             data: {
                 "competition_id": id,
                 "status": statusInfo

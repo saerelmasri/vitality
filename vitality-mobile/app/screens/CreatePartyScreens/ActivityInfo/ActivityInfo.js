@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = " "
+import { BASE_URL } from '@env'
 
 const ActivityInfo = ({navigation}) => {
     const [ challengeName, setChallengeName ] = useState('')
@@ -41,7 +42,7 @@ const ActivityInfo = ({navigation}) => {
             try {
                 const res = await axios({
                     method: 'POST',
-                    url: 'http://192.168.1.104:5000/competition_route/createCompetition',
+                    url: `${BASE_URL}/competition_route/createCompetition`,
                     data: info,
                     headers: {
                         'Authorization': JWT,

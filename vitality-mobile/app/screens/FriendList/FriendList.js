@@ -6,7 +6,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 var JWT = ""
-
+import { BASE_URL } from '@env'
 
 const FriendList = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -25,7 +25,7 @@ const FriendList = ({navigation}) => {
             const fetchUsers = async() => {
                 await axios({
                     method: 'GET',
-                    url: 'http://192.168.1.104:5000/friends_route/myfriends',
+                    url: `${BASE_URL}/friends_route/myfriends`,
                     headers: {
                         'Authorization': JWT,
                         Accept: 'application/json',

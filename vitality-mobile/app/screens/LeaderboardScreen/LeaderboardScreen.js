@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 var JWT = ''
-
+import { BASE_URL } from '@env'
 
 const Leaderboard = ({navigation}) => {
     AsyncStorage.getItem('jwt')
@@ -25,7 +25,7 @@ const Leaderboard = ({navigation}) => {
         const fetchLeaderboard = async() => {
             await axios({
                 method: 'GET',
-                url: 'http://192.168.1.104:5000/leaderboard_route/level_leaderboard',
+                url: `${BASE_URL}/leaderboard_route/level_leaderboard`,
                 headers: {
                     'Authorization': JWT,
                     Accept: 'application/json',
