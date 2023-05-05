@@ -1,6 +1,5 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { View, ScrollView, Image, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { Color } from "../../../globalStyling";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
@@ -25,8 +24,6 @@ const Settings = ({navigation}) => {
             });
     }, []);
 
-    
- 
     useEffect(() => {
         const fetchFullName = async () => {
             if(JWT){
@@ -40,41 +37,71 @@ const Settings = ({navigation}) => {
                     }
                 }).then(res => {
                     setUser(res.data.message[0]['full_name']);
-                    setImage(res.data.message[0]['photo_url']);
                 }).catch(err => {
                     console.log(err.response);
                 })
             }
         }
-        fetchFullName()        
+        fetchFullName();   
+        
+        const fetchLastPhoto = async () => {
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/photos_route/getLastPhotoUrl`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setImage(res.data.message.photo_url);
+                }).catch(err => {
+                    console.log(err.response);
+                })
+            }
+        }
+        fetchLastPhoto();  
     }, [JWT])
 
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-        if (!result.canceled) {
-            setImage(result.assets[0].uri)
-            await axios({
-                method: 'POST',
-                url: `${BASE_URL}/photos_route/addProfilePhoto`,
-                data: {
-                    "photoData": result.assets[0].uri
-                },
-                headers: {
-                    'Authorization': JWT,
-                }
-              }).then(response => {
-                console.log(response.data);
-              })
-              .catch(error => {
-                console.log(error.response);
-              });
+    const uploadImage = async (assets) => {
+        const photo = {
+          uri: assets[0].uri,
+          type: 'image/jpeg',
+          name: 'photo.jpg',
+        };
+      
+        const formData = new FormData();
+        formData.append('image', photo);
+      
+        try {
+          const response = await axios({
+            method: 'POST',
+            url: `${BASE_URL}/photos_route/addProfilePhoto`,
+            data: formData,
+            headers: {
+              'Authorization': JWT,
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          
+        } catch (error) {
+          console.log(error.response.data);
         }
-    }
+    };
+      
+      const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+      
+        if (!result.canceled) {
+          uploadImage(result.assets);
+        }
+    };
     return(
             <View style={settingStyle.container}>
                 <ScrollView>
@@ -86,7 +113,7 @@ const Settings = ({navigation}) => {
                             <View style={settingStyle.avatarContent} >
                                 <View style={settingStyle.picture}>
                                     { image ? (
-                                    <Image source={{ uri: image }} style={{ width: 120, height: 120, borderRadius: 150 }}/>
+                                    <Image source={{ uri: `${image}`}} style={{ width: 120, height: 120, borderRadius: 120 }}/>
                                     ): (
                                         <Image source={require('../../assets/app-img/default.jpg')} style={{ width: 120, height: 120, borderRadius: 100 }}/>
                                         
@@ -107,25 +134,6 @@ const Settings = ({navigation}) => {
                                     {user}
                                 </Text>
                             </View>
-                        </View>
-
-                        <View style={settingStyle.optionsContainer}>
-                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeHeight')}>
-                                <Text style={settingStyle.optionTxt}>Change Height</Text>
-                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeWeight')}>
-                                <Text style={settingStyle.optionTxt}>Change Weight</Text>
-                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeGoal')}>
-                                <Text style={settingStyle.optionTxt}>Change goal</Text>
-                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeActivity')}>
-                                <Text style={settingStyle.optionTxt}>Change activity level</Text>
-                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
-                            </TouchableOpacity>
                         </View>
                     </>
                 )}
@@ -191,25 +199,6 @@ const settingStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    optionsContainer: {
-        width: width,
-        height: height / 3,
-        backgroundColor: Color.grey,
-        marginTop: ' 20%'
-    },
-    option: {
-        height: height / 12,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: ' 10%',
-        paddingRight: ' 10%',
-    },
-    optionTxt: {
-        fontSize: 22
-    }
-    
 })
 
 

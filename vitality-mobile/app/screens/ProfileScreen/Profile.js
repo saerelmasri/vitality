@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
+import { View, ScrollView, SafeAreaView, Image, Text, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 import axios from 'axios'
@@ -10,35 +10,60 @@ import { BASE_URL } from '@env'
 
 const Profile = ({navigation}) => {
     const [profileDetail, setProfileDetail ] = useState([])
+    const [ JWT, setJWT ] = useState('')
+    const [ image, setImage ] = useState('')
     const { handleLogout } = useLogin()
-    
+
     useEffect(() => {
-        let isMounted = true;
         AsyncStorage.getItem('jwt')
             .then(token => {
-                if (isMounted) {
-                    const JWT = token;
-                    axios({
-                        method: 'GET',
-                        url: `${BASE_URL}/user_route/user_details`,
-                        headers: {
-                            'Authorization': JWT,
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(res => {
-                        setProfileDetail(res.data.message[0]);
-                    }).catch(err => {
-                        console.log(err.response.data);
-                    });
-                }
+                setJWT(token);
             })
             .catch(error => {
                 console.log(error);
             });
-
-        return () => { isMounted = false };
     }, []);
+    
+    useEffect(() => {
+        const fetUserDetails = async() => {
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/user_route/user_details`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setProfileDetail(res.data.message[0]);
+                }).catch(err => {
+                    console.log(err.response.data);
+                });
+            }
+        }
+
+        fetUserDetails()
+        
+        const fetchLastPhoto = async () => {
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/photos_route/getLastPhotoUrl`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setImage(res.data.message.photo_url)
+                }).catch(err => {
+                    console.log(err.response);
+                })
+            }
+        }
+        fetchLastPhoto();
+    }, [JWT]);
 
     return(
         <SafeAreaView style={{flex:1}}>
@@ -50,7 +75,7 @@ const Profile = ({navigation}) => {
                                 <Text style={profileStyling.avatarTxt}>Your Profile</Text>
                                 {
                                     profileDetail.photo_url ? (
-                                        <Image style={profileStyling.avatar} source={{ uri: profileDetail.photo_url }}/>
+                                        <Image style={profileStyling.avatar} source={{ uri: `${image}`}}/>
                                     ) : (
                                         <Image style={profileStyling.avatar} source={require('../../assets/app-img/default.jpg')}/>
                                     )
