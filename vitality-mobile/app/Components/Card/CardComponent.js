@@ -6,14 +6,14 @@ const { height, width } = Dimensions.get('window')
 const CardComponent = ({text, target, image}) => {
     return(
         <TouchableOpacity>
-            <ImageBackground style={workoutDashboardStyling.cardComponent} source={{uri: image}} imageStyle={{borderRadius: 20, opacity: 0.5}}>
+            <ImageBackground style={workoutDashboardStyling.cardComponent} source={{uri: image}} imageStyle={{borderRadius: 20,}}>
                 <View style={workoutDashboardStyling.textCard}>
-                    <Text style={{fontSize: 20, fontWeight: 500, color: Color.white}}>
+                    <Text style={workoutDashboardStyling.textStyle}>
                         {target}
                     </Text>
                 </View>
                 <View style={workoutDashboardStyling.textCard}>
-                    <Text style={{fontSize: 20, fontWeight: 500, color: Color.white}}>
+                    <Text style={workoutDashboardStyling.textStyle}>
                         {text}
                     </Text>
                 </View>
@@ -39,7 +39,14 @@ const workoutDashboardStyling = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         paddingLeft: '5%'
-
+    },
+    textStyle: {
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 15,
+        textShadowColor: 'black',
+        fontSize: 20, 
+        fontWeight: 500, 
+        color: Color.white
     }
 
 })

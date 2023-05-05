@@ -4,7 +4,7 @@ import { Color } from "../../../globalStyling";
 const RecipeComponent = ({level, name, action}) => {
     return(
         <TouchableOpacity style={recipesComponentStyling.recipeComponent} onPress={action}>
-            <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 320, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={{uri: `${level}`}} imageStyle={{borderRadius: 10, opacity: 0.5}}>
+            <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 320, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={{uri: `${level}`}} imageStyle={{borderRadius: 10,}}>
                 <View style={recipesComponentStyling.recipeName}>
                     <Text style={recipesComponentStyling.recipeTxt}>
                         {name}
@@ -45,7 +45,10 @@ const recipesComponentStyling = StyleSheet.create({
     recipeTxt: {
         fontSize: 25,
         fontWeight: 500,
-        color: Color.white
+        color: Color.white,
+        textShadowColor: 'black', 
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5
     }
 })
 

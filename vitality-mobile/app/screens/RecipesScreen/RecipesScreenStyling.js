@@ -22,7 +22,7 @@ const recipesStyling = StyleSheet.create({
     text: {
         fontSize: 18,
         fontWeight: 400,
-        color: Color.white
+        color: Color.white,
     },
     searchContainer: {
         width: width - 20,

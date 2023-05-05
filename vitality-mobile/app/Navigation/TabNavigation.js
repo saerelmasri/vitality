@@ -57,7 +57,7 @@ const NutritionDashboard = () => {
 const Home = () => {
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/> 
+        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/> 
       </Stack.Navigator>
     );
 }
@@ -65,8 +65,8 @@ const Home = () => {
 const Workout = () => {
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="WorkoutDashboard" component={WorkoutDashboard} options={{headerShown:true, headerTitle: 'Discover', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
-        <Stack.Screen name="ExerciseListing" component={ExerciseListing} options={{headerShown: false}}/>
+        <Stack.Screen name="WorkoutDashboard" component={WorkoutDashboard} options={{headerShown:true, headerTitle: 'Discover', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="ExerciseListing" component={ExerciseListing} options={{headerShown:true, headerTitle: '', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
       </Stack.Navigator>
     );
 }

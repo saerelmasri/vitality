@@ -47,17 +47,8 @@ const ExerciseListing = ({navigation}) => {
     
     }, [])
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={workoutDashboardStyling.container}>
                 <ScrollView>
-                    <View style={workoutDashboardStyling.backBtnContainer}>
-                        <View style={workoutDashboardStyling.backBtn}>
-                            <Pressable onPress={() => navigation.navigate('WorkoutDashboard')}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     {isLoading ? (<Indicator/>) : (
                         <>
                             <View style={workoutDashboardStyling.header}>
@@ -78,7 +69,6 @@ const ExerciseListing = ({navigation}) => {
                 </ScrollView>
 
             </View>
-        </SafeAreaView>
     );
 }
 
