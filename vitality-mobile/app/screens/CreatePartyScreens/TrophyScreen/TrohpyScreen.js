@@ -1,29 +1,28 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Text } from "react-native";
 import { Color } from "../../../../globalStyling";
 import { trophyStyle } from "./TrophyScreenStyling";
-import { useRoute } from "@react-navigation/native"
+import { useRoute, useNavigation } from "@react-navigation/native"
+import { useEffect } from "react";
 
-const Trophy = ({navigation}) => {
+const Trophy = () => {
     const route = useRoute()
     const winnerOrLoser = route.params.title
+    const navigation = useNavigation();
 
-    // setTimeout(()=> {
-    //     navigation.navigate('PlaygroundDashboard')
-    // },2000)
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            navigation.navigate('Leaderboard')
+        }, 2000);
 
-    console.log(winnerOrLoser);
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [navigation]);
+
     return(
         <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={trophyStyle.container}>
                 <ScrollView>
-                    <View style={trophyStyle.backBtnContainer}>
-                        <View style={trophyStyle.backBtn}>
-                            <Pressable onPress={() => navigation.navigate('PlaygroundDashboard')}>
-                                <Image source={require('../../../assets/app-img/close.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
                     {winnerOrLoser === 'winner' ? (
                         <View style={trophyStyle.content}>
                         <View style={trophyStyle.trophyContent}>
@@ -47,8 +46,6 @@ const Trophy = ({navigation}) => {
                         </View>
                     </View>
                     )}
-                    
-
                 </ScrollView>
             </View>
         </SafeAreaView>

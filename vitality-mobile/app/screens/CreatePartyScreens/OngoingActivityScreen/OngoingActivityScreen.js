@@ -48,7 +48,7 @@ const OnGoingActivity = ({navigation}) => {
                     'Content-Type': 'application/json'
                 }
             }).then(res => {
-                console.log(res.data.message);
+                //console.log(res.data.message.rules);
                 if(res.data.status === 201){
                     setChallengeDetail(res.data.message);
                     const time = res.data.message.rules;
@@ -63,6 +63,7 @@ const OnGoingActivity = ({navigation}) => {
     
     }, [id, JWT])
 
+    
     const finishCompetition = async() => {
         await axios({
             method: 'POST',
@@ -77,11 +78,10 @@ const OnGoingActivity = ({navigation}) => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
-            console.log(res.data.message);
             if(res.data.status === 201){
-                navigation.navigate('Winner/Loser', {title: "winner"})
+                navigation.navigate('WinnerLoser', {title: "winner"})
             }else{
-                navigation.navigate('Winner/Loser', {title: "loser"})
+                navigation.navigate('WinnerLoser', {title: "loser"})
             }
         }).catch(err => {
             console.log(err.response.data);
@@ -97,9 +97,10 @@ const OnGoingActivity = ({navigation}) => {
                         
                         <View style={onGoingActivityStyling.timingConteiner}>
                             <View style={onGoingActivityStyling.timing}>
+                            {timeInMinutes > 0 && (
                                 <CountDown
                                     size={30}
-                                    until={timeInMinutes * 60}
+                                    until={timeInMinutes * 60} // convert minutes to seconds
                                     showSeparator
                                     timeToShow={['M', 'S']}
                                     digitStyle={{ backgroundColor: 'transparent' }}
@@ -107,6 +108,7 @@ const OnGoingActivity = ({navigation}) => {
                                     timeLabelStyle={{ color: 'white' }}
                                     onFinish={handleCountdownFinish}
                                 />
+                            )}
 
                             </View>
                         </View>

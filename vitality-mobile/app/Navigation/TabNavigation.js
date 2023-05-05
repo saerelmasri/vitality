@@ -79,8 +79,8 @@ const Playground = () => {
         <Stack.Screen name="Invitations" component={Invitation} options={{headerShown:true, headerTitle: 'Invitations', headerLeft: null, headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="ActivityInfo" component={ActivityInfo} options={{headerShown:false}}/>
         <Stack.Screen name="InviteFriends" component={InviteFriends}options={{headerShown:false}}/> 
-        <Stack.Screen name="onGoingActivity" component={OnGoingActivity} options={{headerShown:false}}/>
-        <Stack.Screen name="Winner/Loser" component={Trophy} options={{headerShown:false}}/>
+        <Stack.Screen name="onGoingActivity" component={OnGoingActivity} options={{tabBarVisible: false }}/>
+        <Stack.Screen name="WinnerLoser" component={Trophy} options={{headerShown:false}}/>
         <Stack.Screen name="InvitationDetail" component={InvitationDetail} options={{headerShown:false,}}/>
         <Stack.Screen name="ActivityToStart" component={ActivityToStart} options={{headerShown:true, headerTitle: 'Challenge Dashboard', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
       </Stack.Navigator>

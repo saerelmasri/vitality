@@ -34,7 +34,8 @@ const trophyStyle = StyleSheet.create({
         height: '50%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: '10%'
     },
     headerContainer: {
         height: height / 2.4,

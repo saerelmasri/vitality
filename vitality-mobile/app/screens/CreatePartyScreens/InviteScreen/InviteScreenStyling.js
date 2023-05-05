@@ -7,22 +7,29 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-var JWT = ""
+//var JWT = ""
 import { BASE_URL } from '@env'
+import Indicator from "../../../Components/ActivityIndicator/indicator";
 
 const InviteFriends = ({navigation}) => {
+    const [JWT, setJWT] = useState(null)
     const route = useRoute()
     const competitionID = route.params.competitionInfo
 
     const [ friends, setFriends ] = useState([])
+    const [ isLoading, setIsLoading ] = useState(false)
 
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    useEffect(() => {
+        const getToken = async () => {
+          try {
+            const token = await AsyncStorage.getItem('jwt');
+            setJWT(token || '');
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        getToken();
+    }, []);
 
     const deleteCompetition = async() => {
         await axios({
@@ -39,30 +46,35 @@ const InviteFriends = ({navigation}) => {
                 navigation.goBack()
             }
         }).catch((err) => {
-            console.error(err);
+            console.error(err.response.data);
         })
     }
 
     useEffect(() => {
-        const fetchFriends = async() => {
-            await axios({
-                method: 'GET',
-                url: `${BASE_URL}/friends_route/myfriends`,
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setFriends(res.data.message)
-            }).catch(err => {
-                console.error(err.response);
-            })
-        }
-    
-        fetchFriends()
-    }, [])
-    
+        const fetchFriends = async () => {
+          try {
+            const res = await axios({
+              method: 'GET',
+              url: `${BASE_URL}/friends_route/myfriends`,
+              headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              }
+            });
+            setIsLoading(true)
+            setInterval(() => {
+                setFriends(res.data.message);
+                setIsLoading(false);
+            }, 2000)
+          } catch (err) {
+            setIsLoading(false);
+            console.error(err.response.data);
+          }
+        };
+        fetchFriends();
+
+    }, [JWT]);
     
     const sendInvitation = async(recipient_id) => {
         await axios({
@@ -107,13 +119,18 @@ const InviteFriends = ({navigation}) => {
                             <Text style={{fontSize: 17, fontWeight: 500, color: Color.white}}>Challenge a friend</Text>
                         </View>
                         <View style={activityInfoStyle.friendsSection}>
-                            <ScrollView>
-                            {
-                                friends.map(friend => (
-                                    <Friend key={friend.id} name={friend.nickname} action={() => sendInvitation(friend.id)}/>
-                                ))
-                            }
-                            </ScrollView>
+                            { isLoading ? (
+                                <Indicator/>
+                            ) : (
+                                <ScrollView>
+                                {
+                                    friends.map(friend => (
+                                        <Friend key={friend.id} name={friend.nickname} action={() => sendInvitation(friend.id)}/>
+                                    ))
+                                }
+                                </ScrollView>
+                            )}
+                            
                         </View>
                     </View>
                     <View style={activityInfoStyle.btnContainer}>
