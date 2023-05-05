@@ -1,5 +1,6 @@
-import {  StyleSheet } from "react-native"
+import {  StyleSheet, Dimensions } from "react-native"
 import { Color } from "../../../globalStyling"
+const { height, width } = Dimensions.get('window')
 
 const goalStyling = StyleSheet.create({
     mainContainer: {
@@ -66,9 +67,16 @@ const goalStyling = StyleSheet.create({
     },
     goalContainer: {
         width: '80%',
-        height: '65%',
+        height: '75%',
         display: 'flex',
         justifyContent: 'space-around'
+    },
+    btnContainer: {
+        width: width,
+        height: height / 8,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 

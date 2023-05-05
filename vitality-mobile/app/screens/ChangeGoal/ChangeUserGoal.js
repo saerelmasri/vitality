@@ -56,27 +56,23 @@ const ChangeGoal = ({navigation}) => {
         <View style={goalStyling.mainContainer}>
             { isLoading ? (<Indicator/>) : (
                 <>
-                    <View  style={goalStyling.backBtnContainer}>
-                        <View style={goalStyling.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
                     <View style={goalStyling.contentContainer}>
                         <View style={goalStyling.headerContainer}>
                             <Text style={goalStyling.headerText}>Do you want to change your <Text style={goalStyling.span}>goal?</Text></Text>
                         </View>
-                    <View style={goalStyling.goalContainer}>
-                        <GoalBtn goalName={'Maintain weight'} action={() => {setGoal('maintain'), setGoalID('1')}} />
-                        <GoalBtn goalName={'Mild weight loss'} action={() => {setGoal('mildlose'), setGoalID('2')}}/>
-                        <GoalBtn goalName={'Weight loss'} action={() => {setGoal('weightlose'), setGoalID('3')}}/>
-                        <GoalBtn goalName={'Extreme weight loss'} action={() => {setGoal('extremelose'), setGoalID('4')}}/>
-                        <GoalBtn goalName={'Mild weight gain'} action={() => {setGoal('mildgain'), setGoalID('5')}}/>
-                        <GoalBtn goalName={'Weight gain'} action={() => {setGoal('weightgain'), setGoalID('6')}}/>
-                        <GoalBtn goalName={'Extreme weight gain'} action={() => {setGoal('extremegain'), setGoalID('7')}}/>
-                    </View>
-                    <Button action={() => checkGoal(goalID)} title={'Continue'}/>
+                        <View style={goalStyling.goalContainer}>
+                            <GoalBtn goalName={'Maintain weight'} action={() => {setGoal('maintain'), setGoalID('1')}} />
+                            <GoalBtn goalName={'Mild weight loss'} action={() => {setGoal('mildlose'), setGoalID('2')}}/>
+                            <GoalBtn goalName={'Weight loss'} action={() => {setGoal('weightlose'), setGoalID('3')}}/>
+                            <GoalBtn goalName={'Extreme weight loss'} action={() => {setGoal('extremelose'), setGoalID('4')}}/>
+                            <GoalBtn goalName={'Mild weight gain'} action={() => {setGoal('mildgain'), setGoalID('5')}}/>
+                            <GoalBtn goalName={'Weight gain'} action={() => {setGoal('weightgain'), setGoalID('6')}}/>
+                            <GoalBtn goalName={'Extreme weight gain'} action={() => {setGoal('extremegain'), setGoalID('7')}}/>
+                        </View>
+                        <View style={goalStyling.btnContainer}>
+                            <Button action={() => checkGoal(goalID)} title={'Continue'}/>
+                        </View>
+                        
                     </View>
                 </>
             )}

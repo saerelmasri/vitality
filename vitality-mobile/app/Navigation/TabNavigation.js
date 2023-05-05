@@ -94,11 +94,11 @@ const ProfileDashboard = () => {
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Profile" component={Profile} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
-        <Stack.Screen name="Settins" component={Settings} options={{headerShown:false,}}/>
-        <Stack.Screen name="ChangeHeight" component={ChangeUserHeight} options={{headerShown:false,}}/>
-        <Stack.Screen name="ChangeWeight" component={ChangeUserWeight} options={{headerShown:false,}} />
-        <Stack.Screen name="ChangeGoal" component={ChangeGoal} options={{headerShown:false,}} />
-        <Stack.Screen name="ChangeActivity" component={ChangeActivityLevel} options={{headerShown:false,}} />
+        <Stack.Screen name="Settins" component={Settings} options={{headerShown:true, headerTitle: 'Settings', headerTitleAlign: "center", headerStyle: {backgroundColor: '#8AA6A3', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
+        <Stack.Screen name="ChangeHeight" component={ChangeUserHeight} options={{headerShown:true, headerTitle: 'Change Height', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
+        <Stack.Screen name="ChangeWeight" component={ChangeUserWeight} options={{headerShown:true, headerTitle: 'Change Weight', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
+        <Stack.Screen name="ChangeGoal" component={ChangeGoal} options={{headerShown:true, headerTitle: 'Change Goal', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
+        <Stack.Screen name="ChangeActivity" component={ChangeActivityLevel} options={{headerShown:true, headerTitle: 'Change Activity', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
         <Stack.Screen name="FriendList" component={FriendList} options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}, headerLeft: () => (
             <Pressable onPress={() => navigation.goBack()}>
               <MaterialCommunityIcons name="arrow-left" size={30} />

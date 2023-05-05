@@ -9,6 +9,7 @@ import Indicator from '../../Components/ActivityIndicator/indicator'
 import Button from "../../Components/Button/Button";
 var JWT = ""
 import { BASE_URL } from '@env'
+import { ScrollView } from "react-native-gesture-handler";
 
 
 const ChangeActivityLevel = ({navigation}) => {
@@ -56,47 +57,45 @@ const ChangeActivityLevel = ({navigation}) => {
             { loading ? (<Indicator/>) : (
                 <>
                     <View>
-                        <View  style={activityLevelStyle.backBtnContainer}>
-                            <View style={activityLevelStyle.backBtn}>
-                                <Pressable onPress={() => navigation.goBack()}>
-                                    <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                                </Pressable>
-                            </View>
-                        </View>
-                        <View style={activityLevelStyle.contentContainer}>
-                            <View style={activityLevelStyle.headerContainer}>
-                                <Text style={activityLevelStyle.headerText}>Select your new <Text style={activityLevelStyle.span}>activity level</Text></Text>
-                            </View>
-                            
-                            <View style={activityLevelStyle.activityContainer}>
-                                <ActivityLevelTypes 
-                                    title={'Sedentary: little or no exercise'} 
-                                    action={() => setActivity('2')}
-                                />
-                                <ActivityLevelTypes 
-                                    title={'Exercise 1-3 times/week'} 
-                                    action={() => {setActivity('3')}}
-                                />
-                                <ActivityLevelTypes 
-                                    title={'Exercise 4-5 times/week'} 
-                                    action={() => setActivity('4')}
-                                />
-                                <ActivityLevelTypes 
-                                    title={'Daily exercise or intense exercise 3-4 times/week'} 
-                                    action={() => setActivity('5')}
-                                />
-                                <ActivityLevelTypes 
-                                    title={'Intense exercise 6-7 times/week'} 
-                                    action={() => setActivity('6')}
-                                />
-                                <ActivityLevelTypes 
-                                    title={'Very intense exercise daily, or physical job'} 
-                                    action={() => setActivity('7')}
-                                />
+                        <ScrollView>
+                            <View style={activityLevelStyle.contentContainer}>
+                                <View style={activityLevelStyle.headerContainer}>
+                                    <Text style={activityLevelStyle.headerText}>Select your new <Text style={activityLevelStyle.span}>activity level</Text></Text>
+                                </View>
                                 
+                                <View style={activityLevelStyle.activityContainer}>
+                                    <ActivityLevelTypes 
+                                        title={'Sedentary: little or no exercise'} 
+                                        action={() => setActivity('2')}
+                                    />
+                                    <ActivityLevelTypes 
+                                        title={'Exercise 1-3 times/week'} 
+                                        action={() => {setActivity('3')}}
+                                    />
+                                    <ActivityLevelTypes 
+                                        title={'Exercise 4-5 times/week'} 
+                                        action={() => setActivity('4')}
+                                    />
+                                    <ActivityLevelTypes 
+                                        title={'Daily exercise or intense exercise 3-4 times/week'} 
+                                        action={() => setActivity('5')}
+                                    />
+                                    <ActivityLevelTypes 
+                                        title={'Intense exercise 6-7 times/week'} 
+                                        action={() => setActivity('6')}
+                                    />
+                                    <ActivityLevelTypes 
+                                        title={'Very intense exercise daily, or physical job'} 
+                                        action={() => setActivity('7')}
+                                    />
+                                    
+                                </View>
+                                <View style={activityLevelStyle.btnContainer}>
+                                    <Button action={() => checkActivity(activity)} title={"Continue"}/>
+                                </View>
+
                             </View>
-                            <Button action={() => checkActivity(activity)} title={"Continue"}/>
-                        </View>
+                        </ScrollView>
                     </View>
                 </>
             )}

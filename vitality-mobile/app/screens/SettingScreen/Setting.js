@@ -1,22 +1,25 @@
 import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from "react-native";
 import { Color } from "../../../globalStyling";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as ImagePicker from 'expo-image-picker'
 import Indicator from "../../Components/ActivityIndicator/indicator";
-var JWT =""
 import { BASE_URL } from '@env'
 
 const Settings = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    })
+    const [ JWT, setJWT ] = useState('')
+    useEffect(() => {
+        AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
     const [ user, setUser ] = useState('')
     const [ image, setImage ] = useState('')
@@ -69,23 +72,12 @@ const Settings = ({navigation}) => {
         }
     }
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={settingStyle.container}>
                 <ScrollView>
                 { isLoading ? (
                     <Indicator/>
                 ): (
                     <>
-                        <View style={settingStyle.backBtnContainer}>
-                            <View style={settingStyle.backBtn}>
-                                <Pressable onPress={() => navigation.goBack()}>
-                                    <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                                </Pressable>
-                            </View>
-                        </View>
-                        <View style={settingStyle.headerContent}>
-                            <Text style={{fontSize: 25}}>Settings</Text>
-                        </View>
                         <View style={settingStyle.profileContainer}>
                             <View style={settingStyle.avatarContent} >
                                 <View style={settingStyle.picture}>
@@ -107,7 +99,7 @@ const Settings = ({navigation}) => {
                             </View>
 
                             <View style={settingStyle.name}>
-                                <Text style={{fontSize: 22, fontWeight: 500}}>
+                                <Text style={{fontSize: 30, fontWeight: 500}}>
                                     {user}
                                 </Text>
                             </View>
@@ -116,26 +108,25 @@ const Settings = ({navigation}) => {
                         <View style={settingStyle.optionsContainer}>
                             <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeHeight')}>
                                 <Text style={settingStyle.optionTxt}>Change Height</Text>
-                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
                             </TouchableOpacity>
                             <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeWeight')}>
                                 <Text style={settingStyle.optionTxt}>Change Weight</Text>
-                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
                             </TouchableOpacity>
                             <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeGoal')}>
                                 <Text style={settingStyle.optionTxt}>Change goal</Text>
-                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
                             </TouchableOpacity>
                             <TouchableOpacity style={settingStyle.option} onPress={() => navigation.navigate('ChangeActivity')}>
                                 <Text style={settingStyle.optionTxt}>Change activity level</Text>
-                                <Image source={require('../../assets/app-img/back-btn.png')} style={{ transform: [{ rotateY: '180deg' }] }}/>
+                                <MaterialCommunityIcons name="arrow-right-thin" color={'black'} size={50} />
                             </TouchableOpacity>
                         </View>
                     </>
                 )}
                 </ScrollView>
             </View>
-        </SafeAreaView>
     );
 }
 
@@ -148,22 +139,6 @@ const settingStyle = StyleSheet.create({
         overflow: "hidden",
         width: "100%",
     },
-    backBtnContainer: {
-        width: width,
-        height: height / 10,
-        display: 'flex',
-        backgroundColor: Color.grey
-    },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }, 
     headerContent: {
         width: width,
         height: height / 22,
@@ -179,14 +154,15 @@ const settingStyle = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent:'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     avatarContent: {
         width: width / 4,
         height: height / 7,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: '10%'
     },
     picture:{
         width: 120,
@@ -204,7 +180,6 @@ const settingStyle = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 10
     },
     actionBtn: {
         width: width / 5,

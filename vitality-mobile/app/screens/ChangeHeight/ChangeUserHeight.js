@@ -73,24 +73,11 @@ const ChangeUserHeight = ({navigation}) => {
         }
     }
 
-    return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
-            
+    return(            
             <View style={statsStyling.container}>
             { isLoading ? (<Indicator/>) : (
                 <>
                     <ScrollView>
-                        <View style={statsStyling.backBtnContainer}>
-                            <View style={statsStyling.backBtn}>
-                                <Pressable onPress={() => navigation.goBack()}>
-                                    <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                                </Pressable>
-                            </View>
-                        </View>
-                        <View style={statsStyling.headerContent}>
-                            <Text style={{fontSize: 28, fontWeight: 500, color: Color.white}}>Change your Height</Text>
-                        </View>
-
                         <View style={statsStyling.inputContainer}>
                             <View style={statsStyling.heightContainer}>
                                 <View style={statsStyling.TitleContainer}>
@@ -120,7 +107,6 @@ const ChangeUserHeight = ({navigation}) => {
             )}
                 
             </View>
-        </SafeAreaView>
     );
 }
 

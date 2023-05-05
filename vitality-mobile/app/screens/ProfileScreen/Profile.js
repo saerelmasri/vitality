@@ -37,8 +37,9 @@ const Profile = ({navigation}) => {
                 console.log(error);
             });
 
-        return () => { isMounted = false }; // cleanup function to prevent memory leaks
+        return () => { isMounted = false };
     }, []);
+
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={profileStyling.container}>
@@ -47,7 +48,13 @@ const Profile = ({navigation}) => {
                         <View style={profileStyling.infoContainer}>
                             <View style={profileStyling.profileAvatar}>
                                 <Text style={profileStyling.avatarTxt}>Your Profile</Text>
-                                <View style={profileStyling.avatar}></View>
+                                {
+                                    profileDetail.photo_url ? (
+                                        <Image style={profileStyling.avatar} source={{ uri: profileDetail.photo_url }}/>
+                                    ) : (
+                                        <Image style={profileStyling.avatar} source={require('../../assets/app-img/default.jpg')}/>
+                                    )
+                                }
                                 <Text style={profileStyling.avatarTxt}>{profileDetail['full_name']}</Text>
                                 <Text style={profileStyling.avatarTxt}>@{profileDetail['nickname']}</Text>
                             </View>
@@ -94,9 +101,10 @@ const profileStyling = StyleSheet.create({
     },
     profileContainer: {
         width: width, 
-        height: height / 2.5,
+        height: height / 2.2,
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     infoContainer: {
@@ -109,7 +117,8 @@ const profileStyling = StyleSheet.create({
         height: height / 4.5,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        
     },
     avatar: {
         borderColor: Color.white,
@@ -121,7 +130,9 @@ const profileStyling = StyleSheet.create({
     avatarTxt: {
         color: Color.white, 
         fontSize: 20, 
-        fontWeight: 500
+        fontWeight: 500,
+        marginTop: 5,
+        marginBottom: 5
     },
     levelContainer: {
         borderColor: Color.white,

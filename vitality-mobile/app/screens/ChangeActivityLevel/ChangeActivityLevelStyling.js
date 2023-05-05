@@ -1,5 +1,6 @@
-import { View, Alert, Pressable, Image, Text, TouchableOpacity, StyleSheet } from "react-native"
+import { View, Alert, Pressable, Image, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native"
 import { Color } from "../../../globalStyling"
+const { height, width } = Dimensions.get('window')
 
 const activityLevelStyle = StyleSheet.create({
     mainContainer: {
@@ -11,25 +12,9 @@ const activityLevelStyle = StyleSheet.create({
         overflow: "hidden",
         width: "100%",
     },
-    backBtnContainer: {
-        width: '100%',
-        height: '10%',
-        display: 'flex',
-        justifyContent: 'center'
-    },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     contentContainer: {
-        width: '100%',
-        height: '90%',
+        width: width,
+        height:  height,
         display: 'flex',
         alignItems: 'center'
     },
@@ -65,6 +50,14 @@ const activityLevelStyle = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around'
+    },
+    btnContainer: {
+        width: width,
+        height: height / 7,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 2
     }
 })
 
