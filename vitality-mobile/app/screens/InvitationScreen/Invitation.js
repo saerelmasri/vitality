@@ -6,40 +6,47 @@ const { height, width } = Dimensions.get('window')
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-var JWT = ''
 import { BASE_URL } from '@env'
 import Indicator from "../../Components/ActivityIndicator/indicator";
 
 const Invitation = ({navigation}) => {
-    AsyncStorage.getItem('jwt')
-    .then(token => {
-        JWT = token
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
+    const [ JWT, setJWT ] = useState('')
     const [ invitations, setInvitations ] = useState([])
 
     useEffect(() => {
-        const fetchInvitations = async () => {
-            await axios({
-                method: 'GET',
-                url: `${BASE_URL}/competition_route/allInvitation`,
-                headers: {
-                    'Authorization': JWT,
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => {
-                setInvitations(res.data.message);
-            }).catch(err => {
-                console.log(err.response.data.message);
+        const interval = setInterval(() => {
+            AsyncStorage.getItem('jwt')
+            .then(token => {
+                setJWT(token)
             })
+            .catch(error => {
+                console.log(error);
+            })
+        }, 1000)
+        return () => clearInterval(interval);
+    }, [])
+
+    useEffect(() => {
+        const fetchInvitations = async () => {
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/competition_route/allInvitation`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setInvitations(res.data.message);
+                }).catch(err => {
+                    console.log(err.response.data.message);
+                })
+            }
         }
 
         fetchInvitations()
-    }, [])
+    }, [JWT])
 
     const changeStatus = async(id, statusInfo) => {
         await axios({
