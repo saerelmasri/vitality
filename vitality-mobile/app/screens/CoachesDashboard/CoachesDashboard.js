@@ -1,12 +1,11 @@
-import { View, ScrollView, SafeAreaView, Pressable, Image, StatusBar, Platform, Alert, Text, TextInput, TouchableOpacity, Dimensions } from "react-native";
+import { View, ScrollView, Image, Text, Dimensions } from "react-native";
 import { useEffect, useState } from 'react'
-import { API_KEY_RECIPES, BASE_URL } from '@env'
+import { BASE_URL } from '@env'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Color } from "../../../globalStyling";
 import { coachDashboardStyle } from "./CoachesDashboardStyle";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-const { height, width } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 import CoachComponent from "../../Components/CoachComponent/CoachComponent";
 import Indicator from "../../Components/ActivityIndicator/indicator";
 
@@ -83,7 +82,7 @@ const CoachDashboard = ({navigation}) => {
                             <ScrollView style={{width: width, flex: 1,}}>
                             {
                                 coaches.map((item, index) => (
-                                    <CoachComponent name={item.full_name} experience={item.coach_experience} gym={item.gym} avatar={item.photo_url}/>
+                                    <CoachComponent name={item.full_name} experience={item.coach_experience} gym={item.gym} avatar={item.photo_url} action={() => navigation.navigate('CoachInfo', {id: item.id})}/>
                                 ))
                             }   
                             </ScrollView>

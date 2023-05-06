@@ -38,6 +38,7 @@ import Settings from '../screens/SettingScreen/Setting';
 
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import CoachDashboard from '../screens/CoachesDashboard/CoachesDashboard';
+import CoachInfo from '../screens/CoachInfo/CoachInfo';
 
 const NutritionDashboard = () => {
   return (
@@ -68,6 +69,7 @@ const Workout = () => {
         <Stack.Screen name="WorkoutDashboard" component={WorkoutDashboard} options={{headerShown:true, headerTitle: 'Discover', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="ExerciseListing" component={ExerciseListing} options={{headerShown:true, headerTitle: '', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="CoachDashboard" component={CoachDashboard} options={{headerShown:true, headerTitle: 'Coaches', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="CoachInfo" component={CoachInfo} options={{headerShown:true, headerTitle: '', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTransparent: true, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
       </Stack.Navigator>
     );
 }
