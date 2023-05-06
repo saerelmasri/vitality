@@ -32,9 +32,7 @@ const ExtraInfo = () => {
                 },
                 data: data
             }).then(res => {
-                console.log(res.data);
-                localStorage.setItem('token',res.data.token);
-                window.location.href="http://localhost:3000/extra_info";
+                window.location.href="http://localhost:3000/dashboard";
             }).catch(err => {
                 alertFail(err.response);
             });
