@@ -19,8 +19,10 @@ const Register = () => {
     console.log(data);
 
     const handle_submit = () => {
-        if(email === "" && password === ""){
-            alertFail('All fields are required');
+        if(confirmPassword !== password){
+            alertFail('Password does not match');
+        }else if(fullName === "" || email === '' || password === "" || confirmPassword === ""){
+            alertFail('All fields are required')
         }else{
             axios({
                 method: 'POST',
