@@ -4,7 +4,7 @@ import TargetMuscle from "../../Components/TargetMuscleComponent/TargetMuscle";
 const { height, width } = Dimensions.get('window')
 
 
-const WorkoutDashboard = () => {
+const WorkoutDashboard = ({navigation}) => {
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={workoutDashboardStyling.container}>
@@ -13,7 +13,7 @@ const WorkoutDashboard = () => {
                         <TouchableOpacity style={workoutDashboardStyling.options} onPress={() => navigation.navigate('WorkoutDashboard')}>
                             <Text style={workoutDashboardStyling.text}>Workouts</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={workoutDashboardStyling.options} onPress={() => navigation.navigate('WorkoutDashboard')}>
+                        <TouchableOpacity style={workoutDashboardStyling.options} onPress={() => navigation.navigate('CoachDashboard')}>
                             <Text style={workoutDashboardStyling.text}>Coaches</Text>
                         </TouchableOpacity>
 

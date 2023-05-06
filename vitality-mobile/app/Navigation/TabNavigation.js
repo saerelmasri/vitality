@@ -37,6 +37,7 @@ import Profile from '../screens/ProfileScreen/Profile';
 import Settings from '../screens/SettingScreen/Setting';
 
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import CoachDashboard from '../screens/CoachesDashboard/CoachesDashboard';
 
 const NutritionDashboard = () => {
   return (
@@ -66,6 +67,7 @@ const Workout = () => {
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="WorkoutDashboard" component={WorkoutDashboard} options={{headerShown:true, headerTitle: 'Discover', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="ExerciseListing" component={ExerciseListing} options={{headerShown:true, headerTitle: '', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="CoachDashboard" component={CoachDashboard} options={{headerShown:true, headerTitle: 'Coaches', headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
       </Stack.Navigator>
     );
 }
