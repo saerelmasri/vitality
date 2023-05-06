@@ -9,6 +9,15 @@ const WorkoutDashboard = () => {
         <SafeAreaView style={{flex:1}}>
             <View style={workoutDashboardStyling.container}>
                 <ScrollView>
+                    <View style={workoutDashboardStyling.headerOptions}>
+                        <TouchableOpacity style={workoutDashboardStyling.options} onPress={() => navigation.navigate('WorkoutDashboard')}>
+                            <Text style={workoutDashboardStyling.text}>Workouts</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={workoutDashboardStyling.options} onPress={() => navigation.navigate('WorkoutDashboard')}>
+                            <Text style={workoutDashboardStyling.text}>Coaches</Text>
+                        </TouchableOpacity>
+
+                    </View>
                     <View style={workoutDashboardStyling.headerTitle}>
                         <Text style={workoutDashboardStyling.title}>
                             Our Collections
@@ -56,6 +65,28 @@ const workoutDashboardStyling = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         paddingBottom: 10
+    },
+    headerOptions: {
+        width: width,
+        height: height / 10,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
+    options: {
+        width: '40%',
+        height: '70%',
+        borderRadius: 10,
+        backgroundColor: Color.grey,
+        display: 'flex',
+        justifyContent:'center',
+        alignItems: 'center'
+    },
+    text: {
+        fontSize: 22,
+        color: Color.black,
+        fontWeight: 500
     }
 })
 

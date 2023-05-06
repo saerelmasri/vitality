@@ -63,8 +63,6 @@ const Login = () => {
                         />
                     </View>
 
-                    <Text style={loginStyles.forgotPassword}>Forgot Password?</Text>
-
                     <Button title={'Log In'} action={() => login()}/>
                     
                     <Text style={loginStyles.actions}>Need an account? <Text style={loginStyles.span} onPress={() => navigation.navigate('Register')}>Register</Text></Text>
