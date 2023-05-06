@@ -94,40 +94,56 @@ const login = (req, res) => {
 }
 
 const getCoachesInfo = async(req, res) => {
-    const token = req.header('Authorization');
+    const token = req.header('Authorization')
     if(!token){
-        return res.status(400).json({
-            status:400,
+        return res.status(401).json({
+            status: 401,
             message: 'Unauthorized'
-        });
+        })
     }
     try{
-        const decode = jwt.verify(token, process.env.JWT_TOKEN);
-        const user_id = decode.userId
-        const fetch = 'SELECT full_name, email FROM coaches WHERE id = ?'
-        await sql.query(fetch,user_id, (err, result) => {
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN)
+        const coach_id = decoded.userId
+        const query = `
+            SELECT c.full_name, c.email, ci.*, cp.photo_url
+            FROM coaches c
+            LEFT JOIN coach_info_extra ci ON c.id = ci.coach_id
+            LEFT JOIN (
+                SELECT coach_id, photo_url
+                FROM coach_photo cp1
+                WHERE cp1.created_at = (
+                    SELECT MAX(created_at)
+                    FROM coach_photo cp2
+                    WHERE cp1.coach_id = cp2.coach_id
+                )
+            ) AS cp ON c.id = cp.coach_id
+            WHERE c.id = ?`
+
+        await sql.query(query, [coach_id], (err, result) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
                     message: err
-                });
-            }
-            if(!result){
-                return res.status(401).json({
-                    status: 401,
-                    message: 'Invalid id'
                 })
             }
+
+            if(result.length === 0){
+                return res.status(404).json({
+                    status: 404,
+                    message: 'No coach'
+                })
+            }
+
             return res.status(201).json({
                 status: 201,
-                message: 'Success',
-                response: result
+                message: result
             })
-        } )
+        })
     }catch(err){
         res.status(500).json({
-            message: 'Server Error'
-        });
+            status: 500,
+            message: err
+        })
     }
 }
 
