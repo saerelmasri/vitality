@@ -78,6 +78,10 @@ const CoachInfo = () => {
                                 <View style={[CoachInfoStyle.cardContainer]}> 
                                     <Text style={{fontSize: 20}}>Gym:{'\n'}{coach['gym']}</Text>
                                 </View>
+                            </View >
+                            <View style={CoachInfoStyle.contactContainer}>
+                                <Text style={{fontSize: 20}}>Contact Me: {coach['email']}</Text>
+
                             </View>
                             
 

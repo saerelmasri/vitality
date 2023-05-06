@@ -45,7 +45,8 @@ const CoachInfoStyle = StyleSheet.create({
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: '10%'
     },
     aboutContainer: {
         width: '100%', 
@@ -68,6 +69,13 @@ const CoachInfoStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: '2%',
+    },
+    contactContainer: {
+        width: '100%',
+        height: height / 18,
+        display: 'flex',
+        justifyContent: 'center',
+        paddingLeft: '2%'
     }
     
 })
