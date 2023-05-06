@@ -2,9 +2,10 @@ const { Router } = require('express');
 const route = Router();
 const multer = require('multer')
 const path = require('path')
+const jwt = require('../middleware/jwt.middleware')
 
 const { register, login, getCoachesInfo } = require('../controllers/coaches.controllers');
-const { add_coach_extra_info, coach_extra_info } = require('../controllers/coach_extra_info.controllers')
+const { add_coach_extra_info, coach_extra_info, allCoaches } = require('../controllers/coach_extra_info.controllers')
 const { addProfilePhoto, getLastPhotoUrl } = require('../controllers/coach_photo.controllers')
 
 var storage = multer.diskStorage({
@@ -25,6 +26,7 @@ route.post('/login', login);
 route.get('/getCoachesInfo', getCoachesInfo);
 route.post('/add_coach_extra_info', add_coach_extra_info)
 route.get('/get_coach_extra_info', coach_extra_info)
+route.get('/allCoaches', jwt, allCoaches)
 route.post('/addProfilePhoto',upload.single('image'), addProfilePhoto)
 route.get('/getLastPhotoUrl', getLastPhotoUrl)
 

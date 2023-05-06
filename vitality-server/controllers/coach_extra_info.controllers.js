@@ -58,10 +58,18 @@ const coach_extra_info = async(req, res) => {
         const user_id = decode.userId
 
         const query = `
-            SELECT c.full_name, c.email, ci.*
+            SELECT c.full_name, c.email, ci.*, cp.photo_url
             FROM coaches c
-            LEFT JOIN coach_info_extra ci
-            ON c.id = ci.coach_id
+            LEFT JOIN coach_info_extra ci ON c.id = ci.coach_id
+            LEFT JOIN (
+                SELECT coach_id, photo_url
+                FROM coach_photo cp1
+                WHERE cp1.created_at = (
+                    SELECT MAX(created_at)
+                    FROM coach_photo cp2
+                    WHERE cp1.coach_id = cp2.coach_id
+                )
+            ) AS cp ON c.id = cp.coach_id
             WHERE c.id = ?`
         await sql.query(query, user_id, (err, result) => {
             if(err){
@@ -83,7 +91,44 @@ const coach_extra_info = async(req, res) => {
         })
     }
 }
+
+const allCoaches = async(req, res) => {
+    try{
+        const query = `
+            SELECT c.full_name, c.email, ci.*, cp.photo_url
+            FROM coaches c
+            LEFT JOIN coach_info_extra ci ON c.id = ci.coach_id
+            LEFT JOIN (
+                SELECT coach_id, photo_url
+                FROM coach_photo cp1
+                WHERE cp1.created_at = (
+                    SELECT MAX(created_at)
+                    FROM coach_photo cp2
+                    WHERE cp1.coach_id = cp2.coach_id
+                )
+            ) AS cp ON c.id = cp.coach_id`
+        await sql.query(query, (err, result) => {
+            if(err){
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                message: result
+            })
+        })
+    }catch(err){
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
 module.exports = { 
     add_coach_extra_info,
-    coach_extra_info
+    coach_extra_info,
+    allCoaches
  }
