@@ -5,8 +5,8 @@ const FirstPlace = ({avatar}) => {
     return(
         <View style={leaderboardStyle.boardPlace}>
             {
-                avatar ? (
-                    <Image style={leaderboardStyle.profileFirst} source={{ uri: {avatar}}}/>
+                avatar !== null && avatar !== undefined ? (
+                    <Image style={leaderboardStyle.profileFirst} source={{ uri: `${avatar}`}}/>
                 ) : (
                     <Image style={leaderboardStyle.profileFirst} source={require('../../assets/app-img/default.jpg')}/>
                 )

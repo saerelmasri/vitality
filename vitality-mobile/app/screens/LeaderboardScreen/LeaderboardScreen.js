@@ -54,7 +54,7 @@ const Leaderboard = ({navigation}) => {
         fetchLeaderboard();
       
         return () => clearInterval(intervalId);
-      }, [JWT]);
+    }, [JWT]);
 
     return(
         <SafeAreaView style={{flex:1, }}>
@@ -67,9 +67,9 @@ const Leaderboard = ({navigation}) => {
                             <>
                             <View style={leaderboardStyle.headerContainer}>
                                 <View style={leaderboardStyle.boardContainer}>
-                                    <Place position={'3'}/>
-                                    <FirstPlace/>
-                                    <Place position={' 2'}/>
+                                    <Place position={'3'} avatar={list[2].photo_url} />
+                                    <FirstPlace avatar={list[0].photo_url}/>
+                                    <Place position={'2'} avatar={list[1].photo_url}/>
                                 </View>
                             </View>
                             <View style={leaderboardStyle.leaderboard}>

@@ -4,8 +4,8 @@ import { Color } from "../../../globalStyling";
 const Place = ({avatar, position}) => {
     return(
         <View style={leaderboardStyle.boardPlace}>
-            { avatar ? (
-                <Image style={leaderboardStyle.profile} source={{ uri: {avatar}}}/>
+            { avatar !== null && avatar !== undefined ? (
+                <Image style={leaderboardStyle.profile} source={{ uri: `${avatar}`}}/>
             ) : (
                 <Image style={leaderboardStyle.profile} source={require('../../assets/app-img/default.jpg')}/>
             )}

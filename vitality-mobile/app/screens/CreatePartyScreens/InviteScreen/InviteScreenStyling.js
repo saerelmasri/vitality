@@ -179,7 +179,6 @@ const activityInfoStyle = StyleSheet.create({
         paddingBottom: '10%',
     },
     btnContainer: {
-        borderWidth: 1,
         width: width,
         height: width / 1.5,
         display: 'flex',
