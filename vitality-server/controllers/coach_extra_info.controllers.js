@@ -47,6 +47,7 @@ const add_coach_extra_info = async(req, res) => {
 
 const coach_extra_info = async(req, res) => {
     const token = req.header('Authorization')
+    const { id } = req.params;
     if(!token){
         return res.status(401).json({
             status: 401,
@@ -54,9 +55,6 @@ const coach_extra_info = async(req, res) => {
         })
     }
     try{
-        const decode = jwt.verify(token, process.env.JWT_TOKEN);
-        const user_id = decode.userId
-
         const query = `
             SELECT c.full_name, c.email, ci.*, cp.photo_url
             FROM coaches c
@@ -71,11 +69,19 @@ const coach_extra_info = async(req, res) => {
                 )
             ) AS cp ON c.id = cp.coach_id
             WHERE c.id = ?`
-        await sql.query(query, user_id, (err, result) => {
+
+        await sql.query(query, [id], (err, result) => {
             if(err){
                 return res.status(500).json({
                     status: 500,
                     message: err
+                })
+            }
+
+            if(result.length === 0){
+                return res.status(404).json({
+                    status: 404,
+                    message: 'No coach'
                 })
             }
 

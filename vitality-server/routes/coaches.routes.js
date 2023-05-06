@@ -25,7 +25,7 @@ route.post('/register', register);
 route.post('/login', login);
 route.get('/getCoachesInfo', getCoachesInfo);
 route.post('/add_coach_extra_info', add_coach_extra_info)
-route.get('/get_coach_extra_info', coach_extra_info)
+route.get('/get_coach_extra_info/:id', coach_extra_info)
 route.get('/allCoaches', jwt, allCoaches)
 route.post('/addProfilePhoto',upload.single('image'), addProfilePhoto)
 route.get('/getLastPhotoUrl', getLastPhotoUrl)
