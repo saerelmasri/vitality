@@ -131,6 +131,62 @@ const getCoachesInfo = async(req, res) => {
     }
 }
 
+const displayCoaches = async(req, res) => {
+    const token = req.header('Authorization')
+    if (!token) {
+        return res.status(401).json({
+            status: 401,
+            message: 'Unauthorized'
+        })
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN)
+        const coach_id = decoded.userId
+
+        const baseUrl = 'http://192.168.1.104:5000/vitality/vitality-server/vitality-server/coaches/'
+        const displayUsersQuery = `
+        SELECT c.full_name, cie.*
+        FROM coaches c
+        LEFT JOIN coach_info_extra cie ON c.id = cie.coach_id
+        LEFT JOIN (
+            SELECT coach_id, photo_url
+            FROM coach_photo up1
+            WHERE up1.created_at = (
+                SELECT MAX(created_at)
+                FROM coach_photo up2
+                WHERE up1.coach_id = up2.coach_id
+            )
+        ) AS up ON c.coach_id = up.coach_id
+        WHERE c.id = ?
+        `
+
+        await sql.query(displayUsersQuery, [coach_id], (err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    status: 500,
+                    message: err
+                })
+            }
+
+            const usersWithPhotoUrls = result.map(user => {
+                const photoUrl = user.photo_url ? baseUrl + user.photo_url : null
+                return { ...user, photo_url: photoUrl }
+            })
+
+            return res.status(200).json({
+                status: 200,
+                message: usersWithPhotoUrls
+            })
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err
+        })
+    }
+}
+
 module.exports = { 
     register, 
     login,

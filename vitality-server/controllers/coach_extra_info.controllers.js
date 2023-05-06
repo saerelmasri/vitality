@@ -57,7 +57,12 @@ const coach_extra_info = async(req, res) => {
         const decode = jwt.verify(token, process.env.JWT_TOKEN);
         const user_id = decode.userId
 
-        const query = 'SELECT * FROM coach_info_extra WHERE coach_id = ?'
+        const query = `
+            SELECT c.full_name, c.email, ci.*
+            FROM coaches c
+            LEFT JOIN coach_info_extra ci
+            ON c.id = ci.coach_id
+            WHERE c.id = ?`
         await sql.query(query, user_id, (err, result) => {
             if(err){
                 return res.status(500).json({
