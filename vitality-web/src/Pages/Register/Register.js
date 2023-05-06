@@ -16,8 +16,6 @@ const Register = () => {
         "password": password
     })
 
-    console.log(data);
-
     const handle_submit = () => {
         if(confirmPassword !== password){
             alertFail('Password does not match');
