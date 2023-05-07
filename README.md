@@ -52,11 +52,33 @@
 
 ### User Screens (Mobile)
 
-| Login screen                              | Register screen                         | Landing screen                          | Loading screen                          |
-| ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen                               | Menu Screen                             | Order Screen                            | Checkout Screen                         |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| Welcome screen                               | Login screen                             | Registration screen                         | Weight/Height screen                            |
+| -------------------------------------------- | ---------------------------------------- | ------------------------------------------- | ----------------------------------------------- |
+| ![Landing](./README/screenshots/welcome.jpg) | ![fsdaf](./README/screenshots/login.jpg) | ![fsdaf](./README/screenshots/register.jpg) | ![fsdaf](./README/screenshots/weightheight.jpg) |
+
+| Age screen                               | Gender screen                             | Goal screen                             | Diet screen                             |
+| ---------------------------------------- | ----------------------------------------- | --------------------------------------- | --------------------------------------- |
+| ![Landing](./README/screenshots/age.jpg) | ![fsdaf](./README/screenshots/gender.jpg) | ![fsdaf](./README/screenshots/goal.jpg) | ![fsdaf](./README/screenshots/diet.jpg) |
+
+| Activity screen                               | Landing screen 1                         | Landing screen 2                         | Landing screen 3                         |
+| --------------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| ![Landing](./README/screenshots/activity.jpg) | ![fsdaf](./README/screenshots/home1.jpg) | ![fsdaf](./README/screenshots/home2.jpg) | ![fsdaf](./README/screenshots/home3.jpg) |
+
+| Nutrition screen                                | Macros screen                             | Diary screen                                  | Kitchen screen 3                           |
+| ----------------------------------------------- | ----------------------------------------- | --------------------------------------------- | ------------------------------------------ |
+| ![Landing](./README/screenshots/nutrition1.jpg) | ![fsdaf](./README/screenshots/macros.jpg) | ![fsdaf](./README/screenshots/nutrition2.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) |
+
+| Recipe screen                               | Workout screen 1                            | Workout screen 2                            | Coaches screen                             |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------ |
+| ![Landing](./README/screenshots/recipe.jpg) | ![fsdaf](./README/screenshots/workout1.jpg) | ![fsdaf](./README/screenshots/workout2.jpg) | ![fsdaf](./README/screenshots/coaches.jpg) |
+
+| Coaches Info screen                            | Playground screen                             | Leaderboard screen                             | Invitations screen                             |
+| ---------------------------------------------- | --------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ![Landing](./README/screenshots/coachInfo.jpg) | ![fsdaf](./README/screenshots/playground.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) |
+
+| Profile screen                               | Setting screen                              | Friend List screen                            | Add Friend screen                            |
+| -------------------------------------------- | ------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
+| ![Landing](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/settings.jpg) | ![fsdaf](./README/screenshots/friendList.jpg) | ![fsdaf](./README/screenshots/addFriend.jpg) |
 
 ### Admin Screens (Web)
 
