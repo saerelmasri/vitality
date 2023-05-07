@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import { BASE_URL } from '@env'
 import Indicator from "../../Components/ActivityIndicator/indicator";
+import NoFriends from "../../Components/NoFriends/NoFriends";
 
 const FriendList = ({navigation}) => {
 
@@ -81,20 +82,19 @@ const FriendList = ({navigation}) => {
                         </Pressable>
                     </View>
                     <View style={friendStyle.friendListConteiner}>
-                        { isLoading ? (
-                            <Indicator/>
-                        ) : (
+                    <View style={friendStyle.friendListContainer}>
+                        {isLoading ? (
+                            <Indicator />
+                        ) : friend && friend.length > 0 ? (
                             <ScrollView>
-                                {friend.map(item => (
-                                    <FriendComponent 
-                                    key={item.id} 
-                                    name={item.nickname} 
-                                    photo={item.photo_url} 
-                                    />
-                                ))}
+                            {friend.map((item) => (
+                                <FriendComponent key={item.id} name={item.nickname} photo={item.photo_url} />
+                            ))}
                             </ScrollView>
+                        ) : (
+                            <NoFriends />
                         )}
-                        
+                    </View>
                     </View>
 
                 </ScrollView>
