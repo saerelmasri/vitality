@@ -29,19 +29,53 @@
 <!-- Prototyping -->
 <img src="./README/title3.svg"/>
 
-> We designed Vitality using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience. The design was done on Figma.
+> We designed Vitality using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience. Noted that the below wireframes were iterated throught the development process, the final results are shown in the implementation section on this README file. The design was done on Figma.
 
 ### Wireframes
 
-| Login screen                            | Register screen                       | Landing screen                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login screen                                      | Register screen 1                               | Register screen 2                               |
+| ------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| ![Landing](./README/wireframes/registration1.png) | ![fsdaf](./README/wireframes/registration2.png) | ![fsdaf](./README/wireframes/registration2.png) |
 
-### Mockups
+| Register screen 3                                 | Register screen 4                               | Register screen 5                               |
+| ------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| ![Landing](./README/wireframes/registration3.png) | ![fsdaf](./README/wireframes/registration4.png) | ![fsdaf](./README/wireframes/registration5.png) |
 
-| Home screen                             | Menu Screen                           | Order Screen                          |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Register screen 6                                 | Register screen 7                               | Nutrition screen                             |
+| ------------------------------------------------- | ----------------------------------------------- | -------------------------------------------- |
+| ![Landing](./README/wireframes/registration6.png) | ![fsdaf](./README/wireframes/registration8.png) | ![fsdaf](./README/wireframes/nutrition1.png) |
+
+| Diary screen                                   | Food screen                                  | Food facts screen                            |
+| ---------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| ![Landing](./README/wireframes/nutrition2.png) | ![fsdaf](./README/wireframes/nutrition3.png) | ![fsdaf](./README/wireframes/nutrition4.png) |
+
+| Kitchen screen                               | Kitchen Dashboard screen                   | Recipe screen                              |
+| -------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
+| ![Landing](./README/wireframes/kitchen1.png) | ![fsdaf](./README/wireframes/kitchen2.png) | ![fsdaf](./README/wireframes/kitchen3.png) |
+
+| Workout Deashboard screen                    | Workout Exercises screen                   | Coach Dashboard screen                     |
+| -------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
+| ![Landing](./README/wireframes/workout1.png) | ![fsdaf](./README/wireframes/workout2.png) | ![fsdaf](./README/wireframes/workout3.png) |
+
+| Coach Info screen                            | Playground Dashboard screen                   | Create Activity screen                        |
+| -------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| ![Landing](./README/wireframes/workout4.png) | ![fsdaf](./README/wireframes/playground1.png) | ![fsdaf](./README/wireframes/playground2.png) |
+
+| Invite Friend to activity screen                | Activity on going screen                      | Win screen                                    |
+| ----------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| ![Landing](./README/wireframes/playground3.png) | ![fsdaf](./README/wireframes/playground4.png) | ![fsdaf](./README/wireframes/playground5.png) |
+
+| Lose screen                                     | Leaderboard screen                            | Invitations screen                            |
+| ----------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| ![Landing](./README/wireframes/playground6.png) | ![fsdaf](./README/wireframes/playground7.png) | ![fsdaf](./README/wireframes/playground8.png) |
+
+| Invitation info screen                          | Profile screen                             | Friend List screen                         |
+| ----------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
+| ![Landing](./README/wireframes/playground9.png) | ![fsdaf](./README/wireframes/profile1.png) | ![fsdaf](./README/wireframes/profile2.png) |
+
+| Add friend screen  
+| --------------------------------------- |
+| ![Landing](./README/wireframes/profile3.png)
 
 <br><br>
 
@@ -79,14 +113,6 @@
 | Profile screen                               | Setting screen                              | Friend List screen                            | Add Friend screen                            |
 | -------------------------------------------- | ------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
 | ![Landing](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/settings.jpg) | ![fsdaf](./README/screenshots/friendList.jpg) | ![fsdaf](./README/screenshots/addFriend.jpg) |
-
-### Admin Screens (Web)
-
-| Login screen                            | Register screen                       | Landing screen                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-| Home screen                             | Menu Screen                           | Order Screen                          |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
 <br><br>
 
