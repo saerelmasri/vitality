@@ -56,7 +56,7 @@ const MealContainer = () => {
                     setBreakfastCal(res.data.message.breakfast);
                     setDinnerCal(res.data.message.dinner);
                     setLunchCal(res.data.message.lunch);
-                }).catch(err => console.error(err.response.data))
+                }).catch(err => console.log(err.response.data))
             };
             getTotalCalories()
 

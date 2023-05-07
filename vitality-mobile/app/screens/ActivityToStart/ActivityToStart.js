@@ -66,7 +66,7 @@ const ActivityToStart = ({navigation}) => {
                 navigation.navigate('onGoingActivity', { competitionID: competitionID['id'] })
             }
         }).catch(err => {
-            console.error(err.response.data.message);
+            console.log(err.response.data.message);
         })
     }
 
@@ -87,7 +87,7 @@ const ActivityToStart = ({navigation}) => {
                 navigation.navigate('PlaygroundDashboard')
             }
         }).catch(err => {
-            console.error(err.response.data.message);
+            console.log(err.response.data.message);
         })
     }
 

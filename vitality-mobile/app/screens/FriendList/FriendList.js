@@ -82,19 +82,17 @@ const FriendList = ({navigation}) => {
                         </Pressable>
                     </View>
                     <View style={friendStyle.friendListConteiner}>
-                    <View style={friendStyle.friendListContainer}>
-                        {isLoading ? (
-                            <Indicator />
-                        ) : friend && friend.length > 0 ? (
-                            <ScrollView>
+                    {isLoading ? (
+                        <Indicator />
+                    ) : friend && friend.length > 0 ? (
+                        <ScrollView>
                             {friend.map((item) => (
                                 <FriendComponent key={item.id} name={item.nickname} photo={item.photo_url} />
                             ))}
-                            </ScrollView>
-                        ) : (
-                            <NoFriends />
-                        )}
-                    </View>
+                        </ScrollView>
+                    ) : (
+                        <NoFriends />
+                    )}
                     </View>
 
                 </ScrollView>

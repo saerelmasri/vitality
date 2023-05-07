@@ -56,7 +56,7 @@ const ActivityInfo = ({navigation}) => {
                     navigation.navigate("InviteFriends", { competitionInfo: { id: res.data.competition_id } })
                 }
             } catch (err) {
-                console.error(err.response.data.message)
+                console.log(err.response.data.message)
             }
         }
     }

@@ -46,7 +46,7 @@ const InviteFriends = ({navigation}) => {
                 navigation.goBack()
             }
         }).catch((err) => {
-            console.error(err.response.data);
+            console.log(err.response.data);
         })
     }
 
@@ -70,7 +70,7 @@ const InviteFriends = ({navigation}) => {
             }, 2000)
           } catch (err) {
             setIsLoading(false);
-            console.error(err.response.data);
+            console.log(err.response.data);
           }
         };
         fetchFriends();

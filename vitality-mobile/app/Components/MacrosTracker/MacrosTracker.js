@@ -74,7 +74,7 @@ const Macro = () => {
                     setCarbs(res.data.message.carbs);
                     setFats(res.data.message.fats);
                     setProtein(res.data.message.protein);
-                }).catch(err => console.error(err.response.data))
+                }).catch(err => console.log(err.response.data))
             };
     
             getTotalCalories()

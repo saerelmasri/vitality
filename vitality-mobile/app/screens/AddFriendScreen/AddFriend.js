@@ -150,7 +150,6 @@ const addFriendStyling = StyleSheet.create({
     },
     friendListConteiner: {
         width: width,
-        height: height / 1.5,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

@@ -51,7 +51,7 @@ const FoodDetail = ({navigation}) => {
                 const { calories, name, fat_total_g, protein_g, carbohydrates_total_g } = res.data[0];
                 setFoodStats({ calories, nameProduct: name, fats: fat_total_g, protein: protein_g, carbs: carbohydrates_total_g });
             } catch (error) {
-                console.error(error.response.data);
+                console.log(error.response.data);
             }
         };
         if (serving !== '') {

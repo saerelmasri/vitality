@@ -58,7 +58,7 @@ const Macros = ({navigation}) => {
                     setBreakfastCal(res.data.message.breakfast);
                     setDinnerCal(res.data.message.dinner);
                     setLunchCal(res.data.message.lunch);
-                }).catch(err => console.error(err.response))
+                }).catch(err => console.log(err.response))
             };
     
             getTotalCalories()
@@ -90,7 +90,7 @@ const Macros = ({navigation}) => {
                     setFoodMeal3(res.data.message)
                 }
                 
-            }).catch(err => console.error(err.response.data.message))
+            }).catch(err => console.log(err.response.data.message))
         }
         
         getFoods(1)

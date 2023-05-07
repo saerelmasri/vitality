@@ -32,7 +32,6 @@ const LoginProvider = ({children}) => {
           setLoading(false)
         }
       }).catch((err) => {
-        console.log(err.response.data);
         setLoading(false);
         Alert.alert('Login Failed', 'Invalid email or password');
       })
