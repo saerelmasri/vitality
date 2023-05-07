@@ -73,9 +73,9 @@
 | ----------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
 | ![Landing](./README/wireframes/playground9.png) | ![fsdaf](./README/wireframes/profile1.png) | ![fsdaf](./README/wireframes/profile2.png) |
 
-| Add friend screen  
-| --------------------------------------- |
-| ![Landing](./README/wireframes/profile3.png)
+| Add friend screen                            | Activity Indicator screen                           | Welcome screen                            |
+| -------------------------------------------- | --------------------------------------------------- | ----------------------------------------- |
+| ![Landing](./README/wireframes/profile3.png) | ![fsdaf](./README/wireframes/activityIndicator.png) | ![fsdaf](./README/wireframes/Welcome.png) |
 
 <br><br>
 
