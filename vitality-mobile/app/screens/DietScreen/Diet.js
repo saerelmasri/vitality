@@ -24,13 +24,6 @@ const Diet = ({navigation}) => {
     }
     return(
         <View style={dietStyling.mainContainer}>
-            <View  style={dietStyling.backBtnContainer}>
-                <View style={dietStyling.backBtn}>
-                    <Pressable onPress={() => Alert.alert('image clicked')}>
-                        <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                    </Pressable>
-                </View>
-            </View>
             <View style={dietStyling.contentContainer}>
                 <View style={dietStyling.headerContainer}>
                     <Text style={dietStyling.headerText}>Choose a diet you’d like to follow</Text>

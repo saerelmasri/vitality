@@ -7,7 +7,6 @@ import { activityLevelStyle } from "./ActivityLevelStylings"
 import NextBtn from "../../Components/NextBtn/NextBtn"
 import ActivityLevelTypes from "../../Components/activityLevel/ActivityComponent"
 import Indicator from '../../Components/ActivityIndicator/indicator'
-var JWT = ''
 import { BASE_URL } from '@env'
 
 const ActivityLevel = ({navigation}) => {
@@ -16,11 +15,12 @@ const ActivityLevel = ({navigation}) => {
     const [loading, setLoading] = useState(false);
     const route = useRoute()
     const toPass = route.params.data
+    const [ JWT, setJWT ] = useState('')
 
     
     AsyncStorage.getItem('token')
     .then(token => {
-        JWT = token
+        setJWT(token)
     })
     .catch(error => {
         console.log(error);
@@ -36,17 +36,17 @@ const ActivityLevel = ({navigation}) => {
                     gender: toPass['toPass']['toPass']['toPass']['gender'],
                     height: toPass['toPass']['toPass']['toPass']['weightHeight']['userHeight'],
                     weight: toPass['toPass']['toPass']['toPass']['weightHeight']['userWeight'],
-                    activitylevel: activity,
+                    activitylevel: 5,
                     goal: toPass['toPass']['goal']['goal'],
                 },
                 headers: {
-                  'content-type': 'application/octet-stream',
-                  'X-RapidAPI-Key': '0be9f1d9fbmsh909221869cd9123p1b8f03jsnc224a276d142',
-                  'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
+                    'X-RapidAPI-Key': '0be9f1d9fbmsh909221869cd9123p1b8f03jsnc224a276d142',
+                    'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
                 }
             }).then(res => {
+                console.log(res);
                 setCalories(res.data.data['calorie'])
-            }).catch(err => console.log(err))
+            }).catch(err => console.log(err.response.data))
         }
 
         calculateCalories()
@@ -67,7 +67,6 @@ const ActivityLevel = ({navigation}) => {
         if(activity === ''){
             Alert.alert('Select an activity please')
         }else{
-            console.log(calories);
             await axios({
                 method: 'POST',
                 url: `${BASE_URL}/extra_info/extraInfoUser`,
@@ -123,13 +122,6 @@ const ActivityLevel = ({navigation}) => {
             { loading ? (<Indicator/>) : (
                 <>
                     <View>
-                        <View  style={activityLevelStyle.backBtnContainer}>
-                            <View style={activityLevelStyle.backBtn}>
-                                <Pressable onPress={() => Alert.alert('image clicked')}>
-                                    <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                                </Pressable>
-                            </View>
-                        </View>
                         <View style={activityLevelStyle.contentContainer}>
                             <View style={activityLevelStyle.headerContainer}>
                                 <Text style={activityLevelStyle.headerText}>Select <Text style={activityLevelStyle.span}>activity level</Text></Text>
@@ -140,27 +132,40 @@ const ActivityLevel = ({navigation}) => {
                             <View style={activityLevelStyle.activityContainer}>
                                 <ActivityLevelTypes 
                                     title={'Sedentary: little or no exercise'} 
-                                    action={() => setActivity('2')}
+                                    action={() => setActivity(2)}
                                 />
                                 <ActivityLevelTypes 
                                     title={'Exercise 1-3 times/week'} 
-                                    action={() => {setActivity('3')}}
+                                    action={() => {
+                                        setActivity(3)
+                                    }}
                                 />
                                 <ActivityLevelTypes 
                                     title={'Exercise 4-5 times/week'} 
-                                    action={() => setActivity('4')}
+                                    action={() => 
+                                        {setActivity(4)
+                                    }
+                                        
+                                    }
                                 />
                                 <ActivityLevelTypes 
                                     title={'Daily exercise or intense exercise 3-4 times/week'} 
-                                    action={() => setActivity('5')}
+                                    action={() =>{ 
+                                        setActivity(5)
+
+                                    }}
                                 />
                                 <ActivityLevelTypes 
                                     title={'Intense exercise 6-7 times/week'} 
-                                    action={() => setActivity('6')}
+                                    action={() => {
+                                        setActivity(6)
+                                    }}
                                 />
                                 <ActivityLevelTypes 
                                     title={'Very intense exercise daily, or physical job'} 
-                                    action={() => setActivity('7')}
+                                    action={() => {
+                                        setActivity(7   )
+                                    }}
                                 />
                                 
                             </View>

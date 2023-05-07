@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Color } from '../../../globalStyling'
+const { height, width } = Dimensions.get('window')
+
 
 const weightHeightStylings = StyleSheet.create({
     flex: {
@@ -20,19 +22,9 @@ const weightHeightStylings = StyleSheet.create({
         display: 'flex',
         justifyContent:'center'
     },
-    backBtn: {
-        height: 50,
-        width: 50,
-        marginTop: 0,
-        marginLeft: 10,
-        marginTop: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     container: {
         width: '100%',
-        height: '95%',
+        height: '100%',
         backgroundColor: Color.darkGreen,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
@@ -87,7 +79,7 @@ const weightHeightStylings = StyleSheet.create({
     heightContainer: {
         borderWidth: 1,
         width: '100%',
-        height: '60%',
+        height: '70%',
         backgroundColor: Color.darkGreen,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
@@ -114,7 +106,7 @@ const weightHeightStylings = StyleSheet.create({
     },
     leftButton: {
         width: '100%',
-        height: '100%',
+        height: height / 15,
         backgroundColor: Color.white,
         borderRadius: 30,
         display: 'flex',

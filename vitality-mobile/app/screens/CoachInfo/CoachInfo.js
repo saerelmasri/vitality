@@ -26,30 +26,33 @@ const CoachInfo = () => {
     }, [])
 
     useEffect(() => {
-        const fetchCoaches = async() => {
-            if (JWT) {
-                await axios({
-                    method: 'GET',
-                    url: `${BASE_URL}/coach/get_coach_extra_info/${coachId}`,
-                    headers: {
-                        'Authorization': JWT,
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => {
-                    setIsLoading(true)
-                    setInterval(() => {
-                        setCoach(res.data.message[0]);
+        setInterval(() => {
+            const fetchCoaches = async() => {
+                if (JWT) {
+                    await axios({
+                        method: 'GET',
+                        url: `${BASE_URL}/coach/get_coach_extra_info/${coachId}`,
+                        headers: {
+                            'Authorization': JWT,
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => {
+                        setIsLoading(true)
+                        setInterval(() => {
+                            setCoach(res.data.message[0]);
+                            setIsLoading(false)
+                        }, 2000)
+                    }).catch(err => {
                         setIsLoading(false)
-                    }, 2000)
-                }).catch(err => {
-                    setIsLoading(false)
-                    console.log(err.response.data);
-                })
+                        console.log(err.response.data);
+                    })
+                }
             }
-        }
-
-        fetchCoaches()
+    
+            fetchCoaches()
+        }, 10000)
+        
     }, [JWT])
     return(
         <SafeAreaView style={{flex:1}}>

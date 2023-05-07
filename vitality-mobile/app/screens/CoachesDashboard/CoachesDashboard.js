@@ -40,6 +40,7 @@ const CoachDashboard = ({navigation}) => {
                         'Content-Type': 'application/json'
                     }
                 }).then(res => {
+                    console.log(res.data.message);
                     setIsLoading(true)
                     setInterval(() => {
                         setCoaches(res.data.message);

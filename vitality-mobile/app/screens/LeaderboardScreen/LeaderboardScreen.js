@@ -43,13 +43,13 @@ const Leaderboard = ({navigation}) => {
             setTopThree(response.data.message.slice(0, 3));
             setList(response.data.message);
           } catch (error) {
-            console.log(error);
+            console.log(error.response.data);
           } finally {
             setLoading(false);
           }
         };
       
-        const intervalId = setInterval(fetchLeaderboard, 300000);
+        const intervalId = setInterval(fetchLeaderboard, 60000);
       
         fetchLeaderboard();
       
@@ -67,9 +67,9 @@ const Leaderboard = ({navigation}) => {
                             <>
                             <View style={leaderboardStyle.headerContainer}>
                                 <View style={leaderboardStyle.boardContainer}>
-                                    <Place position={'3'} avatar={list[2].photo_url} />
-                                    <FirstPlace avatar={list[0].photo_url}/>
-                                    <Place position={'2'} avatar={list[1].photo_url}/>
+                                    {list[2] && <Place position={'3'} avatar={list[2].photo_url} />}
+                                    {list[0] && <FirstPlace avatar={list[0].photo_url}/>}
+                                    {list[1] && <Place position={'2'} avatar={list[1].photo_url}/>}
                                 </View>
                             </View>
                             <View style={leaderboardStyle.leaderboard}>

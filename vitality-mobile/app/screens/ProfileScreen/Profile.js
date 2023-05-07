@@ -45,9 +45,9 @@ const Profile = ({navigation}) => {
 
         fetUserDetails()
         
-        const fetchLastPhoto = async () => {
-            if(JWT){
-                await axios({
+        const intervalId = setInterval(async () => {
+            try {
+                const response = await axios({
                     method: 'GET',
                     url: `${BASE_URL}/photos_route/getLastPhotoUrl`,
                     headers: {
@@ -55,15 +55,18 @@ const Profile = ({navigation}) => {
                         Accept: 'application/json',
                         'Content-Type': 'application/json'
                     }
-                }).then(res => {
-                    setImage(res.data.message.photo_url)
-                }).catch(err => {
-                    console.log(err.response);
-                })
+                });
+                setImage(response.data.message.photo_url);
+            } catch (error) {
+                console.log(error.response);
             }
-        }
-        fetchLastPhoto();
+        }, 30000);
+    
+        return () => clearInterval(intervalId);
+        
     }, [JWT]);
+
+    
 
     return(
         <SafeAreaView style={{flex:1}}>

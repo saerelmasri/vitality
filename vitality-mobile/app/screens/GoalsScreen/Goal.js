@@ -26,13 +26,6 @@ const Goal = ({navigation}) => {
 
     return(
         <View style={goalStyling.mainContainer}>
-            <View  style={goalStyling.backBtnContainer}>
-                <View style={goalStyling.backBtn}>
-                    <Pressable onPress={() => Alert.alert('image clicked')}>
-                        <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                    </Pressable>
-                </View>
-            </View>
             <View style={goalStyling.contentContainer}>
                 <View style={goalStyling.headerContainer}>
                     <Text style={goalStyling.headerText}>What is your <Text style={goalStyling.span}>goal?</Text></Text>

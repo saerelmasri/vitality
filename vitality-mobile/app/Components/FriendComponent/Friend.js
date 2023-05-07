@@ -6,7 +6,7 @@ const Friend = ({name, action, photo}) => {
     return(
         <View style={activityInfoStyle.friends}>
             <View style={activityInfoStyle.photoContainer}>
-                {photo !== null  ? (
+                {photo !== null && photo !== undefined  ? (
                         <View style={activityInfoStyle.photo}>
                             <Image source={{uri: `${photo}`}} style={{width: '100%', height: '100%', borderRadius: 100}}/>
                         </View>

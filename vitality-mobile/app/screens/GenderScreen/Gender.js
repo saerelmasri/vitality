@@ -3,6 +3,8 @@ import { useRoute } from "@react-navigation/native"
 import { useState } from 'react'
 import { genderStylings } from "./GenderStyling"
 import NextBtn from "../../Components/NextBtn/NextBtn"
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const Gender = ({navigation}) => {
     const [ gender, setGender ] = useState('')
@@ -24,14 +26,6 @@ const Gender = ({navigation}) => {
     return(
         <ScrollView>
             <View style={genderStylings.mainContainer}>
-                <View  style={genderStylings.backBtnContainer}>
-                    <View style={genderStylings.backBtn}>
-                        <Pressable onPress={() => Alert.alert('image clicked')}>
-                            <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                        </Pressable>
-                    </View>
-                </View>
-
             <View style={genderStylings.contentContainer}>
                     <View style={genderStylings.headerContainer}>
                         <Text style={genderStylings.headerText}>What is your <Text style={genderStylings.span}>gender</Text></Text>

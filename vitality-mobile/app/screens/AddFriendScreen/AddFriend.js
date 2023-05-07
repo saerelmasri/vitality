@@ -51,7 +51,6 @@ const AddFriend = ({navigation}) => {
         }
         fetchUser()
     }, [JWT])
-    
     const addFriend = async(id) => {
         await axios({
             method: 'POST',

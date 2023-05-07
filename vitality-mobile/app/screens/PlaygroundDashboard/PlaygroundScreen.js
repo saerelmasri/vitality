@@ -51,7 +51,7 @@ const PlaygroundDashboard = ({navigation}) => {
                     <Header action2={()=> {navigation.navigate('Leaderboard')}} action3={() => navigation.navigate('Invitations')}/>
 
                     <View style={runningStyling.imageContainer}>
-                        <ImageBackground style={runningStyling.imageContent} source={require('../../assets/app-img/friends.jpg')} imageStyle={{width: width - 73,height: height / 3.3, borderRadius: 10, opacity: 0.7,}}>
+                        <ImageBackground style={runningStyling.imageContent} source={require('../../assets/app-img/friends.jpg')} imageStyle={{width: width - 73,height: height / 3.3, borderRadius: 10}}>
                             <View style={runningStyling.imageTextContent} >
                                 <Text style={runningStyling.text}>
                                     Create your challenges and compete with your friends!
@@ -132,7 +132,10 @@ const runningStyling = StyleSheet.create({
         fontSize: 28,
         textAlign: 'center',
         fontWeight: 500,
-        color: Color.white
+        color: Color.white,
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 3,
+        textShadowColor: '#000000',
     },
     btnContainer: {
         height: height / 8,

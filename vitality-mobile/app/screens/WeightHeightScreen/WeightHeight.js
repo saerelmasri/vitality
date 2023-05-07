@@ -22,15 +22,7 @@ const WeightHeight = ({navigation}) => {
 
     return(
         <ScrollView>
-            <View style={weightHeightStylings.mainContainer}>
-                <View style={weightHeightStylings.backContainer}>
-                    <View style={weightHeightStylings.backBtn}>
-                        <Pressable onPress={() => Alert.alert('image clicked')}>
-                            <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                        </Pressable>
-                    </View>
-                </View>
-                
+            <View style={weightHeightStylings.mainContainer}>  
                 <View style={weightHeightStylings.headerContainer}>
                     <Text style={weightHeightStylings.headerText}>Please provide the following <Text style={weightHeightStylings.span}>information</Text></Text>
                 </View>

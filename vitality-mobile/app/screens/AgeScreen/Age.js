@@ -24,13 +24,6 @@ const Age = ({navigation}) => {
     }
     return(
         <View style={ageStyling.mainContainer}>
-            <View  style={ageStyling.backBtnContainer}>
-                <View style={ageStyling.backBtn}>
-                    <Pressable onPress={() => Alert.alert('image clicked')}>
-                        <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                    </Pressable>
-                </View>
-            </View>
             <View style={ageStyling.contentContainer}>
                 <View style={ageStyling.headerContainer}>
                     <Text style={ageStyling.headerText}>How <Text style={ageStyling.span}>old</Text> are you?</Text>

@@ -71,7 +71,6 @@ const Macro = () => {
                         'Content-Type': 'application/json'
                     }
                 }).then(res=> {
-                    console.log(res);
                     setCarbs(res.data.message.carbs);
                     setFats(res.data.message.fats);
                     setProtein(res.data.message.protein);
@@ -79,7 +78,6 @@ const Macro = () => {
             };
     
             getTotalCalories()
-            console.log(BASE_URL);
 
         }, 5000)
         return () => clearInterval(interval)
