@@ -15,7 +15,6 @@ const displayUsers = async(req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_TOKEN)
         const user_id = decoded.userId
 
-        const baseUrl = 'http://192.168.1.104:5000/vitality/vitality-server/vitality-server/image/'
         const displayUsersQuery = `
             SELECT u.id, u.nickname, u.full_name, up.photo_url
             FROM users u
@@ -45,7 +44,7 @@ const displayUsers = async(req, res) => {
             }
 
             const usersWithPhotoUrls = result.map(user => {
-                const photoUrl = user.photo_url ? baseUrl + user.photo_url : null
+                const photoUrl = user.photo_url ? user.photo_url : null
                 return { ...user, photo_url: photoUrl }
             })
 
