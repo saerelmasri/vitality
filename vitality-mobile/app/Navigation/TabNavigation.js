@@ -48,7 +48,7 @@ const NutritionDashboard = () => {
         <Stack.Screen name="FoodListing" component={FoodListing} options={{headerShown:true, headerTitle: '', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="FoodDetail" component={FoodDetail} options={{headerShown:true, headerTitle: '', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="WelcomeKitchen" component={WelcomeKitchen} options={{headerShown:true, headerTitle: '', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
-        <Stack.Screen name="RecipeDashboard" component={Recipes} options={{headerShown:false}}/> 
+        <Stack.Screen name="RecipeDashboard" component={Recipes} options={{headerShown:true, headerTitle: '', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="RecipeDescription" component={RecipesDescription} options={{headerShown:true, headerTitle: '', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
     </Stack.Navigator>
   );

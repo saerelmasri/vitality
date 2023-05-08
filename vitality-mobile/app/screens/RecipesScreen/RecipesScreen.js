@@ -49,7 +49,6 @@ const Recipes = ({navigation}) => {
 
 
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, }}>
             <View style={recipesStyling.container}>
                 <ScrollView>
                     <View style={recipesStyling.header}>
@@ -107,7 +106,6 @@ const Recipes = ({navigation}) => {
                    </View>
                 </ScrollView>
             </View>
-        </SafeAreaView>
     );
 }
 
