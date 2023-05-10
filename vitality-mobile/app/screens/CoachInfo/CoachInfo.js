@@ -69,10 +69,10 @@ const CoachInfo = () => {
                         <View style={CoachInfoStyle.infoContainer}>
                             <View style={CoachInfoStyle.nameContainer}>
                                 <Text style={{fontSize: 30, fontWeight: '500'}}>{coach['full_name']}</Text>
-                                <Text style={{fontSize: 20, fontWeight: '400'}}>Experience: {coach['coach_experience']}</Text>
+                                <Text style={{fontSize: 20, fontWeight: '500'}}>Experience: {coach['coach_experience']}</Text>
                             </View>
                             <View style={CoachInfoStyle.aboutContainer}>
-                                <Text style={{fontSize: 20}}>About Me:{'\n'} {coach['description']}</Text>
+                                <Text style={{fontSize: 21, fontWeight: 500}}>About Me:{'\n'} {coach['description']}</Text>
                             </View>
                             <View style={CoachInfoStyle.infoCardContainer}>
                                 <View style={[CoachInfoStyle.cardContainer]}> 
@@ -83,7 +83,7 @@ const CoachInfo = () => {
                                 </View>
                             </View >
                             <View style={CoachInfoStyle.contactContainer}>
-                                <Text style={{fontSize: 20}}>Contact Me: {coach['email']}</Text>
+                                <Text style={{fontSize: 21, fontWeight: '500'}}>Contact Me: {coach['email']}</Text>
 
                             </View>
                             

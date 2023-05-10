@@ -78,7 +78,7 @@ const workoutDashboardStyling = StyleSheet.create({
         width: '40%',
         height: '70%',
         borderRadius: 10,
-        backgroundColor: Color.grey,
+        backgroundColor: Color.white,
         display: 'flex',
         justifyContent:'center',
         alignItems: 'center'

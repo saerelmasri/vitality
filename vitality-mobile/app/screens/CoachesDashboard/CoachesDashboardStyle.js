@@ -17,21 +17,26 @@ const coachDashboardStyle = StyleSheet.create({
         height: height / 12,
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: 10,
-        paddingTop: 10
+        paddingLeft: '5%'
+    },
+    header2: {
+        width: width,
+        height: height / 14,
+        display: 'flex',
+        justifyContent: 'center',
+        paddingLeft: '5%'
     },
     text: {
-        fontSize: 18,
-        fontWeight: 400,
+        fontSize: 22,
+        fontWeight: 500,
         color: Color.white,
     },
     aiBtn: {
-        width: width - 20,
-        height: height / 6,
-        marginLeft: 10,
-        borderRadius: 10,
-        marginTop: 20,
+        width: width,
+        height: height / 4.5,
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
         
     },
     chefTxt: {

@@ -40,7 +40,6 @@ const CoachDashboard = ({navigation}) => {
                         'Content-Type': 'application/json'
                     }
                 }).then(res => {
-                    console.log(res.data.message);
                     setIsLoading(true)
                     setInterval(() => {
                         setCoaches(res.data.message);
@@ -72,8 +71,8 @@ const CoachDashboard = ({navigation}) => {
                             <Image source={require('../../assets/app-img/coaching.jpg')} style={{resizeMode: 'cover', height: 150, width: 340, borderRadius: 10}}/>
                         </View>
                     </View>
-                    <View style={coachDashboardStyle.header}>
-                        <Text style={coachDashboardStyle.text}>Our coaches</Text>
+                    <View style={coachDashboardStyle.header2}>
+                        <Text style={[coachDashboardStyle.text, {fontSize: 20, fontWeight: 400,}] }>Check our coaches!</Text>
                     </View>
 
                     <View style={coachDashboardStyle.coachesContainer}>

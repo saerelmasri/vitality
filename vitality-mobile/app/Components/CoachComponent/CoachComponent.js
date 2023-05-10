@@ -35,7 +35,7 @@ const coachDashboardStyle = StyleSheet.create({
         width: '90%',
         height: height / 4.2,
         borderRadius: 10,
-        backgroundColor: Color.grey,
+        backgroundColor: Color.white,
         display:'flex',
         flexDirection: 'row',
         marginBottom: 20
