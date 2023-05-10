@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { Color, FontFamily } from "../../../globalStyling";
-
+import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
 
 const loginStyles = StyleSheet.create({
@@ -17,41 +16,43 @@ const loginStyles = StyleSheet.create({
         width: '100%',
         height: '30%',
     },  
+    header: {
+        width: width,
+        height: height / 8,
+        display: 'flex',
+        justifyContent: 'center',
+        paddingLeft: '7%'
+    },  
     txtTile: {
         fontSize: 30,
         fontWeight: 600,
-        height: 36,
-        marginTop: 40,
-        marginRight: 100 
     },
     txt: {
         fontSize: 20,
         fontWeight: 400,
-        height: 36,
-        marginRight: 100 
     },
     inputs:{
-        width: 310,
-        height: 100, 
+        width: width - 40,
+        height: height / 7, 
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        marginBottom: 10
     },
     input: {
-        width: 300,
+        width: '100%',
         height: 57,
         backgroundColor:Color.white,
         borderRadius: 10,
         fontSize: 20,
         paddingLeft: 10
     },
-    forgotPassword:{
-        fontSize: 15,
-        fontWeight: 500,
-        height: 18,
-        marginRight: 200,
-        marginTop: 10,
-        marginBottom: 10
+    btnConteiner:{
+        width: width,
+        height: height / 7,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     actions: {
         fontSize: 15,

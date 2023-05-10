@@ -7,7 +7,6 @@ import axios from "axios";
 import { BASE_URL } from '@env'
 
 const Register = ({navigation}) => {
-
     const [ fullName, setFullName ] = useState('')
     const [ nickName, setNickName ] = useState('')
     const [ email, setEmail ] = useState('')

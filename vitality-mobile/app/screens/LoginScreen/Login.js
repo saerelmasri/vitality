@@ -1,7 +1,5 @@
 import { View, Text, TextInput, Image, Alert, ScrollView } from "react-native";
-import { useContext, useEffect, useState } from "react"
-import axios from 'axios'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react"
 import { loginStyles } from "./LoginStyle";
 import Button from "../../Components/Button/Button";
 import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
@@ -9,11 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
     const navigation = useNavigation();
-
-
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
-    const [ isLoading, setIsLoading ] = useState(false)
     const { handleLogin, jwt } = useLogin()
 
     const login = async() => {
@@ -34,11 +29,14 @@ const Login = () => {
             <ScrollView>
                 <View style={loginStyles.loginScreen}>
                     <Image source={require('../../assets/app-img/login.jpg')} style={loginStyles.loginImg}></Image>
-                    <Text style={loginStyles.txtTile}>Glad To See You!</Text>
-                    <Text style={loginStyles.txt}>Please sign in to continue</Text>
+                    <View style={loginStyles.header}>
+                        <Text style={loginStyles.txtTile}>Glad To See You!</Text>
+                        <Text style={loginStyles.txt}>Please sign in to continue</Text>
+                    </View>
+                    
 
                     <View style={loginStyles.inputs}>
-                        <Text>Email</Text>
+                        <Text style={{paddingBottom: 10, fontSize: 18}}>Email</Text>
                         <TextInput 
                             label='Email' 
                             value={email}
@@ -51,7 +49,7 @@ const Login = () => {
                     </View>
 
                     <View style={loginStyles.inputs}>
-                        <Text>Password</Text>
+                        <Text style={{paddingBottom: 10, fontSize: 18}}>Password</Text>
                         <TextInput 
                             label='Password' 
                             value={password}
@@ -63,7 +61,9 @@ const Login = () => {
                         />
                     </View>
 
-                    <Button title={'Log In'} action={() => login()}/>
+                    <View style={loginStyles.btnConteiner}>
+                        <Button title={'Log In'} action={() => login()}/>
+                    </View>
                     
                     <Text style={loginStyles.actions}>Need an account? <Text style={loginStyles.span} onPress={() => navigation.navigate('Register')}>Register</Text></Text>
                     </View>
