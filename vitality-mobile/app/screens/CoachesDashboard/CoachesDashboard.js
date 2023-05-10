@@ -82,7 +82,7 @@ const CoachDashboard = ({navigation}) => {
                             <ScrollView style={{width: width, flex: 1,}}>
                             {
                                 coaches.map((item, index) => (
-                                    <CoachComponent name={item.full_name} experience={item.coach_experience} gym={item.gym} avatar={item.photo_url} action={() => navigation.navigate('CoachInfo', {id: item.id})}/>
+                                    <CoachComponent name={item.full_name} experience={item.coach_experience} gym={item.gym} avatar={item.photo_url} action={() => navigation.navigate('CoachInfo', {id: item.coach_id})}/>
                                 ))
                             }   
                             </ScrollView>
