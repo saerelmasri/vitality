@@ -1,8 +1,4 @@
-/* fonts */
-export const FontFamily = {
-    interMedium: "Inter_medium",
-    interSemibold: "Inter_semibold",
-  };
+
   /* Colors */
   export const Color = {
     white: "#fff",

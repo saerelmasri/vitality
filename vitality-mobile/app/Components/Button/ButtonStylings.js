@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Color, FontFamily } from "../../../globalStyling";
+const { height, width } = Dimensions.get('window')
 const ButtonStyles = StyleSheet.create({
     btnContainer: {
-      width: 300,
-      height: 70,
+      width: width - 100,
+      height: height / 12,
       display:'flex',
       justifyContent: "center",
       alignItems: "center",
@@ -20,7 +21,6 @@ const ButtonStyles = StyleSheet.create({
     btnText: {
       fontSize: 25,
       fontWeight: "500",
-      fontFamily: FontFamily.interMedium,
       color: "#000",
     }
 });

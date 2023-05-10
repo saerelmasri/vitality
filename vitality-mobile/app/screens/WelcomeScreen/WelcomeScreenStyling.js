@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { Color, FontFamily } from "../../../globalStyling";
+import { Color } from "../../../globalStyling";
 
 const { height, width } = Dimensions.get('window')
 const welcomeStyles = StyleSheet.create({
@@ -7,7 +7,6 @@ const welcomeStyles = StyleSheet.create({
       width: 360,
       textAlign: "left",
       color: Color.white,
-      fontFamily: FontFamily.interSemibold,
       fontWeight: "500",
       left: 20,
       alignItems: "center",
@@ -45,7 +44,6 @@ const welcomeStyles = StyleSheet.create({
       fontSize: 25,
       textTransform: "capitalize",
       fontWeight: "500",
-      fontFamily: FontFamily.interMedium,
       color: "#000",
     },
     dumbbels: {
