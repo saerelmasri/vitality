@@ -4,10 +4,12 @@ const { height, width } = Dimensions.get('window')
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
+import * as ImagePicker from 'expo-image-picker'
 import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
 import { BASE_URL } from '@env'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Profile = ({navigation}) => {
     const [profileDetail, setProfileDetail ] = useState([])
@@ -67,6 +69,44 @@ const Profile = ({navigation}) => {
 
     }, [JWT]);
 
+    const uploadImage = async (assets) => {
+        const photo = {
+          uri: assets[0].uri,
+          type: 'image/jpeg',
+          name: 'photo.jpg',
+        };
+      
+        const formData = new FormData();
+        formData.append('image', photo);
+      
+        try {
+          const response = await axios({
+            method: 'POST',
+            url: `${BASE_URL}/photos_route/addProfilePhoto`,
+            data: formData,
+            headers: {
+              'Authorization': JWT,
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+          
+        } catch (error) {
+          console.log(error.response.data);
+        }
+    };
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+      
+        if (!result.canceled) {
+          uploadImage(result.assets);
+        }
+    }
+
     return(
         <SafeAreaView style={{flex:1}}>
             <View style={profileStyling.container}>
@@ -100,15 +140,15 @@ const Profile = ({navigation}) => {
                         <View style={profileStyling.optionSection}>
                             <View style={profileStyling.option}>
                                 <View style={profileStyling.optionIcon}>
-                                    <MaterialCommunityIcons name="account-settings-outline" size={40} />
+                                    <MaterialIcons name="add-a-photo" size={30} />
                                 </View>
-                                <TouchableOpacity onPress={() => navigation.navigate('Settins')}>
-                                    <Text style={profileStyling.optionTxt}>Settings</Text>
+                                <TouchableOpacity onPress={() => pickImage()}>
+                                    <Text style={profileStyling.optionTxt}>Change Profile Pic</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={profileStyling.option}>
                                 <View style={profileStyling.optionIcon}>
-                                    <FontAwesome5 name="user-friends" size={30} />
+                                    <FontAwesome5 name="user-friends" size={25} />
                                 </View>
                                 <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
                                     <Text style={profileStyling.optionTxt}>Friend/Add Friends</Text>
