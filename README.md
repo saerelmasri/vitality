@@ -98,9 +98,13 @@
 | --------------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | ![Landing](./README/screenshots/activity.jpg) | ![fsdaf](./README/screenshots/home1.jpg) | ![fsdaf](./README/screenshots/home2.jpg) | ![fsdaf](./README/screenshots/home3.jpg) |
 
-| Nutrition screen                                | Macros screen                             | Diary screen                                  | Kitchen screen 3                           |
-| ----------------------------------------------- | ----------------------------------------- | --------------------------------------------- | ------------------------------------------ |
-| ![Landing](./README/screenshots/nutrition1.jpg) | ![fsdaf](./README/screenshots/macros.jpg) | ![fsdaf](./README/screenshots/nutrition2.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) |
+| Nutrition screen                                | Macros screen                                 | Diary screen                                  | Search screen 1                               |
+| ----------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| ![Landing](./README/screenshots/nutrients1.jpg) | ![fsdaf](./README/screenshots/nutrients2.jpg) | ![fsdaf](./README/screenshots/nutrients3.jpg) | ![fsdaf](./README/screenshots/nutrients4.jpg) |
+
+| Search screen 2                                 | Food Detail screen                            | Kitchen 1 screen                           | Kitchen screen 3                           |
+| ----------------------------------------------- | --------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
+| ![Landing](./README/screenshots/nutrients5.jpg) | ![fsdaf](./README/screenshots/nutrients6.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) |
 
 | Recipe screen                               | Workout screen 1                            | Workout screen 2                            | Coaches screen                             |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------ |
