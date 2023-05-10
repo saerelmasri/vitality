@@ -98,7 +98,7 @@ const ProfileDashboard = () => {
   const navigation = useNavigation();
     return (
       <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Profile" component={Profile} options={{headerShown:true, headerTitle: 'Home', headerStyle: {backgroundColor: 'black'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
+        <Stack.Screen name="Profile" component={Profile} options={{headerShown:true, headerTitle: 'Profile', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>
         <Stack.Screen name="FriendList" component={FriendList} options={{headerShown:true, headerTitle: 'Friends', headerStyle: {backgroundColor: '#127369'}, headerTitleStyle:{color: '#fff', fontSize: 30}, headerLeft: () => (
             <Pressable onPress={() => navigation.goBack()}>
               <MaterialCommunityIcons name="arrow-left" size={30} />

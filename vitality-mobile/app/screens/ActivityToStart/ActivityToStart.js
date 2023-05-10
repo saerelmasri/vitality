@@ -6,13 +6,13 @@ import { useRoute } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-var JWT = ""
 import { BASE_URL } from '@env'
 
 const ActivityToStart = ({navigation}) => {
+    const [ JWT, setJWT ] = useState('')
     AsyncStorage.getItem('jwt')
     .then(token => {
-        JWT = token
+        setJWT(token)
     })
     .catch(error => {
         console.log(error);

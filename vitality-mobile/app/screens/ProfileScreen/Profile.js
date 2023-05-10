@@ -243,7 +243,7 @@ const profileStyling = StyleSheet.create({
         justifyContent: 'space-around',
     },
     optionTxt: {
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 500,
         marginBottom: '2%'
     },
