@@ -57,7 +57,7 @@ const Login = () => {
                             placeholder="Password"
                             underlineColorAndroid="transparent"
                             onChangeText={text => {setPassword(text)}}
-
+                            secureTextEntry={true}
                         />
                     </View>
 
