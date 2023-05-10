@@ -118,8 +118,9 @@
 | ----------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ------------------------------------------ |
 | ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) | ![fsdaf](./README/screenshots/profile.jpg) |
 
-| Friends screen |
-| ![Landing](./README/screenshots/profile2.jpg)
+| Friends screen                                |
+| --------------------------------------------- |
+| ![Landing](./README/screenshots/profile2.jpg) |
 
 <br><br>
 
