@@ -31,8 +31,8 @@ const kitchenStyle = StyleSheet.create({
 
     },
     txtContent:{
-        fontSize: 60,
-        fontWeight: 500,
+        fontSize: 62,
+        fontWeight: 600,
         color: Color.white
     },
     btnContainer: {
@@ -40,13 +40,13 @@ const kitchenStyle = StyleSheet.create({
         height: height / 10,
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: 20
+        paddingLeft: 20,
     },
     btn: {
         width: '50%',
         height: '70%',
         borderRadius: 10,
-        backgroundColor: Color.grey,
+        backgroundColor: Color.white,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'

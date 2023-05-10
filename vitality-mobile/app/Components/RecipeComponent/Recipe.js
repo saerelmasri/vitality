@@ -4,7 +4,7 @@ import { Color } from "../../../globalStyling";
 const RecipeComponent = ({level, name, action}) => {
     return(
         <TouchableOpacity style={recipesComponentStyling.recipeComponent} onPress={action}>
-            <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 320, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={{uri: `${level}`}} imageStyle={{borderRadius: 10,}}>
+            <ImageBackground  style={{resizeMode: 'cover', height: 220, width: 340, borderRadius: 10, display: 'flex', justifyContent: 'space-between'}} source={{uri: `${level}`}} imageStyle={{borderRadius: 10,}}>
                 <View style={recipesComponentStyling.recipeName}>
                     <Text style={recipesComponentStyling.recipeTxt}>
                         {name}

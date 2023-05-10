@@ -20,7 +20,7 @@ const recipesStyling = StyleSheet.create({
         paddingLeft: 10
     },
     text: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 400,
         color: Color.white,
     },
@@ -37,6 +37,9 @@ const recipesStyling = StyleSheet.create({
     searchIconContainer: {
         width: width /7,
         height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     searchInput: {
         fontSize: 20,
@@ -66,14 +69,14 @@ const recipesStyling = StyleSheet.create({
         width: width,
         height: height / 12,
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row',
         marginTop: '5%'
     },
     btn: {
-        width: '30%',
-        height: '70%',
+        width: '28%',
+        height: '65%',
         borderRadius: 10,
         backgroundColor: Color.white,
         display: 'flex',

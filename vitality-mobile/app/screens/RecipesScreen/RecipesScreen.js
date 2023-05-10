@@ -5,6 +5,8 @@ import axios from 'axios'
 import { Color } from "../../../globalStyling";
 import { recipesStyling } from "./RecipesScreenStyling";
 import RecipeComponent from "../../Components/RecipeComponent/Recipe";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const Recipes = ({navigation}) => {
 
@@ -57,6 +59,7 @@ const Recipes = ({navigation}) => {
 
                     <View style={recipesStyling.searchContainer}>
                         <View style={recipesStyling.searchIconContainer}>
+                            <Ionicons name="search" size={30} />
                         </View>
                         <TextInput 
                             style={recipesStyling.searchInput} 
