@@ -114,20 +114,25 @@ const InviteFriends = ({navigation}) => {
                         <View style={activityInfoStyle.friendsSection}>
                             { isLoading ? (
                                 <Indicator/>
-                            ) : (
+                            ) : friends.length > 0 ? (
                                 <ScrollView>
-                                {
-                                    friends.map(friend => (
-                                        <Friend key={friend.id} name={friend.nickname} photo={friend.photo_url}  action={() => sendInvitation(friend.id)}/>
-                                    ))
-                                }
+                                {friends.map(friend => (
+                                    <Friend key={friend.id} name={friend.nickname} photo={friend.photo_url} action={() => sendInvitation(friend.id)}/>
+                                ))}
                                 </ScrollView>
+                            ) : (
+                                <View style={{width: width, height: height / 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image source={require('../../../assets/app-img/nofriend.png')} style={{height: 250, width: 250}}/>
+                                    <Text style={{fontSize: 25, fontWeight: 500, color: Color.white}}>Add friends to compete with!</Text>
+
+                                </View>
                             )}
-                            
                         </View>
                     </View>
                     <View style={activityInfoStyle.btnContainer}>
                         <Button title={'Continue'} action={()=> navigation.navigate('PlaygroundDashboard')}/>
+                    </View>
+                    <View style={activityInfoStyle.btnContainer}>
                         <Button title={'Delete Competition'} action={()=> deleteCompetition()}/>
                     </View>
                 </ScrollView>
@@ -180,9 +185,9 @@ const activityInfoStyle = StyleSheet.create({
     },
     btnContainer: {
         width: width,
-        height: width / 1.5,
+        height: width / 3.5,
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center'
     },
     friends: {

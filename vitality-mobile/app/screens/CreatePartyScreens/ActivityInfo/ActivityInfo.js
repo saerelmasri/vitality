@@ -67,9 +67,7 @@ const ActivityInfo = ({navigation}) => {
                         <Text style={activityInfoStyle.txt}>Create Challenge</Text>
                     </View>
                     <View style={activityInfoStyle.inputContainer}>
-                        <View style={activityInfoStyle.input}>
-                            <Text>Workout</Text>
-                        </View>
+                        <Text style={{fontSize: 25, fontWeight: 500, color: Color.white}}>Set your workout challenge</Text>
                         <View style={activityInfoStyle.inputs}>
                             <Text style={{color: Color.white}}>Challenge Name</Text>
                             <TextInput 
@@ -163,7 +161,7 @@ const activityInfoStyle = StyleSheet.create({
     },
     btnContainer: {
         width: width,
-        height: width / 2,
+        height: width / 4,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
