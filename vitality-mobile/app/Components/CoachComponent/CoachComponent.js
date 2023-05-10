@@ -22,7 +22,7 @@ const CoachComponent = ({name, gym, experience, avatar, action}) => {
                 <View style={coachDashboardStyle.info}>
                     <Text style={{fontSize: 25, fontWeight: 500}}>{name}</Text>
                     <Text style={{fontSize: 18, fontWeight: 400}}>Professional Coach at {gym}</Text>
-                    <Text style={{fontSize: 18, fontWeight: 400}}>Experience coaching: {experience} years</Text>
+                    <Text style={{fontSize: 18, fontWeight: 400}}>Experience coaching: {experience}</Text>
                 </View>
                 
             </View>

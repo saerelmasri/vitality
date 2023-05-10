@@ -62,13 +62,13 @@ const CoachInfoStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     cardContainer: {
-        height: '60%',
+        height: height / 9,
+        width: width - 210,
         borderRadius: 10,
         backgroundColor: Color.white,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: '2%',
+        padding: '1%'
     },
     contactContainer: {
         width: '100%',

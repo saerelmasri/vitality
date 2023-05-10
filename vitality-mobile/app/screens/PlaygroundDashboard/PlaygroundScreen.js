@@ -52,13 +52,14 @@ const PlaygroundDashboard = ({navigation}) => {
 
                     <View style={runningStyling.imageContainer}>
                         <ImageBackground style={runningStyling.imageContent} source={require('../../assets/app-img/friends.jpg')} imageStyle={{width: width - 73,height: height / 3.3, borderRadius: 10}}>
-                            <View style={runningStyling.imageTextContent} >
+                            
+                        </ImageBackground>
+                    </View>
+                    <View style={runningStyling.imageTextContent} >
                                 <Text style={runningStyling.text}>
                                     Create your challenges and compete with your friends!
                                 </Text>
                             </View>
-                        </ImageBackground>
-                    </View>
 
                     <View style={runningStyling.btnContainer}>
                         <Button title={'Create a party'} action={() => navigation.navigate('ActivityInfo')}/>
@@ -79,7 +80,9 @@ const PlaygroundDashboard = ({navigation}) => {
                         { partyInfo && partyInfo.title ? (
                             <Challenge name={partyInfo.title} reward={`Reward:${partyInfo.reward}pts`} action={() => navigation.navigate('ActivityToStart', { competitionInfo: { id: partyInfo.id }})}/>
                         ) : (
-                            <Challenge name={"Create a party"} reward={"Challenge your friends"} />
+                            <View>
+                                
+                            </View>
                         )}
                     </View>
                 </ScrollView>
@@ -121,7 +124,8 @@ const runningStyling = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     imageTextContent: {
-        height: '60%',
+        width: width,
+        height: height / 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -133,7 +137,6 @@ const runningStyling = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 500,
         color: Color.white,
-        textShadowOffset: { width: 2, height: 2 },
         textShadowRadius: 3,
         textShadowColor: '#000000',
     },

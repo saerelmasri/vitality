@@ -51,7 +51,7 @@ const CoachInfo = () => {
             }
     
             fetchCoaches()
-        }, 10000)
+        }, 5000)
         
     }, [JWT])
     return(
@@ -76,10 +76,10 @@ const CoachInfo = () => {
                             </View>
                             <View style={CoachInfoStyle.infoCardContainer}>
                                 <View style={[CoachInfoStyle.cardContainer]}> 
-                                    <Text style={{fontSize: 20}}>Speciality:{'\n'}{coach['coach_type']}</Text>
+                                    <Text style={{fontSize: 18}}>Speciality: {coach['coach_type']}</Text>
                                 </View>
                                 <View style={[CoachInfoStyle.cardContainer]}> 
-                                    <Text style={{fontSize: 20}}>Gym:{'\n'}{coach['gym']}</Text>
+                                    <Text style={{fontSize: 18}}>Gym:{'\n'}{coach['gym']}</Text>
                                 </View>
                             </View >
                             <View style={CoachInfoStyle.contactContainer}>

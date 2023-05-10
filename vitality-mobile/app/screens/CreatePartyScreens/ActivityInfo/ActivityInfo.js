@@ -63,9 +63,6 @@ const ActivityInfo = ({navigation}) => {
     return(
             <View style={activityInfoStyle.container}>
                 <ScrollView>
-                    <View style={activityInfoStyle.header}>
-                        <Text style={activityInfoStyle.txt}>Create Challenge</Text>
-                    </View>
                     <View style={activityInfoStyle.inputContainer}>
                         <Text style={{fontSize: 25, fontWeight: 500, color: Color.white}}>Set your workout challenge</Text>
                         <View style={activityInfoStyle.inputs}>

@@ -128,9 +128,12 @@ const ActivityToStart = ({navigation}) => {
                     <View style={activityToStartStyling.topBtn}>
                         <Button title={'Start Competition'} action={() => startCompetition()}/>
                     </View>
-                    <View style={activityToStartStyling.topBtn}>
-                        <Button title={'Cancel competition'} action={() => cancelCompetition()}/>
-                    </View>
+                    <View style={activityToStartStyling.cancelContainer}>
+                        <Pressable onPress={() => cancelCompetition()}>
+                            <Text style={{fontSize: 22, fontWeight: 500, color: Color.white}}>Cancel competition</Text>
+                        </Pressable>
+
+                    </View> 
                 </ScrollView>
             </View>
     );
@@ -272,10 +275,15 @@ const activityToStartStyling = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: '5%',
         paddingRight: '5%',
+    },
+    cancelContainer: {
+        width: width,
+        height: height / 10,
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingTop: '5%'
     }
-    
-    
-    
 })
 
 

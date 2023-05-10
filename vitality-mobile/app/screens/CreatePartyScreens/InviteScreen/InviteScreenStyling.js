@@ -132,8 +132,11 @@ const InviteFriends = ({navigation}) => {
                     <View style={activityInfoStyle.btnContainer}>
                         <Button title={'Continue'} action={()=> navigation.navigate('PlaygroundDashboard')}/>
                     </View>
-                    <View style={activityInfoStyle.btnContainer}>
-                        <Button title={'Delete Competition'} action={()=> deleteCompetition()}/>
+                    <View style={activityInfoStyle.cancelContainer}>
+                        <Pressable onPress={()=> deleteCompetition()}>
+                            <Text style={{fontSize: 20, fontWeight: 500, color: Color.white}}>Delete Competition</Text>
+                        </Pressable>
+
                     </View>
                 </ScrollView>
             </View>
@@ -222,6 +225,14 @@ const activityInfoStyle = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    cancelContainer: {
+        width: width,
+        height: height / 10,
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingTop: '5%'
     }
     
     
