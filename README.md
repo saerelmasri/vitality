@@ -110,13 +110,16 @@
 | --------------------------------------------- | ------------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 | ![Landing](./README/screenshots/workout1.jpg) | ![fsdaf](./README/screenshots/workout2.jpg) | ![fsdaf](./README/screenshots/coach1.jpg) | ![fsdaf](./README/screenshots/coach2.jpg) |
 
-| Coaches Info screen                            | Playground screen                             | Leaderboard screen                             | Invitations screen                             |
-| ---------------------------------------------- | --------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| ![Landing](./README/screenshots/coachInfo.jpg) | ![fsdaf](./README/screenshots/playground.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) |
+| Playground screen                         | Create Party screen                     | Invite Friend screen                    | Invitations screen                      |
+| ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| ![Landing](./README/screenshots/act1.jpg) | ![fsdaf](./README/screenshots/act2.jpg) | ![fsdaf](./README/screenshots/act3.jpg) | ![fsdaf](./README/screenshots/act4.jpg) |
 
-| Profile screen                               | Setting screen                              | Friend List screen                            | Add Friend screen                            |
-| -------------------------------------------- | ------------------------------------------- | --------------------------------------------- | -------------------------------------------- |
-| ![Landing](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/settings.jpg) | ![fsdaf](./README/screenshots/friendList.jpg) | ![fsdaf](./README/screenshots/addFriend.jpg) |
+| On going screen                           | Leaderboard screen                             | Mainbox screen                                 | Profile screen                             |
+| ----------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ------------------------------------------ |
+| ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) | ![fsdaf](./README/screenshots/profile.jpg) |
+
+| Friends screen |
+| ![Landing](./README/screenshots/profile2.jpg)
 
 <br><br>
 
