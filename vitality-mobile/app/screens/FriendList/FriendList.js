@@ -62,21 +62,21 @@ const FriendList = ({navigation}) => {
                 <ScrollView>
                     <View style={friendStyle.headerContainer}>
                         <View style={friendStyle.header}>
-                            <Text style={{fontSize: 18, fontWeight: 500, marginBottom: 5}}>
+                            <Text style={{fontSize: 20, fontWeight: 600, marginBottom: 5}}>
                                 Invite to workout with
                             </Text>
-                            <Text style={{fontSize: 16, fontWeight: 400}}>
+                            <Text style={{fontSize: 18, fontWeight: 400}}>
                                 You can surely invite your friends to workout together 
                                 virtually and compete to increase motivation
                             </Text>
                         </View>
                     </View>
                     <View style={friendStyle.listFriendTxtContainer}>
-                        <Text style={{fontSize: 25, color: Color.white}}>
+                        <Text style={{fontSize: 28, color: Color.white, fontWeight: 600}}>
                             Workout Friends
                         </Text>
                         <Pressable onPress={() => navigation.navigate('AddFriend')}>
-                            <Text style={{fontSize: 16, color: Color.white, fontWeight: 500}}>
+                            <Text style={{fontSize: 18, color: Color.white, fontWeight: 600}}>
                                 Add Friend
                             </Text>
                         </Pressable>

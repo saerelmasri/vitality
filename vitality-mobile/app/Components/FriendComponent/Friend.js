@@ -1,6 +1,8 @@
-import { View, Pressable, Image, Alert, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Image, Alert, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import { Color } from "../../../globalStyling";
 const { height, width } = Dimensions.get('window')
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 const Friend = ({name, action, photo}) => {
     return(
@@ -20,9 +22,9 @@ const Friend = ({name, action, photo}) => {
                 <Text style={{fontSize: 17}}>{name}</Text>
             </View>
             <View style={activityInfoStyle.addContainer}>
-                <Pressable onPress={action}>
-                    <Image source={require('../../assets/app-img/addBtn.png')}/>
-                </Pressable>
+                <TouchableOpacity onPress={action} style={activityInfoStyle.addBtn}>
+                    <AntDesign name="plus" size={20} color={'white'} />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -79,6 +81,15 @@ const activityInfoStyle = StyleSheet.create({
     addContainer: {
         height: '100%',
         width: '25%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    addBtn: {
+        borderRadius: 100,
+        width: 40,
+        height: 40,
+        backgroundColor: Color.darkGreen,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
