@@ -5,8 +5,9 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import LoginProvider, { LoginContext, useLogin } from "../../context/LoginProvider";
-var JWT =""
 import { BASE_URL } from '@env'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Profile = ({navigation}) => {
     const [profileDetail, setProfileDetail ] = useState([])
@@ -60,13 +61,11 @@ const Profile = ({navigation}) => {
             } catch (error) {
                 console.log(error.response);
             }
-        }, 30000);
+        }, 10000);
     
         return () => clearInterval(intervalId);
-        
-    }, [JWT]);
 
-    
+    }, [JWT]);
 
     return(
         <SafeAreaView style={{flex:1}}>
@@ -99,15 +98,32 @@ const Profile = ({navigation}) => {
 
                     <View style={profileStyling.collectionSection}>
                         <View style={profileStyling.optionSection}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Settins')}>
-                                <Text style={profileStyling.optionTxt}>Settings</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
-                            <Text style={profileStyling.optionTxt}>Friend/Add Friends</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handleLogout()}>
-                            <Text style={profileStyling.optionTxt}>Log Out</Text>
-                            </TouchableOpacity>
+                            <View style={profileStyling.option}>
+                                <View style={profileStyling.optionIcon}>
+                                    <MaterialCommunityIcons name="account-settings-outline" size={40} />
+                                </View>
+                                <TouchableOpacity onPress={() => navigation.navigate('Settins')}>
+                                    <Text style={profileStyling.optionTxt}>Settings</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={profileStyling.option}>
+                                <View style={profileStyling.optionIcon}>
+                                    <FontAwesome5 name="user-friends" size={30} />
+                                </View>
+                                <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
+                                    <Text style={profileStyling.optionTxt}>Friend/Add Friends</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={profileStyling.option}>
+                                <View style={profileStyling.optionIcon}>
+                                    <MaterialCommunityIcons name="logout-variant" size={30} />
+                                </View>
+                                <TouchableOpacity onPress={() => handleLogout()}>
+                                    <Text style={profileStyling.optionTxt}>Log Out</Text>
+                                </TouchableOpacity>
+                            </View>
+                            
+                            
                         </View>
                     </View>
 
@@ -171,25 +187,39 @@ const profileStyling = StyleSheet.create({
     },
     collectionSection: {
         width: width, 
-        height: height / 2,
+        height: height / 2.8,
         backgroundColor: Color.grey,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         marginTop: '10%',
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     optionSection: {
         width: width / 1.2,
-        height: height / 3,
+        height: height / 4,
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
     },
     optionTxt: {
         fontSize: 30,
         fontWeight: 500,
         marginBottom: '2%'
+    },
+    option: {
+        width: '100%',
+        height: '30%',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    optionIcon: {
+        height: '100%',
+        width: '20%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 
