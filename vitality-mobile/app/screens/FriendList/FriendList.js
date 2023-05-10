@@ -8,11 +8,13 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from '@env'
 import Indicator from "../../Components/ActivityIndicator/indicator";
 import NoFriends from "../../Components/NoFriends/NoFriends";
+import Friend from "../../Components/FriendComponent/Friend";
 
 const FriendList = ({navigation}) => {
 
     const [ friend, setFriends ] = useState([])
     const [ isLoading, setIsLoading ] = useState(false)
+    const [ userDetail, setUserDetail ] = useState([])
     const [ JWT, setJWT ] = useState('')
     
     useEffect(() => {
@@ -51,9 +53,53 @@ const FriendList = ({navigation}) => {
                 })
             }
         }
-
         fetchUsers()
+
+        const fetchSuggestions = async() => {
+            if(JWT){
+                await axios({
+                    method: 'GET',
+                    url: `${BASE_URL}/friends_route/displayUsers`,
+                    headers: {
+                        'Authorization': JWT,
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => {
+                    setIsLoading(true)
+                    setInterval(() => {
+                        setUserDetail(res.data.message);
+                        setIsLoading(false)
+                    }, 2000)
+                }).catch(err => {
+                    setIsLoading(false)
+                    console.log(err.response);
+                })
+            }
+        }
+        fetchSuggestions()
     }, [JWT])
+
+    const addFriend = async(id) => {
+        await axios({
+            method: 'POST',
+            url: `${BASE_URL}/friends_route/addFriend`,
+            data: {
+                "friend_id": id
+            },
+            headers: {
+                'Authorization': JWT,
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.data.status === 201){
+                Alert.alert('Added to friend list')
+            }
+        }).catch(err => {
+            Alert.alert(res.response.data.message)
+        })
+    }
 
 
     return(
@@ -75,11 +121,6 @@ const FriendList = ({navigation}) => {
                         <Text style={{fontSize: 28, color: Color.white, fontWeight: 600}}>
                             Workout Friends
                         </Text>
-                        <Pressable onPress={() => navigation.navigate('AddFriend')}>
-                            <Text style={{fontSize: 18, color: Color.white, fontWeight: 600}}>
-                                Add Friend
-                            </Text>
-                        </Pressable>
                     </View>
                     <View style={friendStyle.friendListConteiner}>
                     {isLoading ? (
@@ -93,6 +134,22 @@ const FriendList = ({navigation}) => {
                     ) : (
                         <NoFriends />
                     )}
+                    </View>
+                    <View style={friendStyle.listFriendTxtContainer}>
+                        <Text style={{fontSize: 28, color: Color.white, fontWeight: 600}}>
+                            Recommended profiles
+                        </Text>
+                    </View>
+                    <View style={friendStyle.friendListConteiner}>
+                        { isLoading ? (
+                            <Indicator/>
+                        ):(
+                            <ScrollView>
+                                {userDetail.map((item) => (
+                                    <Friend key={item.id} name={item.full_name} photo={item.photo_url} action={() => {addFriend(item.id)}}/>
+                                ))}
+                            </ScrollView>
+                        )}
                     </View>
 
                 </ScrollView>
@@ -139,7 +196,6 @@ const friendStyle = StyleSheet.create({
     },
     friendListConteiner: {
         width: width,
-        height: height / 1.6,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
