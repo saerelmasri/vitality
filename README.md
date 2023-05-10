@@ -102,13 +102,13 @@
 | ----------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
 | ![Landing](./README/screenshots/nutrients1.jpg) | ![fsdaf](./README/screenshots/nutrients2.jpg) | ![fsdaf](./README/screenshots/nutrients3.jpg) | ![fsdaf](./README/screenshots/nutrients4.jpg) |
 
-| Search screen 2                                 | Food Detail screen                            | Kitchen 1 screen                           | Kitchen screen 3                           |
-| ----------------------------------------------- | --------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
-| ![Landing](./README/screenshots/nutrients5.jpg) | ![fsdaf](./README/screenshots/nutrients6.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) |
+| Search screen 2                                 | Food Detail screen                            | Kitchen 1 screen                           | Food screen                               |
+| ----------------------------------------------- | --------------------------------------------- | ------------------------------------------ | ----------------------------------------- |
+| ![Landing](./README/screenshots/nutrients5.jpg) | ![fsdaf](./README/screenshots/nutrients6.jpg) | ![fsdaf](./README/screenshots/kitchen.jpg) | ![fsdaf](./README/screenshots/recipe.jpg) |
 
-| Recipe screen                               | Workout screen 1                            | Workout screen 2                            | Coaches screen                             |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------ |
-| ![Landing](./README/screenshots/recipe.jpg) | ![fsdaf](./README/screenshots/workout1.jpg) | ![fsdaf](./README/screenshots/workout2.jpg) | ![fsdaf](./README/screenshots/coaches.jpg) |
+| Workout screen 1                              | Workout screen 2                            | Coaches screen                            | Coaches Info screen                       |
+| --------------------------------------------- | ------------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| ![Landing](./README/screenshots/workout1.jpg) | ![fsdaf](./README/screenshots/workout2.jpg) | ![fsdaf](./README/screenshots/coach1.jpg) | ![fsdaf](./README/screenshots/coach2.jpg) |
 
 | Coaches Info screen                            | Playground screen                             | Leaderboard screen                             | Invitations screen                             |
 | ---------------------------------------------- | --------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
