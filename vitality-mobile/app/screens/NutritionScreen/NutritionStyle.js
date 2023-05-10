@@ -22,7 +22,7 @@ const nutritionStyle = StyleSheet.create({
     btn: {
         width: '30%',
         height: '70%',
-        backgroundColor: Color.grey,
+        backgroundColor: Color.white,
         borderRadius: 10,
         display: 'flex', 
         justifyContent: 'center',
@@ -72,7 +72,7 @@ const nutritionStyle = StyleSheet.create({
         paddingLeft: 10
     },
     text: {
-        fontSize: 30,
+        fontSize: 33,
         fontWeight: 500,
         color: Color.white,
         paddingLeft: 10

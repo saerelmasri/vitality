@@ -24,16 +24,6 @@ const Nutrition = ({navigation}) => {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={nutritionStyle.bar}>
-                    <View style={nutritionStyle.left}>
-                    </View>
-                    <View style={nutritionStyle.center}>
-                        <Text style={nutritionStyle.centerTxt}>
-                            Your logs
-                        </Text>
-                    </View>
-                    <View style={nutritionStyle.right}></View>
-                </View>
                 <View style={nutritionStyle.caloriesStats}>
                     <View style={nutritionStyle.textContainer}>
                         <Text style={nutritionStyle.text}>

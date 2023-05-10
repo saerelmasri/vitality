@@ -100,7 +100,7 @@ const Macro = () => {
 
 const nutritionStyle = StyleSheet.create({
     card: {
-        width: width - 10,
+        width: width - 20,
         height: height / 3,
         marginTop: 10,
         borderRadius: 10,
