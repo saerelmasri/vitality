@@ -40,6 +40,7 @@ import CoachDashboard from '../screens/CoachesDashboard/CoachesDashboard';
 import CoachInfo from '../screens/CoachInfo/CoachInfo';
 
 const NutritionDashboard = () => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator initialRouteName="" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Nutrition" component={Nutrition} options={{headerShown:true, headerTitle: 'Nutrition', headerStyle: {backgroundColor: '#127369' , elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30}}}/>

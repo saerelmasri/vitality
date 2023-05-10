@@ -14,7 +14,7 @@ const HomeScreen = () => {
                     </View>
                     <View style={homeScreenStyle.caloriesContainer}>
                         <ImageBackground style={homeScreenStyle.kitchen} source={require('../../assets/app-img/foodImg.jpg')} imageStyle={{borderRadius: 10}}>
-                            <TouchableOpacity style={homeScreenStyle.containerBtn} onPress={() => navigation.navigate('Nutrition', { screen: 'RecipeDashboard' })}>
+                            <TouchableOpacity style={homeScreenStyle.containerBtn} onPress={() => navigation.navigate('Nutrition', { screen: 'Nutrition' })}>
                                 <Text style={{fontSize: 17, color: Color.black, fontWeight: 600, textAlign: 'center'}}>Check out recipes</Text>
                             </TouchableOpacity>
                         </ImageBackground>
