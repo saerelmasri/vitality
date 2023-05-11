@@ -118,10 +118,11 @@
 | ----------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ------------------------------------------ |
 | ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) | ![fsdaf](./README/screenshots/profile.jpg) |
 
-| Friend List screen                            | Leaderboard screen                             | Mainbox screen                                 | Profile screen                             |
-| --------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ------------------------------------------ |
-| ![Landing](./README/screenshots/profile2.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) | ![fsdaf](./README/screenshots/profile.jpg) |
-|                                               |                                                |                                                |                                            |
+| Friend List screen                            |     |     |     |
+| --------------------------------------------- | --- | --- | --- |
+| ![Landing](./README/screenshots/profile2.jpg) |     |     |     |
+|                                               |     |     |     |
+|  |
 
 <br><br>
 
