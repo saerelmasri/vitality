@@ -114,15 +114,13 @@
 | ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | ![Landing](./README/screenshots/act1.jpg) | ![fsdaf](./README/screenshots/act2.jpg) | ![fsdaf](./README/screenshots/act3.jpg) | ![fsdaf](./README/screenshots/act4.jpg) |
 
-| On going screen                           | Leaderboard screen                             | Mainbox screen                                 | Profile screen                             |
-| ----------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ------------------------------------------ |
-| ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitations.jpg) | ![fsdaf](./README/screenshots/profile.jpg) |
+| On going screen                           | Win screen                                    | Defeat screen                                 | Leaderboard screen                             |
+| ----------------------------------------- | --------------------------------------------- | --------------------------------------------- | ---------------------------------------------- |
+| ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/wireframes/playground5.png) | ![fsdaf](./README/wireframes/playground6.png) | ![fsdaf](./README/screenshots/leaderboard.jpg) |
 
-| Friend List screen                            |     |     |     |
-| --------------------------------------------- | --- | --- | --- |
-| ![Landing](./README/screenshots/profile2.jpg) | --- | --- | --- |
-|                                               |     |     |     |
-|                                               |
+| Invitation Detail Screen                        | Profile screen                             | Friend List                                 |     |
+| ----------------------------------------------- | ------------------------------------------ | ------------------------------------------- | --- |
+| ![Landing](./README/wireframes/playground9.png) | ![fsdaf](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/profile2.jpg) |     |
 
 <br><br>
 
