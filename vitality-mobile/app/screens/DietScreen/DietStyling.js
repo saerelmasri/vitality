@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet, Dimensions } from "react-native"
 import { Color } from "../../../globalStyling"
+const { height, width } = Dimensions.get('window')
+
 
 const dietStyling = StyleSheet.create({
     mainContainer: {
@@ -35,7 +37,7 @@ const dietStyling = StyleSheet.create({
     },
     headerContainer: {
         width: '100%',
-        height: '10%',
+        height: '15%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
@@ -45,12 +47,21 @@ const dietStyling = StyleSheet.create({
         textAlign: 'center',
         paddingLeft: 20,
         paddingRight: 20,
+        paddingBottom: 10
     },
     dietContainer: {
         width: '100%',
         height: '75%',
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    btnConteiner: {
+        marginTop: 10, 
+        width: width,
+        height: height / 10,
+        display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center'
     }
 })

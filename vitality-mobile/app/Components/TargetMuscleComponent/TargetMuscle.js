@@ -29,13 +29,13 @@ const TargetMuscle = ({target}) => {
         <TouchableOpacity onPress={()=> {navigation.navigate('ExerciseListing', {target: link})}}>
             <ImageBackground style={workoutDashboardStyling.targetMuscleComponent} source={path} imageStyle={{borderRadius: 10}}>
                 <View style={workoutDashboardStyling.topContainer}>
-                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.white}}>
+                    <Text style={{fontSize: 25, fontWeight: 500, color : Color.black}}>
                         Target muscle: {target}
                     </Text>
                 </View>
                 <View style={workoutDashboardStyling.bottomContainer}>
                     <View style={workoutDashboardStyling.exerciseCounter}>
-                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.white}}>
+                        <Text style={{fontSize: 20, fontWeight: 400, color : Color.black}}>
                             50 exercise
                         </Text>
                     </View>
@@ -56,9 +56,14 @@ const workoutDashboardStyling = StyleSheet.create({
     },
     topContainer: {
         height: '40%',
+        width: '75%',
         display: 'flex',
         justifyContent: 'center',
-        paddingLeft: '5%'
+        paddingLeft: '5%',
+        backgroundColor: Color.white,
+        borderRadius: 10,
+        marginTop: 10,
+        marginLeft: 15
     },
     bottomContainer: {
         height: '40%',
@@ -67,9 +72,13 @@ const workoutDashboardStyling = StyleSheet.create({
         paddingLeft: '5%'
     },
     exerciseCounter: {
-        width: '90%',
+        backgroundColor: Color.white,
+        borderRadius: 10,
+        width: '35%',
+        height: '70%',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
 })

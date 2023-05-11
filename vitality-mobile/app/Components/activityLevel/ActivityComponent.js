@@ -17,7 +17,8 @@ const activityLevelStyle = StyleSheet.create({
         backgroundColor: Color.white,
         paddingLeft: 20,
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 10
     },
     activityTitle: {
         fontSize: 25,

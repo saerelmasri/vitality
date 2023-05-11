@@ -66,7 +66,7 @@ const ActivityInfo = ({navigation}) => {
                     <View style={activityInfoStyle.inputContainer}>
                         <Text style={{fontSize: 25, fontWeight: 500, color: Color.white}}>Set your workout challenge</Text>
                         <View style={activityInfoStyle.inputs}>
-                            <Text style={{color: Color.white}}>Challenge Name</Text>
+                            <Text style={{color: Color.white, paddingBottom: 10}}>Challenge Name</Text>
                             <TextInput 
                                 style={activityInfoStyle.input}
                                 placeholder="Enter challenge Name"
@@ -78,7 +78,7 @@ const ActivityInfo = ({navigation}) => {
                         </View>
 
                         <View style={activityInfoStyle.inputs}>
-                            <Text style={{color: Color.white}}>Workout Name</Text>
+                            <Text style={{color: Color.white, paddingBottom: 10}}>Workout Name</Text>
                             <TextInput 
                                 style={activityInfoStyle.input}
                                 placeholder="Enter your challenge objective"
@@ -89,7 +89,7 @@ const ActivityInfo = ({navigation}) => {
                             />
                         </View>
                         <View style={activityInfoStyle.inputs}>
-                            <Text style={{color: Color.white}}>Your rule</Text>
+                            <Text style={{color: Color.white, paddingBottom: 10}}>Your rule</Text>
                             <TextInput 
                                 style={activityInfoStyle.input}
                                 placeholder="Set the minutes"
@@ -98,7 +98,7 @@ const ActivityInfo = ({navigation}) => {
                                 value={rules}
                                 onChangeText={text => setRules(text)}
                             />
-                            <Text style={{color: Color.white, fontSize: 15}}>Enter time only in minutes</Text>
+                            <Text style={{color: Color.white, fontSize: 15, paddingTop: 10}}>Enter time only in minutes</Text>
                         </View>
                     </View>
 

@@ -1,10 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Color } from '../../../globalStyling'
+const { height, width } = Dimensions.get('window')
+
 
 const nextBtnStyling = StyleSheet.create({
     nextBtn: {
-        width: '50%',
-        height: '10%',
+        width: width - 200,
+        height: height / 15,
         borderRadius: 50,
         backgroundColor: Color.white,
         display: 'flex',

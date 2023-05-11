@@ -35,7 +35,9 @@ const Diet = ({navigation}) => {
                     <TypeOfDiet title={'Vegetarian Diet'} description={'Plant-based foods and excludes meat, fish, and poultry. It may dairy and eggs.'} imageName={'vegetarian'} action={() => setDiet('3')}/>
                     <TypeOfDiet title={'Normal Diet'} description={'Balanced and healthy diet that meets the nutritional needs of an individual.'} imageName={'normal'} action={() => setDiet('4')}/>
                 </View>
-                <NextBtn action={checkDiet}/>
+                <View style={dietStyling.btnConteiner}>
+                    <NextBtn action={checkDiet}/>
+                </View>
             </View>
         </View>
     )

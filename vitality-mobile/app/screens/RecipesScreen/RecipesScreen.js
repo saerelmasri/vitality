@@ -74,7 +74,7 @@ const Recipes = ({navigation}) => {
                     <View style={recipesStyling.aiBtn}>
                         <View>
                             <View style={recipesStyling.chefTxt} >
-                                <Text style= {{fontSize: 20, fontWeight: 500, color: Color.white, textShadowColor: 'black',  textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5}}>
+                                <Text style= {{fontSize: 20, fontWeight: 500, color: Color.white, textShadowColor: 'black',  textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 10}}>
                                     We have for you a large database of recipes!
                                 </Text>
                             </View>

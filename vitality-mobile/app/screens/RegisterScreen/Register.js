@@ -60,18 +60,18 @@ const Register = ({navigation}) => {
 
                 <View style={registerStyle.inputsContainer}>
                     <View style={registerStyle.inputs}>
-                        <Text>Full Name</Text>
+                        <Text style={{paddingBottom: 5}}>Full Name</Text>
                         <TextInput 
                             label='Email' 
                             value={fullName} 
                             style={registerStyle.input} 
                             onChangeText={text => setFullName(text)}
-                            placeholder="Your full name"
+                            placeholder="Enter your full name"
                             underlineColorAndroid="transparent"
                         />
                     </View>
                     <View style={registerStyle.inputs}>
-                        <Text>Nickname</Text>
+                        <Text style={{paddingBottom: 5}}>Nickname</Text>
                         <TextInput 
                             label='Email' 
                             value={nickName} 
@@ -82,7 +82,7 @@ const Register = ({navigation}) => {
                         />
                     </View>
                     <View style={registerStyle.inputs}>
-                        <Text>Email</Text>
+                        <Text style={{paddingBottom: 5}}>Email</Text>
                         <TextInput 
                             label='Email' 
                             value={email} 
@@ -94,7 +94,7 @@ const Register = ({navigation}) => {
                         />
                     </View>
                     <View style={registerStyle.inputs}>
-                        <Text>Password</Text>
+                        <Text style={{paddingBottom: 5}}>Password</Text>
                         <TextInput 
                             label='Password' 
                             value={password}
@@ -107,7 +107,7 @@ const Register = ({navigation}) => {
                         />
                     </View>
                     <View style={registerStyle.inputs}>
-                        <Text>Confirm Password</Text>
+                        <Text style={{paddingBottom: 5}}>Confirm Password</Text>
                         <TextInput 
                             label='Password' 
                             value={confirmPassword}

@@ -98,7 +98,7 @@ const ActivityToStart = ({navigation}) => {
                     <View style={activityToStartStyling.detailContainer}>
                         <View style={activityToStartStyling.detailInfo}>
                             <Text style={activityToStartStyling.leftTxt}>
-                                Friends invitated
+                                Friends invited
                             </Text>
                         </View>
                         <View style={activityToStartStyling.friends}>
