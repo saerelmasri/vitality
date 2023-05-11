@@ -68,20 +68,8 @@ const InvitationDetail = ({navigation}) => {
         }) 
     }
     return(
-        <SafeAreaView style={{flex:1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
             <View style={invitationStyle.container}>
                 <ScrollView>
-                    <View style={invitationStyle.backBtnContainer}>
-                        <View style={invitationStyle.backBtn}>
-                            <Pressable onPress={() => navigation.goBack()}>
-                                <Image source={require('../../assets/app-img/back-btn.png')}></Image>
-                            </Pressable>
-                        </View>
-                    </View>
-
-                    <View style={invitationStyle.header}>
-                        <Text style={invitationStyle.txt}>Challenge Details</Text>
-                    </View>
                     <View style={invitationStyle.invitationName}>
                         <Text style={{fontSize: 28, color: Color.white}}> 
                             {challengeDetails.title} challenge!
@@ -130,12 +118,13 @@ const InvitationDetail = ({navigation}) => {
                     <View style={invitationStyle.topBtn}>
                         <Button title={'Accept'} action={() => changeStatus(competitionID['id'], "accepted")}/>
                     </View>
-                    <View style={invitationStyle.topBtn}>
-                        <Button title={'Decline'} action={() => changeStatus(competitionID['id'], "declined")}/>
+                    <View style={{width: width, height: height / 10, display: 'flex', alignItems:'center', paddingTop: '5%'}}>
+                        <Pressable onPress={() => changeStatus(competitionID['id'], "declined")}>
+                            <Text style={{fontSize: 27, fontWeight: 500, color: Color.white}}>Decline</Text>
+                        </Pressable>
                     </View>
                 </ScrollView>
             </View>
-        </SafeAreaView>
     );
 }
 

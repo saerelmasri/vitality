@@ -32,7 +32,6 @@ import OnGoingActivity from '../screens/CreatePartyScreens/OngoingActivityScreen
 
 import Success from '../Components/SuccessScreen/success';
 import FriendList from '../screens/FriendList/FriendList';
-import AddFriend from '../screens/AddFriendScreen/AddFriend';
 import Profile from '../screens/ProfileScreen/Profile';
 
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
@@ -89,7 +88,7 @@ const Playground = () => {
         <Stack.Screen name="InviteFriends" component={InviteFriends} options={{headerShown:true, headerTitle: '', headerLeft: null, headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 30,}}}/>
         <Stack.Screen name="onGoingActivity" component={OnGoingActivity} options={{tabBarVisible: false }}/>
         <Stack.Screen name="WinnerLoser" component={Trophy} options={{headerShown:false}}/>
-        <Stack.Screen name="InvitationDetail" component={InvitationDetail} options={{headerShown:false,}}/>
+        <Stack.Screen name="InvitationDetail" component={InvitationDetail} options={{headerShown:true, headerTitle: 'Invitation Details', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
         <Stack.Screen name="ActivityToStart" component={ActivityToStart} options={{headerShown:true, headerTitle: 'Challenge Dashboard', headerTitleAlign: "center", headerStyle: {backgroundColor: '#127369', elevation: 0}, headerTitleStyle:{color: '#fff', fontSize: 25}}}/>
       </Stack.Navigator>
     );
