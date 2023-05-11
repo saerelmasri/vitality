@@ -120,9 +120,9 @@
 
 | Friend List screen                            |     |     |     |
 | --------------------------------------------- | --- | --- | --- |
-| ![Landing](./README/screenshots/profile2.jpg) |     |     |     |
+| ![Landing](./README/screenshots/profile2.jpg) | --- | --- | --- |
 |                                               |     |     |     |
-|  |
+|                                               |
 
 <br><br>
 
