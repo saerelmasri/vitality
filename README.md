@@ -118,9 +118,9 @@
 | ----------------------------------------- | --------------------------------------------- | --------------------------------------------- | ---------------------------------------------- |
 | ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/wireframes/playground5.png) | ![fsdaf](./README/wireframes/playground6.png) | ![fsdaf](./README/screenshots/leaderboard.jpg) |
 
-| Invitation Detail Screen                        | Profile screen                             | Friend List                                 |     |
-| ----------------------------------------------- | ------------------------------------------ | ------------------------------------------- | --- |
-| ![Landing](./README/wireframes/playground9.png) | ![fsdaf](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/profile2.jpg) |     |
+| Invitation Detail Screen                            | Invitation Detail screen                            | Profile screen                             | Friend List screen                          |
+| --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------ | ------------------------------------------- |
+| ![Landing](./README/screenshots/invitationdash.jpg) | ![fsdaf](./README/screenshots/invitationDetail.jpg) | ![fsdaf](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/profile2.jpg) |
 
 <br><br>
 
