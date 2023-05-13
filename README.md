@@ -118,7 +118,7 @@
 | ----------------------------------------- | --------------------------------------------- | ---------------------------------------------- | ------------------------------------------------- |
 | ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/wireframes/playground5.png) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitationdash.jpg) |
 
-| Invitation Detail Screen                              | Profile screen                             | Friend List screen                          | Demo                        |
+| Invitation Detail Screen                              | Profile screen                             | Friend List screen                          | Demo Video                  |
 | ----------------------------------------------------- | ------------------------------------------ | ------------------------------------------- | --------------------------- |
 | ![Landing](./README/screenshots/invitationDetail.jpg) | ![fsdaf](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/profile2.jpg) | ![fsdaf](./README/demo.gif) |
 
