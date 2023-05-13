@@ -114,13 +114,13 @@
 | ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | ![Landing](./README/screenshots/act1.jpg) | ![fsdaf](./README/screenshots/act2.jpg) | ![fsdaf](./README/screenshots/act3.jpg) | ![fsdaf](./README/screenshots/act4.jpg) |
 
-| On going screen                           | Win screen                                    | Defeat screen                                 | Leaderboard screen                             |
-| ----------------------------------------- | --------------------------------------------- | --------------------------------------------- | ---------------------------------------------- |
-| ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/wireframes/playground5.png) | ![fsdaf](./README/wireframes/playground6.png) | ![fsdaf](./README/screenshots/leaderboard.jpg) |
+| On going screen                           | Win screen                                    | Leaderboard screen                             | Invitation Dashboard Screen                       |
+| ----------------------------------------- | --------------------------------------------- | ---------------------------------------------- | ------------------------------------------------- |
+| ![Landing](./README/screenshots/act5.jpg) | ![fsdaf](./README/wireframes/playground5.png) | ![fsdaf](./README/screenshots/leaderboard.jpg) | ![fsdaf](./README/screenshots/invitationdash.jpg) |
 
-| Invitation Detail Screen                            | Invitation Detail screen                            | Profile screen                             | Friend List screen                          |
-| --------------------------------------------------- | --------------------------------------------------- | ------------------------------------------ | ------------------------------------------- |
-| ![Landing](./README/screenshots/invitationdash.jpg) | ![fsdaf](./README/screenshots/invitationDetail.jpg) | ![fsdaf](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/profile2.jpg) |
+| Invitation Detail Screen                              | Profile screen                             | Friend List screen                          | Demo                        |
+| ----------------------------------------------------- | ------------------------------------------ | ------------------------------------------- | --------------------------- |
+| ![Landing](./README/screenshots/invitationDetail.jpg) | ![fsdaf](./README/screenshots/profile.jpg) | ![fsdaf](./README/screenshots/profile2.jpg) | ![fsdaf](./README/demo.gif) |
 
 <br><br>
 
