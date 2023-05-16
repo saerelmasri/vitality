@@ -16,13 +16,9 @@
 
 ### User Stories
 
-- As a beginner in fitness, I want to access a variety of workout routines and nutritional plans that are tailored to my fitness level and goals so that I can improve my overall health and fitness.
-- As a healthy user, I would like to receive healthy recipes based on my diet plan
-- As a healthy user, I would like to get all the necessary information about each recipe such as ingredients, preparation, and the specific macros of that recipe.
-- As a user, I want to be able to log my meals and track my macro-nutrient intake, so that I can maintain a healthy diet and achieve my fitness goals.
+- As a user, I want to be able to log my meals and track my macro-nutrient intake, so that I can maintain a healthy diet and achieve my fitness goals. And, I would like to get all the necessary information about healthy recipes such as ingredients, preparation, and the specific macros of that recipe.
 - As a user, I want to be able to receive a large catalog of exercises along with the target muscle, exercise name, and video tutorial to learn the technique of that exercise.
 - As a user, I want to be able to connect with friends who also use the app, so that we can motivate each other to reach our fitness goals and compete on a leaderboard.
-- As a beginner user, I want to search and hire coaches from the app that can help me in my fitness journey
 
 <br><br>
 
